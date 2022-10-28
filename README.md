@@ -1,5 +1,6 @@
 # equipe3-0
-
+IP: 172.26.82.48
+Pass: UGx7g69F9Crx
 
 
 ## Getting started
