@@ -1,0 +1,11 @@
+stages:
+  - deploy
+
+deploy_prod:
+  stage: deploy
+  before_script:
+    - ssh-add <(echo "$SSH_PRIVATE_KEY") 
+  script:
+    - ssh etu@172.26.82.48 "cd var/www/ && git checkout master && git pull origin master && exit"
+  environment: production
+  when: manual
