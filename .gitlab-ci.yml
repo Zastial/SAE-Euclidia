@@ -1,0 +1,18 @@
+stages:
+  - deploy
+
+deploy_prod:
+  stage: deploy
+  before_script:
+    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - touch ~/.ssh/known_hosts
+    - ssh-keyscan 172.26.82.48 >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    - ssh etu@172.26.82.48 "cd var/www/ && git checkout master && git pull origin master && exit"
+  environment: production
+  when: manual
