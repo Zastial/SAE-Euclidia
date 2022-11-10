@@ -10,36 +10,37 @@
     <title>Inscription</title>
 </head>
 <body>
-    <div class="logo">
+    <a href=<?= site_url("Home")?> >
         <h2> logo</h2>
-    </div>
+    </a>
 
     <div class="form-head">
         <h1>Inscription</h1>
     </div>
     <form action=<?= site_url("User/registerCheck"); ?> method="post">
-        
-        <div class="form-input">
-            <div class="user-info">
-                <div class="name">
-                    <label for="name">Nom</label>
-                    <input class="input" type="text" id="name" require>
-                </div>
+        <div class="form-input">         
                 <div class="first-name">
-                    <label for="first-name">Prénom</label>
-                    <input class="input" type="text" id="first-name" require>
+                    <label for="prenom">Prénom</label>
+                    <input class="input" type="text" name="prenom" required>
+                    <?php 
+                        if (isset($error) && $error == true) {
+                            echo "Inscription impossible, merci d'utiliser un email différent.";
+                        }
+                    ?>
                 </div>
-            </div>
-
+                <div class="name">
+                    <label for="nom">Nom</label>
+                    <input class="input" type="text" name="nom" required>
+                </div>
             <div class="email">
                 <label for="email" id="email" pattern=".+@globex\.com" size="30" required>Email</label>
-                <input class="input" type="email" id="email" require>
+                <input class="input" type="email" name="email" required>
             </div>
 
 
             <div class="password">
                 <label for="password">Mot de passe</label>
-                <input class="input" type="password" id="password" require>
+                <input class="input" type="password" name="password" required>
             </div>
         </div>
 
@@ -47,13 +48,15 @@
         <div class="form-btn">
             <button type="submit">S'inscrire</button>
         </div>
+        
+    </form>
 
-        <div class="form-inscription-link">
+    <div class="form-inscription-link">
             <h4>Vous êtes déjà membre ?</h4>
             <a href=<?= site_url("user/login"); ?>>Se connecter</a>
         </div>
-    </form>
 
+        
     <div class="bars">
         <div class="bar-black"></div>
         <div class="bar-gey"></div>

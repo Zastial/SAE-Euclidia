@@ -1,7 +1,7 @@
 <?php
 class ProductEntity {
 
-    private int $id;
+    private int $id_produit;
     private string $titre;
     private float $prix;
     private string $description;
@@ -11,7 +11,7 @@ class ProductEntity {
 	 * @return int
 	 */
     public function getId(): int {
-        return $this->id;
+        return $this->id_produit;
     }
 
     /**
@@ -46,7 +46,7 @@ class ProductEntity {
 	 * @param int $id
 	 */
     public function setId(int $id): void {
-        $this->id = $id;
+        $this->id_produit = $id;
     }
 
     /**

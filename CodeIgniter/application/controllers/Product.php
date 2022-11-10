@@ -10,11 +10,16 @@ class Product extends CI_Controller {
     }
     
     public function index(){
-       $this->load->view("products");
+        $produits = $this->ProductModel->findAll();
+        $this->load->view("products", array("produits"=>$produits));
     }
 
     public function show($id){
         
+    }
+
+    public function showall(){
+        var_dump($this->ProductModel->findAll());
     }
 
 }

@@ -1,3 +1,5 @@
+use website;
+
 drop table achat;
 drop table affectation;
 drop table facture;

@@ -44,6 +44,13 @@ class UserEntity {
     }
 
     /**
+     * @return string
+     */
+    public function getPassword(): string {
+        return $this->password;
+    }
+
+    /**
      * @param int $id
      */
     public function setId(int $id): void {
@@ -98,5 +105,6 @@ class UserEntity {
     public function isValidPassword(string $password): bool {
         return password_verify($password, $this->password);
     }
+
 }
 ?>

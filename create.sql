@@ -16,7 +16,8 @@ CREATE TABLE utilisateur(
    password TEXT NOT NULL,
    email VARCHAR(50) NOT NULL,
    status VARCHAR(50) NOT NULL,
-   PRIMARY KEY(id_utilisateur)
+   PRIMARY KEY(id_utilisateur),
+   UNIQUE(email)
 );
 
 CREATE TABLE categorie(

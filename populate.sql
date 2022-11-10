@@ -11,3 +11,7 @@ VALUES
 
    (2, 'Alexandre', 'Carrrrrol', '$2y$10$JMuuaDMCavASPKf9KBcD1eaMHJ0zkeD8eYs7HjecoD8QeUVRhKQq6',
    'email2@gmail.com', 'Utilisateur');
+
+insert into produit values (1,'Default Cube',60.3,'Default Blender cube - can not get better!',1);
+insert into produit values (2,'Monke',213.4,'Hmmmmmm.... Monke.',1);
+insert into produit values (3,'Crewmate',69.99,'STOP POSTING ABOUT AMONG US',1);

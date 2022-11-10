@@ -13,9 +13,36 @@
     
     <?php require_once('header.php'); ?>
 
-    <h1>ici la page de contact</h1>
+    <div >
+        <h2>Nous contacter</h2>
+        <div>
+            <p> Email : contact@euclidia.com </p>
+            <p> Téléphone : 06######## </p>
+            <p> Adresse : 3 impasse de la rue </p>
+            <p> 35671 Village-en-Bretagne</p>
+        </div>
+    </div>
 
+    <div>
+        <form action="">
 
+            <div>
+                <td><label for="email">Votre email :</label></td><br>
+                <td><input type="email" required></td>
+            </div>
+
+            <div>
+                <td><label for="object">Titre du mail :</label></td><br>
+                <td><input type="text" required></td>
+            </div>
+
+            <div>
+                <td><label for="message">Corps du message :</label></td><br>
+                <td><input type="text" required></td>
+            </div>
+            <br><input type="submit" value="Envoyer">
+        </form>
+    </div>
 
 </body>
 </html>

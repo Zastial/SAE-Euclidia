@@ -10,9 +10,9 @@
     <title>Connexion</title>
 </head>
 <body>
-    <div class="logo">
+    <a href=<?= site_url("Home")?> >
         <h2> logo</h2>
-    </div>
+    </a>
 
     <form action=<?= site_url("User/loginCheck"); ?> method="post">
     <div class="form-container">
@@ -22,12 +22,12 @@
 
         <div class="form-input">
             <div class="email">
-                <label for="email" name="email" pattern=".+@globex\.com" size="30" required>Email</label>
-                <input class="input" type="email" require>
+                <label for="email" pattern=".+@globex\.com" size="30" required>Email</label>
+                <input class="input" type="email" name="email" required>
             </div>
             <div class="password">
                 <label for="password">Mot de passe</label>
-                <input class="input" type="password" name="password" require>
+                <input class="input" type="password" name="password" required>
             </div>
         </div>
 
