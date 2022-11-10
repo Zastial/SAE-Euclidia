@@ -4,10 +4,15 @@
     box-sizing: border-box;
 }
 
-ol, ul, menu, a{
+
+ol, ul, menu {
     list-style: none;
 }
 
 input, textarea {
     -webkit-user-select: auto;
+}
+
+a {
+    text-decoration: inherit;
 }

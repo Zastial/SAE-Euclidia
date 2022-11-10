@@ -11,7 +11,7 @@
 </head>
 <body>
     
-    <?php include ('header.php'); ?>
+    <?php require_once ('header.php'); ?>
 
     <h1>ici la page d'accueil</h1>
 

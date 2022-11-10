@@ -11,7 +11,7 @@
 </head>
 <body>
     
-    <?php include ('header.php'); ?>
+    <?php require_once ('header.php'); ?>
 
     <h1>ici la page des produits avec les filtres etc</h1>
 
