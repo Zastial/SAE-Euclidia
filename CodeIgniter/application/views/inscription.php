@@ -14,11 +14,11 @@
         <h2> logo</h2>
     </div>
 
-    <form action="" method="post"></form>
-        <div class="form-head">
-            <h1>Inscription</h1>
-        </div>
-
+    <div class="form-head">
+        <h1>Inscription</h1>
+    </div>
+    <form action=<?= site_url("User/registerCheck"); ?> method="post">
+        
         <div class="form-input">
             <div class="user-info">
                 <div class="name">
@@ -50,7 +50,7 @@
 
         <div class="form-inscription-link">
             <h4>Vous êtes déjà membre ?</h4>
-            <a href="connexionPage.php">Se connecter</a>
+            <a href=<?= site_url("user/login"); ?>>Se connecter</a>
         </div>
     </form>
 

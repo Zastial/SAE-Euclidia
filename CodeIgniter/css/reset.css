@@ -1,0 +1,13 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+ol, ul, menu, a{
+    list-style: none;
+}
+
+input, textarea {
+    -webkit-user-select: auto;
+}

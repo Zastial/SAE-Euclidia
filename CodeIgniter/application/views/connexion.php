@@ -14,6 +14,7 @@
         <h2> logo</h2>
     </div>
 
+    <form action=<?= site_url("User/loginCheck"); ?> method="post">
     <div class="form-container">
         <div class="form-head">
             <h1>Connexion</h1>
@@ -38,9 +39,10 @@
         <div class="form-inscription-link">
             <h4>Vous n'êtes pas inscrit ?</h4>
 
-            <a href="inscriptionPage.php"> S'inscrire</a>
+            <a href=<?= site_url("user/register"); ?>> S'inscrire</a>
         </div>
     </div>
+    </form>
 
     <div class="bars">
         <div class="bar-black"></div>

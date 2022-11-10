@@ -1,0 +1,52 @@
+body {
+    --black-100: #111111;
+    --black-200: #2F2F2F;
+    --white-100: #111111;
+    --grey-100: #E1E1E1;
+    --white-200: #F1F1F1;
+    --orange-100: #FFAE27;
+    --blue-link-100: #0000EE;
+    --red-100: #DE1B1B;
+
+    --filter-orange-img: invert(67%) sepia(79%) saturate(566%) hue-rotate(338deg) brightness(104%) contrast(101%);
+}
+
+nav {
+    max-width: 1350px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100px;
+}
+
+
+.nav-center {
+    display: flex;
+    width: 600px;
+    justify-content: space-between;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.nav-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.nav-icon:hover {
+    cursor: pointer;
+}
+
+.shopping-cart-icon {
+    margin-right: 55px;
+    filter: var(--filter-orange-img);
+}
