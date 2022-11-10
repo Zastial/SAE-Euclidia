@@ -20,13 +20,13 @@
     </div>
 
     <div >
-        <h1 class ="" > <?= $product->getTitre() ?> </h1>
-        <p> <?= $product->getDescription() ?> </p>
+        <h1 class ="" > <?= $produit->getTitre() ?> </h1>
+        <p> <?= $produit->getDescription() ?> </p>
     </div>
 
     <div class="">
-        <h3> <?= $product->getPrix() ?></h3>
-        <button> <img src="" alt=""> Ajouter au panier</button>
+        <h3> <?= $produit->getPrix() ?></h3>
+        <a href=<?= site_url("ShoppingCart/addProduct/".$produit->getId())?>> <img src="" alt=""> Ajouter au panier</a>
     </div>
 
 

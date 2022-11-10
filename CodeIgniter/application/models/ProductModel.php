@@ -11,12 +11,18 @@ class ProductModel extends CI_Model {
     public function findById($id) : ?ProductEntity{
         $this->db->select('*');
 		$q = $this->db->get_where('produit',array('id_produit'=>$id));
-		$response = $q->row(0,"UserEntity");
+		$response = $q->row(0,"ProductEntity");
 		return $response;
     }
 
     public function addProduct(ProductEntity $product):?ProductEntity{
-        $data = array($product->getId(), $product->getTitre(), $product->getPrix(), $product->getDescription(), $product->getDisponible());
+        $data = array(
+			'id_produit'=>$product->getId(), 
+			'titre'=>$product->getTitre(), 
+			'prix'=>$product->getPrix(), 
+			'description'=>$product->getDescription(), 
+			'disponible'=>$product->getDisponible());
+			
         try {
 			$db_debug = $this->db->db_debug;
 			$this->db->db_debug = FALSE;

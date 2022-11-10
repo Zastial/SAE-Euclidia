@@ -14,12 +14,13 @@ class Product extends CI_Controller {
         $this->load->view("products", array("produits"=>$produits));
     }
 
-    public function show($id){
-        
-    }
-
-    public function showall(){
-        var_dump($this->ProductModel->findAll());
+    public function display($id){
+        $produit = $this->ProductModel->findById($id);
+        if ($produit == null) {
+            echo "Produit introuvable."; 
+            die();
+        }
+        $this->load->view("product", array("produit"=>$produit));
     }
 
 }

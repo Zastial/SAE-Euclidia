@@ -47,6 +47,5 @@ nav {
 }
 
 .shopping-cart-icon {
-    margin-right: 55px;
     filter: var(--filter-orange-img);
 }

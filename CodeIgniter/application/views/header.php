@@ -60,7 +60,7 @@
 
 <nav>
     <div class="nav-container">
-        <a href="home">
+        <a href=<?= site_url("Home") ?>>
             <img class="nav-left" src="" alt="logo">
         </a>
         
@@ -78,19 +78,16 @@
             </a>
 
 
+            <?php if ($connected):?>
             <div class="dropdown">
                 <button class="dropbtn">
-                    <img class="nav-icon account-icon" src=<?= base_url("assets/icon/icon-account-circle.svg") ?> alt="account icon">
-                    <?php if ($connected):?>
-                        <p ><?= $this->session->user["nom"].$this->session->user["prenom"] ?> </p>
-                    <?php endif ;?>
+                        <img class="nav-icon account-icon" src=<?= base_url("assets/icon/icon-account-circle.svg") ?> alt="account icon">
+                        <p ><?= $this->session->user["nom"]." ".$this->session->user["prenom"] ?> </p>
                 </button>
                 
                 <div class="dropdown-content">
 
-                    <a href=<?= (isset($this->session->user)) ? base_url("User/account") : base_url("User/login") ?>> Compte</a>
-
-
+                    <a href=<?=base_url("User/account")?>> Compte</a>
 
                     <?php if ($connected): ?>
                         <?php if ($status == "Utilisateur") : ?>
@@ -106,6 +103,12 @@
 
                 </div>
             </div>
+            <?php else: ?>
+                <div>
+                    <a href=<?= site_url("user/login")?>>Connexion</a>
+                    <a href=<?= site_url("user/register")?>>S'inscrire</a>
+                </div>
+            <?php endif ;?>
 
             
 

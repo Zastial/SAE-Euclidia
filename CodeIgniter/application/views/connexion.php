@@ -24,6 +24,11 @@
             <div class="email">
                 <label for="email" pattern=".+@globex\.com" size="30" required>Email</label>
                 <input class="input" type="email" name="email" required>
+                <?php 
+                        if (isset($error) && $error == true) {
+                            echo "L'identifiant ou le mot de passe est invalide.";
+                        }
+                    ?>
             </div>
             <div class="password">
                 <label for="password">Mot de passe</label>
