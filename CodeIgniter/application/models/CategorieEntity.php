@@ -1,14 +1,14 @@
 <?php
 class CategorieEntity {
 
-    private int $id;
+    private int $id_categorie;
     private string $libelle;
 
     /**
 	 * @return int
 	 */
     public function getId(): int {
-        return $this->id;
+        return $this->id_categorie;
     }
 
     /**

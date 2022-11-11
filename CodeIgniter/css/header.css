@@ -47,5 +47,25 @@ nav {
 }
 
 .shopping-cart-icon {
+    margin-right: 20px;
+
     filter: var(--filter-orange-img);
+}
+
+.btn-nav {
+    border: 2px solid var(--black-100);
+    border-radius: 6px;
+    padding: 14px 23px;
+}
+
+.link-nav {
+    border-radius: 20px;
+    padding: 5px;
+    text-decoration: none;
+    transition: 0.25s ease-in;
+}
+
+.link-nav:hover {
+    background-color: var(--black-200);
+    color: var(--orange-100);
 }

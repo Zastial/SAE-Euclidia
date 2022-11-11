@@ -18,7 +18,6 @@
                     <th> name </th>
                     <th> price</th>
                     <th> description </th>
-                    <th> disponible</th>
                 </tr>
             </thead>
         <tbody>
@@ -28,7 +27,6 @@
                     <td> <?= $prod->getTitre() ?></td>
                     <td> <?= $prod->getPrix() ?></td>
                     <td> <?= $prod->getDescription()?></td>
-                    <td> <?= $prod->getDisponible() ?></td>
                     <td><a href=<?= site_url("ShoppingCart/removeProduct/".$prod->getId())?>>supprimer du panier</a></td>
                 </tr>
             <?php endforeach; ?>

@@ -6,12 +6,26 @@ class Product extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model("ProductModel");
+        $this->load->model("CategorieModel");
         $this->load->helper("url");
     }
     
-    public function index(){
+    public function find(){
         $produits = $this->ProductModel->findAll();
-        $this->load->view("products", array("produits"=>$produits));
+        $categories = $this->CategorieModel->findAll();
+        $this->load->view("products", array("produits"=>$produits, "categories"=>$categories));
+    }
+
+    public function getFilteredProducts() {
+        $categories = $this->input->post('categories');
+        if (empty($categories)) {
+            $produits = $this->ProductModel->findAll();
+        } else {
+            $produits = $this->ProductModel->findByCategories($categories);
+        }
+        
+        $page = $this->load->view('productsContent', array("produits"=>$produits, "categories"=>array()), TRUE);
+        echo $page;
     }
 
     public function display($id){

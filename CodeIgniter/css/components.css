@@ -1,0 +1,8 @@
+.btn {
+    background-color: var(--orange-100);
+    border-radius: 20px;
+}
+
+.btn-main {
+    margin: 20px 35px 20px 35px;
+}

@@ -66,9 +66,9 @@
         
         
         <ul class="nav-center">
-            <li><a href=<?= site_url("Home") ?>>Accueil</a></li> 
-            <li><a href=<?= site_url("Product") ?>>Modèles 3D</a></li>
-            <li><a href=<?= site_url("Contact") ?>>Contact</a></li>
+            <li><a class="link-nav" href=<?= site_url("Home") ?>>Accueil</a></li> 
+            <li><a class="link-nav" href=<?= site_url("Product/find") ?>>Modèles 3D</a></li>
+            <li><a class="link-nav" href=<?= site_url("Contact") ?>>Contact</a></li>
         </ul>
         
     
@@ -105,8 +105,8 @@
             </div>
             <?php else: ?>
                 <div>
-                    <a href=<?= site_url("user/login")?>>Connexion</a>
-                    <a href=<?= site_url("user/register")?>>S'inscrire</a>
+                    <a class="btn-nav" href=<?= site_url("user/login")?>>Connexion</a>
+                    <a class="btn-nav" href=<?= site_url("user/register")?>>S'inscrire</a>
                 </div>
             <?php endif ;?>
 

@@ -20,7 +20,7 @@
     </div>
 
     <div >
-        <h1 class ="" > <?= $produit->getTitre() ?> </h1>
+        <h1 class =""> <?= $produit->getTitre() ?> </h1>
         <p> <?= $produit->getDescription() ?> </p>
     </div>
 

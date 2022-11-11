@@ -25,7 +25,7 @@ class ShoppingCart extends CI_Controller{
         $this->load->view("shoppingCart", array('produits'=>$produits));
     }
 
-    public function addProduct($id){
+    public function addProduct($id=null){
         $produit = $this->ProductModel->findById($id);
         if ($produit == null) {
             echo "Produit non trouvé";
@@ -41,7 +41,7 @@ class ShoppingCart extends CI_Controller{
         
     }
 
-    public function removeProduct($id){
+    public function removeProduct($id=null){
         $cart = $this->session->cart;
         foreach ($cart as $key => $value) {
             if ($value == $id) {
