@@ -5,7 +5,7 @@
 
 
 <head>
-    <link rel="stylesheet" href= <?= base_url("css/reset.css") ?> >
+    <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/header.css") ?> >
 
     <style>

@@ -17,6 +17,10 @@ class Product extends CI_Controller {
     }
 
     public function getFilteredProducts() {
+        if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_REQUESTED_WITH'] != 'XMLHttpRequest') {
+            show_404();
+            die();
+        }
         $categories = $this->input->post('categories');
         if (empty($categories)) {
             $produits = $this->ProductModel->findAll();

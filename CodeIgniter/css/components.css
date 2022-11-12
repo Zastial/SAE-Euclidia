@@ -1,8 +1,62 @@
-.btn {
-    background-color: var(--orange-100);
-    border-radius: 20px;
+
+
+/* ==== CSS ==== */
+
+body {
+    --black-100: #111111;
+    --black-200: #2F2F2F;
+    --white-200: #F1F1F1;
+    --orange: #FFAE27;
+    --blue--link: #0000EE;
+    --white-100: #FFFDFA;
+    --red: #DE1B1B;
+    --grey: #E1E1E1;
 }
 
-.btn-main {
-    margin: 20px 35px 20px 35px;
+
+
+/* ======= BUTTON ======= */
+
+.btn {
+    color: var(--black-200);
+    background-color: var(--orange);
+    border-radius: 10px;
+    text-align: center;
 }
+
+.btn-black-200 {
+    width: 300px;
+    height: 60px;
+    border-radius: 8px;
+    background-color: var(--black-200);
+    color: var(--orange);
+    text-align: center;
+}
+
+
+.btn-main {
+    width: 200px;
+    height: 40px;
+    padding: 10px 20px;
+}
+
+.btn-large {
+    width: 250px;
+    height: 40px;
+}
+
+.btn-small {
+    width: 150px;
+    height: 30px;
+}
+
+.btn-black-200 img.btn-icon {
+    fill: none;
+    stroke: var(--orange);
+    scale: 50%;
+    float: left;
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+}
+
