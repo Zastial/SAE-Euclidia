@@ -35,10 +35,16 @@ class Product extends CI_Controller {
     public function display($id){
         $produit = $this->ProductModel->findById($id);
         if ($produit == null) {
-            echo "Produit introuvable."; 
-            die();
+            $this->session->set_flashdata('previous', base_url('Product/find'));
+            $this->load->view("error");
+            return;
         }
         $this->load->view("product", array("produit"=>$produit));
+    }
+
+    public function error(){
+        $this->session->set_flashdata('previous', base_url('User/changename'));
+        $this->load->view("error");
     }
 
 }

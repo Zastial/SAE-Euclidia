@@ -17,6 +17,10 @@ body {
 
 /* ======= BUTTON ======= */
 
+button {
+    border: none;
+}
+
 .btn {
     color: var(--black-200);
     background-color: var(--orange);

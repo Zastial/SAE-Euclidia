@@ -27,11 +27,14 @@ a,
 button {
     cursor: pointer;
 }
+button {
+    border: none;
+}
 
 /* input checkbox */
 
 input[type="checkbox"] {
-    background-color: red;
+    
     color: var(--orange);
     width: 1.15em;
     height: 1.15em;
@@ -95,7 +98,6 @@ nav {
     height: 80px;
 }
 
-
 .nav-center {
     display: flex;
     width: 600px;
@@ -137,4 +139,54 @@ nav {
 .link-nav:hover {
     background-color: var(--black-200);
     color: var(--orange-100);
+}
+
+
+/* ==== CSS HEADER WHEN CONNECTED ==== */
+ 
+.dropbtn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    background-color: #FFFFFF;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 
+        0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #FFFFFF;
 }

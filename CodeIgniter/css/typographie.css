@@ -1,0 +1,32 @@
+.h1Typo {
+    font-size: 32px;
+}
+
+.h2Typo {
+    font-size: 24px;
+}
+
+.h3Typo {
+    font-size: 18px;
+}
+
+.pTypo {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.aTypo {
+    font-size: 18px;
+}
+
+.aSelectTypo {
+    font-size: 18px;
+}
+
+
+.labelTypo {
+    /* font-family: Inter; */
+    font-size: 20px;
+    font-weight: 400;
+}
+

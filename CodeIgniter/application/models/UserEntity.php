@@ -1,7 +1,7 @@
 <?php
 class UserEntity {
 
-    private int $id;
+    private int $id_utilisateur;
     private string $nom;
     private string $prenom;
     private string $password;
@@ -12,7 +12,7 @@ class UserEntity {
      * @return int
      */
     public function getId(): int {
-        return $this->id;
+        return $this->id_utilisateur;
     }
 
     /**
@@ -54,7 +54,7 @@ class UserEntity {
      * @param int $id
      */
     public function setId(int $id): void {
-        $this->id = $id;
+        $this->id_utilisateur = $id;
     }
 
     /**
@@ -69,13 +69,6 @@ class UserEntity {
      */
     public function setPrenom(string $prenom): void {
         $this->prenom = $prenom;
-    }
-
-    /**
-     * @param string $password
-     */
-    public function setPassword(string $password): void {
-        $this->password = $password;
     }
 
     /**

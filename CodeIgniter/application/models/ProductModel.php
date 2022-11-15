@@ -16,19 +16,6 @@ class ProductModel extends CI_Model {
     }
 
 	public function findByCategories(array $ids) {
-		/*
-		$this->db->select('*');
-		$this->db->from('produit');
-		$this->db->join('affectation', 'produit.id_produit = affectation.id_produit');
-		$this->db->where_in('affectation.id_categorie', $ids);
-		if (count($ids) > 1) {
-			$this->db->group_by('affectation.id_categorie');
-			$this->db->having('count(affectation.id_categorie)', count($ids));
-		}
-		$q = $this->db->get();
-		$response = $q-> custom_result_object("ProductEntity");
-		return $response;
-		*/
 		$sql = "select * from produit as p1 where NOT EXISTS (
 			SELECT * from categorie WHERE id_categorie IN ?
 		  AND id_categorie NOT IN (
@@ -60,5 +47,14 @@ class ProductModel extends CI_Model {
 		return $this->findById($id);
     }
 
+	public function findByFacture($id) {
+		$this->db->select('facture.*');
+		$this->db->from('produit');
+		$this->db->join('achat', 'facture.id_produit = achat.id_produit');
+		$this->db->where(array("achat.id_facture"=>$id));
+		$q = $this->db->get();
+		$response = $q->custom_result_object("ProductEntity");
+		return $response;
+	}
 }
 ?>

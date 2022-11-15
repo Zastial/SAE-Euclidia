@@ -23,9 +23,14 @@
                     <label for="prenom">Prénom</label>
                     <input class="input" type="text" name="prenom" required>
                     <?php 
-                        if (isset($error) && $error == true) {
-                            echo "Inscription impossible, merci d'utiliser un email différent.";
-                        }
+                    $err = $this->session->flashdata('error');
+                    if (!is_null($err)){
+                        echo $err;
+                    }
+                    $succ = $this->session->flashdata('success');
+                    if (!is_null($succ)){
+                        echo $succ;
+                    }
                     ?>
                 </div>
                 <div class="name">
@@ -33,7 +38,7 @@
                     <input class="input" type="text" name="nom" required>
                 </div>
             <div class="email">
-                <label for="email" id="email" pattern=".+@globex\.com" size="30" required>Email</label>
+                <label for="email" id="email" size="30" required>Email</label>
                 <input class="input" type="email" name="email" required>
             </div>
 
@@ -46,7 +51,7 @@
 
 
         <div class="form-btn">
-            <button type="submit">S'inscrire</button>
+            <button class="btn btn-main"type="submit">S'inscrire</button>
         </div>
         
     </form>

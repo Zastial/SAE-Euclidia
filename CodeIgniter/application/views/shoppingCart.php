@@ -36,6 +36,9 @@ $date = date('d/m/Y')
                 </div>
             <?php endforeach; ?>
         </div>
+
+
+        <button class="btn btn-main">Passer la commander</button>
     </div>
 
 </body>

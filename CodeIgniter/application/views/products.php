@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
-
-    <link rel="stylesheet" href=<?= base_url("css/style.css") ?> >
-    <link rel="stylesheet" href=<?= base_url("css/productsPage.css") ?> >
+    <link rel="stylesheet" href=<?= base_url("css/style.css") ?>>
+    <link rel="stylesheet" href=<?= base_url("css/productsPage.css") ?>>
+    <link rel="stylesheet" href="<?= base_url("css/grid-products.css") ?>">
     <title>Modèles 3D</title>
 </head>
 <body>
@@ -36,7 +36,7 @@
         </div>
         
         
-        <div class="produits">
+        <div class="grid-products" id="produits">
             <?php require_once('productsContent.php') ?>
         </div>
     </div>
@@ -62,7 +62,6 @@
             });
 
             $('#filter').click(function() {
-
                 modifyProducts();
                 
             });
@@ -76,7 +75,6 @@
             var post_data = {
                 'categories': ids
             };
-            
 
             $.ajax({
                 type: "POST",
