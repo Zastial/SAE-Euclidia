@@ -19,8 +19,8 @@
         <h2> logo</h2>
     </a>
 
-    
-    <form action=<?= site_url("User/registerCheck"); ?> method="post">
+    <?php echo form_open('user/register'); ?>
+
         <div class="form-container">
 
             <div class="form-head">
@@ -30,26 +30,31 @@
             <div class="form-input">         
                     <div class="first-name">
                         <label for="first-name" class="labelTypo" size="30">Prénom</label><br>
-                        <input class="input" type="text" name="first-name" required>
+                        <input class="input" type="text" name="prenom" value="<?= set_value('prenom'); ?>" required>
+                        <?php echo form_error('prenom'); ?>
                     </div>
                     <div class="name">
                         <label for="name" class="labelTypo" size="30" >Nom</label><br>
-                        <input class="input" type="text" name="name" required>
+                        <input class="input" type="text" name="nom" value="<?= set_value('nom'); ?>" required>
+                        <?php echo form_error('nom'); ?>
                     </div>
                 <div class="email">
                     <label for="email" class="labelTypo" size="30" >Email</label><br>
-                    <input class="input" type="email" name="email" required>
+                    <input class="input" type="email" name="email" value="<?= set_value('email'); ?>" required>
+                    <?php echo form_error('email'); ?>
                 </div>
 
 
                 <div class="password">
                     <label for="password" class="labelTypo" size="30" >Mot de passe</label><br>
-                    <input class="input" type="password" name="password" required>
+                    <input class="input" type="password" name="password" value="<?= set_value('password'); ?>" required>
+                    <?php echo form_error('password'); ?>
                 </div>
 
                 <div class="confirm-password">
                     <label for="confirm-password" class="labelTypo" size="30" >Confirmer le mot de passe</label><br>
-                    <input class="input" type="confirm-password" name="confirm-password" required>
+                    <input class="input" type="password" name="confirm-password" value="<?= set_value('confirm-password'); ?>" required>
+                    <?php echo form_error('confirm-password'); ?>
                 </div>
 
             </div>

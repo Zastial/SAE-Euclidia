@@ -27,22 +27,15 @@
                     <th> <p class=" "> <?= $this->session->user["email"] ?> </p> </th>
                 </tr>
             </table>
-    
-            <button class="btn btn-large" > Modifier le profil</button>
-        </div>
-        <div class="user-password">
-            <div>
-            <div>
-                <h3>Mot de passe</h3>
-                <p>******</p>
-                <button class="btn btn-large">Modifier le mot de passe</button>
-            </div>
             
+            <a href="<?= site_url("user/modify") ?>" target="_parent">
+                <button class="btn btn-large"> Modifier mes informations</button>
+            </a>
+
             <div>
                 <a href="" style="color : var(--red);">Supprimer le compte</a>
             </div>
         </div>
-
     </div>
 
 

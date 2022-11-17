@@ -51,13 +51,13 @@
 
 
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
 
         $(function() {
             $('#reset').click(function() {
                 
-                $('#categories').find('input[type=checkbox]:checked').removeAttr('checked');
+                $('#categories').find('input[type=checkbox]:checked').prop('checked', false);
                 modifyProducts();
             });
 
