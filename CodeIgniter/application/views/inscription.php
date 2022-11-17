@@ -5,48 +5,59 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/reset.css">
-    <link rel="stylesheet" href="../styles/style.css">
+
+    <link rel="stylesheet" href= <?= base_url("css/typographie.css") ?>>
+    <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
+    <link rel="stylesheet" href=<?= base_url("css/style.css") ?>>
+    <link rel="stylesheet" href=<?= base_url("css/inscription.css") ?>>
+
     <title>Inscription</title>
 </head>
 <body>
+<?php require_once('error.php'); ?>
     <a href=<?= site_url("Home")?> >
         <h2> logo</h2>
     </a>
 
-    <div class="form-head">
-        <h1>Inscription</h1>
-    </div>
+    
     <form action=<?= site_url("User/registerCheck"); ?> method="post">
-        <div class="form-input">         
-                <div class="first-name">
-                    <label for="prenom">Prénom</label>
-                    <input class="input" type="text" name="prenom" required>
-                    <?php 
-                        if (isset($error) && $error == true) {
-                            echo "Inscription impossible, merci d'utiliser un email différent.";
-                        }
-                    ?>
+        <div class="form-container">
+
+            <div class="form-head">
+                <h1>Inscription</h1>
+            </div>
+
+            <div class="form-input">         
+                    <div class="first-name">
+                        <label for="first-name" class="labelTypo" size="30">Prénom</label><br>
+                        <input class="input" type="text" name="first-name" required>
+                    </div>
+                    <div class="name">
+                        <label for="name" class="labelTypo" size="30" >Nom</label><br>
+                        <input class="input" type="text" name="name" required>
+                    </div>
+                <div class="email">
+                    <label for="email" class="labelTypo" size="30" >Email</label><br>
+                    <input class="input" type="email" name="email" required>
                 </div>
-                <div class="name">
-                    <label for="nom">Nom</label>
-                    <input class="input" type="text" name="nom" required>
+
+
+                <div class="password">
+                    <label for="password" class="labelTypo" size="30" >Mot de passe</label><br>
+                    <input class="input" type="password" name="password" required>
                 </div>
-            <div class="email">
-                <label for="email" id="email" pattern=".+@globex\.com" size="30" required>Email</label>
-                <input class="input" type="email" name="email" required>
+
+                <div class="confirm-password">
+                    <label for="confirm-password" class="labelTypo" size="30" >Confirmer le mot de passe</label><br>
+                    <input class="input" type="confirm-password" name="confirm-password" required>
+                </div>
+
             </div>
 
 
-            <div class="password">
-                <label for="password">Mot de passe</label>
-                <input class="input" type="password" name="password" required>
+            <div class="form-btn">
+                <button class="btn btn-main"type="submit">S'inscrire</button>
             </div>
-        </div>
-
-
-        <div class="form-btn">
-            <button type="submit">S'inscrire</button>
         </div>
         
     </form>

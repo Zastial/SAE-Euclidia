@@ -5,25 +5,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href=<?= base_url("css/reset.css") ?> >
-    <link rel="stylesheet" href=<?= base_url("css/style.css") ?> >
+    <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
+    <link rel="stylesheet" href=<?= base_url("css/style.css") ?>>
+    <link rel="stylesheet" href=<?= base_url("css/productsPage.css") ?>>
+    <link rel="stylesheet" href="<?= base_url("css/grid-products.css") ?>">
     <title>Modèles 3D</title>
 </head>
 <body>
     
     <?php require_once ('header.php'); ?>
 
-    <div id="categories">
-        <?php foreach ($categories as $cat): ?>
-            <input type="checkbox" id=<?= $cat->getId() ?>>
-                <?=$cat->getLibelle()?>
-            </input>
-        <?php endforeach; ?>
-        <button id="filter">Appliquer les filtres</button>
-        <button id="reset">Réinitialiser les filtres</button>
+    <div class="main-content">
+        
+        
+        <div class="search">
+
+            <div class="search-bar">
+                <input type="text" name="rechercher" id="rechercher" placeholder="Rechercher">
+            </div>
+
+            <div class="categories" id="categories">
+                <?php foreach ($categories as $cat): ?>
+                    <input type="checkbox" id=<?= $cat->getId() ?>>
+                        <label for="checkbox"><?=$cat->getLibelle()?></label>
+                    </input>
+                <?php endforeach; ?>
+            </div>
+            <button id="filter">Appliquer les filtres</button>
+            <button id="reset">Réinitialiser les filtres</button>
+        </div>
+        
+        
+        <div class="grid-products" id="produits">
+            <?php require_once('productsContent.php') ?>
+        </div>
     </div>
-    
-    <?php require_once('productsContent.php') ?>
+
+
+
+
+
+
+
+
+
+
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript">
@@ -36,7 +62,6 @@
             });
 
             $('#filter').click(function() {
-
                 modifyProducts();
                 
             });
@@ -50,7 +75,6 @@
             var post_data = {
                 'categories': ids
             };
-            
 
             $.ajax({
                 type: "POST",

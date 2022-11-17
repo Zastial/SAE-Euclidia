@@ -1,0 +1,87 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5% 0 0 10%;
+}
+
+.form-input {
+    display: block;
+    padding: 20px;
+}
+
+.form-input .input {
+    background-color: #E1E1E1;
+    border-radius: 5px;
+    width: 400px;
+    height: 25px;
+}
+
+.btn-main {
+    cursor: pointer;
+}
+
+.form-input .name {
+    padding-bottom: 10px;
+}
+
+.form-input .first-name {
+    padding-bottom: 10px;
+}
+
+.form-input .email {
+    padding-bottom: 10px;
+}
+
+.form-input .password {
+    padding-bottom: 10px;
+}
+
+.form-input .confirm-password {
+    padding-bottom: 10px;
+}
+
+.btn-main {
+    width: 150px;
+    font-size: 20px;
+    padding: 0px;
+}
+
+.form-inscription-link {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.form-inscription-link a {
+    margin-left: 5px;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.bars {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+}
+
+.bars .bar-black {
+    height: 500px;
+    border-left: 30px solid black;
+    border-radius: 15px;
+    transform: rotate(45deg);
+}
+.bars .bar-grey {
+    height: 500px;
+    border-left: 30px solid grey;
+    border-radius: 15px;
+    transform: rotate(45deg);
+}
+.bars .bar-orange {
+    height: 500px;
+    border-left: 30px solid orange;
+    border-radius: 15px;
+    transform: rotate(45deg);
+}

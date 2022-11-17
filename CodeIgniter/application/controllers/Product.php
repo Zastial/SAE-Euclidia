@@ -11,17 +11,21 @@ class Product extends CI_Controller {
     }
     
     public function find(){
-        $produits = $this->ProductModel->findAll();
+        $produits = $this->ProductModel->findAllAvailable();
         $categories = $this->CategorieModel->findAll();
         $this->load->view("products", array("produits"=>$produits, "categories"=>$categories));
     }
 
     public function getFilteredProducts() {
+        if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_REQUESTED_WITH'] != 'XMLHttpRequest') {
+            show_404();
+            die();
+        }
         $categories = $this->input->post('categories');
         if (empty($categories)) {
-            $produits = $this->ProductModel->findAll();
+            $produits = $this->ProductModel->findAllAvailable();
         } else {
-            $produits = $this->ProductModel->findByCategories($categories);
+            $produits = $this->ProductModel->findByCategoriesAvailable($categories, true);
         }
         
         $page = $this->load->view('productsContent', array("produits"=>$produits, "categories"=>array()), TRUE);
@@ -29,12 +33,18 @@ class Product extends CI_Controller {
     }
 
     public function display($id){
-        $produit = $this->ProductModel->findById($id);
+        $produit = $this->ProductModel->findByIdAvailable($id);
         if ($produit == null) {
-            echo "Produit introuvable."; 
-            die();
+            $this->session->set_flashdata('previous', base_url('Product/find'));
+            $this->load->view("error");
+            return;
         }
         $this->load->view("product", array("produit"=>$produit));
+    }
+
+    public function error(){
+        $this->session->set_flashdata('previous', base_url('User/changename'));
+        $this->load->view("error");
     }
 
 }

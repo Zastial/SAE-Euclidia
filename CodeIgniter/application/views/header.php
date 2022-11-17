@@ -1,67 +1,19 @@
 <?php 
+
     $connected = (isset($this->session->user)) ? true : false;
     $status = ($connected) ? $this->session->user["status"] : "";
 ?>
 
 
 <head>
-    <link rel="stylesheet" href= <?= base_url("css/reset.css") ?> >
+    <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/header.css") ?> >
-
-    <style>
-        .dropbtn {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            gap: 10px;
-            align-items: center;
-            background-color: #FFFFFF;
-            padding: 16px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-        }
-  
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-  
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 
-                0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
-  
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-  
-        .dropdown-content a:hover {
-            background-color: #f1f1f1
-        }
-  
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-  
-        .dropdown:hover .dropbtn {
-            background-color: #FFFFFF;
-        }
-    </style>
 </head>
 
 <nav>
     <div class="nav-container">
         <a href=<?= site_url("Home") ?>>
-            <img class="nav-left" src="" alt="logo">
+            <img class="nav-left" src="" alt="Euclidia">
         </a>
         
         
@@ -89,20 +41,18 @@
 
                     <a href=<?=base_url("User/account")?>> Compte</a>
 
-                    <?php if ($connected): ?>
-                        <?php if ($status == "Utilisateur") : ?>
-                            
+                
+                    <?php if ($status == "Administrateur" || $status == "Responsable") : ?>
                             <html>
-                                <a href=<?= site_url("user/logout") ?>> Se déconnecter</a>
+                                <a href=<?= site_url("admin") ?>>Gestion</a>
                             </html>
-                            
-
-
-                        <?php endif; ?>
                     <?php endif; ?>
-
+                    
+                    <a href=<?=base_url("User/logout")?>> Déconnexion</a>
                 </div>
             </div>
+
+
             <?php else: ?>
                 <div>
                     <a class="btn-nav" href=<?= site_url("user/login")?>>Connexion</a>
@@ -117,3 +67,4 @@
         </div>
     </div>
 </nav>
+<?php require_once('error.php'); ?>

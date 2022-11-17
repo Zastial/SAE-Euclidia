@@ -21,7 +21,6 @@ class ShoppingCart extends CI_Controller{
                 $produits[] = $prod;
             }
         }
-
         $this->load->view("shoppingCart", array('produits'=>$produits));
     }
 
@@ -52,6 +51,21 @@ class ShoppingCart extends CI_Controller{
         redirect($this->agent->referrer());
     }
 
+    public function orderCommand() {
+        $produits = array();
+
+        if (!empty($this->session->cart)) {
+            foreach ($this->session->cart as $id) {
+                $prod = $this->ProductModel->findById($id);
+                if ($prod != null) {
+                    array_push($produits,$prod);
+                    // $produits[] = $prod;
+                }
+            }
+        }
+        $this->load->view("order_summary", array('produits'=>$produits));
+    }
+    
 }
 
    
