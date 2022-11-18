@@ -63,7 +63,6 @@ class ProductModel extends CI_Model {
 	}
     public function addProduct(ProductEntity $product):?ProductEntity{
         $data = array(
-			'id_produit'=>$product->getId(), 
 			'titre'=>$product->getTitre(), 
 			'prix'=>$product->getPrix(), 
 			'description'=>$product->getDescription(), 
@@ -74,9 +73,13 @@ class ProductModel extends CI_Model {
 			$this->db->db_debug = FALSE;
 			$this->db->insert('produit', $data);
 			$this->db->db_debug = $db_debug;
-		} catch (Exception $e) {}
+		} catch (Exception $e) {return null;}
 
-		return $this->findById($id);
+		// get last inserted row
+		$id = $this->db->insert_id();
+		$q = $this->db->get_where('produit', array('id_produit' => $id));
+		$response = $q->row(0,"ProductEntity");
+		return $response;
     }
 
 	public function findByFacture($id) {

@@ -1,0 +1,58 @@
+.summary {
+    max-width: 50rem;
+    margin: auto;
+}
+
+.tab {
+    display: flex;
+    flex-direction: row;
+    padding: 2rem 2rem 0 2rem;
+}
+
+.facturation {
+    padding-left: 1rem;
+}
+
+.facturation input {
+    margin-bottom: 1rem;
+}
+
+
+.payment {
+    width: 25rem;
+    height: 5rem;
+    margin: 1rem;
+    border: 0.1rem solid rgb(206, 206, 206);
+    display: flex;
+    align-items: center;
+}
+
+.payment input {
+    margin-left: 0.5rem;
+}
+
+.payment label {
+    font-weight: bold;
+    width: 10rem;
+    margin-left: 0.5rem;
+}
+
+.payment img {
+    max-width: 5rem;
+    height: 3rem;
+    margin-left: 7rem;
+}
+
+
+.promotion {
+    padding: 2rem;
+}
+
+.promotion input {
+    margin-top: 2rem;
+    width:15rem;
+}
+
+.promotion button {
+    margin-left: 1rem;
+}

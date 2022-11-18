@@ -66,13 +66,13 @@ $email = empty(set_value('email')) ? $this->session->user["email"] : set_value('
             </div>
 
             <div class="form-btn">
-                <button class="btn btn-main"type="submit">Appliquer les modifications</button>
+                <button class="btn btn-orange btn-main"type="submit">Appliquer les modifications</button>
             </div>
         </div>
     </form>
     <div class="back-btn">
         <a href="<?= site_url("user/account") ?>" target="_parent">
-            <button class="btn btn-main">Retourner sur mon compte</button>
+            <button class="btn btn-orange btn-main">Retourner sur mon compte</button>
         </a>
     </div>
 </body>

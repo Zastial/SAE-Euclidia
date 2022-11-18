@@ -35,7 +35,7 @@ class ShoppingCart extends CI_Controller{
             $cart[] = $id;
             $this->session->set_userdata("cart",$cart);
         }
-        
+        $this->session->set_flashdata('info', 'Produit ajouté au panier.');
         redirect($this->agent->referrer());
         
     }
@@ -47,6 +47,7 @@ class ShoppingCart extends CI_Controller{
                 unset($cart[$key]);
             }
         }
+        $this->session->set_flashdata('info', 'Produit retiré du panier.');
         $this->session->set_userdata("cart",$cart);
         redirect($this->agent->referrer());
     }
@@ -63,7 +64,7 @@ class ShoppingCart extends CI_Controller{
                 }
             }
         }
-        $this->load->view("order_summary", array('produits'=>$produits));
+        $this->load->view("orderCommand", array('produits'=>$produits));
     }
     
 }

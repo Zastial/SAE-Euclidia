@@ -10,6 +10,10 @@
     padding: 20px;
 }
 
+.form-input > * > p {
+    color: red;
+}
+
 .form-input .input {
     background-color: #E1E1E1;
     border-radius: 5px;
@@ -85,3 +89,4 @@
     border-radius: 15px;
     transform: rotate(45deg);
 }
+

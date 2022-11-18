@@ -7,14 +7,17 @@
     display:flex;
     flex-direction: column;
     gap: 30px;
+    width: 20%;
 
 }
-.produits {
 
-}
 
 .categories {
     display: flex;
-    
+    flex-direction: column;
+
 }
 
+.grid-product {
+    width: 80%;
+}

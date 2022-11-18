@@ -44,11 +44,8 @@ class User extends CI_Controller {
             $password = $this->input->post("password");
             $status = "Utilisateur";
 
-            $id = $this->UserModel->getNewId();
-
             $user = new UserEntity();
 
-            $user->setId($id);
             $user->setNom(htmlspecialchars($nom));
             $user->setPrenom(htmlspecialchars($prenom));
             $user->setEmail(htmlspecialchars($email));
@@ -103,6 +100,10 @@ class User extends CI_Controller {
                 "prenom"=>$user->getPrenom(),
                 "email"=>$user->getEmail(), 
                 "status"=>$user->getStatus()));
+            
+            if ($this->session->cart) {
+                redirect('shoppingCart');
+            }
             redirect('Home');
         }
     }
@@ -122,16 +123,16 @@ class User extends CI_Controller {
         }
 
         $this->form_validation->set_rules('prenom', 'Prénom', 'required|callback_isValidName|max_length[50]',
-            array('required' => 'Vous devez entrer un prénom', 'isValidName' => 'Le prénom ne doit contenir que des lettres', 'max_length' => 'Le prénom ne doit pas dépasser 50 caractères'));
+            array('required' => 'Vous devez entrer un prénom', 'isValidName' => 'Le prénom doit démarrer par une lettre et ne doit contenir que des lettres ou les caractères -\'', 'max_length' => 'Le prénom ne doit pas dépasser 50 caractères'));
 
         $this->form_validation->set_rules('nom', 'Nom', 'required|callback_isValidName|max_length[50]',
-            array('required' => 'Vous devez entrer un nom', 'isValidName' => 'Le nom ne doit contenir que des lettres', 'max_length' => 'Le nom ne doit pas dépasser 50 caractères'));
+            array('required' => 'Vous devez entrer un nom', 'isValidName' => 'Le nom doit démarrer par une lettre et ne doit contenir que des lettres ou les caractères -\'', 'max_length' => 'Le nom ne doit pas dépasser 50 caractères'));
 
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|callback_isUniqueEmail',
-            array('required' => 'Vous devez entrer un email', 'valid_email' => 'L\'email n\'est pas valide', 'is_unique' => 'L\'email est déjà utilisé'));
+            array('required' => 'Vous devez entrer un email', 'valid_email' => 'L\'email n\'est pas valide', 'isUniqueEmail' => 'L\'email est déjà utilisé'));
 
         $this->form_validation->set_rules('new-password', 'Mot de passe', 'max_length[50]|callback_isValidModifyPassword',
-            array('max_length' => 'Le mot de passe ne doit pas dépasser 50 caractères'));
+            array('max_length' => 'Le mot de passe ne doit pas dépasser 50 caractères', 'isValidModifyPassword' => 'Votre mot de passe actuel est incorrect!'));
 
         $this->form_validation->set_rules('confirm-new-password', 'Confirmation du mot de passe', 'matches[new-password]',
             array('matches' => 'Les mots de passe ne correspondent pas'));
@@ -226,10 +227,11 @@ class User extends CI_Controller {
      * checks if name is valid (no numbers, 50 chars max)
      */
     public function isValidName(string $name): bool {
-        $uppercase=preg_match('@[A-Z]@',$name);
-        $lowercase=preg_match('@[a-z]@',$name);
-        $number=preg_match('@[0-9]@',$name);
-        return ($uppercase || $lowercase) && !$number;
+        preg_match("@(?i)[a-zÀ-ÿ'-]+@", $name, $matches);
+        if (count($matches) == 0) return false;
+        preg_match("@(?i)[a-zÀ-ÿ]@", $name[0], $matches2);
+        if (count($matches2) == 0) return false;
+        return strlen($matches[0]) == strlen($name);
     }
 
     public function account() {

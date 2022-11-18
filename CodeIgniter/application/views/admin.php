@@ -17,66 +17,93 @@ if (isset($this->session->user["status"])) {
     <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/style.css") ?> >
     <link rel="stylesheet" href=<?= base_url("css/tabs.css") ?> >
-    <link rel="stylesheet" href=<?= base_url("css/adminComponents.css") ?> >
-
     <script type="text/javascript" src=<?=base_url("js/tabs.js")?>></script>
     <title>Admin</title>
 </head>
 <body>
     
     <?php require_once('header.php'); ?>
+    <div class="main">
+        <div class="tab-container">
+            <?php if ($status == "Responsable" || $status == "Administrateur"): ?>
+                <button class="tab-link" onclick="openTab(event, 'Produits')">Produits</button>
+            <?php endif; ?>
     
-    <div class="tab-container">
+            <?php if ($status == "Administrateur"): ?>
+                <button class="tab-link" onclick="openTab(event, 'Utilisateurs')">Utilisateurs</button>
+            <?PHP endif; ?>
+
+            <?php if ($status == "Responsable" || $status == "Administrateur"): ?>
+                <button class="tab-link" onclick="openTab(event, 'Categories')">Categories</button>
+            <?php endif; ?>
+        </div>
+    
+    
         <?php if ($status == "Responsable" || $status == "Administrateur"): ?>
-            <button class="tab-link active" onclick="openTab(event, 'Produits')">Produits</button>
+        <div id="Produits" class="tab-content">
+        
+            <button class="btn btn-large btn-add">Ajouter un Produit</button>
+            
+            <?php foreach ($products as $product) :?>
+                    <div class="item-container">
+                        <p><?= $product->getID()?></p>
+                        <p><?= $product->getTitre()?></p>
+                        <p><?= $product->getPrix()?></p>
+                        <p><?= $product->getDisponible() ? "oui" : "non"?></p>
+                        <div >
+                            <img class="icon" src=<?=base_url("assets/icon/icon-pen.svg")?> alt="Modifier le produit">
+                            <img class="icon" src=<?=base_url("assets/icon/icon-delete.svg")?> alt="Supprimer le produit">
+                        </div>
+                        
+                    </div>
+    
+            <?php endforeach ; ?>
+        </div>
+        <?php endif; ?>
+        
+        
+        <?php if ($status == "Administrateur"): ?>
+        <div id="Utilisateurs" class="tab-content">
+            
+            <button class="btn btn-large btn-add">Ajouter un Utilisateur</button>
+
+            <?php foreach ($users as $user) :?>
+                    <div class="item-container">
+                        <p> <?= $user->getPrenom()?></p>
+                        <p><?= $user->getNom()?></p>
+                        <p><?= $user->getEmail()?></p>
+                        <p><?= $user->getStatus()?></p>
+                        <div class="icons">
+                            <img src=<?=base_url("assets/icon/icon-pen.svg")?> alt="Modifier le produit">
+                            <img src=<?=base_url("assets/icon/icon-delete.svg")?> alt="Supprimer le produit">
+                        </div>
+                    </div>
+    
+            <?php endforeach ; ?>
+    
+        </div>
         <?php endif; ?>
 
-        <?php if ($status == "Administrateur"): ?>
-            <button class="tab-link" onclick="openTab(event, 'Utilisateurs')">Utilisateurs</button>
-        <?PHP endif; ?>
-    </div>
+        <?php if ($status == "Responsable" || $status == "Administrateur"): ?>
+        <div id="Categories" class="tab-content">
 
+            <button class="btn btn-large btn-add">Ajouter une Catégotie</button>    
 
-    <?php if ($status == "Responsable" || $status == "Administrateur"): ?>
-    <div id="Produits" class="tab-content">
-    
-        <?php foreach ($products as $product) :?>
-                <div class="item-container">
-                    <p><?= $product->getID()?></p>
-                    <p><?= $product->getTitre()?></p>
-                    <p><?= $product->getPrix()?></p>
-                    <p><?= $product->getDisponible() ? "oui" : "non"?></p>
-                    <div class="icons">
-                        <img src=<?=base_url("assets/icon/icon-pen.svg")?> alt="Modifier le produit">
-                        <img src=<?=base_url("assets/icon/icon-delete.svg")?> alt="Supprimer le produit">
+            <?php foreach ($categories as $cat) :?>
+                    <div class="item-container">
+                        <p><?= $cat->getId()?></p>
+                        <p><?= $cat->getLibelle()?></p>
+                        <div >
+                            <img class="icon" src=<?=base_url("assets/icon/icon-pen.svg")?> alt="Modifier la catégorie">
+                            <img class="icon" src=<?=base_url("assets/icon/icon-delete.svg")?> alt="Supprimer la catégorie">
+                        </div>
+                        
                     </div>
-                    
-                </div>
 
-        <?php endforeach ; ?>
+            <?php endforeach ; ?>
+        </div>
+        <?php endif; ?>
     </div>
-    <?php endif; ?>
-    
-    
-    <?php if ($status == "Administrateur"): ?>
-    <div id="Utilisateurs" class="tab-content">
-    
-    <?php foreach ($users as $user) :?>
-                <div class="item-container">
-                    <p> <?= $user->getPrenom()?></p>
-                    <p><?= $user->getNom()?></p>
-                    <p><?= $user->getEmail()?></p>
-                    <p><?= $user->getStatus()?></p>
-                    <div class="icons">
-                        <img src=<?=base_url("assets/icon/icon-pen.svg")?> alt="Modifier le produit">
-                        <img src=<?=base_url("assets/icon/icon-delete.svg")?> alt="Supprimer le produit">
-                    </div>
-                </div>
-
-        <?php endforeach ; ?>
-
-    </div>
-    <?php endif; ?>
 
 </body>
 </html>

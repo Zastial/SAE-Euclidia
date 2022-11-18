@@ -22,11 +22,21 @@ button {
 }
 
 .btn {
-    color: var(--black-200);
-    background-color: var(--orange);
     border-radius: 10px;
     text-align: center;
 }
+
+.btn-orange {
+    color: var(--black-200);
+    background-color: var(--orange);
+}
+
+
+.btn:hover {
+    transition: 10ms ease;
+    filter:brightness(90%) ; 
+}
+
 
 .btn-black-200 {
     width: 300px;
@@ -61,5 +71,10 @@ button {
     margin-left: 10px;
     width: 40px;
     height: 40px;
+}
+
+.btn-add {
+    background-color: green;
+    
 }
 

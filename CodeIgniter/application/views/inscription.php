@@ -28,16 +28,16 @@
             </div>
 
             <div class="form-input">         
-                    <div class="first-name">
-                        <label for="first-name" class="labelTypo" size="30">Prénom</label><br>
-                        <input class="input" type="text" name="prenom" value="<?= set_value('prenom'); ?>" required>
-                        <?php echo form_error('prenom'); ?>
-                    </div>
-                    <div class="name">
-                        <label for="name" class="labelTypo" size="30" >Nom</label><br>
-                        <input class="input" type="text" name="nom" value="<?= set_value('nom'); ?>" required>
-                        <?php echo form_error('nom'); ?>
-                    </div>
+                <div class="first-name">
+                    <label for="first-name" class="labelTypo" size="30">Prénom</label><br>
+                    <input class="input" type="text" name="prenom" value="<?= set_value('prenom'); ?>" required>
+                    <?php echo form_error('prenom'); ?>
+                </div>
+                <div class="name">
+                    <label for="name" class="labelTypo" size="30" >Nom</label><br>
+                    <input class="input" type="text" name="nom" value="<?= set_value('nom'); ?>" required>
+                    <?php echo form_error('nom'); ?>
+                </div>
                 <div class="email">
                     <label for="email" class="labelTypo" size="30" >Email</label><br>
                     <input class="input" type="email" name="email" value="<?= set_value('email'); ?>" required>
@@ -61,21 +61,23 @@
 
 
             <div class="form-btn">
-                <button class="btn btn-main"type="submit">S'inscrire</button>
+                <button class="btn btn-orange btn-main"type="submit">S'inscrire</button>
+            </div>
+
+            <div class="form-inscription-link">
+                <h4>Vous êtes déjà membre ?</h4>
+                <a href=<?= site_url("user/login"); ?>>Se connecter</a>
             </div>
         </div>
         
     </form>
 
-    <div class="form-inscription-link">
-            <h4>Vous êtes déjà membre ?</h4>
-            <a href=<?= site_url("user/login"); ?>>Se connecter</a>
-        </div>
+    
 
         
     <div class="bars">
         <div class="bar-black"></div>
-        <div class="bar-gey"></div>
+        <div class="bar-grey"></div>
         <div class="bar-orange"></div>
     </div>
 </body>

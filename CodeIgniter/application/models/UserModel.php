@@ -23,25 +23,14 @@ class UserModel extends CI_Model {
 		return $response;
     }
 
-	public function getNewId(): int {
-		$this->db->select_max('id_utilisateur');
-		$this->db->from("utilisateur");
-		$query = $this->db->get();
-		if ($query->num_rows() > 0) {
-			return $query->row('id_utilisateur') + 1;
-		}
-		return 0;
-	}
-
 	public function addUser(UserEntity $user): ?UserEntity {
 		$nom = $user->getNom();
 		$prenom = $user->getPrenom();
 		$email = $user->getEmail();
-		$id = $user->getId();
 		$password = $user->getPassword();
 		$status = $user->getStatus();
 
-		$data = array('id_utilisateur' => $id, 
+		$data = array(
 		'prenom' => $prenom, 
 		'nom' => $nom, 
 		'password' => $password, 
@@ -53,10 +42,15 @@ class UserModel extends CI_Model {
 			$this->db->db_debug = FALSE;
 			$this->db->insert('utilisateur', $data);
 			$this->db->db_debug = $db_debug;
-		} catch (Exception $e) {}
+		} catch (Exception $e) {return null;}
 
-		return $this->findById($id);
+		// get last inserted row
+		$id = $this->db->insert_id();
+		$q = $this->db->get_where('utilisateur', array('id_utilisateur' => $id));
+		$response = $q->row(0,"UserEntity");
+		return $response;
 	}
+	
 	public function updateUser(UserEntity $user): ?UserEntity{
 		try {
 			$db_debug = $this->db->db_debug;

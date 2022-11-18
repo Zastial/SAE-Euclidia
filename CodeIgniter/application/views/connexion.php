@@ -39,7 +39,7 @@
 
 
             <div class="form-btn">
-                <button class="btn btn-main"> Se connecter</button>
+                <button class="btn btn-orange btn-main"> Se connecter</button>
             </div>
 
             <div class="form-inscription-link">

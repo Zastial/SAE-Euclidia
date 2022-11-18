@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/style.css") ?> >
+    <link rel="stylesheet" href=<?= base_url("css/account.css") ?> >
     <title>Account</title>
 </head>
 <body>
@@ -29,7 +30,7 @@
             </table>
             
             <a href="<?= site_url("user/modify") ?>" target="_parent">
-                <button class="btn btn-large"> Modifier mes informations</button>
+                <button class="btn btn-orange btn-large"> Modifier mes informations</button>
             </a>
 
             <div>

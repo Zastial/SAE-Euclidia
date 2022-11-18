@@ -25,6 +25,8 @@
         </div>
     </div>
 
+
+    <!--A delete ou faire -->
     <div>
         <form action="">
 
@@ -42,10 +44,11 @@
                 <td><label for="message">Corps du message :</label></td><br>
                 <td><input type="text" required></td>
             </div>
-            <br><input type="submit" value="Envoyer">
+            <input type="submit" value="Envoyer">
         </form>
     </div>
 
+    <!-- end -->
 </body>
 </html>
 

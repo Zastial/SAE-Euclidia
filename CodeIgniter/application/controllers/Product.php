@@ -42,9 +42,4 @@ class Product extends CI_Controller {
         $this->load->view("product", array("produit"=>$produit));
     }
 
-    public function error(){
-        $this->session->set_flashdata('previous', base_url('User/changename'));
-        $this->load->view("error");
-    }
-
 }

@@ -1,0 +1,42 @@
+.product{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5% 0 0 0;
+}
+
+
+.images {
+    display: inline;
+}
+
+
+.images .main-image {
+    width: 450px;
+}
+
+
+.description{
+    margin-left: 15%;
+}
+
+
+
+.description .model .titre{
+    /*align-items: center;*/
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+
+
+.description .buy{
+    display: flex;
+
+    margin-top: 5%;
+    justify-content: space-evenly;
+}
+
+.description .buy h3{
+    margin-top: 9px;
+}

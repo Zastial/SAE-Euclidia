@@ -1,6 +1,7 @@
 <?php 
 $date = date('d/m/Y');
 $disabled = empty($this->session->cart);
+$connected = (isset($this->session->user)) ? true : false;
 ?>
 
 
@@ -38,13 +39,17 @@ $disabled = empty($this->session->cart);
         </div>
 
         <div class='order'>
-            <?php
-                if(count($produits)==0) {
-                    echo('<button class="btn btn-main btn-disabled" disabled> Passer la commande </button>');
-                } else {
-                    echo('<a href="<?= site_url("ShoppingCart/payment")?>"><button class="btn btn-main"> Passer la commande </button></a>');
-                }
-            ?>
+            <?php if(count($produits)==0) : ?>
+                <html>
+                    <button class="btn btn-main btn-orange btn-disabled" disabled> Passer la commande </button>
+                </html>
+                <?php elseif ($connected) : ?>
+                    <html>
+                        <a href='<?= site_url("ShoppingCart/orderCommand") ?>'><button class='btn btn-main btn-orange'> Passer la commande </button></a>
+                    </html>
+                <?php else :?>
+                    <a href='<?= site_url("user/login") ?>'><button class='btn btn-main btn-orange'> Connectez-vous pour passer une commande   </button></a>
+            <?php endif; ?>
         </div>
 
 

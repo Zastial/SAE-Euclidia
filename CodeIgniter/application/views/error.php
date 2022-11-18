@@ -1,4 +1,4 @@
-<script src="../js/notiflix-aio-3.2.5.min.js"></script>
+<script src="<?php echo base_url("js/notiflix-aio-3.2.5.min.js"); ?>"></script>
 <?php if($this->session->flashdata('success')){ ?>
     <script>Notiflix.Notify.success('<?php echo $this->session->flashdata('success'); ?>', {timeout:5000, distance:'90px', width:"400px", fontSize:"16px"});</script>
 <?php }else if($this->session->flashdata('error')){  ?>

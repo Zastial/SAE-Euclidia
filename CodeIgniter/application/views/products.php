@@ -31,8 +31,8 @@
                     </input>
                 <?php endforeach; ?>
             </div>
-            <button id="filter">Appliquer les filtres</button>
-            <button id="reset">Réinitialiser les filtres</button>
+            <button class="btn btn-orange btn-large" id="filter">Appliquer les filtres</button>
+            <button class="btn btn-orange btn-large" id="reset">Réinitialiser les filtres</button>
         </div>
         
         
