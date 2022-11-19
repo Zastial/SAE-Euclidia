@@ -10,7 +10,7 @@
 }
 
 /* Style the buttons that are used to open the tab content */
-.tab-container button {
+.tab-container .tab-link {
     background-color: inherit;
     float: left;
     border: none;
@@ -35,6 +35,10 @@
     border-bottom: 4px solid var(--orange);
 }
 
+
+/* ============ Content ============ */
+
+
 /* Style the tab content */
 .tab-content {
     display: none;
@@ -42,21 +46,36 @@
     background-color: var(--white-200);
 }
 
+.tab-content button {
+    margin: 0 3em 3em;
+}
+
 .item-container {
-    height: 70px;
-    display: flex;
+    padding: 10px 30px;
+    display: grid;
     align-items: center;
-    justify-content: space-around;
+    grid-template-columns: repeat(4, 1fr) 80px;
     background-color: #FFFDFA;
     border-radius: 8px;
     margin-bottom: 20px;
 }
 
-.item-container > p {
+.item-container>p {
     width: 10rem;
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
 }
 
-.icons img {
+.icon-container {
+    grid-column: end;
+}
+
+.icon {
     width: 24px;
     height: 24px;
+}
+
+.icon-delete {
+    margin-left: 1em;
 }

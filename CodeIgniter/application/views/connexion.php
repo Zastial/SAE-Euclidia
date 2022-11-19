@@ -13,41 +13,41 @@
     <title>Connexion</title>
 </head>
 <body>
-<?php require_once('error.php'); ?>
+    <?php require_once('error.php'); ?>
     <a href=<?= site_url("Home")?> >
         <h2> logo</h2>
     </a>
 
+        
+            
     <?php echo form_open('user/login'); ?>
-        <div class="form-container">
-            <div class="form-head">
-                <h1 class="h1Typo">Connexion</h1>
-            </div>
 
-            <div class="form-input">
-                <div class="email">
-                    <label for="email" class="labelTypo" size="30" required>Email</label><br>
-                    <input class="input" type="email" name="email" value="<?= set_value('email'); ?>" required>
-                    <?php echo form_error('email'); ?>
+            <div class="form-container">
+                <div class="form-head">
+                    <h1 class="h1Typo">Connexion</h1>
                 </div>
-                <div class="password">
-                    <label for="password" class="labelTypo">Mot de passe</label><br>
-                    <input class="input" type="password" name="password" value="<?= set_value('password'); ?>" required>
-                    <?php echo form_error('password'); ?>
+
+                <div class="form-input">
+                    <div class="email">
+                        <label for="email" class="labelTypo" size="30" required>Email</label><br>
+                        <input  type="email" id="email" value="<?= set_value('email'); ?>" required>
+                        <?php echo form_error('email'); ?>
+                    </div>
+                    <div class="password">
+                        <label for="password" class="labelTypo">Mot de passe</label><br>
+                        <input  type="password" id="password" value="<?= set_value('password'); ?>" required>
+                        <?php echo form_error('password'); ?>
+                    </div>
+                </div>
+
+                <div class="form-btn">
+                    <button class="btn btn-orange btn-main" type="submit"> Se connecter</button>
+                </div>
+
+                <div>
+                    <p>Vous n'êtes pas inscrit ? <a href=<?= site_url("user/register"); ?>> S'inscrire</a></p>
                 </div>
             </div>
-
-
-            <div class="form-btn">
-                <button class="btn btn-orange btn-main"> Se connecter</button>
-            </div>
-
-            <div class="form-inscription-link">
-                <p class="pTypo">Vous n'êtes pas inscrit ?</p>
-
-                <a href=<?= site_url("user/register"); ?> class="aTypo"> S'inscrire</a>
-            </div>
-        </div>
     </form>
 
     <div class="bars">

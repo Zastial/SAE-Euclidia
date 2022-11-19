@@ -11,6 +11,11 @@ body {
     --white-100: #FFFDFA;
     --red: #DE1B1B;
     --grey: #E1E1E1;
+    --blue-100:#3271AB;
+    --blue-200: #79BCF7;
+    --inpu-text-clr: #6F6F6F;
+    --input-border-clr:#949494;
+
 }
 
 
@@ -29,6 +34,10 @@ button {
 .btn-orange {
     color: var(--black-200);
     background-color: var(--orange);
+}
+.btn-blue-200 {
+    color: var(--black-100);
+    background-color: var(--blue-200);
 }
 
 
@@ -78,3 +87,18 @@ button {
     
 }
 
+/* =========== INPUT =========== */
+
+
+
+.input_box .icon {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    color: var(--inpu-text-clr);
+}
+.input_box .icon img {
+    width: 24px;
+    height: 24px;
+}

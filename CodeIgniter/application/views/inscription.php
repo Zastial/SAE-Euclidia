@@ -65,8 +65,7 @@
             </div>
 
             <div class="form-inscription-link">
-                <h4>Vous êtes déjà membre ?</h4>
-                <a href=<?= site_url("user/login"); ?>>Se connecter</a>
+                <p>Vous êtes déjà membre ? <a href=<?= site_url("user/login"); ?>>Se connecter</a></p>
             </div>
         </div>
         
