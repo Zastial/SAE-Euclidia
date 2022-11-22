@@ -14,62 +14,70 @@ $connected = (isset($this->session->user)) ? true : false;
     <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
     <link rel="stylesheet" href= <?= base_url("css/shoppingCart.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/style.css") ?> >
+    <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
+
     <title>ShoppingCart</title>
 </head>
 <body>
     <?php require_once ('header.php'); ?>
 
-    <div class="main-content">
-        <div class="info">
-            <h1>Panier</h1>
-            <p><?= $date ?> </p>
-        </div>
+
+    <div class="cart-container">
+        <div class="cart">
+            <div class="info">
+                <h1>Panier</h1>
+                <p><?= $date ?> </p>
+            </div>
+            
         
-    
-        <div class="shopping-cart-list">
+            <div class="shopping-cart-list">
+                <?php foreach($produits as $prod) :?>
+                    <div class="shopping-cart-product" onclick='location.href="<?= site_url("Product/display/".$prod->getId())?>"' style="cursor:pointer">
+                        
+                            <img class="image-model" src="<?= base_url("assets/image/default-img.png") ?>" alt="default image">
+                            <p><?= $prod->getTitre() ?></p>
+                            <p><?= $prod->getPrix() ?> €</p>
+                        
+
+                        <a href="<?= site_url("ShoppingCart/removeProduct/".$prod->getId())?>"><img class="icon-delete" src="<?=base_url("assets/icon/icon-delete.svg") ?>" alt="delete bouton"></a>   
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <div class='order'>
+                <?php if(count($produits)==0) : ?>
+                    
+                    <button class="btn btn-main btn-orange btn-disabled" disabled> Passer la commande </button>
+                    <button class='btn btn-main btn-orange btn-disabled' disabled> Vider le Panier </button>
+                    
+                    <?php elseif ($connected) : ?>
+                        
+                        <a href='<?= site_url("ShoppingCart/orderCommand") ?>'><button class='btn btn-main btn-orange'> Passer la commande </button></a>
+                        <a href='<?= site_url("ShoppingCart/emptyCart") ?>'><button class='btn btn-main btn-orange'> Vider le Panier </button></a>
+                        
+                    <?php else :?>
+                        <a href='<?= site_url("user/login") ?>'><button class='btn btn-main btn-orange'> Connectez-vous pour passer une commande   </button></a>
+                        <a href='<?= site_url("ShoppingCart/emptyCart") ?>'><button class='btn btn-main btn-orange'> Vider le Panier </button></a>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <div class='order-total'>
+            <h1>Total</h1>
+            <?php 
+                $total = 0
+            ?>
             <?php foreach($produits as $prod) :?>
-                <div class="shopping-cart-product">
-                    <img class="image-model" src="<?= base_url("assets/image/default-img.png") ?>" alt="default image">
-                    <!--<img src="       $prod->getId()?>" alt="modèle  $prod->getTitre() ?>"> -->
+                <div class="produit-total">
                     <p><?= $prod->getTitre() ?></p>
                     <p><?= $prod->getPrix() ?> €</p>
-                    <a href="<?= site_url("ShoppingCart/removeProduct/".$prod->getId())?>"><img class="icon-delete" src="<?=base_url("assets/icon/icon-delete.svg") ?>" alt="delete bouton"></a>   
+                    <?php 
+                        $total += $prod->getPrix()
+                    ?>
                 </div>
             <?php endforeach; ?>
+            <p>Total = <?= $total ?> €</p>
         </div>
-
-        <div class='order'>
-            <?php if(count($produits)==0) : ?>
-                <html>
-                    <button class="btn btn-main btn-orange btn-disabled" disabled> Passer la commande </button>
-                </html>
-                <?php elseif ($connected) : ?>
-                    <html>
-                        <a href='<?= site_url("ShoppingCart/orderCommand") ?>'><button class='btn btn-main btn-orange'> Passer la commande </button></a>
-                    </html>
-                <?php else :?>
-                    <a href='<?= site_url("user/login") ?>'><button class='btn btn-main btn-orange'> Connectez-vous pour passer une commande   </button></a>
-            <?php endif; ?>
-        </div>
-
-
-    </div>
-
-    <div class='order-total'>
-        <h1>Total</h1>
-        <?php 
-            $total = 0
-        ?>
-        <?php foreach($produits as $prod) :?>
-            <div class="produit-total">
-                <p><?= $prod->getTitre() ?></p>
-                <p><?= $prod->getPrix() ?> €</p>
-                <?php 
-                    $total += $prod->getPrix()
-                ?>
-            </div>
-        <?php endforeach; ?>
-        <p>Total = <?= $total ?> €</p>
     </div>
 
 </body>

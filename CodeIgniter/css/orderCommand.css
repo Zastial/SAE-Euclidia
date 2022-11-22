@@ -1,22 +1,59 @@
+.main {
+    display: flex;
+    justify-content: center;
+}
+
 .summary {
-    max-width: 50rem;
-    margin: auto;
+    width: 50rem;
 }
 
 .tab {
     display: flex;
-    flex-direction: row;
     padding: 2rem 2rem 0 2rem;
 }
 
 .facturation {
-    padding-left: 1rem;
+    width: 500rem;
+    display: grid;
+    grid-template-areas: 
+    "a b"
+    "c ."
+    "d .";
+}
+
+.formulaire {
+    grid-area: a;
 }
 
 .facturation input {
     margin-bottom: 1rem;
 }
 
+.formulaire .entries {
+    padding-left: 8rem;
+}
+
+.order-total {
+    grid-area: b;
+    flex-direction: column;
+    line-height: 2rem;
+    height:fit-content;
+    width: fit-content;
+    border: 0.1rem solid rgb(206, 206, 206);
+    border-radius: 10px;
+    margin-top: 2rem;
+    margin-left: 20rem;
+}
+
+.payment-methods {
+    grid-area: c;
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+}
+
+.payment-method {
+    padding-left: 5rem;
+}
 
 .payment {
     width: 25rem;
@@ -25,6 +62,7 @@
     border: 0.1rem solid rgb(206, 206, 206);
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .payment input {
@@ -33,18 +71,18 @@
 
 .payment label {
     font-weight: bold;
-    width: 10rem;
     margin-left: 0.5rem;
 }
 
 .payment img {
     max-width: 5rem;
     height: 3rem;
-    margin-left: 7rem;
+    margin-right: 1rem;
 }
 
 
 .promotion {
+    grid-area: d;
     padding: 2rem;
 }
 
@@ -56,3 +94,5 @@
 .promotion button {
     margin-left: 1rem;
 }
+
+

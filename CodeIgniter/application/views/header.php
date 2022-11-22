@@ -8,6 +8,8 @@
 <head>
     <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/header.css") ?> >
+    <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
+
 </head>
 
 <nav>

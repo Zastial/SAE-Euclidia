@@ -9,10 +9,12 @@
     <link rel="stylesheet" href=<?= base_url("css/style.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/productsPage.css") ?>>
     <link rel="stylesheet" href="<?= base_url("css/grid-products.css") ?>">
+    <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
+
     <title>Modèles 3D</title>
 </head>
 <body>
-    
+    <?php require_once('error.php'); ?>
     <?php require_once ('header.php'); ?>
 
     <div class="main-content">

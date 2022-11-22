@@ -1,4 +1,11 @@
-.main-content {
+.cart-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+.cart {
     padding: 20px 120px;
     width: 1200px;
     display: inline-block;
@@ -12,8 +19,8 @@
     border-bottom: 2px solid var(--grey);
     padding: 50px 0px 20px;
     margin-bottom: 50px;
- 
 }
+
 
 .shopping-cart-list {
     display: flex;
@@ -25,6 +32,10 @@
 
 .order {
     padding-top: 50px;
+    align-items:center;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
 }
 
 .order .btn-disabled:disabled {
@@ -50,6 +61,11 @@
 .shopping-cart-product .icon-delete {
     width: 20px;
     height: 20px;
+}
+
+.shopping-cart-product-on {
+    width: 15rem;
+    display: inline;
 }
 
 

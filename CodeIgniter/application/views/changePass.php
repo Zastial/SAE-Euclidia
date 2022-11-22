@@ -7,6 +7,8 @@
 
     <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/style.css") ?> >
+    <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
+
     <title>Changer de mot de passe</title>
 </head>
 <body>

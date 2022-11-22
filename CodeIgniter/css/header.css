@@ -17,6 +17,10 @@ menu {
     list-style-type: none;
 }
 
+a {
+    display: inline-block;
+}
+
 input,
 textarea {
     -webkit-user-select: auto;
@@ -31,56 +35,11 @@ button {
     border: none;
 }
 
-/* input checkbox */
-
-input[type="checkbox"] {
-    
-    color: var(--orange);
-    width: 1.15em;
-    height: 1.15em;
-    border: 0.15em solid var(--orange);
-    border-radius: 0.15em;
-    transform: translateY(-0.075em);
-    place-content: center;
-    margin: 10px;
-}
-
-input[type="checkbox"]::before {
-    content: "";
-    width: 1em;
-    height: 1em;
-    background-color: var(--orange);
-    transform: scale(0);
-    transition: 120ms transform ease-in-out;
-    transform-origin: bottom left;
-    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-}
-
-input[type="checkbox"]:checked::before {
-    transform: scale(1);
-}
-
-input[type="checkbox"]:focus {
-    outline: max(2px, 0.15em) solid var(--orange);
-    outline-offset: max(2px, 0.15em);
-}
 
 
 
 /* ==== CSS HEADER ==== */
 
-body {
-    --black-100: #111111;
-    --black-200: #2F2F2F;
-    --white-100: #111111;
-    --grey-100: #E1E1E1;
-    --white-200: #F1F1F1;
-    --orange-100: #FFAE27;
-    --blue-link-100: #0000EE;
-    --red-100: #DE1B1B;
-
-    --filter-orange-img: invert(67%) sepia(79%) saturate(566%) hue-rotate(338deg) brightness(104%) contrast(101%);
-}
 
 nav {
     text-align: center;
@@ -138,7 +97,7 @@ nav {
 
 .link-nav:hover {
     background-color: var(--black-200);
-    color: var(--orange-100);
+    color: var(--orange);
 }
 
 

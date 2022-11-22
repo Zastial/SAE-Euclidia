@@ -1,14 +1,31 @@
 
 
-
-
-.form-input input {
-    background-color: #E1E1E1;
-    border-radius: 5px;
-    width: 400px;
-    height: 25px;
+form {
+    display: flex;
+    justify-content: center;
 }
 
+.form-input .input {
+    position: relative;
+}
+
+.form-input span {
+    position: absolute;
+    z-index: 1;
+    padding: 0px;
+    top: 25%;
+    left: 10px;
+    color: var(--inpu-text-clr);
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-with-icon {
+    padding: 14px 20px 14px 40px;
+}
 
 
 

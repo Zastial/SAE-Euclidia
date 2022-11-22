@@ -9,59 +9,75 @@
     <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/style.css") ?> >
     <link rel="stylesheet" href=<?= base_url("css/account.css") ?> >
+    <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
+    <link rel="stylesheet" href=<?= base_url("css/bill.css") ?>>
+
     <title>Account</title>
 </head>
 <body>
-    
     <?php require_once('header.php'); ?>
     <div class="user-info">
         <div class="user-profile">
-            <table>
-                <tr>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Email</th>
-                </tr>
-                <tr>
-                    <th> <p class=" "> <?= $this->session->user["nom"]?> </p> </th>
-                    <th> <p class=" "> <?= $this->session->user["prenom"]?> </p> </th>
-                    <th> <p class=" "> <?= $this->session->user["email"] ?> </p> </th>
-                </tr>
-            </table>
-            
-            <a href="<?= site_url("user/modify") ?>" target="_parent">
-                <button class="btn btn-orange btn-large"> Modifier mes informations</button>
-            </a>
 
-            <div>
+            <div class="one">
+                <div class="bigbold">Nom</div>
+                <div><?= $this->session->user["nom"]?></div>
+            </div>
+
+            <div class="two">
+                <div class="bigbold">Prénom</div>
+                <div><?= $this->session->user["prenom"]?></div>
+            </div>
+
+            <div class="three-four">
+                <div class="bigbold">Email</div>
+                <div><?= $this->session->user["email"]?></div>
+            </div>
+
+            <div class="one-two">
+                <div class="bigbold">Mot de passe</div>
+                <div>******</div>
+            </div>
+
+            
+            
+            <div class="one-two">
+                <a href="<?= site_url("user/modify") ?>" target="_parent">
+                    <button class="btn btn-orange btn-large"> Modifier mes informations</button>
+                </a>
+            </div>
+
+            <div class="three-four left-padding">
                 <a href="" style="color : var(--red);">Supprimer le compte</a>
             </div>
         </div>
-    </div>
-
-
-    <div class="bill-container">
+        <?php if (!is_null($factures)){ ?>
+        <div class="bill-container">
         <h1 class="bill-title">Factures</h1>
 
         
-        <?php  ?>
+        <?php foreach ($factures as $bill): ?>
         <!-- foreach $bills as $bill: -->
 
         <a href="" ><!-- renvoie vers la page pour afficher la facture selon son ID -->
             <div class="bill">
-                <img src="<?= base_url("assets/image/default-img.png") ?>" alt="default image of modele">
-                <p> <!-- bill.getID() --> 1</p>
-                <p> Facture 01/01/2022 <!-- bill.getDate() --></p>
-                <p> 19:00  <!-- bill.getHour --> </p>
+                
+                <p> <?= $bill->getId() ?></p>
+                <p> Facture du <?= $bill->getDate() ?></p>
+                
                 <img src="<?= base_url("assets/icon/icon-search.svg") ?>" alt="">
             </div>
-        </a>
+        
             
-        <!-- endforeach; -->
-        <?php ?>
+        <?php endforeach; ?>
+        <?php } ?>
 
         </div>
     </div>
+    </div>
+
+
+    
 
 </body>
 </html>

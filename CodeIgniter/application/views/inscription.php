@@ -9,7 +9,11 @@
     <link rel="stylesheet" href= <?= base_url("css/typographie.css") ?>>
     <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/style.css") ?>>
-    <link rel="stylesheet" href=<?= base_url("css/inscription.css") ?>>
+    <link rel="stylesheet" href=<?= base_url("css/connexion.css") ?>>
+    <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+
 
     <title>Inscription</title>
 </head>
@@ -23,40 +27,65 @@
 
         <div class="form-container">
 
-            <div class="form-head">
-                <h1>Inscription</h1>
-            </div>
+            
+            <h1>Inscription</h1>
+            
 
-            <div class="form-input">         
-                <div class="first-name">
-                    <label for="first-name" class="labelTypo" size="30">Prénom</label><br>
-                    <input class="input" type="text" name="prenom" value="<?= set_value('prenom'); ?>" required>
-                    <?php echo form_error('prenom'); ?>
+            <div class="form-content">         
+                <div class="form-input">
+                    <div class="input-container">
+                        <label for="first-name" class="labelTypo" size="30">Prénom</label><br>
+                        <div class="input">
+                            <span class="material-symbols-outlined">person</span>                        
+                            <input class="input-with-icon" type="text" name="prenom" value="<?= set_value('prenom'); ?>" required>
+                        </div>
+                    </div>
+                    <p><?php echo form_error('prenom'); ?></p>
                 </div>
-                <div class="name">
-                    <label for="name" class="labelTypo" size="30" >Nom</label><br>
-                    <input class="input" type="text" name="nom" value="<?= set_value('nom'); ?>" required>
-                    <?php echo form_error('nom'); ?>
+                <div class="form-input">
+                    <div class="input-container">
+                        <label for="name" class="labelTypo" size="30" >Nom</label><br>
+                        <div class="input">
+                            <span class="material-symbols-outlined">person</span>                        
+                            <input class="input-with-icon" type="text" name="nom" value="<?= set_value('nom'); ?>" required>
+                        </div>
+                    </div>
+                    <p style="color: red;"><?php echo form_error('nom'); ?></p>
                 </div>
-                <div class="email">
-                    <label for="email" class="labelTypo" size="30" >Email</label><br>
-                    <input class="input" type="email" name="email" value="<?= set_value('email'); ?>" required>
-                    <?php echo form_error('email'); ?>
+                
+                <div class="form-input">
+                    <div class="input-container">
+                        <label for="email" class="labelTypo" size="30" >Email</label><br>
+                        <div class="input">
+                            <span class="material-symbols-outlined">alternate_email</span>                        
+                            <input class="input-with-icon" type="email" name="email" value="<?= set_value('email'); ?>" required>
+                        </div>
+                    </div>
+                    <p style="color: red;"><?php echo form_error('email'); ?></p>
                 </div>
+                
+                <div class="form-input">
+                    <div class="input-container">
+                        <label for="password" class="labelTypo" size="30" >Mot de passe</label><br>
+                        <div class="input">
+                            <span class="material-symbols-outlined">lock</span>                        
+                            <input class="input-with-icon" type="password" name="password" value="<?= set_value('password'); ?>" required>
+                        </div>
+                    </div>
+                    <p style="color: red;"><?php echo form_error('password'); ?></p>
+                </div>             
 
 
-                <div class="password">
-                    <label for="password" class="labelTypo" size="30" >Mot de passe</label><br>
-                    <input class="input" type="password" name="password" value="<?= set_value('password'); ?>" required>
-                    <?php echo form_error('password'); ?>
+                <div class="form-input">
+                    <div class="input-container">
+                        <label for="confirm-password" class="labelTypo" size="30" >Confirmer le mot de passe</label><br>
+                        <div class="input">
+                            <span class="material-symbols-outlined">lock</span>                        
+                            <input class="input-with-icon" type="password" name="confirm-password" value="<?= set_value('confirm-password'); ?>" required>
+                        </div>
+                    </div>
+                    <p style="color: red;"><?php echo form_error('confirm-password'); ?></p>
                 </div>
-
-                <div class="confirm-password">
-                    <label for="confirm-password" class="labelTypo" size="30" >Confirmer le mot de passe</label><br>
-                    <input class="input" type="password" name="confirm-password" value="<?= set_value('confirm-password'); ?>" required>
-                    <?php echo form_error('confirm-password'); ?>
-                </div>
-
             </div>
 
 

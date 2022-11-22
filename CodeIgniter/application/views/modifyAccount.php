@@ -15,6 +15,8 @@ $email = empty(set_value('email')) ? $this->session->user["email"] : set_value('
 
     <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/style.css") ?> >
+    <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
+
 
     <title>Modifier mon compte</title>
 </head>

@@ -6,7 +6,7 @@
 .tab-container {
     overflow: hidden;
     border: 1px solid #ccc;
-    background-color: #f1f1f1;
+    background-color: #f1f1f1;  
 }
 
 /* Style the buttons that are used to open the tab content */
@@ -50,18 +50,29 @@
     margin: 0 3em 3em;
 }
 
+
 .item-container {
     padding: 10px 30px;
     display: grid;
     align-items: center;
     grid-template-columns: repeat(4, 1fr) 80px;
-    background-color: #FFFDFA;
     border-radius: 8px;
     margin-bottom: 20px;
 }
 
+.item-container-white {
+    background-color: var(--white-100);
+    color: var(--black-200);
+}
+
+.item-container-black {
+    background-color: var(--black-200);
+    color: var(--orange);
+}
+
+
 .item-container>p {
-    width: 10rem;
+    width: 15rem;
     white-space: nowrap;
     overflow: hidden; 
     text-overflow: ellipsis;

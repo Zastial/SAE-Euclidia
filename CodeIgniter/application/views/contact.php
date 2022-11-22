@@ -9,6 +9,8 @@
     <link rel="stylesheet" href= <?= base_url("css/typographie.css") ?>>
     <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/style.css") ?> >
+    <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
+
     <title>Contact</title>
 </head>
 <body>

@@ -7,6 +7,11 @@
     max-width: 460px;
     border-radius: 10px;
     box-shadow: 1px 18px 40px -8px rgba(0, 0, 0, 0.25);
+    grid-column: 4;
+    grid-row: 1/3;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 80vh;
 }
 
 .bill-title {
@@ -14,6 +19,10 @@
     text-align: center;
     margin-bottom: 40px;
 
+}
+
+.bill-container a{
+    width: 100%;
 }
 
 .bill {

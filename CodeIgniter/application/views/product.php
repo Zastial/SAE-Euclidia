@@ -11,6 +11,8 @@
     <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/style.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/product.css") ?>>
+    <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
+
 
 
     <title>Contact</title>
@@ -18,20 +20,15 @@
 <body>
     
     <?php require_once ('header.php'); ?>
+    
+    <div class="return">
+        <a class="link-nav" href=<?= site_url("Product/find")?>> <img src="" alt=""> < Retour </a>
+    </div>
+
 
     <div class="product">
 
         <div class="images">
-            <!--
-            <div class="three-images">
-                <img src="" alt="">
-                <img src="" alt="">
-                <img src="" alt="">
-            </div>
-        
-            <div class="main_image">
-            </div>
-            -->
             <img class="main-image" src="<?= base_url("assets/image/default-img.png") ?>" alt="">
         </div>
 
@@ -43,8 +40,12 @@
             </div>
 
             <div class="buy">
-                <h3> <?= $produit->getPrix() ?></h3>
-                <a class="link-nav" href=<?= site_url("ShoppingCart/addProduct/".$produit->getId())?>> <img src="" alt=""> Ajouter au panier</a>
+                <h3> <?= $produit->getPrix() ?> €</h3>
+                <?php if (!$incart) : ?>
+                    <a class="link-nav" href=<?= site_url("ShoppingCart/addProduct/".$produit->getId())?>>Ajouter au panier</a>
+                <?php else: ?>
+                    <a class="link-nav" href=<?= site_url("shoppingCart") ?>>Voir mon panier</a>
+                <?php endif; ?>
             </div>
         </div>
     </div>

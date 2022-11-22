@@ -1,24 +1,5 @@
 
 
-/* ==== CSS ==== */
-
-body {
-    --black-100: #111111;
-    --black-200: #2F2F2F;
-    --white-200: #F1F1F1;
-    --orange: #FFAE27;
-    --blue--link: #0000EE;
-    --white-100: #FFFDFA;
-    --red: #DE1B1B;
-    --grey: #E1E1E1;
-    --blue-100:#3271AB;
-    --blue-200: #79BCF7;
-    --inpu-text-clr: #6F6F6F;
-    --input-border-clr:#949494;
-
-}
-
-
 
 /* ======= BUTTON ======= */
 
@@ -84,7 +65,7 @@ button {
 
 .btn-add {
     background-color: green;
-    
+
 }
 
 /* =========== INPUT =========== */

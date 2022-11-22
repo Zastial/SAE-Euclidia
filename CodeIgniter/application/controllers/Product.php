@@ -32,14 +32,17 @@ class Product extends CI_Controller {
         echo $page;
     }
 
-    public function display($id){
+    public function display($productid){
+        $id = intval($productid);
         $produit = $this->ProductModel->findByIdAvailable($id);
         if ($produit == null) {
-            $this->session->set_flashdata('previous', base_url('Product/find'));
-            $this->load->view("error");
-            return;
+            $this->session->set_flashdata('error', 'Le produit sélectionné n\\\'existe pas ou n\\\'est plus disponible.');
+            redirect('product/find');
         }
-        $this->load->view("product", array("produit"=>$produit));
+
+        $inCart = isset($this->session->cart) && in_array($id, $this->session->cart);
+        $this->load->view("product", array("produit"=>$produit, "incart"=>$inCart));
+
     }
 
 }

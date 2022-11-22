@@ -6,6 +6,7 @@ class User extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model("UserModel");
+        $this->load->model("FactureModel");
         $this->load->library('form_validation');
         $this->load->helper('form');
     }
@@ -101,9 +102,6 @@ class User extends CI_Controller {
                 "email"=>$user->getEmail(), 
                 "status"=>$user->getStatus()));
             
-            if ($this->session->cart) {
-                redirect('shoppingCart');
-            }
             redirect('Home');
         }
     }
@@ -239,7 +237,9 @@ class User extends CI_Controller {
         if (!isset($this->session->user)) {
             redirect('Home');
         }
-        $this->load->view("account");
+
+        $factures = $this->FactureModel->findByUser($this->UserModel->findByEmail($this->session->user["email"])->getId());
+        $this->load->view("account", array("factures" => $factures));
     }
 }
 ?>
