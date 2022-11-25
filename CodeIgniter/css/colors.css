@@ -1,4 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+/* ===== RESET ==== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    scroll-behavior: smooth;
+}
+
+
+ol,
+ul,
+a,
+menu {
+    text-decoration: none;
+    list-style: none;
+    list-style-type: none;
+}
+
+a {
+    display: inline-block;
+}
+
+input,
+textarea {
+    -webkit-user-select: auto;
+}
+
+
+a,
+button {
+    cursor: pointer;
+}
+button {
+    border: none;
+}
 body {
     --black-100: #111111;
     --black-200: #2F2F2F;
@@ -16,6 +54,11 @@ body {
     --filter-orange-img: invert(67%) sepia(79%) saturate(566%) hue-rotate(338deg) brightness(104%) contrast(101%);
 
     font-family: 'Poppins', sans-serif;
+
+}
+
+section {
+    min-height: 90vh;
 }
 
 
@@ -27,6 +70,7 @@ input {
     border: 1px solid var(--input-border-clr);
     color: var(--inpu-text-clr);
     padding: 14px 20px;
+    width: 100%;
 }
 
 .material-symbols-outlined {
@@ -34,9 +78,11 @@ input {
 }
 
 input[type=text]:focus,input[type=text]:active,
+input[type=textarea]:focus,input[type=textarea]:active,
 input[type=email]:focus,input[type=email]:active,
 input[type=number]:focus,input[type=number]:active,
 input[type=password]:focus,input[type=password]:active  {
+
     transition: 250ms ease-in-out;
     border: 1px solid var(--orange);
 }
@@ -46,7 +92,6 @@ input[type=password]:focus,input[type=password]:active  {
 /* input checkbox */
 
 input[type="checkbox"] {
-    
     color: var(--orange);
     width: 1.15em;
     height: 1.15em;
@@ -77,3 +122,10 @@ input[type="checkbox"]:focus {
     outline-offset: max(2px, 0.15em);
 }
 
+
+/* Typographie */
+
+
+.form-error {
+    color: red;
+}

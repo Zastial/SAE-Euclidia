@@ -7,9 +7,20 @@ button {
     border: none;
 }
 
+button:disabled {
+    background-color: grey;
+    opacity: 0.6;
+    cursor: default;
+}
+
+
 .btn {
     border-radius: 10px;
     text-align: center;
+    padding: 8px;
+}
+.btn:hover {
+    filter: brightness(90%);
 }
 
 .btn-orange {
@@ -22,9 +33,8 @@ button {
 }
 
 
-.btn:hover {
+button:hover{
     transition: 10ms ease;
-    filter:brightness(90%) ; 
 }
 
 
@@ -71,15 +81,26 @@ button {
 /* =========== INPUT =========== */
 
 
+.input {
+    position: relative;
+}
 
-.input_box .icon {
+.input span {
     position: absolute;
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
+    z-index: 1;
+    padding: 0px;
+    top: 25%;
+    left: 10px;
     color: var(--inpu-text-clr);
 }
-.input_box .icon img {
-    width: 24px;
-    height: 24px;
+
+.input-container {
+    display: flex;
+    flex-direction: column;
 }
+
+.input-with-icon {
+    padding: 14px 20px 14px 40px;
+}
+
+

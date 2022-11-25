@@ -1,40 +1,5 @@
-/* ===== RESET ==== */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0px;
-    padding: 0px;
-}
 
-
-ol,
-ul,
-a,
-menu {
-    text-decoration: none;
-    list-style: none;
-    list-style-type: none;
-}
-
-a {
-    display: inline-block;
-}
-
-input,
-textarea {
-    -webkit-user-select: auto;
-}
-
-
-a,
-button {
-    cursor: pointer;
-}
-button {
-    border: none;
-}
-
+ 
 
 
 
@@ -69,6 +34,11 @@ nav {
 }
 
 .nav-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.logo-icon {
     width: 40px;
     height: 40px;
 }
@@ -114,6 +84,8 @@ nav {
     font-size: 16px;
     border: none;
     cursor: pointer;
+    color: var(--black-200);
+    z-index: 1;
 }
 
 .dropdown {
@@ -128,7 +100,7 @@ nav {
     min-width: 160px;
     box-shadow: 0px 8px 16px 
         0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
+    
 }
 
 .dropdown-content a {

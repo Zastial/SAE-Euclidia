@@ -2,7 +2,7 @@
     <?php $id = $prod->getId(); ?>
     <a class="card-link" href="<?=site_url("Product/display/").$id ?>">
         <div class="card-container">
-            <img src="<?= base_url("assets/image/default-img.png") ?>" alt="modèle <?= $prod->getTitre() ?>">
+            <img src="<?= base_url('img/get/'.$prod->getId()) ?>" alt="modèle <?= $prod->getTitre() ?>">
             <div class="card-description">
                 <p><?= $prod->getPrix() ?>  €</p>
                 <p><?= $prod->getTitre() ?></p>

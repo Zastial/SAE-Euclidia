@@ -7,6 +7,7 @@ class User extends CI_Controller {
         parent::__construct();
         $this->load->model("UserModel");
         $this->load->model("FactureModel");
+        $this->load->model("AchatModel");
         $this->load->library('form_validation');
         $this->load->helper('form');
     }
@@ -240,6 +241,14 @@ class User extends CI_Controller {
 
         $factures = $this->FactureModel->findByUser($this->UserModel->findByEmail($this->session->user["email"])->getId());
         $this->load->view("account", array("factures" => $factures));
+    }
+
+    public function getFacture($id){
+        $f = $this->FactureModel->findById($id);
+        $u = $this->UserModel->findById($f->getUserId());
+        //$a = $this->AchatModel-> /TODO : redo achat, add facture in it and primary key on user+prod
+        $this->load->view("facture", array("f" => $f, "u" =>$u));
+        
     }
 }
 ?>

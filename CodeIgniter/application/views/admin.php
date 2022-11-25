@@ -43,7 +43,7 @@ if (isset($this->session->user["status"])) {
         <?php if ($status == "Responsable" || $status == "Administrateur"): ?>
         <div id="Produits" class="tab-content">
         
-            <button class="btn btn-large btn-blue-200">Ajouter un Produit</button>
+            <a class="btn btn-large btn-blue-200" href=<?= site_url("Admin/addProduct") ?>>Ajouter un Produit</a>
 
             <div class="item-container item-container-black">
                 <p>ID</p>
@@ -59,7 +59,9 @@ if (isset($this->session->user["status"])) {
                         <p><?= $product->getPrix()?></p>
                         <p><?= $product->getDisponible() ? "oui" : "non"?></p>
                         <div class="icon-container">
-                            <img class="icon" src="<?=base_url("assets/icon/icon-pen.svg")?>" alt="Modifier le produit">
+                            <a href="<?=site_url("Admin/modifProduit/".$product->getID()) ?>">
+                                <img class="icon" src="<?=base_url("assets/icon/icon-pen.svg")?>" alt="Modifier le produit">
+                            </a>
                             <img class="icon icon-delete" src="<?=base_url("assets/icon/icon-delete.svg")?>" alt="Supprimer le produit">
                         </div>
                         

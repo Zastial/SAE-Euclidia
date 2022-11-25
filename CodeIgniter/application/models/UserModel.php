@@ -69,6 +69,5 @@ class UserModel extends CI_Model {
 		} catch (Exception $e) {return null;} 
 		return $this->findById($user->getId());
 	}
-
 }
 ?>

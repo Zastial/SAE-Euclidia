@@ -30,6 +30,7 @@
 }
 
 .formulaire .entries {
+    margin-top: 1rem;
     padding-left: 8rem;
 }
 
@@ -55,6 +56,25 @@
     padding-left: 5rem;
 }
 
+.payment-method .left {
+    display: grid;
+    grid-template-columns: repeat(2,0fr);
+}
+
+.payment-method .left input {
+    width: 1rem;
+    margin: auto;
+    margin-left: 1rem;
+}
+
+.payment-method .left label {
+    width: 15rem;
+    font-weight: bold;
+    padding-left: 0.5rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
 .payment {
     width: 25rem;
     height: 5rem;
@@ -65,25 +85,25 @@
     justify-content: space-between;
 }
 
-.payment input {
-    margin-left: 0.5rem;
-}
-
-.payment label {
-    font-weight: bold;
-    margin-left: 0.5rem;
-}
-
 .payment img {
     max-width: 5rem;
     height: 3rem;
     margin-right: 1rem;
 }
 
-
 .promotion {
     grid-area: d;
-    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    margin-bottom: 10rem;
+}
+
+.promotion h4 {
+    width: fit-content;
+}
+
+.promotion .entries {
+    padding-left: 5rem;
 }
 
 .promotion input {
@@ -92,6 +112,7 @@
 }
 
 .promotion button {
+    width: 10rem;
     margin-left: 1rem;
 }
 

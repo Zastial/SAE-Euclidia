@@ -12,6 +12,7 @@ class FactureEntity {
     private int $code_postal;
     private string $paiement;
     private int $reduction;
+    private int $nbProduits;
 
 
     /**
@@ -70,6 +71,10 @@ class FactureEntity {
         return $this->reduction;
     }
 
+    public function getnbProduits():int{
+        return $this->nbProduits;
+    }
+
     /**
 	 * @param int $id
 	 */
@@ -124,6 +129,10 @@ class FactureEntity {
 
     public function setReduction(int $reduction){
         $this->reduction = $reduction;
+    }
+
+    public function setnbProduits(int $nb){
+        $this->nbProduits = $nb;
     }
 }
 ?>

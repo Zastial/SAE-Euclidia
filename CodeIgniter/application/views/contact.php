@@ -10,6 +10,7 @@
     <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/style.css") ?> >
     <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
+    <link rel="stylesheet" href=<?= base_url("css/contact.css") ?>>
 
     <title>Contact</title>
 </head>
@@ -17,41 +18,67 @@
     
     <?php require_once('header.php'); ?>
 
-    <div >
-        <h2>Nous contacter</h2>
-        <div>
-            <p> Email : contact@euclidia.com </p>
-            <p> Téléphone : 06######## </p>
-            <p> Adresse : 3 impasse de la rue </p>
-            <p> 35671 Village-en-Bretagne</p>
+    <section>
+
+
+
+    
+        <div class="contact-all">
+            <div class="contact">
+                <div class='contact-info'>
+                    <h2>Nous contacter</h2>
+                    <div>
+                        <p> Email : contact@euclidia.com</p>
+                        <p> Téléphone : 06######## </p>
+                        <p> Adresse : 3 impasse de la rue </p>
+                        <p> 35671 Village-en-Bretagne</p>
+                    </div>
+                </div>
+    
+                <div class='contact-form'>
+                    <form action="<?= site_url("Contact/sendMail") ?>" method='post'>
+                        <div class="names">
+                            <div>
+                                <td><label>Nom : </label></td><br>
+                                <td><input type="text" name="nom" required></td>
+                            </div>
+                            <div>               
+                                <td><label>Prénom :</label></td><br>
+                                <td><input type="text" name="prenom" required></td>
+                            </div>
+                        </div>
+                        <div class="mail">
+                            <td><label for="email">Votre email :</label></td><br>
+                            <td><input type="email" name="email" required></td>
+                        </div>
+    
+                        <div class="object">
+                            <td><label for="objet">Titre du mail :</label></td><br>
+                            <td><input type="text" name="objet" required></td>
+                        </div>
+    
+                        <div class="message">
+                            <td><label for="message">Corps du message :</label></td><br>
+                            <td><textarea type="text" name="message" required></textarea></td>
+                        </div>
+                        <input class="btn btn-main btn-orange btn-send" type="submit" value="Envoyer">
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
 
 
-    <!--A delete ou faire -->
-    <div>
-        <form action="">
 
-            <div>
-                <td><label for="email">Votre email :</label></td><br>
-                <td><input type="email" required></td>
-            </div>
 
-            <div>
-                <td><label for="object">Titre du mail :</label></td><br>
-                <td><input type="text" required></td>
-            </div>
 
-            <div>
-                <td><label for="message">Corps du message :</label></td><br>
-                <td><input type="text" required></td>
-            </div>
-            <input type="submit" value="Envoyer">
-        </form>
-    </div>
 
-    <!-- end -->
+    </section>
 </body>
+
+
+
+    <?php require_once('footer.php'); ?>
+
 </html>
 
 

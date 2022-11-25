@@ -5,6 +5,8 @@ class Admin extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
+        $this->load->library('form_validation');
+        $this->load->helper('form');
 
 
         // redirect to home if user is not connected or isn't an admin / responsable
@@ -39,8 +41,46 @@ class Admin extends CI_Controller {
 
     }
 
-    public function addProduct() {
+    public function addProduct(){
+        // redirect to home if user is already connected
+        
+        $this->form_validation->set_rules('name', 'Name', 'required',
+            array('required' => 'Vous devez entrer le nom du produit'));
 
+        $this->form_validation->set_rules('price', 'Price', 'required',
+        array('required' => 'Vous devez entrer le prix du produit'));
+
+        $this->form_validation->set_rules('description', 'Description', 'required',
+        array('required' => 'Vous devez entrer la description du produit'));
+
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view("addProduct");
+        } else {
+            
+            // form is valid
+            $name = $this -> input -> post("name");
+            $price = $this -> input -> post("price");
+            $description = $this->input->post("description");
+           
+            
+            if ($this->input->post("disponible")=="true"){
+                $disponible= true;
+            }else{
+                $disponible= false;
+            }
+
+            $product= new ProductEntity ;
+            $product -> setTitre($name);
+            $product -> setPrix($price);
+            $product -> setDescription($description);
+            $product -> setDisponible($disponible);
+
+            $this -> ProductModel -> addProduct($product);
+
+            //COMBO BOX pour les catégories?
+            redirect('Admin/index');
+        }
     }
 
     public function removeCategorie() {

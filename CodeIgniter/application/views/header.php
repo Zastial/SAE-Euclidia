@@ -15,7 +15,7 @@
 <nav>
     <div class="nav-container">
         <a href=<?= site_url("Home") ?>>
-            <img class="nav-left" src="" alt="Euclidia">
+            <img src="/assets/image/euclidia_logo.png" alt="Euclidia" style="width: 12rem;">
         </a>
         
         
@@ -34,10 +34,12 @@
 
             <?php if ($connected):?>
             <div class="dropdown">
-                <button class="dropbtn">
+                
+                    <a class="dropbtn" href=<?=base_url("User/account")?>>
                         <img class="nav-icon account-icon" src=<?= base_url("assets/icon/icon-account-circle.svg") ?> alt="account icon">
                         <p ><?= $this->session->user["nom"]." ".$this->session->user["prenom"] ?> </p>
-                </button>
+                    </a>
+                
                 
                 <div class="dropdown-content">
 

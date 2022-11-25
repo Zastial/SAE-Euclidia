@@ -1,0 +1,45 @@
+.contact-all {
+    background-image: url("/assets/image/contact-form-background.svg");
+    padding: 3rem;
+}
+
+.contact {
+    background-color: white;
+    border-radius: 5px;
+    max-width: fit-content;
+    margin: auto;
+    padding: 2rem;
+    line-height: 2rem;
+}
+
+.contact .contact-info {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.contact .contact-info h2 {
+    margin-bottom: 1rem;
+}
+
+.contact .names {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 1rem;
+}
+
+.contact .names input{
+    width: 95%;
+}
+
+.contact .mail input{
+    width: 28.5rem;
+}
+
+.contact .object input{
+    width: 28.5rem;
+}
+
+.btn-send {
+    margin-top: 2rem;
+    cursor: pointer;
+}

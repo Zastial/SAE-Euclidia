@@ -9,6 +9,13 @@ class FactureModel extends CI_Model {
 		return $response;
     }
 
+    public function findById($id){
+        $this->db->select('*');
+        $q = $this->db->get_where('facture', array('id_facture'=>$id));
+        $response = $q->row(0,"FactureEntity");
+		return $response;
+    }
+
     public function addFacture(FactureEntity $f): ?FactureEntity{
         $data = array(
             "date_facture" => $f->getDate(),

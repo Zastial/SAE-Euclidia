@@ -11,45 +11,47 @@
     <link rel="stylesheet" href="<?= base_url("css/grid-products.css") ?>">
     <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
     <title>Modèles 3D</title>
 </head>
 <body>
     <?php require_once('error.php'); ?>
     <?php require_once ('header.php'); ?>
 
-    <div class="main-content">
-        
-        
-        <div class="search">
+    <section>
 
-            <div class="search-bar">
-                <input type="text" name="rechercher" id="rechercher" placeholder="Rechercher">
+        <div class="main-content">
+            
+            
+            <div class="search">
+    
+                <div class="input-container">
+                    <div class="input">
+                        <span class="material-symbols-outlined">search</span>
+                        <input class="input-with-icon"type="text" name="rechercher" id="rechercher" placeholder="Rechercher">
+                    </div>
+                </div>
+    
+                <div class="categories" id="categories">
+                    <?php foreach ($categories as $cat): ?>
+                        <div class="once-categ">
+                            <input class="input-with-icon"type="checkbox" id=<?= $cat->getId() ?>></input>
+                            <label for="checkbox"><?=$cat->getLibelle()?></label>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <button class="btn btn-orange btn-large" id="filter">Appliquer les filtres</button>
+                <button class="btn btn-orange btn-large" id="reset">Réinitialiser les filtres</button>
             </div>
-
-            <div class="categories" id="categories">
-                <?php foreach ($categories as $cat): ?>
-                    <input type="checkbox" id=<?= $cat->getId() ?>>
-                        <label for="checkbox"><?=$cat->getLibelle()?></label>
-                    </input>
-                <?php endforeach; ?>
+            
+            
+            <div class="grid-products" id="produits">
+                <?php require_once('productsContent.php') ?>
             </div>
-            <button class="btn btn-orange btn-large" id="filter">Appliquer les filtres</button>
-            <button class="btn btn-orange btn-large" id="reset">Réinitialiser les filtres</button>
         </div>
-        
-        
-        <div class="grid-products" id="produits">
-            <?php require_once('productsContent.php') ?>
-        </div>
-    </div>
 
-
-
-
-
-
-
-
+    </section>
 
 
 
@@ -91,5 +93,8 @@
     </script>
 
 </body>
+<footer>
+    <?php require_once('footer.php'); ?>
+</footer>
 </html>
 

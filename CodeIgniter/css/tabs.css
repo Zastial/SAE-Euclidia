@@ -19,8 +19,6 @@
     padding: 14px 16px;
 }
 
-
-
 /* Change background color of buttons on hover */
 .tab-container button:hover {
 
@@ -33,6 +31,10 @@
 /* Create an active/current tablink class */
 .tab-container button.active {
     border-bottom: 4px solid var(--orange);
+}
+
+.tab-container button:not(.active) {
+    border-bottom: 4px solid transparent;
 }
 
 

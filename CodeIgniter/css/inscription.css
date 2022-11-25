@@ -1,0 +1,70 @@
+
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3em;
+}
+
+.form-content-inscription {
+    max-width: 40em;
+    display: grid;
+    grid-template-areas: 
+                "firstname  lastname" 
+                "email      email"
+                "password   passwordconfirmation";
+    grid-gap: 2rem;
+}
+
+.inscription-first-name { grid-area: firstname;}
+.inscription-last-name { grid-area: lastname;}
+.inscription-email { grid-area: email;}
+.inscription-password { grid-area: password;}
+.inscription-password-confirmation { grid-area: passwordconfirmation;}
+
+.form-content-connexion {
+    max-width: 40em;
+    display: grid;
+    grid-template-areas: 
+                "email" 
+                "password";
+    grid-gap: 2rem;
+}
+
+.connexion-email {grid-area: email;}
+.connexion-password { grid-area: password;}
+
+
+/* style de barres*/
+.bars {
+    position: absolute;
+    display: flex;
+    gap: 10rem;
+    margin-top: 2rem;
+}
+
+.bars .bar-black {
+    height: 450px;
+    border-left: 35px solid black;
+    border-radius: 25px;
+    transform: rotate(45deg);
+}
+
+.bars .bar-grey {
+    height: 600px;
+    border-left: 35px solid grey;
+    border-radius: 25px;
+    transform: rotate(45deg);
+    margin-left: -3rem;
+    margin-top: -6rem;
+}
+
+.bars .bar-orange {
+    height: 600px;
+    border-left: 35px solid orange;
+    border-radius: 25px;
+    transform: rotate(45deg);
+    margin-left: -10rem;
+    margin-top: 0rem;
+}

@@ -8,15 +8,16 @@ class ShoppingCart extends CI_Controller{
         $this->load->model("ProductModel");
         $this->load->model("UserModel");
         $this->load->model("FactureModel");
+        $this->load->model("AchatModel");
         $this->load->library('user_agent');
 
         if (!isset($this->session->cart)) {
             $this->session->set_userdata("cart",array());
         }
+        $this->verifyCart();
     }
 
     public function index(){
-        $this->verifyCart();
 
         $produits = array();
         foreach ($this->session->cart as $index=>$id) {
@@ -69,7 +70,6 @@ class ShoppingCart extends CI_Controller{
     }
 
     public function orderCommand() {
-        $this->verifyCart();
         $produits = array();
 
         if (!isset($this->session->user) || !isset($this->session->cart) || empty($this->session->cart) ) {
@@ -99,14 +99,37 @@ class ShoppingCart extends CI_Controller{
         $f->setCodePostal($this->input->post("code_postal"));
         $f->setPaiement($this->input->post("choose"));
         $f->setReduction(0);
-        $res = $this->FactureModel->addFacture($f);
+        $f->setnbProduits(count($this->session->cart));
+
+        $f = $this->FactureModel->addFacture($f);
+
         if (is_null($f)){
             $this->session->set_flashdata('error', 'L\'enregistrement de votre facture a échoué!');
             redirect('shoppingCart');
         }
-        $this->session->set_flashdata('success', 'Paiement réussi!');
+
+        $this->session->set_flashdata('success', 'Paiement réussi !');
+
+        $panier = $this->session->cart;
         $this->session->set_userdata("cart",array());
+        $this->addAchat($f, $panier);
         redirect('User/account');
+    }
+
+    private function addAchat(FactureEntity $f, array $panier) {
+        foreach ($panier as $id) {
+            $a = new AchatEntity();
+            $prod = $this->ProductModel->findByIdAvailable($id);
+
+            if ($prod == null) {
+                continue;
+            }
+
+            $a->setIdFacture($f->getId());
+            $a->setIdProduit($id);
+            $a->setPrix($prod->getPrix());
+            $this->AchatModel->addAchat($a);
+        }
     }
     
     /**
