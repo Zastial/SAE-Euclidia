@@ -1,38 +1,32 @@
 
-
-
-.product{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    margin: 5% 0 0 0;
+section {
+    height: 90vh;
 }
 
-.images .main-image {
-    width: 450px;
-    margin-left: 5%;
+
+.product {
+    height: 80%;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    place-items: center;
+    margin: auto;
 }
 
-.description{
-    margin-left: 5%;
+.product-image {
+    flex: 1;
 
 }
-
-.description .model .titre{
-    text-align: center;
-    margin-bottom: 5%;
+.product-image img {
+    width: 500px;
+    height: 300px;
 }
 
-.description .buy{
-    display: flex;
-
-    margin-top: 5%;
-    justify-content: space-evenly;
+.product-content {
+    flex: 1;
 }
 
-.description .buy h3{
-    margin-top: 9px;
-}
+
+
 
 .description .buy .a-desactived {
     background-color: grey;
@@ -46,5 +40,5 @@
 
 
 .return{
-    margin-left: 4%;
+    margin-left: 3em;
 }

@@ -9,9 +9,9 @@ class AchatModel extends CI_Model {
 		return $response;
     }
 
-    public function findById(string $idUser) {
+    public function findById($idFacture) {
 		$this->db->select('*');
-		$q = $this->db->get_where('achat',array('id_utilisateur'=>$idUser));
+		$q = $this->db->get_where('achat',array('id_facture'=>$idFacture));
 		$response = $q->custom_result_object("AchatEntity");
 		return $response;
 	}

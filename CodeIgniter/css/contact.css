@@ -1,6 +1,10 @@
 .contact-all {
-    background-image: url("/assets/image/contact-form-background.svg");
     padding: 3rem;
+}
+
+section {
+    background-image: url("/assets/image/contact-form-background.svg");
+    background-size: cover;
 }
 
 .contact {

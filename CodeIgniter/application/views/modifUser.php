@@ -36,7 +36,7 @@ $email = empty(set_value('email')) ? $this->session->user["email"] : set_value('
             <div class="form-container">
     
                 <div class="form-head">
-                    <h1>Modifier mes informations</h1>
+                    <h1>Modifier les informations de l'utilisateur</h1>
                 </div>
 
     
@@ -58,22 +58,11 @@ $email = empty(set_value('email')) ? $this->session->user["email"] : set_value('
                     </div>
     
                     <div class="password">
-                        <label for="password" class="labelTypo require" size="30" >Mot de passe actuel</label><br>
-                        <input class="input" type="password" name="password" value="<?= set_value('password'); ?>"required>
+                        <label for="password" class="labelTypo" size="30" >Mot de passe (non obligatoire)</label><br>
+                        <input class="input" type="password" name="password" value="<?= set_value('password'); ?>">
                         <?php echo form_error('password'); ?>
                     </div>
-    
-                    <div class="password">
-                        <label for="new-password" class="labelTypo" size="30" >Modifier mon mot de passe (non obligatoire)</label><br>
-                        <input class="input" type="password" name="new-password">
-                        <?php echo form_error('new-password'); ?>
-                    </div>
-    
-                    <div class="confirm-password">
-                        <label for="confirm-new-password" class="labelTypo" size="30" >Confirmer le nouveau mot de passe</label><br>
-                        <input class="input" type="password" name="confirm-new-password">
-                        <?php echo form_error('confirm-new-password'); ?>
-                    </div>
+
     
                 </div>
     

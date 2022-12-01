@@ -31,16 +31,22 @@ $disabled = empty($this->session->cart);
                             <div class="entries">
                                 <label for="nom">Nom</label><br>
                                 <input class="input" type="text" name="nom" value = "<?= $this->session->user["nom"] ?>" required> <br>
+
                                 <label for="prenom">Prenom</label><br>
                                 <input class="input" type="text" name="prenom" value = "<?= $this->session->user["prenom"] ?> " required> <br>         
+                                
                                 <label for="rue">Numéro de rue</label><br>
                                 <input class="input" type="number" min="0" name="rue" required> <br>
+
                                 <label for="adresse">Adresse</label><br>
                                 <input class="input" type="text" name="adresse" required> <br>
+
                                 <label for="ville">Ville</label><br>
                                 <input class="input" type="text" name="ville" required> <br>
+
                                 <label for="code_postal">Code postal</label><br>
                                 <input class="input" type="number" name="code_postal" required> <br>
+                                
                                 <label for="pays">Pays</label><br>
                                 <input class="input" type="text" name="pays" required> <br>
                             </div>

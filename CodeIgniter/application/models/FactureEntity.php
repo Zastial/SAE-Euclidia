@@ -1,5 +1,6 @@
 <?php
-class FactureEntity {
+require_once("FactureInterface.php");
+class FactureEntity implements FactureInterface {
 
     private int $id_facture;
     private string $date_facture;
@@ -11,8 +12,6 @@ class FactureEntity {
     private string $ville;
     private int $code_postal;
     private string $paiement;
-    private int $reduction;
-    private int $nbProduits;
 
 
     /**
@@ -67,14 +66,6 @@ class FactureEntity {
         return $this->paiement;
     }
 
-    public function getReduction():int{
-        return $this->reduction;
-    }
-
-    public function getnbProduits():int{
-        return $this->nbProduits;
-    }
-
     /**
 	 * @param int $id
 	 */
@@ -99,7 +90,7 @@ class FactureEntity {
     /**
 	 * @param int $userid
 	 */
-    public function setUserId(int $userid): void {
+    public function setUserId(int $userid) {
         $this->id_utilisateur = $userid;
     }
 
@@ -125,14 +116,6 @@ class FactureEntity {
 
     public function setPaiement(string $paiement){
         $this->paiement = $paiement;
-    }
-
-    public function setReduction(int $reduction){
-        $this->reduction = $reduction;
-    }
-
-    public function setnbProduits(int $nb){
-        $this->nbProduits = $nb;
     }
 }
 ?>

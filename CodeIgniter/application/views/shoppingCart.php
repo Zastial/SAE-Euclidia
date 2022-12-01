@@ -20,10 +20,8 @@ $connected = (isset($this->session->user)) ? true : false;
 </head>
 <body>
     <?php require_once ('header.php'); ?>
-
-
+    
     <section>
-
 
         <div class="cart-container">
             <div class="cart">

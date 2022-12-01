@@ -1,7 +1,10 @@
+
+
 .main-content {
     display:flex;
     justify-content: space-around;
     padding-top: 5em;
+    margin-bottom: 2rem;
 }
 
 .search {
@@ -16,8 +19,34 @@
 .categories {
     display: flex;
     flex-direction: column;
-
+    gap: 50px;
 }
+.categories input[type=checkbox] {
+    display: none;
+}
+
+.categories input[type=checkbox]:checked + label {
+    background-color: var(--orange);
+}
+
+.categories label {
+    background-color: var(--grey);
+    border-radius: 12px ;
+    padding: 10px 20px;
+    transition: 150ms all ease-in-out; 
+}
+   
+.categories label:hover {
+    background:var(--grey-200);
+    cursor:pointer;
+}
+
+.price-container {
+    display: flex;
+    gap: 2rem;
+}
+
+
 
 .grid-product {
     width: 80%;

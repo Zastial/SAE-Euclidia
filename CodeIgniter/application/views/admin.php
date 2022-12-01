@@ -24,12 +24,12 @@ if (isset($this->session->user["status"])) {
 <body>
     
     <?php require_once('header.php'); ?>
+
     <div class="main">
         <div class="tab-container">
             <?php if ($status == "Responsable" || $status == "Administrateur"): ?>
-                <button class="tab-link" onclick="openTab(event, 'Produits')">Produits</button>
-            <?php endif; ?>
-    
+                <button class="tab-link" onclick="openTab(event, 'Produits')" clicked>Produits</button>
+            <?php endif; ?>    
             <?php if ($status == "Administrateur"): ?>
                 <button class="tab-link" onclick="openTab(event, 'Utilisateurs')">Utilisateurs</button>
             <?PHP endif; ?>
@@ -43,7 +43,7 @@ if (isset($this->session->user["status"])) {
         <?php if ($status == "Responsable" || $status == "Administrateur"): ?>
         <div id="Produits" class="tab-content">
         
-            <a class="btn btn-large btn-blue-200" href=<?= site_url("Admin/addProduct") ?>>Ajouter un Produit</a>
+            <a class="btn btn-large btn-blue-200" href= <?= site_url("Admin\addProduct")?>>Ajouter un Produit</a>
 
             <div class="item-container item-container-black">
                 <p>ID</p>
@@ -59,10 +59,23 @@ if (isset($this->session->user["status"])) {
                         <p><?= $product->getPrix()?></p>
                         <p><?= $product->getDisponible() ? "oui" : "non"?></p>
                         <div class="icon-container">
-                            <a href="<?=site_url("Admin/modifProduit/".$product->getID()) ?>">
+                            <a href="<?=site_url("Admin/modifProduct/".$product->getID()) ?>">
                                 <img class="icon" src="<?=base_url("assets/icon/icon-pen.svg")?>" alt="Modifier le produit">
                             </a>
-                            <img class="icon icon-delete" src="<?=base_url("assets/icon/icon-delete.svg")?>" alt="Supprimer le produit">
+
+                            <script>
+                                function supprimerProduit() {
+                                    var x;
+                                    var r = confirm("Voulez-vous vraiment supprimer le produit ?");
+
+                                    if (r == true) {
+                                        window.location.href = "<?= site_url("Admin/removeProduct/".$product->getID()) ?>";
+                                    }
+                                }
+                            </script>
+                            <a onclick="supprimerProduit()">
+                                <img class="icon icon-delete" src="<?=base_url("assets/icon/icon-delete.svg")?>" alt="Supprimer le produit">
+                            </a>
                         </div>
                         
                     </div>
@@ -74,8 +87,6 @@ if (isset($this->session->user["status"])) {
         
         <?php if ($status == "Administrateur"): ?>
         <div id="Utilisateurs" class="tab-content">
-            
-            <button class="btn btn-large btn-blue-200">Ajouter un Utilisateur</button>
 
             <div class="item-container item-container-black">
                 <p>Nom</p>
@@ -93,8 +104,10 @@ if (isset($this->session->user["status"])) {
                         <p><?= $user->getEmail()?></p>
                         <p><?= $user->getStatus(); ?></p>
                         <div class="icon-container">
-                            <img class="icon" src="<?=base_url("assets/icon/icon-pen.svg")?>" alt="Modifier le produit">
-                            <img class="icon icon-delete" src="<?=base_url("assets/icon/icon-delete.svg")?>" alt="Supprimer le produit">
+                            <a href="<?=site_url("Admin/modifUser/".$user->getID()) ?>">
+                                <img class="icon" src="<?=base_url("assets/icon/icon-pen.svg")?>" alt="Modifier l'utilisateur">
+                            </a>
+                            <img class="icon icon-delete" src="<?=base_url("assets/icon/icon-delete.svg")?>" alt="Supprimer l'utilisateur">
                         </div>
                     </div>
     
@@ -106,7 +119,7 @@ if (isset($this->session->user["status"])) {
         <?php if ($status == "Responsable" || $status == "Administrateur"): ?>
         <div id="Categories" class="tab-content">
 
-            <button class="btn btn-large btn-blue-200">Ajouter une Catégotie</button>    
+            <a class="btn btn-large btn-blue-200" href= <?= site_url("Admin\addCategorie")?>>Ajouter une Catégorie</a>
 
             <div class="item-container item-container-black">
                 <p>ID</p>
@@ -119,7 +132,9 @@ if (isset($this->session->user["status"])) {
                         <p><?= $cat->getId()?></p>
                         <p><?= $cat->getLibelle()?></p>
                         <div class="icon-container">
-                            <img class="icon" src="<?=base_url("assets/icon/icon-pen.svg")?>" alt="Modifier la catégorie">
+                            <a href="<?=site_url("Admin/modifCategorie/".$cat->getId()) ?>">
+                                <img class="icon" src="<?=base_url("assets/icon/icon-pen.svg")?>" alt="Modifier la catégorie">
+                            </a>
                             <img class="icon icon-delete" src="<?=base_url("assets/icon/icon-delete.svg")?>" alt="Supprimer la catégorie">
                         </div>
                         

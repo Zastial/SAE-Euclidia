@@ -8,6 +8,7 @@ class User extends CI_Controller {
         $this->load->model("UserModel");
         $this->load->model("FactureModel");
         $this->load->model("AchatModel");
+        $this->load->model("ProductModel");
         $this->load->library('form_validation');
         $this->load->helper('form');
     }
@@ -144,6 +145,7 @@ class User extends CI_Controller {
             $email = $this->input->post("email");
             $nom = $this->input->post("nom");
             $prenom = $this->input->post("prenom");
+            $actualPassword = $this->input->post("password");
             $newPassword = $this->input->post("new-password");
 
             $user = $this->UserModel->findByEmail($email);
@@ -151,6 +153,12 @@ class User extends CI_Controller {
                 $this->session->set_flashdata('error', 'Une erreur est survenue. Vous allez être déconnecté.');
                 $this->logout();
             }
+
+            if (!$user->isValidPassword($actualPassword)) {
+                $this->session->set_flashdata('error', 'Le mot de passe actuel que vous avez entré est invalide.');
+                redirect('user/modify');
+            }
+            
             $user->setNom($nom);
             $user->setPrenom($prenom);
             $user->setEmail($email);
@@ -238,17 +246,85 @@ class User extends CI_Controller {
         if (!isset($this->session->user)) {
             redirect('Home');
         }
-
-        $factures = $this->FactureModel->findByUser($this->UserModel->findByEmail($this->session->user["email"])->getId());
-        $this->load->view("account", array("factures" => $factures));
+        $user = $this->UserModel->findByEmail($this->session->user["email"]);
+        if (is_null($user)) redirect("User/login");
+        $factures = $this->FactureModel->findByUser($user->getId());
+        $this->load->view("account", array("factures" => $factures, "user"=>$user));
     }
 
     public function getFacture($id){
         $f = $this->FactureModel->findById($id);
+        if (is_null($f)) redirect('User/account');
         $u = $this->UserModel->findById($f->getUserId());
-        //$a = $this->AchatModel-> /TODO : redo achat, add facture in it and primary key on user+prod
-        $this->load->view("facture", array("f" => $f, "u" =>$u));
+        if ($u->getId() != $this->UserModel->findByEmail($this->session->user["email"])->getId()) redirect('User/account');
+        $a = $this->AchatModel->findById($id);
+        $arr = array();
+        foreach ($a as $ent){
+            $p = $this->ProductModel->findById($ent->getIdProduit());
+            if (!is_null($p)){
+                $arr[] = array($p->getTitre(), $ent->getPrix());
+            }
+        }
+        $this->load->view("facture", array("f" => $f, "u" =>$u, "a"=>$arr));
         
+    }
+
+    public function modifyAddress(){
+        if (!isset($this->session->user)) {
+            redirect('Home');
+            die();
+        }
+
+        $this->form_validation->set_rules('numerorue', 'Numéro de rue', 'required|max_length[6]',
+            array('required' => 'Vous devez entrer un numéro', 'max_length' => 'Le numéro de rue ne doit pas dépasser 6 caractères'));
+
+        $this->form_validation->set_rules('adresse', 'Adresse', 'required|max_length[300]',
+            array('required' => 'Vous devez entrer une adresse', 'max_length' => 'L\'adresse ne doit pas dépasser 300 caractères'));
+
+        $this->form_validation->set_rules('ville', 'Ville', 'required|max_length[50]',
+            array('required' => 'Vous devez entrer un email', 'max_length' => 'Le nom de la ville ne doit pas dépasser 50 caractères'));
+
+        $this->form_validation->set_rules('codepostal', 'Code Postal', 'required|max_length[5]',
+            array('required' => 'Vous devez entrer un email', 'max_length' => 'Le code postal de passe ne doit pas dépasser 5 caractères'));
+
+        $this->form_validation->set_rules('pays', 'Pays', 'required|max_length[50]',
+            array('required' => 'Vous devez entrer un email', 'max_length' => 'Le nom du pays ne doit pas dépasser 50 caractères'));
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view("modifyAddress");
+        } else {
+
+            // form is valid
+            $numerorue = $this->input->post("numerorue");
+            $adresse = $this->input->post("adresse");
+            $ville = $this->input->post("ville");
+            $codepostal = $this->input->post("codepostal");
+            $pays = $this->input->post("pays");
+
+            $user = $this->UserModel->findByEmail($this -> session -> user["email"]);
+            if ($user == null) {
+                $this->session->set_flashdata('error', 'Une erreur est survenue. Vous allez être déconnecté.');
+                $this->logout();
+            }
+            
+            $user->setNumRue($numerorue);
+            $user->setAdresse($adresse);
+            $user->setVille($ville);
+            $user->setPostalCode($codepostal);
+            $user->setPays($pays);
+
+
+            $newuser = $this->UserModel->updateUser($user);
+
+            if ($newuser == null){            
+                $this->session->set_flashdata('error', 'Une erreur est survenue. Vous allez être déconnecté.');
+                $this->logout();
+            }
+
+            
+            $this->session->set_flashdata('success', 'Opération réalisée avec succès !');
+            redirect('User/account');
+        }
     }
 }
 ?>

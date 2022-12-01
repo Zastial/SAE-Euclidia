@@ -19,8 +19,8 @@
 </head>
 <body>
 <?php require_once('error.php'); ?>
-    <a href=<?= site_url("Home")?> >
-        <h2> logo</h2>
+    <a href=<?= site_url("Home") ?>>
+        <img src="/assets/image/logoEuclidia.png" alt="Euclidia" style="width: 12rem;">
     </a>
 
     <?php echo form_open('user/register'); ?>
@@ -33,7 +33,7 @@
                 <div class="inscription-first-name">
                     <div class="form-input">
                         <div class="input-container">
-                            <label for="first-name" class="labelTypo" size="30">Prénom</label>
+                            <label for="first-name" class="labelTypo require" size="30">Prénom</label>
                             <div class="input">
                                 <span class="material-symbols-outlined">person</span>                        
                                 <input class="input-with-icon" type="text" name="prenom" value="<?= set_value('prenom'); ?>" required>
@@ -46,7 +46,7 @@
                 <div class="inscription-last-name">
                     <div class="form-input">
                         <div class="input-container">
-                            <label for="name" class="labelTypo" size="30" >Nom</label>
+                            <label for="name" class="labelTypo require" size="30" >Nom</label>
                             <div class="input">
                                 <span class="material-symbols-outlined">person</span>                        
                                 <input class="input-with-icon" type="text" name="nom" value="<?= set_value('nom'); ?>" required>
@@ -59,7 +59,7 @@
                 <div class="inscription-email">
                     <div class="form-input">
                         <div class="input-container email">
-                            <label for="email" class="labelTypo" size="30" >Email</label>
+                            <label for="email" class="labelTypo require" size="30" >Email</label>
                             <div class="input">
                                 <span class="material-symbols-outlined">alternate_email</span>                        
                                 <input class="input-with-icon" type="email" name="email" value="<?= set_value('email'); ?>" required>
@@ -72,7 +72,7 @@
                 <div class="inscription-password">
                     <div class="form-input">
                         <div class="input-container">
-                            <label for="password" class="labelTypo" size="30" >Mot de passe</label>
+                            <label for="password" class="labelTypo require" size="30" >Mot de passe</label>
                             <div class="input">
                                 <span class="material-symbols-outlined">lock</span>                        
                                 <input class="input-with-icon" type="password" name="password" value="<?= set_value('password'); ?>" required>
@@ -85,7 +85,7 @@
                 <div class="inscription-password-confirmation">
                     <div class="form-input">
                         <div class="input-container">
-                            <label for="confirm-password" class="labelTypo" size="30" >Confirmer le mot de passe</label>
+                            <label for="confirm-password" class="labelTypo require" size="30" >Confirmer le mot de passe</label>
                             <div class="input">
                                 <span class="material-symbols-outlined">lock</span>                        
                                 <input class="input-with-icon" type="password" name="confirm-password" value="<?= set_value('confirm-password'); ?>" required>

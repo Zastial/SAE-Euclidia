@@ -7,6 +7,11 @@ class UserEntity {
     private string $password;
     private string $email;
     private string $status;
+    private string $numrue;
+    private string $adresse;
+    private string $ville;
+    private string $postalcode;
+    private string $pays;
    
     /**
      * @return int
@@ -50,6 +55,42 @@ class UserEntity {
         return $this->password;
     }
 
+
+    /**
+     * @return string
+     */
+    public function getNumRue(): string {
+        return $this->numrue;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdresse(): string {
+        return $this->adresse;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVille(): string {
+        return $this->ville;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPostalCode(): string {
+        return $this->postalcode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPays(): string {
+        return $this->pays;
+    }
+
     /**
      * @param int $id
      */
@@ -91,6 +132,44 @@ class UserEntity {
     public function setStatus(string $status): void {
         $this->status = $status;
     }
+
+
+    /**
+     * @param string $numrue
+     */
+    public function setNumRue(string $numrue): void {
+        $this->numrue = $numrue;
+    }
+
+    /**
+     * @param string $adresse
+     */
+    public function setAdresse(string $adresse): void {
+        $this->adresse = $adresse;
+    }
+
+    /**
+     * @param string $ville
+     */
+    public function setVille(string $ville): void {
+        $this->ville = $ville;
+    }
+
+    /**
+     * @param string $postalcode
+     */
+    public function setPostalCode(string $postalcode): void {
+        $this->postalcode = $postalcode;
+    }
+
+    /**
+     * @param string $pays
+     */
+    public function setPays(string $pays): void {
+        $this->pays = $pays;
+    }
+
+
 
      /**
      * @param string $password

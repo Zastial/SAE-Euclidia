@@ -39,26 +39,26 @@
                     <form action="<?= site_url("Contact/sendMail") ?>" method='post'>
                         <div class="names">
                             <div>
-                                <td><label>Nom : </label></td><br>
+                                <td><label class="require">Nom : </label></td><br>
                                 <td><input type="text" name="nom" required></td>
                             </div>
                             <div>               
-                                <td><label>Prénom :</label></td><br>
+                                <td><label  class="require">Prénom :</label></td><br>
                                 <td><input type="text" name="prenom" required></td>
                             </div>
                         </div>
                         <div class="mail">
-                            <td><label for="email">Votre email :</label></td><br>
+                            <td><label  class="require" for="email">Votre email :</label></td><br>
                             <td><input type="email" name="email" required></td>
                         </div>
     
                         <div class="object">
-                            <td><label for="objet">Titre du mail :</label></td><br>
+                            <td><label  class="require" for="objet">Titre du mail :</label></td><br>
                             <td><input type="text" name="objet" required></td>
                         </div>
     
                         <div class="message">
-                            <td><label for="message">Corps du message :</label></td><br>
+                            <td><label  class="require" for="message">Corps du message :</label></td><br>
                             <td><textarea type="text" name="message" required></textarea></td>
                         </div>
                         <input class="btn btn-main btn-orange btn-send" type="submit" value="Envoyer">

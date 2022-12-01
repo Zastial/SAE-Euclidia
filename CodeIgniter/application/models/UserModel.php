@@ -35,7 +35,12 @@ class UserModel extends CI_Model {
 		'nom' => $nom, 
 		'password' => $password, 
 		'email' => $email,
-		'status' => $status);
+		'status' => $status,
+		'numrue' => 'NON DEFINI',
+		'adresse' => 'NON DEFINI',
+		'ville' => 'NON DEFINI',
+		'postalcode' => 'NON DEFINI',
+		'pays' => 'NON DEFINI');
 		
 		try {
 			$db_debug = $this->db->db_debug;

@@ -16,6 +16,11 @@ CREATE TABLE utilisateur(
    password TEXT NOT NULL,
    email VARCHAR(50) NOT NULL,
    status VARCHAR(50) NOT NULL,
+   numrue VARCHAR(50) NOT NULL,
+   adresse VARCHAR(300) NOT NULL,
+   ville VARCHAR(50) NOT NULL,
+   postalcode VARCHAR(5) NOT NULL,
+   pays VARCHAR(50) NOT NULL,
    PRIMARY KEY(id_utilisateur),
    UNIQUE(email)
 );
@@ -33,6 +38,12 @@ CREATE TABLE facture(
    total DECIMAL(15,2) NOT NULL,
    id_utilisateur INT NOT NULL,
    adresse VARCHAR(300) NOT NULL,
+   numero_rue INT NOT NULL,
+   pays VARCHAR(200),
+   ville VARCHAR(300),
+   code_postal INT,
+   paiement VARCHAR(200),
+   reduction INT,
    PRIMARY KEY(id_facture),
    FOREIGN KEY(id_utilisateur) REFERENCES utilisateur(id_utilisateur)
 );
@@ -61,3 +72,8 @@ CREATE TABLE achat(
    FOREIGN KEY(id_produit) REFERENCES produit(id_produit),
    FOREIGN KEY(id_facture) REFERENCES facture(id_facture)
 );
+
+create TABLE reduction(
+   code VARCHAR(50) NOT NULL UNIQUE,
+   pourcent INT NOT NULL
+)

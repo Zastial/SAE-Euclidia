@@ -54,28 +54,61 @@
                 <div class="three-four left-padding">
                     <a href="" style="color : var(--red);">Supprimer le compte</a>
                 </div>
-            </div>
-            <?php if (!is_null($factures)){ ?>
-            <div class="bill-container">
-            <h1 class="bill-title">Factures</h1>
-    
-            
-            <?php foreach ($factures as $bill): ?>
-            <!-- foreach $bills as $bill: -->
-    
-            <a href="<?=base_url("User/getFacture/".$bill->getId())?>" ><!-- renvoie vers la page pour afficher la facture selon son ID -->
-                <div class="bill">
-                    
-                    <p> <?= $bill->getId() ?></p>
-                    <p> Facture du <?= $bill->getDate() ?></p>
-                    
-                    <img src="<?= base_url("assets/icon/icon-search.svg") ?>" alt="">
+
+                <div class="one-two">
+                    <div class="bigbold">Numéro de rue</div>
+                    <div><?= $user->getNumRue()?></div>
                 </div>
-            
+
+                <div class="adresse">
+                    <div class="bigbold">Adresse</div>
+                    <div><?= $user->getAdresse()?></div>
+                </div>
+
+                <div class="ville">
+                    <div class="bigbold">Ville</div>
+                    <div><?= $user->getVille()?></div>
+                </div>
+
+                <div class="one-two">
+                    <div class="bigbold">Code Postal</div>
+                    <div><?= $user->getPostalCode()?></div>
+                </div>
+
+                <div class="pays">
+                    <div class="bigbold">Pays</div>
+                    <div><?= $user->getPays()?></div>
+                </div>
+
+
+                <div class="one-two">
+                    <a href="<?= site_url("user/modifyAddress") ?>">
+                        <button class="btn btn-orange btn-large"> Modifier mon adresse</button>
+                    </a>
+                </div>
+
+
+            </div>
+            <?php if (!is_null($factures)): ?>
+                <div class="bill-container">
+                <h1 class="bill-title">Factures</h1>
+        
                 
-            <?php endforeach; ?>
-            <?php } ?>
-    
+                <?php foreach ($factures as $bill): ?>
+        
+                    <a href="<?=base_url("User/getFacture/".$bill->getId())?>" target="_blank"><!-- renvoie vers la page pour afficher la facture selon son ID -->
+                        <div class="bill">
+                            
+                            <p> <?= $bill->getId() ?></p>
+                            <p> Facture du <?= $bill->getDate() ?></p>
+                            
+                            <img src="<?= base_url("assets/icon/icon-search.svg") ?>" alt="">
+                        </div>
+                
+                    
+                <?php endforeach; ?>
+            <?php endif ?>    
+        
             </div>
         </div>
         

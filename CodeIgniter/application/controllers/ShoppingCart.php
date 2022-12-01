@@ -11,6 +11,10 @@ class ShoppingCart extends CI_Controller{
         $this->load->model("AchatModel");
         $this->load->library('user_agent');
 
+        if (isset($this->session->user) && $this->session->user['status'] != "Utilisateur") {
+            redirect("Home");
+        }
+        
         if (!isset($this->session->cart)) {
             $this->session->set_userdata("cart",array());
         }
@@ -76,13 +80,6 @@ class ShoppingCart extends CI_Controller{
             redirect('shoppingCart');
         }
 
-        foreach ($this->session->cart as $id) {
-            $prod = $this->ProductModel->findByIdAvailable($id);
-            if ($prod != null) {
-                array_push($produits,$prod);
-            }
-        }
-
         $this->load->view("orderCommand", array('produits'=>$produits));
     }
 
@@ -98,8 +95,9 @@ class ShoppingCart extends CI_Controller{
         $f->setVille($this->input->post("ville"));
         $f->setCodePostal($this->input->post("code_postal"));
         $f->setPaiement($this->input->post("choose"));
-        $f->setReduction(0);
-        $f->setnbProduits(count($this->session->cart));
+
+        // if reduction then add decorator
+        // $f = new FactureReduction($f, $reduction);
 
         $f = $this->FactureModel->addFacture($f);
 
@@ -134,13 +132,20 @@ class ShoppingCart extends CI_Controller{
     
     /**
      * Verify the cart
-     * remove unavailable items from the cart 
+     * remove unavailable or already bought items from the cart
      * if the cart is modified, redirect the user to the shopping cart page
      */
     private function verifyCart() {
+        $this->load->model("AchatModel");
         $updatedCart = array();
+        $mail = (isset($this->session->user)) ? $this->session->user["email"] : "";
         foreach ($this->session->cart as $index=>$id) {
             $prod = $this->ProductModel->findByIdAvailable($id);
+
+            // if the user is connected and bought the model, do not add it in the updated cart
+            if ($mail != "" && $this->AchatModel->boughtFromUser($id, $mail)) {
+                continue;
+            }
             if ($prod != null) {
                 $updatedCart[] = $id;
             }
@@ -167,11 +172,4 @@ class ShoppingCart extends CI_Controller{
     }
     
 }
-
-   
-
-
-
-
-
 ?>

@@ -15,7 +15,7 @@
 <nav>
     <div class="nav-container">
         <a href=<?= site_url("Home") ?>>
-            <img src="/assets/image/euclidia_logo.png" alt="Euclidia" style="width: 12rem;">
+            <img src="/assets/image/logoEuclidia.png" alt="Euclidia" style="width: 12rem;">
         </a>
         
         
@@ -35,32 +35,37 @@
             <?php if ($connected):?>
             <div class="dropdown">
                 
-                    <a class="dropbtn" href=<?=base_url("User/account")?>>
-                        <img class="nav-icon account-icon" src=<?= base_url("assets/icon/icon-account-circle.svg") ?> alt="account icon">
+                    <a class="dropbtn" href=<?=site_url("User/account")?>>
+                        <img class="nav-icon account-icon" src=<?= site_url("assets/icon/icon-account-circle.svg") ?> alt="account icon">
                         <p ><?= $this->session->user["nom"]." ".$this->session->user["prenom"] ?> </p>
                     </a>
                 
                 
                 <div class="dropdown-content">
 
-                    <a href=<?=base_url("User/account")?>> Compte</a>
-
+                    <a href=<?=site_url("User/account")?>> Compte</a>
                 
                     <?php if ($status == "Administrateur" || $status == "Responsable") : ?>
                             <html>
                                 <a href=<?= site_url("admin") ?>>Gestion</a>
                             </html>
                     <?php endif; ?>
+
+                    <?php if ($status == "Utilisateur"): ?>
+                        <a href=<?=site_url("") ?>>Mes commandes</a>
+                    <?php endif; ?>
+
                     
-                    <a href=<?=base_url("User/logout")?>> Déconnexion</a>
+                    
+                    <a href=<?=site_url("User/logout")?>> Déconnexion</a>
                 </div>
             </div>
 
 
             <?php else: ?>
                 <div>
-                    <a class="btn-nav" href=<?= site_url("user/login")?>>Connexion</a>
-                    <a class="btn-nav" href=<?= site_url("user/register")?>>S'inscrire</a>
+                    <a href=<?= site_url("user/login")?>><button class="btn-nav">Connexion</button></a>
+                    <a href=<?= site_url("user/register")?>><button class="btn-nav">S'inscrire</button></a>
                 </div>
             <?php endif ;?>
 

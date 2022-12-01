@@ -28,5 +28,29 @@ class Img extends CI_Controller {
         header('Content-type: image/png');
         readfile($this->config->item('model_assets') . "default/default-img.png");
     }
+
+    public function getRandomHomeModel() {
+        $path = $this->config->item('model_assets') . "home/";
+        if (!is_dir($path)) {
+            die();
+        }
+
+        $files = scandir($path);
+        $models = array();
+        foreach ($files as $f) {
+            $ext = pathinfo($f, PATHINFO_EXTENSION);
+            if ($ext == "glb" || $ext == "gltf") {
+                $models[] = $path . $f;
+            }
+        }
+        
+        if (empty($models)) {
+            die();
+        }
+
+        $key = array_rand($models);
+        header('Content-type: text/json');
+        readfile($models[$key]);
+    }
 }
 ?>

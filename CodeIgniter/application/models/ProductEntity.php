@@ -77,4 +77,5 @@ class ProductEntity {
         $this->disponible = $disponible;
     }
 }
+
 ?>

@@ -22,8 +22,8 @@
     
 
 
-    <a href=<?= site_url("Home")?> >
-        <h2> logo</h2>
+    <a href=<?= site_url("Home") ?>>
+        <img src="/assets/image/logoEuclidia.png" alt="Euclidia" style="width: 12rem;">
     </a>
 
         
@@ -40,7 +40,7 @@
                 <div class="connexion-email">
                     <div class="form-input">
                         <div class="input-container">
-                            <label for="email" class="labelTypo" size="30" required>Email</label>
+                            <label for="email" class="labelTypo require" size="30" required>Email</label>
                             <div class="input">
                                 <span class="material-symbols-outlined">alternate_email</span>                        
                                 <input class="input-with-icon" type="email" name="email" id="email" value="<?= set_value('email'); ?>" required>
@@ -53,7 +53,7 @@
                 <div class="connexion-password">
                     <div class="form-input">
                         <div class="input-container">
-                            <label for="password" class="labelTypo">Mot de passe</label>
+                            <label for="password" class="labelTypo require">Mot de passe</label>
                             <div class="input">
                                 <span class="material-symbols-outlined">lock</span>
                                 <input class="input-with-icon" type="password" name="password" id="password" value="<?= set_value('password'); ?>" required>

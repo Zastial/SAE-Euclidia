@@ -33,47 +33,59 @@ $html = '<br>
 <table style="line-height: 1.5;">
     <tr><td><b>Facture:</b> #' . $f->getId() . '
         </td>
-        <td style="text-align:right;"><b>A destination de: </b>'.$u->getNom(). ' ' . $u->getPrenom() . '</td>
+        <td style="text-align:right;"><b>'.$u->getNom(). ' ' . $u->getPrenom() . '</b></td>
     </tr>
     <tr>
         <td><b>Date:</b> '.$f->getDate().'</td>
+        <td style="text-align:right;"><b></b>'.$f->getNumeroRue(). ', ' . $f->getAdresse() . '</td>
     </tr>
-</table>';
-
-$html .= '
+    <tr>
+        <td></td>
+        <td style="text-align:right;"><b></b>'.$f->getCodePostal(). ', ' . $f->getVille() . '</td>
+    </tr>
+    <tr>
+    <td></td>
+    <td style="text-align:right;"><b></b>'.$f->getPays(). '</td>
+    </tr>
+    
+</table>
 <div></div>
-    <div style="border-bottom:1px solid #000;">
+<div style="border-bottom:1px solid #000;">
         <table style="line-height: 2;">
             <tr style="font-weight: bold;border:1px solid #cccccc;background-color:#f2f2f2;">
-                <td style="border:1px solid #cccccc;width:200px;">Item Description</td>
-                <td style = "text-align:right;border:1px solid #cccccc;width:85px">Price ($)</td>
-                <td style = "text-align:right;border:1px solid #cccccc;width:75px;">Quantity</td>
-                <td style = "text-align:right;border:1px solid #cccccc;">Subtotal ($)</td>
-            </tr>
-<?php
-$total = 0;
-$productModel = new Order();
-foreach ($orderItemResult as $k => $v) {
-    $price = $orderItemResult[$k]["item_price"] * $orderItemResult[$k]["quantity"];
-    $total += $price;
-    $productResult = $productModel->getProduct($orderItemResult[$k]["product_id"]);
-    ?>
-    <tr> <td style="border:1px solid #cccccc;"><?php echo $productResult[0]["product_title"]; ?></td>
-                    <td style = "text-align:right; border:1px solid #cccccc;"><?php echo number_format($orderItemResult[$k]["item_price"], 2); ?></td>
-                    <td style = "text-align:right; border:1px solid #cccccc;"><?php echo $orderItemResult[$k]["quantity"]; ?></td>
-                    <td style = "text-align:right; border:1px solid #cccccc;"><?php echo number_format($price, 2); ?></td>
-               </tr>
-<?php
+                <td style="border:1px solid #cccccc;width:250px;">Description</td>
+                <td style = "text-align:right;border:1px solid #cccccc;width:110px">Prix (€)</td>
+                <td style = "text-align:right;border:1px solid #cccccc;width:140px">Sous-total (€)</td>
+            </tr>';
+$sub = 0;
+foreach ($a as $prod){
+    $sub+=$prod[1];
+    $html .= '
+    <tr> <td style="border:1px solid #cccccc;">'.$prod[0].'</td>
+        <td style = "text-align:right; border:1px solid #cccccc;">'.$prod[1].'</td>
+        <td style = "text-align:right; border:1px solid #cccccc;">'.$sub.'</td>
+    </tr>
+    ';
 }
-?>
+if (is_a($f, "FactureReduction") && $f->getReduction() != 0){
+    $sub*=(100-$f->getReduction())/100;
+    $sub = round($sub, 2);
+    $html .= '
+    <tr> <td style="border:1px solid #cccccc;">Réduction sur code</td>
+        <td style = "text-align:right; border:1px solid #cccccc;">'.-$f->getReduction().'</td>
+        <td style = "text-align:right; border:1px solid #cccccc;">'.$sub.'</td>
+    </tr>
+    ';
+}
+$html .= '
+
 <tr style = "font-weight: bold;">
     <td></td><td></td>
-    <td style = "text-align:right;">Total ($)</td>
-    <td style = "text-align:right;"><?php echo number_format($total, 2); ?></td>
+    <td style = "text-align:right;">Total (€) : '.$sub.'</td>
 </tr>
 </table></div>
-<p><u>Kindly make your payment to</u>:<br/>
-Bank: American Bank of Commerce<br/>
+<p><b>Nous vous remercions de votre commande.</b><br/>
+Euclidia S.A. - Modèles 3D<br/>
 A/C: 05346346543634563423<br/>
 BIC: 23141434<br/>
 </p>

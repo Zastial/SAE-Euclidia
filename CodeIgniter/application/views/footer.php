@@ -29,7 +29,7 @@
         </ul>
     </div>
 
-    <p class="copyright">Company Name © 2018</p>
+    <p class="copyright">Copyright © 2022</p>
 
 
 </footer>

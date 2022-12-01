@@ -10,7 +10,9 @@ nav {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    border-bottom: 1px solid var(--grey-100);
+    border-bottom: 1px solid rgba(0,0,0,.2);
+    box-shadow: 0 4px 8px -2px rgba(0,0,0,.2);
+    
 }
 
 .nav-container {
@@ -49,13 +51,28 @@ nav {
 
 .shopping-cart-icon {
     margin-right: 20px;
-    filter: var(--filter-orange-img);
+    fill : var(--orange);
+    transition: 100ms all ease-in-out;
 }
 
+.shopping-cart-icon:hover {
+    
+    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 1));
+}
+
+
+
 .btn-nav {
-    border: 2px solid var(--black-100);
     border-radius: 6px;
     padding: 14px 23px;
+    border-radius: 8px;
+    background-color: var(--black-200);
+    color: var(--orange);
+}
+
+.btn-nav:hover {
+    background-color: var(--orange);
+    color: white;
 }
 
 .link-nav {
@@ -91,6 +108,7 @@ nav {
 .dropdown {
     position: relative;
     display: inline-block;
+    z-index: 6;
 }
 
 .dropdown-content {
@@ -120,4 +138,22 @@ nav {
 
 .dropdown:hover .dropbtn {
     background-color: #FFFFFF;
+}
+
+
+
+
+/* ==== ANIMATIONS ==== */
+
+@keyframes animation-jump {
+
+    from {
+        margin-left: 100%;
+        transform: scale(1);
+    }
+    
+    to {
+        margin-left: 0%;
+        transform: scale(3);
+    }
 }

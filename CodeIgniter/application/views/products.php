@@ -34,15 +34,34 @@
                 </div>
     
                 <div class="categories" id="categories">
+                    <h1>Catégories :</h1>
                     <?php foreach ($categories as $cat): ?>
-                        <div class="once-categ">
-                            <input class="input-with-icon"type="checkbox" id=<?= $cat->getId() ?>></input>
-                            <label for="checkbox"><?=$cat->getLibelle()?></label>
+                        <div class="one-categ">
+                            <?php $categId = $cat->getId() ;?>
+                            <input class="input-with-icon" type="checkbox" id=<?=$categId?> />
+                            <label for=<?= $categId ?>> <?=$cat->getLibelle()?> </label>
                         </div>
                     <?php endforeach; ?>
                 </div>
-                <button class="btn btn-orange btn-large" id="filter">Appliquer les filtres</button>
-                <button class="btn btn-orange btn-large" id="reset">Réinitialiser les filtres</button>
+
+
+                <div class="price">
+                    <h2>Prix</h2>
+                    <div class="price-container">
+                        <div class="price-min">
+                            <label for="min">Prix minimum</label>
+                            <input id="min"type="number" min="0" max="9999" value="0" oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                        </div>
+                        <div class="price-max">
+                            <label for="max">Prix maximum</label>
+                            <input id="max" type="number" min="0" max="9999" value="9999" oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                        </div>
+                    </div>
+                </div>
+
+
+                <button class="btn btn-black-200 btn-large" id="filter">Filtrer</button>
+                <button class="btn btn-black-200 btn-large" id="reset">Réinitialiser les filtres</button>
             </div>
             
             

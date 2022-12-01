@@ -13,11 +13,11 @@
 
 ol,
 ul,
-a,
-menu {
+a {
     text-decoration: none;
     list-style: none;
     list-style-type: none;
+
 }
 
 a {
@@ -49,6 +49,7 @@ body {
     --input-border-clr:#949494;
     --white-200: #F1F1F1;
     --grey: #E1E1E1;
+    --grey-200: #999999;
     --white-100: #FFFDFA;
     
     --filter-orange-img: invert(67%) sepia(79%) saturate(566%) hue-rotate(338deg) brightness(104%) contrast(101%);
@@ -57,9 +58,7 @@ body {
 
 }
 
-section {
-    min-height: 90vh;
-}
+
 
 
 input {
@@ -122,6 +121,12 @@ input[type="checkbox"]:focus {
     outline-offset: max(2px, 0.15em);
 }
 
+
+/*when label required : display red star*/
+.require:after {
+    content:" *";
+    color: red;
+}
 
 /* Typographie */
 
