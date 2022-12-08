@@ -54,26 +54,17 @@ if (isset($this->session->user["status"])) {
             
             <?php foreach ($products as $product) :?>
                     <div class="item-container item-container-white">
+
                         <p><?= $product->getID()?></p>
                         <p><?= $product->getTitre()?></p>
                         <p><?= $product->getPrix()?></p>
                         <p><?= $product->getDisponible() ? "oui" : "non"?></p>
+
                         <div class="icon-container">
                             <a href="<?=site_url("Admin/modifProduct/".$product->getID()) ?>">
                                 <img class="icon" src="<?=base_url("assets/icon/icon-pen.svg")?>" alt="Modifier le produit">
                             </a>
-
-                            <script>
-                                function supprimerProduit() {
-                                    var x;
-                                    var r = confirm("Voulez-vous vraiment supprimer le produit ?");
-
-                                    if (r == true) {
-                                        window.location.href = "<?= site_url("Admin/removeProduct/".$product->getID()) ?>";
-                                    }
-                                }
-                            </script>
-                            <a onclick="supprimerProduit()">
+                            <a href="<?=site_url("Admin/removeProduct/".$product->getID()) ?>">
                                 <img class="icon icon-delete" src="<?=base_url("assets/icon/icon-delete.svg")?>" alt="Supprimer le produit">
                             </a>
                         </div>
@@ -103,6 +94,8 @@ if (isset($this->session->user["status"])) {
                         <p><?= $user->getNom()?></p>
                         <p><?= $user->getEmail()?></p>
                         <p><?= $user->getStatus(); ?></p>
+
+                        
                         <div class="icon-container">
                             <a href="<?=site_url("Admin/modifUser/".$user->getID()) ?>">
                                 <img class="icon" src="<?=base_url("assets/icon/icon-pen.svg")?>" alt="Modifier l'utilisateur">
@@ -135,7 +128,19 @@ if (isset($this->session->user["status"])) {
                             <a href="<?=site_url("Admin/modifCategorie/".$cat->getId()) ?>">
                                 <img class="icon" src="<?=base_url("assets/icon/icon-pen.svg")?>" alt="Modifier la catégorie">
                             </a>
-                            <img class="icon icon-delete" src="<?=base_url("assets/icon/icon-delete.svg")?>" alt="Supprimer la catégorie">
+                            <script>
+                                function supprimerCategorie() {
+                                    var x;
+                                    var r = confirm("Voulez-vous vraiment supprimer la catégorie ?");
+
+                                    if (r == true) {
+                                        window.location.href = "<?= site_url("Admin/removeCategorie/".$cat->getId()) ?>";
+                                    }
+                                }
+                            </script>
+                            <a href="<?=site_url("Admin/removeCategorie/".$cat->getId()) ?>">
+                                <img class="icon icon-delete" src="<?=base_url("assets/icon/icon-delete.svg")?>" alt="Supprimer la catégorie">
+                            </a>
                         </div>
                         
                     </div>

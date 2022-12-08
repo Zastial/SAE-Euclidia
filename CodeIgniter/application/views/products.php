@@ -44,17 +44,27 @@
                     <?php endforeach; ?>
                 </div>
 
+                <div class="filters">
+                    <h1>Trie des produits :</h1>
+                    <select name="trie" id="trie">
+                        <option value="">- Aucun filtre -</option>
+                        <option value="prix-croissant">Trie par prix croissant</option>
+                        <option value="prix-décroissant">Trie par prix décroissant</option>
+                    </select>
+                    
+                </div>
+
 
                 <div class="price">
                     <h2>Prix</h2>
-                    <div class="price-container">
-                        <div class="price-min">
+                    <div class="price-container" id="price">
+                        <div class="price-left">
                             <label for="min">Prix minimum</label>
-                            <input id="min"type="number" min="0" max="9999" value="0" oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                            <input id="price-min"type="number" min=0 max=9999 value=0 oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" >
                         </div>
-                        <div class="price-max">
+                        <div class="price-right">
                             <label for="max">Prix maximum</label>
-                            <input id="max" type="number" min="0" max="9999" value="9999" oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                            <input id="price-max" type="number" min=0 max=9999 value=9999 oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" >
                         </div>
                     </div>
                 </div>
@@ -75,28 +85,47 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="<?php echo base_url("js/notiflix-aio-3.2.5.min.js"); ?>"></script>
     <script type="text/javascript">
 
+        
         $(function() {
             $('#reset').click(function() {
                 
                 $('#categories').find('input[type=checkbox]:checked').prop('checked', false);
                 modifyProducts();
+  
             });
 
             $('#filter').click(function() {
                 modifyProducts();
-                
             });
         });
 
         function modifyProducts() {
             var checkedCategories = document.querySelectorAll('#categories input[type="checkbox"]:checked');
-            var ids = [];
-            for (var i = 0; i < checkedCategories.length; i++) ids.push(checkedCategories[i].id);
+            var idCategories = [];
+            for (var i = 0; i < checkedCategories.length; i++) idCategories.push(checkedCategories[i].id);
+
+            var idFiltre = $('#trie').val();
+            var min = parseInt(document.getElementById("price-min").value);
+            var max = parseInt(document.getElementById("price-max").value);
+
+            if (min > max || min < 0 || max < 0) {
+                $('#price-min').addClass('invalid');
+                $('#price-max').addClass('invalid');      
+                Notiflix.Notify.failure('truc', {showOnlyTheLastOne:true, timeout:5000, distance:'90px', width:"400px", fontSize:"16px"});
+                return;  
+            } else {
+                $('#price-min').removeClass('invalid');
+                $('#price-max').removeClass('invalid'); 
+            }
 
             var post_data = {
-                'categories': ids
+                'categories': idCategories,
+                /**'filtre' : idFiltre,
+                'prix-min' : prixMin,
+                'prix-max' : prixMax*/
             };
 
             $.ajax({
@@ -108,6 +137,10 @@
                 }
             });
         }
+
+
+        
+    
         
     </script>
 

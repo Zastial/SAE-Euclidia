@@ -10,6 +10,7 @@
     <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
 
     <title>Admin-AddProduct</title>
+    <!--<link rel="icon" size="24x24"href="/assets/image/logoEuclidia.png" type="image/png">-->
 </head>
 <body>
     <?php require_once('error.php'); ?>
@@ -36,7 +37,7 @@
                 
                 <div class="prix">
                     <label for="price" class="labelTypo" size="30" required>Prix du Produit</label>
-                    <input class="" type="text" name="price" required>
+                    <input class="" type="number" step="0.01" name="price" required>
                 </div>
                 
                 <div class="desc">
@@ -46,11 +47,11 @@
                 </div>
 
             <div class="dispo">
-                <label class="labelTypo" size="30" required>Disponibilité</label>
-                <input type="radio" id="oui" name="disponible" value="true" checked>
-                <label for="oui"> Oui </label>
-                <input type="radio" id="non" value="false" name="disponible">
-                <label for="non"> Non </label>
+                <label for="disponible">Disponibilité du produit</label>
+                <select name="disponible" id="disponible">
+                    <option value="oui">oui<option>
+                    <option value="oui">non<option>
+                </select>
                 
             </div>
             
@@ -61,6 +62,9 @@
                 <?php endforeach ?>
             </div>
         
+            <div class= "upload">
+                    <input type="file" name="usefile" accept="image/png, image/jpeg">
+            </div>
             
             <div class="validation">
                 <button class="btn btn-orange btn-main"type="submit">Créer un nouveau produit</button>

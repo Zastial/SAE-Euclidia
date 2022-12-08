@@ -56,14 +56,6 @@ CREATE TABLE affectation (
    FOREIGN KEY(id_categorie) REFERENCES categorie(id_categorie)
 );
 
-CREATE TABLE favori(
-   id_produit INT NOT NULL AUTO_INCREMENT,
-   id_utilisateur INT NOT NULL,
-   PRIMARY KEY(id_produit, id_utilisateur),
-   FOREIGN KEY(id_produit) REFERENCES produit(id_produit),
-   FOREIGN KEY(id_utilisateur) REFERENCES utilisateur(id_utilisateur)
-);
-
 CREATE TABLE achat(
    id_produit INT NOT NULL,
    id_facture INT NOT NULL,

@@ -71,6 +71,11 @@ input {
     padding: 14px 20px;
     width: 100%;
 }
+.invalid {
+    border: 1px solid var(--red);
+}
+
+
 
 .material-symbols-outlined {
     padding-left: 30px;

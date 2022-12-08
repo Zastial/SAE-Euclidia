@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="" tests="1" assertions="16" errors="0" warnings="0" failures="0" skipped="0" time="0.003735">
+    <testsuite name="CodeIgniter Application Test Suite" tests="1" assertions="16" errors="0" warnings="0" failures="0" skipped="0" time="0.003735">
+      <testsuite name="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" tests="1" assertions="16" errors="0" warnings="0" failures="0" skipped="0" time="0.003735">
+        <testcase name="test_findAll" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" line="21" assertions="16" time="0.003735"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

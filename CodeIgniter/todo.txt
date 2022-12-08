@@ -1,0 +1,35 @@
+
+status facture?
+
+                        TODO A FAIRE
+
+
+Inscription :
+        - captchat pour vérif que c'est pas un robot
+
+
+
+Connexion :
+        -captchat pour vérif que c'est pas un robot
+
+
+
+Admin : (action : inserer, modifier, supprimer)
+
+    users : 
+        - filter les utilisateurs (status, recherche nom prénom)
+        - afficher les factures des utilisateurs
+        
+    produits: 
+        - afficher les produits achettés par utilisateurs
+        
+
+
+
+    REQUETES:
+
+    Les selects doivent se faire 
+
+Commandes:
+    - Icones
+    - Titre

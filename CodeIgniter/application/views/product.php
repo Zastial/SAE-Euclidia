@@ -46,7 +46,7 @@
                 
                 <div class="-button" class="buy">
                     <?php if ($isbought): ?>
-                        <a class="link-nav a-desactived" role="link" aria-disabled="true">Déjà possédé</a>
+                        <a class="link-nav a-desactived" role="link" aria-disabled="true" href="<?= site_url("Product/download/".$produit->getId()) ?>">Télécharger</a>
                     <?php endif; ?>
                     <?php if (!$incart && !$isbought) : ?>
                         <a class="link-nav" href=<?= site_url("ShoppingCart/addProduct/".$produit->getId())?>>Ajouter au panier</a>

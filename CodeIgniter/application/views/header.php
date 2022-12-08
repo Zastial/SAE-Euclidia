@@ -52,7 +52,7 @@
                     <?php endif; ?>
 
                     <?php if ($status == "Utilisateur"): ?>
-                        <a href=<?=site_url("") ?>>Mes commandes</a>
+                        <a href=<?=site_url("User/commandes") ?>>Mes commandes</a>
                     <?php endif; ?>
 
                     

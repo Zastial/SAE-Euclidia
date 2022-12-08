@@ -138,5 +138,11 @@ class ProductModel extends CI_Model {
 		$response = $q->custom_result_object("ProductEntity");
 		return $response;
 	}
+
+	public function getProductsByUserId($id){
+		$q = $this->db->query("CALL getBoughtProductsOfUser(".$id.")");
+		$response = $q->custom_result_object("ProductEntity");
+		return $response;
+	}
 }
 ?>

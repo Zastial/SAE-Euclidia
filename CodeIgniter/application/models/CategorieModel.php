@@ -40,7 +40,30 @@ class CategorieModel extends CI_Model {
 		return $response;
     }
 
+	public function updateCategorie(CategorieEntity $categorie){
+		try {
+			$db_debug = $this->db->db_debug;
+			$this->db->db_debug = FALSE;
+			$this->db->set('libelle', $categorie->getLibelle());	
+			$this->db->where('id_categorie', $categorie->getId());
+			$result = $this->db->update('categorie');
+			$this->db->db_debug = $db_debug;
 
+			if (!$result) {
+				return null;
+			}
+
+		} catch (Exception $e) {return null;} 
+	}
+
+	public function removeCategorie(int $categorieID) {
+		try {
+			$db_debug = $this->db->db_debug;
+			$this->db->db_debug = FALSE;
+			$this->db->delete('categorie', array('id_categorie' => $categorieID));
+
+		} catch (Exception $e) {return null;} 
+	}
 
 
 }

@@ -26,13 +26,14 @@ class Product extends CI_Controller {
         }
         // find products by categorie(s)
         $categories = $this->input->post('categories');
+        $filtre = $this->input->post('filtre');
         if (empty($categories)) {
             $produits = $this->ProductModel->findAllAvailable();
         } else {
             $produits = $this->ProductModel->findByCategoriesAvailable($categories);
         }
         
-        // filter by name
+        
         // filter by price
 
         $page = $this->load->view('productsContent', array("produits"=>$produits, "categories"=>array()), TRUE);
@@ -58,4 +59,17 @@ class Product extends CI_Controller {
 
     }
 
+    public function download($productid){
+        $id = intval($productid);
+        $produit = $this->ProductModel->findById($id);
+        if ($produit == null) {
+            $this->session->set_flashdata('error', 'Le produit sélectionné n\\\'existe plus! Nous nous excusons de la gêne occasionnée.');
+            redirect($_SERVER['HTTP_REFERER']); //Redirect back
+        }
+        $path = $this->config->item('model_assets') . "products/" . $id . '.obj';
+        header('Content-Description: File Transfer');
+        header('Content-type: application/octet-stream');
+        header('Content-Disposition: attachment; filename="'.$produit->getTitre().'.obj'.'"');
+        readfile($path);
+    }
 }

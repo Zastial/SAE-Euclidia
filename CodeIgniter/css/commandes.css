@@ -1,0 +1,5 @@
+.commandes-container{
+    display: grid;
+    width: 70%;
+    row-gap: 10px;
+}

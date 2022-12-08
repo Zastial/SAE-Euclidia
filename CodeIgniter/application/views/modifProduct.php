@@ -42,13 +42,13 @@
                 <input type="checkbox" id="categories" name="categories[]" value="<?php echo $categorie->getId(); ?>">
                 <label for="categorie"><?php echo $categorie->getLibelle(); ?></label>
             <?php endif ?>
-        <?php endforeach ?><br>
+        <?php endforeach ?>
 
         <label for="disponible">Disponibilité du produit</label>
         <select name="disponible" id="disponible">
             <option value="<?php echo ($produit->getDisponible()) ? "oui" : "non" ?>"><?php echo ($produit->getDisponible()) ? "oui" : "non" ?></option>
             <option value="<?php echo ($produit->getDisponible()) ? "oui" : "non" ?>"><?php echo ($produit->getDisponible()) ? "non" : "oui" ?></option>
-        </select><br>
+        </select>
         
         <input class="btn btn-main btn-orange" type="submit" value="Modifier le produit">
 

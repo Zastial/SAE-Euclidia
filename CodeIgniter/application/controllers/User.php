@@ -326,5 +326,15 @@ class User extends CI_Controller {
             redirect('User/account');
         }
     }
+    
+    public function commandes(){
+        if (!isset($this->session->user)) {
+            redirect('Home');
+            die();
+        }
+        $u = $this->UserModel->findByEmail($this->session->user["email"]);
+        $p = $this->ProductModel->getProductsByUserId($u->getId());
+        $this->load->view("commandes", array("p" => $p));
+    }
 }
 ?>

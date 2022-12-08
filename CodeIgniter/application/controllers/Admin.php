@@ -7,6 +7,7 @@ class Admin extends CI_Controller {
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->helper('form');
+        $this->load->library('upload');
 
 
         // redirect to home if user is not connected or isn't an admin / responsable
@@ -92,18 +93,36 @@ class Admin extends CI_Controller {
             $description = $this->input->post("description");
             $disponible = $this->input->post("disponible");
 
-            $categories = $this->input->post("categories");
+            $config["file_name"]= "thumb.png";
+            $config['upload_path']= "./../../../../modelassets/";
+            $config['allowed_types']='jpg|png';
+            $config['max_size']= '2000';
+            $config['max_width']= '1024';
+            $config['max_height']= '768';
+            $this->load->library('upload', $config);
+            //$this-> db->insert('post', $_POST);
 
-            $product= new ProductEntity ;
-            $product -> setTitre($name);
-            $product -> setPrix($price);
-            $product -> setDescription($description);
-            $product -> setDisponible($disponible);
 
-            $this -> ProductModel -> addProduct($product, $categories);
+            if ( ! $this->upload->do_upload("userfile")){
+                $error = array('error' => $this->upload->display_errors());
 
-            //COMBO BOX pour les catégories?
-            redirect('Admin/index');
+                redirect('Admin/index', $error);
+            }else{
+                $categories = $this->input->post("categories");
+
+                $product= new ProductEntity ;
+                $product -> setTitre($name);
+                $product -> setPrix($price);
+                $product -> setDescription($description);
+                $product -> setDisponible($disponible);
+
+                $this -> ProductModel -> addProduct($product, $categories);
+
+                //COMBO BOX pour les catégories?
+                redirect('Admin/index');
+            }
+
+            
         }
     }
 
@@ -159,8 +178,10 @@ class Admin extends CI_Controller {
     }
 
 
-    public function removeCategorie() {
+    public function removeCategorie(int $categorieid) {
+        $this->CategorieModel->removeCategorie($categorieid);
 
+        redirect('Admin/index');
     }
 
     public function addCategorie() {
