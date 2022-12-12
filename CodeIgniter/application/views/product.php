@@ -26,22 +26,20 @@
 
 
         <div class="return">
-            <a class="link-nav" href=<?= site_url("Product/find")?>> <img src="" alt=""> < Retour à la liste des produits</a>
+            <?php $url = htmlspecialchars($_SERVER['HTTP_REFERER']); ?>
+            <a class="link-nav" href=<?= $url ?>> <img src="" alt=""> < Retour à la liste des produits</a>
         </div>
     
     
         <div class="product">
 
-            
             <div class="slider-image">
-                <img class="other-image" id="0" src="<?= base_url('img/get/'.$produit->getId()) ?>" alt="" onclick="changeImage(id)">
-                <img class="other-image" id="1" src="<?= base_url('img/get/'.$produit->getId()) ?>" alt="" onclick="changeImage(id)">
-                <img class="other-image" id="2" src="assets/image/cb.png" alt="" onclick="changeImage(id)">
-
-
+            <?php for($i=0;$i<$c;$i++){?>
+                <img class="other-image" id="<?=$i?>" src="<?= base_url('resource/picture/'.$produit->getId()."/".$i) ?>" alt="" onclick="changeImage(id)">
+            <?php } ?>
             </div>
                 
-            <img class="main-image" id="main-image"src="<?= base_url('img/get/'.$produit->getId()) ?>" alt="">
+            <img class="main-image" id="main-image"src="<?= base_url('resource/picture/'.$produit->getId()) ?>" alt="">
         
             
     
@@ -55,7 +53,7 @@
                 
                 <div class="-button" class="buy">
                     <?php if ($isbought): ?>
-                        <a class="link-nav a-desactived" role="link" aria-disabled="true" href="<?= site_url("Product/download/".$produit->getId()) ?>">Télécharger</a>
+                        <a class="link-nav a-desactived" role="link" aria-disabled="true" href="<?= site_url("Resource/model/".$produit->getId()) ?>">Télécharger</a>
                     <?php endif; ?>
                     <?php if (!$incart && !$isbought) : ?>
                         <a class="link-nav" href=<?= site_url("ShoppingCart/addProduct/".$produit->getId())?>>Ajouter au panier</a>

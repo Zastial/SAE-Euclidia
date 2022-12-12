@@ -77,6 +77,10 @@ nav {
     background-color: #fff;
 }
 
+.nav-account {
+    padding-left: 30px;
+}
+
 
 .btn-nav {
     border-radius: 6px;

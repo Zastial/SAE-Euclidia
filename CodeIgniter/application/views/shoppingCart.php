@@ -36,7 +36,7 @@ $connected = (isset($this->session->user)) ? true : false;
     
                         <div class="shopping-cart-product" style="cursor:pointer">
                             <div class="shopping-cart-content" onclick='location.href="<?= site_url("Product/display/".$prod->getId())?>"'>
-                                <img class="image-model" src="<?= base_url("assets/image/default-img.png") ?>" alt="default image">
+                                <img class="image-model" src="<?= base_url('resource/picture/'.$prod->getId()) ?>" alt="product image">
                                 <p><?= $prod->getTitre() ?></p>
                                 <p><?= $prod->getPrix() ?> €</p>
                             </div>

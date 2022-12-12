@@ -15,6 +15,8 @@ class ProductSeeder extends Seeder {
 	public function run()
 	{
 		$this->db->empty_table($this->table);
+		// $this->db->query('ALTER TABLE ? AUTO_INCREMENT = 1;', array($this->table));
+		$this->db->query('ALTER TABLE produit AUTO_INCREMENT = 1;');
 
 		$data = [
 			'titre' => 'Default Cube',

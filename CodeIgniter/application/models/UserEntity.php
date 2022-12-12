@@ -7,6 +7,7 @@ class UserEntity {
     private string $password;
     private string $email;
     private string $status;
+    private string $etat;
     private string $numrue;
     private string $adresse;
     private string $ville;
@@ -39,6 +40,12 @@ class UserEntity {
      */
     public function getEmail(): string {
         return $this->email;
+    }
+    /**
+     * @return string
+     */
+    public function getEtat(): string {
+        return $this->etat;
     }
 
     /**
@@ -124,6 +131,13 @@ class UserEntity {
      */
     public function setEmail(string $email): void {
         $this->email = $email;
+    }
+
+    /**
+     * @param string $etat
+     */
+    public function setEtat(string $etat): void {
+        $this->etat = $etat;
     }
 
     /**

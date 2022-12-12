@@ -1,5 +1,6 @@
 <?php
 require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."ProductEntity.php";
+require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."AffectationModel.php";
 class ProductModel extends CI_Model {
 
     public function findAll() {
@@ -35,35 +36,46 @@ class ProductModel extends CI_Model {
 		return $response;
 	}
 
-	/**
-	 * @param array $ids
-	 */
-	public function findByCategories(array $ids) {
-		$sql = "select * from produit as p1 where NOT EXISTS (
-			SELECT * from categorie WHERE id_categorie IN ?
-		  AND id_categorie NOT IN (
-				select a.id_categorie FROM affectation as a JOIN produit p2 ON p2.id_produit = a.id_produit WHERE p2.id_produit = p1.id_produit
-			)
-		);";
-		$q = $this->db->query($sql, array($ids));
-		$response = $q-> custom_result_object("ProductEntity");
-		return $response;
-	}
+	
+	public function findQueryBuilder(?string $name, ?array $categories, ?string $tri, ?float $minprice, ?float $maxprice, ?bool $available) {
+		try {
+			$this->db->select('*');
+			$this->db->from('produit');
+			
+			if (!empty($name)) {
+				$mots = explode(' ',$name);
+				foreach($mots as $mot){
+					$this->db->or_like('produit.titre', $mot);
+				}
+			}	
 
-	public function findByCategoriesAvailable(array $ids) {
-		$sql = "select * from produit as p1 where p1.disponible = true AND NOT EXISTS (
-			SELECT * from categorie WHERE id_categorie IN ?
-		  AND id_categorie NOT IN (
-				select a.id_categorie FROM affectation as a JOIN produit p2 ON p2.id_produit = a.id_produit WHERE p2.id_produit = p1.id_produit
-			)
-		);";
-		$q = $this->db->query($sql, array($ids));
-		$response = $q-> custom_result_object("ProductEntity");
-		return $response;
-	}
+			if (!empty($categories)) {
+				$this->db->join('affectation', 'affectation.id_produit = produit.id_produit');
+				$this->db->where_in('affectation.id_categorie', $categories);
+			}
 
-	public function findQueryBuilder(string $name, array $categories, $tri) {
+			if (!empty($tri)) {
+				switch ($tri) {
+					case "1":
+						$this->db->order_by('produit.prix', 'asc');
+					case "2":
+						$this->db->order_by('produit.prix', 'desc');
+				}
+			}
 
+			$min = empty($minprice) ? 0 : $minprice;
+			$max = empty($maxprice) ? 9999 : $maxprice;
+			$dispo = empty($available) ? true : $available;
+			$this->db->where('prix >=', $min);
+			$this->db->where('prix <=', $max);
+			$this->db->where('disponible =', $dispo);
+			
+			$query = $this->db->get();
+			$response = $query->custom_result_object("ProductEntity");
+			return $response;
+		}catch (Exception $e) {
+			return null;
+		}
 	}
 
     public function addProduct(ProductEntity $product, array $categories):?ProductEntity{
@@ -86,6 +98,7 @@ class ProductModel extends CI_Model {
 		$q = $this->db->get_where('produit', array('id_produit' => $id));
 		$response = $q->row(0,"ProductEntity");
 
+		$this->load->model("AffectationModel"); 
 		$this -> AffectationModel -> addAffectations($id,$categories);
 
 		return $response;

@@ -1,5 +1,13 @@
 
-status facture
+status facture  
+
+Design Pattern
+
+ -  decorateur 
+ -  factory (utilisateur) 
+ - 
+
+
 
                         TODO A FAIRE
 
@@ -43,12 +51,15 @@ Modèles 3D:
         - images (ajout par l'admin/resp produit, modif par l'admin, affichage dans la page display)
                 (pour l'admin/resp produit, il peut ajouter des images, changer leur ordre, supprimer une image)
 
-        ((((on peut get les images dans url ex :http://172.26.82.48/img/get/1))))
+        ((((on peut get les images dans url ex :http://172.26.82.48/resource/picture/1))))
+
+        -débordement des liens quand certaines catégories sont cochées
+        - si aucun modèle est trouvé on affiche un msg 
 
 
 Admin : (action : inserer, modifier, supprimer)
     - différentes vues pour les tabs (produits, utilisateurs, catégories...)
-    - Refaire l'appli administrateur
+
     - le script supprimer catégorie est il utile dans la vue admin ? 
     peut il etre deplacer dans tab js ?
 

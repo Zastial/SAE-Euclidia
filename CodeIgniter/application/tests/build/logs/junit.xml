@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="1" assertions="16" errors="0" warnings="0" failures="0" skipped="0" time="0.003735">
-    <testsuite name="CodeIgniter Application Test Suite" tests="1" assertions="16" errors="0" warnings="0" failures="0" skipped="0" time="0.003735">
-      <testsuite name="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" tests="1" assertions="16" errors="0" warnings="0" failures="0" skipped="0" time="0.003735">
-        <testcase name="test_findAll" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" line="21" assertions="16" time="0.003735"/>
+  <testsuite name="" tests="6" assertions="72" errors="0" warnings="0" failures="0" skipped="0" time="0.022722">
+    <testsuite name="CodeIgniter Application Test Suite" tests="6" assertions="72" errors="0" warnings="0" failures="0" skipped="0" time="0.022722">
+      <testsuite name="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" tests="6" assertions="72" errors="0" warnings="0" failures="0" skipped="0" time="0.022722">
+        <testcase name="test_findAll" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" line="21" assertions="16" time="0.003737"/>
+        <testcase name="test_findAllAvailable" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" line="57" assertions="16" time="0.003113"/>
+        <testcase name="test_findById" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" line="92" assertions="15" time="0.003253"/>
+        <testcase name="test_findIdAvailable" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" line="126" assertions="15" time="0.004154"/>
+        <testcase name="test_findQueryBuilder" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" line="158" assertions="5" time="0.003041"/>
+        <testcase name="test_addProduct" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" line="174" assertions="5" time="0.005424"/>
       </testsuite>
     </testsuite>
   </testsuite>

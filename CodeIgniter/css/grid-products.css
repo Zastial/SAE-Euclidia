@@ -35,5 +35,8 @@
 .grid-products {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-auto-rows: min-content;
+    height: min-content;
     gap: 20px;
 }

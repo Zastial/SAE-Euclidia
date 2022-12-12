@@ -66,7 +66,7 @@
 
 
             <?php else: ?>
-                <div>
+                <div class="nav-account">
                     <a href=<?= site_url("user/login")?>><button class="btn-nav">Connexion</button></a>
                     <a href=<?= site_url("user/register")?>><button class="btn-nav">S'inscrire</button></a>
                 </div>

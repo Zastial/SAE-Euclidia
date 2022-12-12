@@ -1,3 +1,39 @@
+<?php 
+$checked = array();
+if (isset($_GET['categorie'])) {
+    $checked = $_GET['categorie'];
+}
+$filter = 0;
+if (!empty($_GET['tri'])) {
+    $filter = htmlentities($_GET['tri']);
+}
+
+$name = "";
+if (!empty($_GET['rechercher'])) {
+    $name = htmlentities($_GET['rechercher']);
+}
+
+$min = 0;
+if (!empty($_GET['price-min'])) {
+    $min = intval($_GET['price-min']);
+}
+
+$max = 9999;
+if (!empty($_GET['price-max'])) {
+    $max = intval($_GET['price-max']);
+}
+
+if ($max < $min) {
+    $min = 0;
+    $max = 9999;
+}
+if ($min < 0) {
+    $min = 0;
+}
+if ($max > 9999) {
+    $max = 9999;
+}
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -10,7 +46,6 @@
     <link rel="stylesheet" href=<?= base_url("css/productsPage.css") ?>>
     <link rel="stylesheet" href="<?= base_url("css/grid-products.css") ?>">
     <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 
     <title>Modèles 3D</title>
@@ -25,11 +60,11 @@
             
             
             <div class="search">
-    
+                <form method="get" action=<?= site_url("product/find")?>>
                 <div class="input-container">
                     <div class="input">
                         <span class="material-symbols-outlined">search</span>
-                        <input class="input-with-icon"type="text" name="rechercher" id="rechercher" placeholder="Rechercher">
+                        <input class="input-with-icon" type="text" name="rechercher" value="<?=$name?>" id="rechercher" placeholder="Rechercher">
                     </div>
                 </div>
     
@@ -38,18 +73,29 @@
                     <?php foreach ($categories as $cat): ?>
                         <div class="one-categ">
                             <?php $categId = $cat->getId() ;?>
-                            <input class="input-with-icon" type="checkbox" id=<?=$categId?> />
+                            <input class="input-with-icon" type="checkbox" id=<?=$categId?> name='categorie[]' value=<?=$categId?> <?php if (in_array($categId, $checked)) {echo 'checked';}?> />
                             <label for=<?= $categId ?>> <?=$cat->getLibelle()?> </label>
                         </div>
                     <?php endforeach; ?>
                 </div>
 
                 <div class="filters">
-                    <h1>Trie des produits :</h1>
-                    <select name="trie" id="trie">
-                        <option value="">- Aucun filtre -</option>
-                        <option value="prix-croissant">Trie par prix croissant</option>
-                        <option value="prix-décroissant">Trie par prix décroissant</option>
+                    <h1>Tri des produits :</h1>
+                    <select name="tri" id="tri">
+                        <?php 
+                        
+                        $options = array('- Aucun filtre -', 'Tri par prix croissant', 'Tri par prix décroissant');
+
+                        for ($i=0;$i<count($options);$i++) {
+                            $balise = "<option";
+                            if ($filter == $i) {
+                                $balise = $balise . " selected";
+                            } 
+                            $balise = $balise . " value=\"".$i."\">".$options[$i]."</option>";
+                            echo $balise;
+                        }
+                         
+                        ?>
                     </select>
                     
                 </div>
@@ -60,11 +106,11 @@
                     <div class="price-container" id="price">
                         <div class="price-left">
                             <label for="min">Prix minimum</label>
-                            <input id="price-min"type="number" min=0 max=9999 value=0 oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" >
+                            <input id="price-min" type="number" name="price-min" min="0" max="9999" value=<?=$min?> oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" >
                         </div>
                         <div class="price-right">
                             <label for="max">Prix maximum</label>
-                            <input id="price-max" type="number" min=0 max=9999 value=9999 oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" >
+                            <input id="price-max" name="price-max" type="number" min="0" max="9999" value=<?=$max?> oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" >
                         </div>
                     </div>
                 </div>
@@ -72,11 +118,24 @@
 
                 <button class="btn btn-black-200 btn-large" id="filter">Filtrer</button>
                 <button class="btn btn-black-200 btn-large" id="reset">Réinitialiser les filtres</button>
+                </form>
             </div>
             
             
             <div class="grid-products" id="produits">
-                <?php require_once('productsContent.php') ?>
+            <?php foreach($produits as $prod) :?>
+                <?php $id = $prod->getId(); ?>
+                <a class="card-link" href="<?=site_url("Product/display/").$id ?>">
+                    <div class="card-container">
+                        <img src="<?= base_url('resource/picture/'.$prod->getId()) ?>" alt="modèle <?= $prod->getTitre() ?>">
+                        <div class="card-description">
+                            <p><?= $prod->getPrix() ?>  €</p>
+                            <p><?= $prod->getTitre() ?></p>
+                        </div>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+
             </div>
         </div>
 
@@ -93,54 +152,14 @@
             $('#reset').click(function() {
                 
                 $('#categories').find('input[type=checkbox]:checked').prop('checked', false);
+                $('#price-min').val('0');
+                $('#price-max').val('9999');
+                $('#rechercher').val("");
+                $('#tri').prop('selectedIndex', 0);
                 modifyProducts();
   
             });
-
-            $('#filter').click(function() {
-                modifyProducts();
-            });
         });
-
-        function modifyProducts() {
-            var checkedCategories = document.querySelectorAll('#categories input[type="checkbox"]:checked');
-            var idCategories = [];
-            for (var i = 0; i < checkedCategories.length; i++) idCategories.push(checkedCategories[i].id);
-
-            var idFiltre = $('#trie').val();
-            var min = parseInt(document.getElementById("price-min").value);
-            var max = parseInt(document.getElementById("price-max").value);
-
-            if (min > max || min < 0 || max < 0) {
-                $('#price-min').addClass('invalid');
-                $('#price-max').addClass('invalid');      
-                Notiflix.Notify.failure('truc', {showOnlyTheLastOne:true, timeout:5000, distance:'90px', width:"400px", fontSize:"16px"});
-                return;  
-            } else {
-                $('#price-min').removeClass('invalid');
-                $('#price-max').removeClass('invalid'); 
-            }
-
-            var post_data = {
-                'categories': idCategories,
-                /**'filtre' : idFiltre,
-                'prix-min' : prixMin,
-                'prix-max' : prixMax*/
-            };
-
-            $.ajax({
-                type: "POST",
-                url: "<?= site_url("Product/getFilteredProducts") ?>",
-                data: post_data,
-                success: function(produits) {
-                    $('#produits').html(produits);
-                }
-            });
-        }
-
-
-        
-    
         
     </script>
 

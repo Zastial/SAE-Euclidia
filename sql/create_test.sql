@@ -21,6 +21,7 @@ CREATE TABLE utilisateur(
    ville VARCHAR(50) NOT NULL,
    postalcode VARCHAR(5) NOT NULL,
    pays VARCHAR(50) NOT NULL,
+      etat VARCHAR(20) NOT NULL default 'active',
    PRIMARY KEY(id_utilisateur),
    UNIQUE(email)
 );

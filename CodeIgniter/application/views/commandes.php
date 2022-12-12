@@ -20,12 +20,11 @@
     <section>
         <h1>Vos commandes</h1>
         <p>Vous pouvez ici consulter les produits que vous avez achetés et les télécharger.</p>
-        <br>
         <div class = "commandes-container">
             <?php foreach($p as $prod): ?>
                 <div class="commandes-product" style="cursor:pointer">
                                 <div class="commandes-content" <?= $prod->getDisponible()?"onclick='location.href=\"" . site_url("Product/display/".$prod->getId())."\"'":""?>>
-                                    <img class="image-model" src="<?= base_url('img/get/'.$prod->getId()) ?>" alt="product image">
+                                    <img class="image-model" src="<?= base_url('resource/picture/'.$prod->getId()) ?>" alt="product image">
                                     <p><?= $prod->getTitre() ?></p>
                                     <p><?= $prod->getPrix() ?> €</p>
                                 </div>
@@ -38,7 +37,7 @@
                                     <?php } ?>
                                 </div>
     
-                                <div class="link-download" onclick='location.href="<?= site_url("Product/download/".$prod->getId())?>"'>
+                                <div class="link-download" onclick='location.href="<?= site_url("resource/model/".$prod->getId())?>"'>
                                     <a><img class="icon icon-download" src="<?=base_url("assets/icon/icon-download.svg") ?>" alt="download bouton"></a>   
                                 </div>
                             </div>

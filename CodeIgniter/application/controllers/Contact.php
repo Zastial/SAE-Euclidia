@@ -20,7 +20,7 @@ class Contact extends CI_Controller {
 
         $objet = $prenom . " " . $nom . " : " . $objet;
 
-        mail('michenaudmathis@gmail.com', $objet, $message);
+        mail('euclidia3d@proton.me', $objet, $message);
     
         redirect("contact");
     }

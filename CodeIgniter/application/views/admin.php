@@ -28,11 +28,12 @@ if (isset($this->session->user["status"])) {
     <div class="page">
 
         <!-- LEFT SIDE BAR -->
+        
         <div class="side-bar">
             <h1>Tables</h1>
             <ul>
                 <?php if ($status == "Responsable" || $status == "Administrateur"): ?>
-                    <li><a class="tab-link" onclick="openTab(event, 'Produits')" ><!--<img src="assets/icon/icon-account-circle.svg" alt="">--> Produits</a></li>
+                    <li><a class="tab-link" onclick="openTab(event, 'Produits')" ><img class="icon-side-bar" src="<?= base_url("assets/icon/icon-account-circle.svg"); ?>" alt=""> Produits</a></li>
                 <?php endif; ?>   
     
                 <?php if ($status == "Administrateur"): ?>
@@ -49,8 +50,6 @@ if (isset($this->session->user["status"])) {
                 <li><a href="">autres</a></li>
             </ul>
             
-    
-            
         </div>
       
         <!-- MAIN CONTENT -->
@@ -62,7 +61,7 @@ if (isset($this->session->user["status"])) {
                 <div id="Produits" class="content">
                     <a class="btn btn-large btn-blue-200" href= <?= site_url("Admin\addProduct")?>>Ajouter un Produit</a>
                 
-                    <div class="head-grid">
+                    <div class="grid head">
                         <p>ID</p>
                         <p>Titre</p>
                         <p>Prix</p>
@@ -71,7 +70,7 @@ if (isset($this->session->user["status"])) {
                     </div>
                     
                     <?php foreach ($products as $product) :?>
-                            <div class="item">
+                            <div class="grid item">
     
                                 <p><?= $product->getID()?></p>
                                 <p><?= $product->getTitre()?></p>
@@ -95,30 +94,30 @@ if (isset($this->session->user["status"])) {
 
                 <div id="Utilisateurs" class="content">
     
-                    <div class="head-grid">
+                    <div class="grid head">
                         <p>Nom</p>
                         <p>Prénom</p>
                         <p>Email</p>
                         <p>Status</p>
+                        <p>Etat</p>
                         <p>Action</p>
                     </div>
     
-                    <?php foreach ($users as $user) :?>
-    
-    
-                            <div class="item">
-                                <p> <?= $user->getPrenom()?></p>
-                                <p><?= $user->getNom()?></p>
-                                <p><?= $user->getEmail()?></p>
-                                <p><?= $user->getStatus(); ?></p>
-    
-                                
-                                <div class="icon-container">
-                                    <a href="<?=site_url("Admin/modifUser/".$user->getID()) ?>">
-                                        <img class="icon" src="<?=base_url("assets/icon/icon-pen.svg")?>" alt="Modifier l'utilisateur">
-                                    </a>
-                                </div>
+                    <?php foreach ($users as $user) :?>    
+                        <div class="grid item">
+                            <p><?= $user->getPrenom()?></p>
+                            <p><?= $user->getNom()?></p>
+                            <p class="user-email"><?= $user->getEmail()?></p>
+                            <p><?= $user->getStatus(); ?></p>
+                            <p><?= $user->getEtat(); ?></p>
+
+                            
+                            <div class="icon-container">
+                                <a href="<?=site_url("Admin/modifUser/".$user->getID()) ?>">
+                                    <img class="icon" src="<?=base_url("assets/icon/icon-pen.svg")?>" alt="Modifier l'utilisateur">
+                                </a>
                             </div>
+                        </div>
             
                     <?php endforeach ; ?>
             
@@ -131,7 +130,7 @@ if (isset($this->session->user["status"])) {
                 <div id="Categories" class="content">
                     <a class="btn btn-large btn-blue-200" href= <?= site_url("Admin\addCategorie")?>>Ajouter une Catégorie</a>
     
-                    <div class="head-grid">
+                    <div class="grid head">
                         <p>ID</p>
                         <p>Nom de catégorie</p>
                         <p>Action</p>
@@ -140,7 +139,7 @@ if (isset($this->session->user["status"])) {
     
                     <?php foreach ($categories as $cat) :?>
     
-                            <div class="item">
+                            <div class="grid item">
                                 <p><?= $cat->getId()?></p>
                                 <p><?= $cat->getLibelle()?></p>
     
@@ -176,7 +175,7 @@ if (isset($this->session->user["status"])) {
         <button onclick="topFunction()" id="myBtn" ><img class="icon-up" src="<?=base_url("assets/icon/icon-arrow-down.svg")?>" alt=""></button>
     </div>
 
-    <?php /*require_once('footer.php'); */?>
+    <?php require_once('footer.php'); ?>
 </body>
 </html>
 
