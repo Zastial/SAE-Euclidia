@@ -170,6 +170,11 @@ class ShoppingCart extends CI_Controller{
         $this->session->set_userdata("cart",array());
         redirect('shoppingCart');
     }
+
+    public function get_card_total(): int {
+        $items_in_cart = count($_SESSION["cart"]);
+        return $items_in_cart;
+    }
     
 }
 ?>

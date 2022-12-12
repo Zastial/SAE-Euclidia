@@ -40,18 +40,19 @@ button {
 body {
     --black-100: #111111;
     --black-200: #2F2F2F;
-    --orange: #FFAE27;
+    --orange: #FFAE27; /*C'est du jaune bon bref*/
     --blue--link: #0000EE;
-    --red: #DE1B1B;
+    --red: hsl(0,78,49,0.94);
     --blue-100:#3271AB;
     --blue-200: #79BCF7;
-    --inpu-text-clr: #6F6F6F;
+    --dark-blue: #334D6E;
+    --input-text-clr: #6F6F6F;
     --input-border-clr:#949494;
     --white-200: #F1F1F1;
     --grey: #E1E1E1;
     --grey-200: #999999;
     --white-100: #FFFDFA;
-    
+    --green:hsl(130,94,41,0.85) ;
     --filter-orange-img: invert(67%) sepia(79%) saturate(566%) hue-rotate(338deg) brightness(104%) contrast(101%);
 
     font-family: 'Poppins', sans-serif;
@@ -67,7 +68,7 @@ input {
     border: none;
     border-radius: 7px;
     border: 1px solid var(--input-border-clr);
-    color: var(--inpu-text-clr);
+    color: var(--input-text-clr);
     padding: 14px 20px;
     width: 100%;
 }

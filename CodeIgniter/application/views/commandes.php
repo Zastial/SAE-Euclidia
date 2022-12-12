@@ -9,7 +9,6 @@
     <link rel="stylesheet" href=<?= base_url("css/style.css") ?> >
     <link rel="stylesheet" href=<?= base_url("css/account.css") ?> >
     <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
-    <link rel="stylesheet" href=<?= base_url("css/shoppingCart.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/commandes.css") ?>>
 
     <title>Account</title>
@@ -17,29 +16,38 @@
 <body>
 
     <?php require_once('header.php'); ?>
-    <div class = "commandes-container">
-        <?php foreach($p as $prod): ?>
-            <div class="shopping-cart-product" style="cursor:pointer">
-                            <div class="shopping-cart-content" <?= $prod->getDisponible()?"onclick='location.href=\"" . site_url("Product/display/".$prod->getId())."\"'":""?>>
-                                <img class="image-model" src="<?= base_url("assets/image/default-img.png") ?>" alt="default image">
-                                <p><?= $prod->getTitre() ?></p>
-                                <p><?= $prod->getPrix() ?> €</p>
-                            </div>
 
-                            <div class="link-delete" <?= $prod->getDisponible()?"onclick='location.href=\"" . site_url("Product/display/".$prod->getId())."\"'":""?>>
-                                <?php if($prod->getDisponible()){ ?>
-                                    <a><img class="icon-show" src="<?=base_url("assets/icon/icon-download.svg") ?>" alt="show product"></a>
-                                <?php } else { ?>
-                                    <a><img class="icon-unavailable" src="<?=base_url("assets/icon/icon-download.svg") ?>" alt="product unavailable"></a> 
-                                <?php } ?>
+    <section>
+        <h1>Vos commandes</h1>
+        <p>Vous pouvez ici consulter les produits que vous avez achetés et les télécharger.</p>
+        <br>
+        <div class = "commandes-container">
+            <?php foreach($p as $prod): ?>
+                <div class="commandes-product" style="cursor:pointer">
+                                <div class="commandes-content" <?= $prod->getDisponible()?"onclick='location.href=\"" . site_url("Product/display/".$prod->getId())."\"'":""?>>
+                                    <img class="image-model" src="<?= base_url('img/get/'.$prod->getId()) ?>" alt="product image">
+                                    <p><?= $prod->getTitre() ?></p>
+                                    <p><?= $prod->getPrix() ?> €</p>
+                                </div>
+    
+                                <div class="link-show" <?= $prod->getDisponible()?"onclick='location.href=\"" . site_url("Product/display/".$prod->getId())."\"'":""?>>
+                                    <?php if($prod->getDisponible()){ ?>
+                                        <a><img class="icon icon-show" src="<?=base_url("assets/icon/icon-available.svg") ?>" alt="show product"></a>
+                                    <?php } else { ?>
+                                        <a><img class="icon icon-unavailable" src="<?=base_url("assets/icon/icon-unavailable.svg") ?>" alt="product unavailable"></a> 
+                                    <?php } ?>
+                                </div>
+    
+                                <div class="link-download" onclick='location.href="<?= site_url("Product/download/".$prod->getId())?>"'>
+                                    <a><img class="icon icon-download" src="<?=base_url("assets/icon/icon-download.svg") ?>" alt="download bouton"></a>   
+                                </div>
                             </div>
-
-                            <div class="link-download" onclick='location.href="<?= site_url("Product/download/".$prod->getId())?>"'>
-                                <a><img class="icon-delete" src="<?=base_url("assets/icon/icon-download.svg") ?>" alt="download bouton"></a>   
-                            </div>
-                        </div>
-        <?php endforeach; ?>
-
+            <?php endforeach; ?>
+    
         </div>
+    </section>
+
 </body>
+<?php require_once('footer.php'); ?>
+
 </html>

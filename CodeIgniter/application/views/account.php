@@ -22,7 +22,9 @@
 
         <div class="user-info">
             <div class="user-profile">
-    
+                <div class="left">
+                    
+                </div>
                 <div class="one">
                     <div class="bigbold">Nom</div>
                     <div><?= $this->session->user["nom"]?></div>

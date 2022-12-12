@@ -1,35 +1,95 @@
 
-status facture?
+status facture
 
                         TODO A FAIRE
 
 
+#
+####
+BDD --->    - ajouter un attribut dans utilisateur pour dire si 
+            son compte est "activer" ou désactiver
+            - trigger pour cet attribut
+
+            - 
+
+####
+#
+
+
 Inscription :
-        - captchat pour vérif que c'est pas un robot
+        -
 
 
 
 Connexion :
-        -captchat pour vérif que c'est pas un robot
+        -
 
+ShoppingCart :
+        - images des produits ne sont pas les bonnes
+
+
+Passer une Commande :
+        - le bouton pour passer la commande ne doit pas être le bouton
+        "vérifier le code"
+        - Icones
+        - Titre
+
+
+
+Modèles 3D:
+
+        - trier les produits (avec les filtres bdd)
+        
+        - images (ajout par l'admin/resp produit, modif par l'admin, affichage dans la page display)
+                (pour l'admin/resp produit, il peut ajouter des images, changer leur ordre, supprimer une image)
+
+        ((((on peut get les images dans url ex :http://172.26.82.48/img/get/1))))
 
 
 Admin : (action : inserer, modifier, supprimer)
+    - différentes vues pour les tabs (produits, utilisateurs, catégories...)
+    - Refaire l'appli administrateur
+    - le script supprimer catégorie est il utile dans la vue admin ? 
+    peut il etre deplacer dans tab js ?
 
     users : 
         - filter les utilisateurs (status, recherche nom prénom)
         - afficher les factures des utilisateurs
         
+
     produits: 
         - afficher les produits achettés par utilisateurs
         
 
 
 
-    REQUETES:
+REQUETES:
 
-    Les selects doivent se faire 
+    selects 
 
-Commandes:
-    - Icones
-    - Titre
+    
+
+
+
+Error 404 :
+    - fixer le header et footer de la page (view/errors/html/error_404.php)
+     et redirection à la page d'accueil dans 5 secondes... ou cliquez ici
+
+
+Account :
+    - refaire la vue
+
+
+
+
+
+
+
+
+#######################################################
+
+                css   a refaire/finir (mathis)
+
+        - pages mes commandes 
+        - compte
+                - facture, profil ...

@@ -1,3 +1,10 @@
+
+
+
+section {
+    min-height: 90vh;
+}
+
 .cart-container {
     display: grid;
     grid-template-columns: 1fr 1fr;

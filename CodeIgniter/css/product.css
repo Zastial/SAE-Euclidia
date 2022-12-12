@@ -1,29 +1,43 @@
 
 section {
-    height: 90vh;
+    min-height: 90vh;
+    padding: 20px 100px ;
 }
 
 
 .product {
-    height: 80%;
-    display: grid;
-    grid-template-columns: repeat(2, 50%);
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
     place-items: center;
     margin: auto;
+    gap: 30px;
+    
 }
 
-.product-image {
-    flex: 1;
 
+.product .slider-image {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 5px 10px;
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    
 }
-.product-image img {
+.product .other-image {
+    width: 200px;
+    height: 160px;
+    cursor: pointer;
+}
+
+.product .main-image {
     width: 500px;
     height: 300px;
 }
 
-.product-content {
-    flex: 1;
-}
+
 
 
 

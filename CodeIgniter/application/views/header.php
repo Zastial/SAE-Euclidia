@@ -12,7 +12,7 @@
 
 </head>
 
-<nav>
+<nav class="main-navbar">
     <div class="nav-container">
         <a href=<?= site_url("Home") ?>>
             <img src="/assets/image/logoEuclidia.png" alt="Euclidia" style="width: 12rem;">
@@ -27,7 +27,10 @@
         
     
         <div class="nav-right">
-            <a href= <?= site_url("ShoppingCart")?>>
+            <a class="nav-cart-container"href= <?= site_url("ShoppingCart")?>>
+                <?php if (!empty($_SESSION['cart']) ): ?>
+                    <span class="notification_cart"><?=count($_SESSION['cart']) ?></span>
+                <?php endif; ?>
                 <img class="nav-icon shopping-cart-icon"src= <?= base_url("assets/icon/icon-shopping-cart.svg") ?>  alt="panier">
             </a>
 

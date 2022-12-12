@@ -12,9 +12,10 @@
     <link rel="stylesheet" href=<?= base_url("css/product.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
 
-
+     <script type="text/javascript" src=<?=base_url("js/slider.js")?>></script>
 
     <title>Modèle 3D</title>
+
 </head>
 <body>
     
@@ -30,11 +31,19 @@
     
     
         <div class="product">
-    
-            <div class="product-image">
-                <img class="main-image" src="<?= base_url('img/get/'.$produit->getId()) ?>" alt="">
+
+            
+            <div class="slider-image">
+                <img class="other-image" id="0" src="<?= base_url('img/get/'.$produit->getId()) ?>" alt="" onclick="changeImage(id)">
+                <img class="other-image" id="1" src="<?= base_url('img/get/'.$produit->getId()) ?>" alt="" onclick="changeImage(id)">
+                <img class="other-image" id="2" src="assets/image/cb.png" alt="" onclick="changeImage(id)">
+
+
             </div>
-    
+                
+            <img class="main-image" id="main-image"src="<?= base_url('img/get/'.$produit->getId()) ?>" alt="">
+        
+            
     
             <div class="product-content">
                 
@@ -60,6 +69,11 @@
 
 
     </section>
+
+    
+
+
+
 </body>
 
 

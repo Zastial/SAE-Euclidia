@@ -13,6 +13,8 @@
     <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     
     <title>Connexion</title>
 </head>
@@ -27,11 +29,8 @@
     </a>
 
         
-            
     <?php echo form_open('user/login'); ?>
         
-    
-    
         <div class="form-container">
 
             <h1 class="h1Typo">Connexion</h1>
@@ -61,19 +60,18 @@
                             <?php echo form_error('password'); ?>
                         </div>
                     </div>
-
                 </div>
-                
 
+                <div class="g-recaptcha" data-sitekey="6Lcn6GMjAAAAAJwRI1TOH5YVNmHZnazq_YGUgsOX"></div>
+                <?php echo form_error('g-recaptcha'); ?>
+
+                
             </div>
             
-                    <button class="btn btn-orange btn-main" type="submit"> Se connecter</button>
-        
-                    <p>Vous n'êtes pas inscrit ? <a href=<?= site_url("user/register"); ?>> S'inscrire</a></p>
-                    
+        <button class="btn btn-orange btn-main" type="submit"> Se connecter</button>
 
-
-            
+        <p>Vous n'êtes pas inscrit ? <a href=<?= site_url("user/register"); ?>> S'inscrire</a></p>
+      
         </div>
     </form>
 

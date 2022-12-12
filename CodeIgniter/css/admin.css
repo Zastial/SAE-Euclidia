@@ -1,0 +1,121 @@
+
+
+
+.page {
+    background-color: #F5F6F8;
+    padding: 30px 0px;
+}
+
+/* side bar */
+.side-bar {
+    position: fixed;
+    max-width: 256px;
+    width: 100%;
+    height: 80%;
+    overflow-x: hidden;
+    background-color: #fff;
+    box-shadow: 6px 0px 18px rgba(0, 0, 0, 0.06);
+}
+.side-bar h1 {
+    text-align: center;
+    padding: 15px 0px;
+    border-bottom: 1px solid grey;
+    margin-bottom: 20px;
+}
+.side-bar ul {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    gap: 24px;
+}
+
+.side-bar li {
+    width: 100%;
+}
+
+.side-bar li a {
+    color : var(--dark-blue);
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.side-bar li:hover a {
+    color: var(--orange);
+}
+
+
+/* MAIN CONTENT */
+.main {
+    min-height: 100vh;
+}
+
+.content {
+    display: none;
+}
+
+/* grid */
+
+.head-grid {
+    display: grid;
+    background-color: #fff;
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+    padding: 20px 100px;
+    margin-bottom: 1px;
+    border-radius: 3px 0px;
+    color: var(--dark-blue);
+}
+
+.item {
+    display: grid;
+    background-color: #fff;
+    grid-template-columns: repeat(5,1fr);
+    width: 100%;
+    padding: 15px 100px;
+    margin-bottom: 1px;
+    color: var(--input-text-clr);
+}
+
+
+
+.icon-container img {
+    width: 24px;
+    height: 24px;
+}
+
+/* main content */
+.main {
+    margin-left: 256px;
+    padding: 30px;
+}
+
+
+
+/* Button to scroll on top of the page */
+#myBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: var(--orange);
+    color: white;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+  
+#myBtn:hover {
+    background-color: #555;
+}
+
+.icon-up {
+    width: 24px;
+    height: 24px;
+    fill: #fff;
+    transform: rotate(180deg);
+    
+}

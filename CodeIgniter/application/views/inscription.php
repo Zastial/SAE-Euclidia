@@ -11,6 +11,7 @@
     <link rel="stylesheet" href=<?= base_url("css/style.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/inscription.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 
 
@@ -93,11 +94,13 @@
                         </div>
                         <p style="color: red;"><?php echo form_error('confirm-password'); ?></p>
                     </div>
-                
                 </div>
+
             
                 
             </div>
+            <div class="g-recaptcha" data-sitekey="6Lcn6GMjAAAAAJwRI1TOH5YVNmHZnazq_YGUgsOX"></div>
+                <?php echo form_error('g-recaptcha'); ?>
             <button class="btn btn-orange btn-main"type="submit">S'inscrire</button>
             <p>Vous êtes déjà membre ? <a href=<?= site_url("user/login"); ?>>Se connecter</a></p>
             

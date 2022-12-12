@@ -62,6 +62,10 @@ class ProductModel extends CI_Model {
 		return $response;
 	}
 
+	public function findQueryBuilder(string $name, array $categories, $tri) {
+
+	}
+
     public function addProduct(ProductEntity $product, array $categories):?ProductEntity{
         $data = array(
 			'titre'=>$product->getTitre(), 

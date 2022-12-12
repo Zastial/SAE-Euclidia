@@ -35,12 +35,15 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('confirm-password', 'Confirmation du mot de passe', 'required|matches[password]',
             array('required' => 'Vous devez confirmer le mot de passe', 'matches' => 'Les mots de passe ne correspondent pas'));
 
+            $this->form_validation->set_rules('g-recaptcha', 'captcha', 'callback_verifyCaptcha',
+            array('verifyCaptcha'=>'Le captcha est invalide.'));
+            
         if ($this->form_validation->run() == FALSE) {
             $this->load->view("inscription");
         } else {
             
             // form is valid
-            
+
             $nom = $this->input->post("nom");
             $prenom = $this->input->post("prenom");
             $email = $this->input->post("email");
@@ -77,17 +80,24 @@ class User extends CI_Controller {
             die();
         }
 
+        $this->load->library('recaptcha');
+        $recaptcha = $this->recaptcha->create_box();
+
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email',
             array('required' => 'Vous devez entrer un email', 'valid_email' => 'L\'email n\'est pas valide'));
 
         $this->form_validation->set_rules('password', 'Mot de passe', 'required',
             array('required' => 'Vous devez entrer un mot de passe'));
 
+        $this->form_validation->set_rules('g-recaptcha', 'captcha', 'callback_verifyCaptcha',
+            array('verifyCaptcha'=>'Le captcha est invalide.'));
+
         if ($this->form_validation->run() == FALSE) {
             $this->load->view("connexion");
         } else {
             
             // form is valid
+
             $email = $this->input->post("email");
             $password = $this->input->post("password");
 
@@ -335,6 +345,39 @@ class User extends CI_Controller {
         $u = $this->UserModel->findByEmail($this->session->user["email"]);
         $p = $this->ProductModel->getProductsByUserId($u->getId());
         $this->load->view("commandes", array("p" => $p));
+    }
+
+    public function verifyCaptcha(): bool {
+        if ($this->input->post('g-recaptcha-response') == null) {
+            return false;
+        }
+        $captcha_response = trim($this->input->post('g-recaptcha-response'));
+
+        if ($captcha_response == '') {
+            return false;
+        }
+        
+        $data = array(
+            'secret' => "6Lcn6GMjAAAAAKOH-wIbY2n_f4qtlKLbEPYz7d7d",
+            'response' => $this->input->post('g-recaptcha-response')
+        );
+
+        $verify = curl_init();
+        curl_setopt($verify, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
+        curl_setopt($verify, CURLOPT_POST, true);
+        curl_setopt($verify, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($verify, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($verify, CURLOPT_PROXY, 'http://cache.ha.univ-nantes.fr:3128/');
+        $response = curl_exec($verify);
+
+        $json = json_decode($response, TRUE);
+
+        if ($json == null) {
+            return false;
+        }
+ 
+        return $json['success'];
     }
 }
 ?>
