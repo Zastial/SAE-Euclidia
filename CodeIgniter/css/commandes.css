@@ -39,7 +39,8 @@ section {
     border-radius: 8px 0px 0px 8px;
 }
 
-.commandes-product .link-show, .commandes-product .link-download {
+.commandes-product .link-show, 
+.commandes-product .link-download {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -49,11 +50,13 @@ section {
     border-radius: 0px 8px 8px 0px;
     
 }
-.commandes-product .link-download img, .commandes-product .link-show img{
+.commandes-product .link-download img, 
+.commandes-product .link-show img{
     transition: ease-in 0.2s;
 } 
 
-.commandes-product .link-download:hover img, .commandes-product .link-show:hover .icon-show{
+.commandes-product .link-download:hover img,
+.commandes-product .link-show:hover .icon-show{
     filter: invert(77%) sepia(46%) saturate(1437%) hue-rotate(335deg) brightness(99%) contrast(105%); 
     /*var(--orange). Generated using https://codepen.io/sosuke/pen/Pjoqqp, with a 0.2 loss.*/
 }

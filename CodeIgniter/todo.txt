@@ -3,22 +3,24 @@ status facture
 
 Design Pattern
 
- -  decorateur 
- -  factory (utilisateur) 
- - 
+ -  decorateur   fait
+ -  factory (utilisateur) fait
+ - ???
+
+ + faire le mini rapport (voir mail Lanoix)
 
 
 
                         TODO A FAIRE
 
 
+-logo euclidia version white et black
+
+
 #
 ####
-BDD --->    - ajouter un attribut dans utilisateur pour dire si 
-            son compte est "activer" ou désactiver
-            - trigger pour cet attribut
-
-            - 
+BDD --->    
+            - procédures
 
 ####
 #
@@ -33,7 +35,19 @@ Connexion :
         -
 
 ShoppingCart :
-        - images des produits ne sont pas les bonnes
+        - icone ShoppingCart un peu trop haute par rapport à l'icone de profil
+
+Mes commandes :
+        - faire la liste des produits comme celle du ShoppingCart en remplaçant le bouton retirer du panier par télécharger
+
+Factures :
+        - retirer le numéro de facture dans la vue account
+
+
+Contacter :
+        - aligner les textbox et agrandir textarea
+        - centrer bouton envoyer
+        - cooldown ??
 
 
 Passer une Commande :
@@ -41,20 +55,28 @@ Passer une Commande :
         "vérifier le code"
         - Icones
         - Titre
+        - numéro de rue, int ?? et si on veut rajouter par exemple "3 bis" ? champ supplémentaire ou numéro de rue devient un string ?
+        
 
+Footer :
+        -un peu trop grand
 
+Recaptcha :
+        - passer de V2 à V3
 
 Modèles 3D:
 
-        - trier les produits (avec les filtres bdd)
-        
+        - si nom d'un produit est trop long afficher trois petit points
+
+
         - images (ajout par l'admin/resp produit, modif par l'admin, affichage dans la page display)
                 (pour l'admin/resp produit, il peut ajouter des images, changer leur ordre, supprimer une image)
 
         ((((on peut get les images dans url ex :http://172.26.82.48/resource/picture/1))))
 
-        -débordement des liens quand certaines catégories sont cochées
+        - débordement des liens quand certaines catégories sont cochées
         - si aucun modèle est trouvé on affiche un msg 
+        - implémentation des pages pour éviter d'avoir 50 000 produits sur la page modèle 3d
 
 
 Admin : (action : inserer, modifier, supprimer)
@@ -70,21 +92,25 @@ Admin : (action : inserer, modifier, supprimer)
 
     produits: 
         - afficher les produits achettés par utilisateurs
+        - Trouver comment upload des images
         
 
+        vue : 
+                - bouton "revenir tout en haut" devrait s'arrêter au dessus du footer quand on scroll tout en bas
+                - liste des tables en sticky
 
 
-REQUETES:
+Account :
+        - problème au niveau des liens de mofication de compte
 
-    selects 
+ 
 
     
 
 
 
 Error 404 :
-    - fixer le header et footer de la page (view/errors/html/error_404.php)
-     et redirection à la page d'accueil dans 5 secondes... ou cliquez ici
+
 
 
 Account :
@@ -93,9 +119,14 @@ Account :
 
 
 
+Alertes pour admin/resp dans "gestion"
+
+        - quand on supprime/add/midif une categorie/produit/user ectt 
+        il faut une notification dans la vue gestion 
 
 
 
+Lorsqu'on rajoute un produit (admin) le controller ne vérifie pas que le produit retourné par le modèle ne soit pas nul
 
 #######################################################
 
@@ -104,3 +135,8 @@ Account :
         - pages mes commandes 
         - compte
                 - facture, profil ...
+
+        - amdmin et res prod ajouter modif supp et les images des produits 
+        (pouvoir faire en sorte de changer l'ordre)
+
+

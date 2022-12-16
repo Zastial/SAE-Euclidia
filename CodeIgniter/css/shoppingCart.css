@@ -1,10 +1,6 @@
 
 
 
-section {
-    min-height: 90vh;
-}
-
 .cart-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -75,7 +71,6 @@ section {
 .shopping-cart-product .icon-delete {
     width: 25px;
     height: 25px;
-
 }
 
 .shopping-cart-product .link-delete {

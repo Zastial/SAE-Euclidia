@@ -1,0 +1,50 @@
+#sortable {
+    width: 50%;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    gap: 25px;   
+}
+
+#sortable li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 55%;
+    border-radius: 8px;
+    box-shadow: 1px 18px 40px -8px rgba(0, 0, 0, 0.25);
+}
+
+#sortable li .infos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 5 0px;
+    height: 100%;
+}
+
+#sortable li img {
+    height: 100%;
+    width: 20vw;
+    border-radius: 8px 0px 0px 8px;
+}
+
+#sortable li .link-delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    flex: 1 0px;
+    border-radius: 0px 8px 8px 0px;
+}
+
+#sortable li .link-delete img {
+    width: 25px;
+    height: 25px;
+}
+
+#sortable li .link-delete:hover {
+    transform: 500ms ease-in-out;
+    background-color: var(--grey);
+}

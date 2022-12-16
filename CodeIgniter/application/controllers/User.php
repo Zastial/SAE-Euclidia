@@ -11,6 +11,9 @@ class User extends CI_Controller {
         $this->load->model("ProductModel");
         $this->load->library('form_validation');
         $this->load->helper('form');
+        //$this->output->enable_profiler(TRUE);
+
+    
     }
 
     public function register() {
@@ -26,8 +29,8 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('nom', 'Nom', 'required|callback_isValidName|max_length[50]',
             array('required' => 'Vous devez entrer un nom', 'isValidName' => 'Le nom ne doit contenir que des lettres', 'max_length' => 'Le nom ne doit pas dépasser 50 caractères'));
 
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[utilisateur.email]',
-            array('required' => 'Vous devez entrer un email', 'valid_email' => 'L\'email n\'est pas valide', 'is_unique' => 'L\'email est déjà utilisé'));
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[utilisateur.email]|max_length[254]',
+            array('required' => 'Vous devez entrer un email', 'valid_email' => 'L\'email n\'est pas valide', 'is_unique' => 'L\'email est déjà utilisé', 'max_length'=>'l\'adresse email ne peut pas dépasser 254 caractères.'));
 
         $this->form_validation->set_rules('password', 'Mot de passe', 'required|callback_isValidPassword|min_length[8]|max_length[50]',
             array('required' => 'Vous devez entrer un mot de passe', 'isValidPassword' => 'Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial', 'min_length' => 'Le mot de passe doit contenir au moins 8 caractères', 'max_length' => 'Le mot de passe ne doit pas dépasser 50 caractères'));
@@ -50,13 +53,12 @@ class User extends CI_Controller {
             $password = $this->input->post("password");
             $status = "Utilisateur";
 
-            $user = new UserEntity();
+            $user = UserEntity::getUser($status);
 
             $user->setNom(htmlspecialchars($nom));
             $user->setPrenom(htmlspecialchars($prenom));
             $user->setEmail(htmlspecialchars($email));
             $user->setEncryptedPassword(htmlspecialchars($password));
-            $user->setStatus($status);
 
             // add user to database, returns null if it didn't work
             $user = $this->UserModel->addUser($user);
@@ -79,6 +81,8 @@ class User extends CI_Controller {
             redirect('Home');
             die();
         }
+        
+        
 
         $this->load->library('recaptcha');
         $recaptcha = $this->recaptcha->create_box();
@@ -107,6 +111,11 @@ class User extends CI_Controller {
                 $this->session->set_flashdata('error', 'Identifiant ou mot de passe incorrect.');
                 redirect('User/login');
             } 
+
+            if ($user->getEtat() != "active") {
+                $this->session->set_flashdata('error', 'Votre compte est désactivé.');
+                redirect('User/login');
+            }
 
             $this->session->set_userdata("user",array(
                 "nom"=>$user->getNom(),
@@ -379,5 +388,7 @@ class User extends CI_Controller {
  
         return $json['success'];
     }
+
+
 }
 ?>

@@ -20,6 +20,7 @@ $connected = (isset($this->session->user)) ? true : false;
 </head>
 <body>
     <?php require_once ('header.php'); ?>
+    <?php require_once('error.php'); ?>
     
     <section>
 

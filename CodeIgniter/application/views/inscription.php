@@ -13,7 +13,18 @@
     <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-
+    <script src="<?=base_url("js/theme.js")?>"></script>
+    <script>
+        if (!localStorage.theme){
+            localStorage.theme = "colors";
+        }
+        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+        if (localStorage.theme=="colors_dark"){
+            toggleSwitch.checked = true;
+        }
+        loadTheme('<?=base_url('css/')?>');
+        toggleSwitch.addEventListener('change', changeTheme, false);
+    </script>
 
 
     <title>Inscription</title>

@@ -36,7 +36,7 @@ $disabled = empty($this->session->cart);
                                 <input class="input" type="text" name="prenom" value = "<?= $this->session->user["prenom"] ?> " required> <br>         
                                 
                                 <label for="rue">Numéro de rue</label><br>
-                                <input class="input" type="number" min="0" name="rue" required> <br>
+                                <input class="input" type="number" min="0" oninput="this.value = Math.abs(this.value)" name="rue" required> <br>
 
                                 <label for="adresse">Adresse</label><br>
                                 <input class="input" type="text" name="adresse" required> <br>
@@ -45,7 +45,7 @@ $disabled = empty($this->session->cart);
                                 <input class="input" type="text" name="ville" required> <br>
 
                                 <label for="code_postal">Code postal</label><br>
-                                <input class="input" type="number" name="code_postal" required> <br>
+                                <input class="input" type="number" min="0" oninput="this.value = Math.abs(this.value)" name="code_postal" required> <br>
                                 
                                 <label for="pays">Pays</label><br>
                                 <input class="input" type="text" name="pays" required> <br>
@@ -100,13 +100,6 @@ $disabled = empty($this->session->cart);
                             </div>
                         </div>
     
-                        <div class="promotion tab">
-                            <h4>3 Code promotionnel</h4>
-                            <div class="entries">
-                                <input class="code_promo" type="text" name="code_promo">
-                                <button class='btn btn-main btn-orange'> Valider code </button>
-                            </div>
-                        </div>
                     </form>
                 </div>
             </div>

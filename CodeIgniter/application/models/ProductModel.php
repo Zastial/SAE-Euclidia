@@ -3,13 +3,18 @@ require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."ProductEn
 require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."AffectationModel.php";
 class ProductModel extends CI_Model {
 
+	/**
+	 * La fonction findAll permet de récupérer tout les produits contenus dans la base de données
+	 */
     public function findAll() {
 		$this->db->select('*');
 		$q = $this->db->get('produit');
 		$response = $q-> custom_result_object("ProductEntity");
 		return $response;
     }
-
+	/**
+	 * La fonction findAllAvailable permet de récupérer tout les produits étants disponibles contenus dans la base de données
+	 */
 	public function findAllAvailable() {
 		$this->db->select('*');
 			$q = $this->db->get_where('produit', array('disponible'=>true));
@@ -18,7 +23,12 @@ class ProductModel extends CI_Model {
 	}
 
 	/**
+	 * La Fonction findById permet de récupérer un produit avec son id
+	 * 
 	 * @param int $id
+	 * 
+	 * @return ?ProductEntity
+	 * 
 	 */
     public function findById(int $id) : ?ProductEntity{
         $this->db->select('*');
@@ -28,34 +38,52 @@ class ProductModel extends CI_Model {
 		return $response;
     }
 
+	/**
+	 * La fonction findByIdAvailable permet de récupérer un produit disponible avec son id
+	 * 
+	 * @param int $id
+	 * 
+	 * @return ?ProductEntity
+	 * 
+	 */
 	public function findByIdAvailable(int $id) : ?ProductEntity {
 		$this->db->select('*');
 		$params = array('id_produit'=>$id, 'disponible'=>true);
-		$q = $q = $this->db->get_where('produit', $params);
+		$q = $this->db->get_where('produit', $params);
 		$response = $q->row(0,"ProductEntity");
 		return $response;
 	}
 
+
+	/**
+	 * La fonction findQueryBuilder permet de trouver les Produits en fonction d'un filtre établi utilisé dans la page Products
+	 * 
+	 * @param FiltreInterface | $filtre
+	 */
 	
-	public function findQueryBuilder(?string $name, ?array $categories, ?string $tri, ?float $minprice, ?float $maxprice, ?bool $available) {
+	public function findQueryBuilder(FiltreInterface $filtre) {
+		// ?string $name, ?array $categories, ?string $tri, ?float $minprice, ?float $maxprice, ?bool $available
+		$filtres = $filtre->getFiltres();
 		try {
 			$this->db->select('*');
 			$this->db->from('produit');
 			
-			if (!empty($name)) {
-				$mots = explode(' ',$name);
+			if (isset($filtres['name'])) {
+				$this->db->group_start();
+				$mots = explode(' ',$filtres['name']);
 				foreach($mots as $mot){
 					$this->db->or_like('produit.titre', $mot);
 				}
+				$this->db->group_end();
 			}	
 
-			if (!empty($categories)) {
+			if (isset($filtres['categories'])) {
 				$this->db->join('affectation', 'affectation.id_produit = produit.id_produit');
-				$this->db->where_in('affectation.id_categorie', $categories);
+				$this->db->where_in('affectation.id_categorie', $filtres['categories']);
 			}
 
-			if (!empty($tri)) {
-				switch ($tri) {
+			if (isset($filtres['tri'])) {
+				switch ($filtres['tri']) {
 					case "1":
 						$this->db->order_by('produit.prix', 'asc');
 					case "2":
@@ -63,12 +91,23 @@ class ProductModel extends CI_Model {
 				}
 			}
 
-			$min = empty($minprice) ? 0 : $minprice;
-			$max = empty($maxprice) ? 9999 : $maxprice;
-			$dispo = empty($available) ? true : $available;
+			$min = 0;
+			$max = 9999;
+
+			if (isset($filtres['minPrice'])) {
+				$min = $filtres['minPrice'];
+			}
+			if (isset($filtres['maxPrice'])) {
+				$max = $filtres['maxPrice'];
+			}
+			$available = true;
+			if (isset($filtres['available'])) {
+				$available = $filtres['available'];
+			}
+		
 			$this->db->where('prix >=', $min);
 			$this->db->where('prix <=', $max);
-			$this->db->where('disponible =', $dispo);
+			$this->db->where('disponible =', $available);
 			
 			$query = $this->db->get();
 			$response = $query->custom_result_object("ProductEntity");
@@ -78,6 +117,14 @@ class ProductModel extends CI_Model {
 		}
 	}
 
+	/**
+	 * La fonction addProduct permet de rajouter un produit dans la base de donnée
+	 * 
+	 * @param ProductEntity | $product
+	 * @param array | $categories
+	 * 
+	 * @return ?ProductEntity
+	 */
     public function addProduct(ProductEntity $product, array $categories):?ProductEntity{
         $data = array(
 			'titre'=>$product->getTitre(), 
@@ -104,6 +151,13 @@ class ProductModel extends CI_Model {
 		return $response;
     }
 
+	/**
+	 * La fonction updateProduct permet de changer les valeurs d'un produit
+	 * 
+	 * @param ProductEntity | $product
+	 * @param array | $categories
+	 * 
+	 */
 	public function updateProduct(ProductEntity $product, array $categories){
 		try {
 			$db_debug = $this->db->db_debug;
@@ -124,24 +178,34 @@ class ProductModel extends CI_Model {
 			$this->db->db_debug = FALSE;
 			$this->db->delete('affectation', array('id_produit' => $product->getID())); 
 
+			$this->load->model("AffectationModel"); 
 			$this->AffectationModel->addAffectations($product->getId(), $categories);
 
 		} catch (Exception $e) {return null;} 
 	}
 
+	/**
+	 * La fonction removeProduct permet de supprimer un produit
+	 * 
+	 * @param int | $productID
+	 */
 	public function removeProduct(int $productID) {
 		try {
-			$db_debug = $this->db->db_debug;
-			$this->db->db_debug = FALSE;
-			$this->db->delete('produit', array('id_produit' => $productID));
-
 			$db_debug = $this->db->db_debug;
 			$this->db->db_debug = FALSE;
 			$this->db->delete('achat', array('id_produit' => $productID));
 
 			$db_debug = $this->db->db_debug;
 			$this->db->db_debug = FALSE;
+			$this->db->delete('affectation', array('id_produit' => $productID));
+
+			$db_debug = $this->db->db_debug;
+			$this->db->db_debug = FALSE;
 			$this->db->delete('favori', array('id_produit' => $productID));
+
+			$db_debug = $this->db->db_debug;
+			$this->db->db_debug = FALSE;
+			$this->db->delete('produit', array('id_produit' => $productID));
 
 		} catch (Exception $e) {return null;} 
 	}

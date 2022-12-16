@@ -1,39 +1,27 @@
 <?php
 require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."FactureEntity.php";
-require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."FactureReduction.php";
 class FactureModel extends CI_Model {
    
-    public function findByUser($id) {
+    /**
+     * La fonction findByUser permet de trouver les factures liées a un utilisateur via son ID
+     * 
+     * @param int |$id
+     */
+    public function findByUser(int $id) {
         $this->db->select('*');
 		$q = $this->db->get_where('facture', array("id_utilisateur"=>$id));
-
-        $factures = array();
-        foreach ($q->result() as $row) {
-            $reduction = $row->reduction;
-            
-            $f = new FactureEntity();
-            $f->setId($row->id_facture);
-            $f->setDate($row->date_facture);
-            $f->setTotal($row->total);
-            $f->setUserId($row->id_utilisateur);
-            $f->setAdresse($row->adresse);
-            $f->setNumeroRue($row->numero_rue);
-            $f->setPays($row->pays);
-            $f->setVille($row->ville);
-            $f->setCodePostal($row->code_postal);
-            $f->setPaiement($row->paiement);
-
-            if ($reduction != 0) {
-                $f = new FactureReduction($f, $reduction);
-            }
-            $factures[] = $f;
-        }
-        return $factures;
 		$response = $q->custom_result_object("FactureEntity");
 		return $response;
     }
 
-    public function findById($id){
+    /**
+     * La fonction findById permet de trouver une facture via son ID
+     * 
+     * @param int |$id
+     * 
+     * @return ?FactureEntity
+     */
+    public function findById(int $id): ?FactureEntity{
         $this->db->select('*');
         $q = $this->db->get_where('facture', array('id_facture'=>$id));
         $res = $q->result();
@@ -51,12 +39,16 @@ class FactureModel extends CI_Model {
         $f->setCodePostal($row->code_postal);
         $f->setPaiement($row->paiement);
 
-        if ($reduction != 0) {
-            $f = new FactureReduction($f, $reduction);
-        }
 		return $f;
     }
 
+    /**
+     * La fonction addFacture permet d'ajouter une facture lorsque un achat est effectué
+     * 
+     * @param FactureEntity | $f
+     * 
+     * @return ?FactureEntity
+     */
     public function addFacture(FactureEntity $f): ?FactureEntity{
         $data = array(
             "date_facture" => $f->getDate(),
@@ -67,13 +59,8 @@ class FactureModel extends CI_Model {
             "pays" => $f->getPays(),
             "ville" => $f->getVille(),
             "code_postal" => $f->getCodePostal(),
-            "paiement" => $f->getPaiement(),
-            "reduction" => 0
+            "paiement" => $f->getPaiement()
         );
-
-        if (is_a($f, "FactureReduction")) {
-            $data["reduction"] = $f->getReduction();
-        }
 
         try {
 			$db_debug = $this->db->db_debug;

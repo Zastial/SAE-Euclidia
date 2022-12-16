@@ -11,9 +11,9 @@
     <link rel="stylesheet" href=<?= base_url("css/style.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/product.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
+    <link rel="stylesheet" href=<?= base_url("css/image-zoom.css") ?>>
 
-     <script type="text/javascript" src=<?=base_url("js/slider.js")?>></script>
-
+    <script type="text/javascript" src=<?=base_url("js/slider.js")?>></script>
     <title>Modèle 3D</title>
 
 </head>
@@ -26,7 +26,12 @@
 
 
         <div class="return">
-            <?php $url = htmlspecialchars($_SERVER['HTTP_REFERER']); ?>
+            <?php
+                $url = site_url("product/find");
+                if (isset($_SERVER['HTTP_REFERER'])) {
+                    $url = htmlspecialchars($_SERVER['HTTP_REFERER']); 
+                }
+            ?>
             <a class="link-nav" href=<?= $url ?>> <img src="" alt=""> < Retour à la liste des produits</a>
         </div>
     
@@ -34,12 +39,12 @@
         <div class="product">
 
             <div class="slider-image">
-            <?php for($i=0;$i<$c;$i++){?>
-                <img class="other-image" id="<?=$i?>" src="<?= base_url('resource/picture/'.$produit->getId()."/".$i) ?>" alt="" onclick="changeImage(id)">
-            <?php } ?>
+                <?php for($i=0;$i<$c;$i++){?>
+                    <img class="other-image" id="<?=$i?>" src="<?= base_url('resource/picture/'.$produit->getId()."/".$i) ?>" alt="" onclick="changeImage(id)">
+                <?php } ?>
             </div>
                 
-            <img class="main-image" id="main-image"src="<?= base_url('resource/picture/'.$produit->getId()) ?>" alt="">
+            <img class="main-image" id="main-image"src="<?= base_url('resource/picture/'.$produit->getId()) ?>" alt="" data-zoom-image>
         
             
     
@@ -76,6 +81,7 @@
 
 
     <?php require_once('footer.php'); ?>
+    <script type="text/javascript" src="<?=base_url("js/image-zoom.js")?>"></script>
 
 </html>
 

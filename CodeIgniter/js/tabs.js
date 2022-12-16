@@ -1,17 +1,8 @@
 function openTab(evt, tabName) {
-    var i, tabcontent, tablinks;
-  
-    // hide all content in tab-content
-    tabcontent = document.getElementsByClassName("content");
-    for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tab-link");
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(tabName).style.display = "block";
-    evt.currentTarget.className += " active";
+  $('.content').css('display', 'none');
+  $('#'+tabName).css('display', 'block');
+  $('.table').removeClass('active');
+  $(evt.currentTarget).addClass('active');
 } 
 
 

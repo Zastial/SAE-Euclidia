@@ -20,8 +20,10 @@
 }
 
 .card-container .card-description {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(2,50%);
+    max-width: 250px;
+    background-color: red;
     gap: 50px;
     padding-top: 10px;
 }
@@ -39,4 +41,13 @@
     grid-auto-rows: min-content;
     height: min-content;
     gap: 20px;
+}
+
+
+
+@media screen and (max-width : 1200px) {
+    .grid-products {
+        grid-template-columns: repeat(2,1fr);
+
+    }
 }

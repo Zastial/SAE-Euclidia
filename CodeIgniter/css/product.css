@@ -1,7 +1,8 @@
 
 section {
-    min-height: 90vh;
     padding: 20px 100px ;
+    background-color: var(--white-100);
+    color: var(--black-100);
 }
 
 

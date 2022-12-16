@@ -9,7 +9,12 @@ class CategorieModel extends CI_Model {
     }
 
 	/**
-	 * @param int $id
+	 * La fonction findById trouve la Catégorie en fonction de son id
+	 * 
+	 * @param int | $id
+	 * 
+	 * @return ?CategorieEntity
+	 * 
 	 */
     public function findById(int $id) : ?CategorieEntity{
         $this->db->select('*');
@@ -20,6 +25,14 @@ class CategorieModel extends CI_Model {
     }
 
 
+	/**
+	 * La Fonction addCategorie ajoute une categorie dans la base de donnée
+	 * 
+	 * @param CategorieEntity | $categorie
+	 * 
+	 * @return ?CategorieEntity
+	 * 
+	 */
 	public function addCategorie(CategorieEntity $categorie):?CategorieEntity{
         $data = array(
 			'libelle'=>$categorie->getLibelle());
@@ -40,6 +53,12 @@ class CategorieModel extends CI_Model {
 		return $response;
     }
 
+	/**
+	 * La fonction updateCategorie permet de changer le nom de la catégorie à partir de son Id
+	 * 
+	 * @param CategorieEntity | $categorie
+	 * 
+	 */
 	public function updateCategorie(CategorieEntity $categorie){
 		try {
 			$db_debug = $this->db->db_debug;
@@ -56,6 +75,11 @@ class CategorieModel extends CI_Model {
 		} catch (Exception $e) {return null;} 
 	}
 
+	/**
+	 * La fonction removeCategorie permet de supprimer une catégorie en fonction de son ID
+	 * 
+	 * @param int | $categorieID
+	 */
 	public function removeCategorie(int $categorieID) {
 		try {
 			$db_debug = $this->db->db_debug;

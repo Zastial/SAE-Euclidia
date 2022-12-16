@@ -8,7 +8,12 @@ class ProductModel_test extends UnitTestCase {
 
 		$CI =& get_instance();
 		$CI->load->library('Seeder');
+		$CI->seeder->call('UserSeeder');
 		$CI->seeder->call('ProductSeeder');
+		$CI->seeder->call('CategorieSeeder');
+		$CI->seeder->call('AffectationSeeder');
+		$CI->seeder->call('FactureSeeder');
+		$CI->seeder->call('AchatSeeder');
 	}
 
     public function setUp() : void
@@ -162,7 +167,8 @@ class ProductModel_test extends UnitTestCase {
 				'description' => 'Default Blender cube - can not get better!',
 				'disponible' => 1];
 
-		$list = $this->obj->findQueryBuilder($name="Default",null,null,null,null,null);
+		$filtre = new FiltreName(new Filtre,"Cube");
+		$list = $this->obj->findQueryBuilder($filtre);
 
 		$this->assertTrue(is_a($list[0], "ProductEntity"));
 		$this->assertEquals($list[0]->getTitre(), $expected['titre']);
@@ -195,5 +201,42 @@ class ProductModel_test extends UnitTestCase {
 		$this->assertEquals($list->getDisponible(), $expected['disponible']);
 	}
 
+	public function test_updateProduct() {
+		$expected = [
+			'titre' => 'Louis Painter',
+			'prix' => 10.1,
+			'description' => 'Le major de Promo 3 fois de suite',
+			'disponible' => 1
+		];
 
+
+		$produitChange = $this->obj->findById(4);
+
+		$produitChange -> setDescription('Le major de Promo 3 fois de suite');
+		$this->obj->updateProduct($produitChange, array());
+
+
+		$this->assertTrue(is_a($produitChange, "ProductEntity"));
+		$this->assertEquals($produitChange->getTitre(), $expected['titre']);
+		$this->assertEquals($produitChange->getPrix(), $expected['prix']);
+		$this->assertEquals($produitChange->getDescription(), $expected['description']);
+		$this->assertEquals($produitChange->getDisponible(), $expected['disponible']);
+	}
+
+	public function test_removeProduct() {
+		$this->obj->removeProduct(3);
+		$this->assertNull($this->obj->findByIdAvailable(3));
+	}
+
+	#Ici une erreur est renvoyée "Unknown table 'website_test.facture'" 
+	// public function test_findByFacture() {
+	// 	$facture = $this->obj->findByFacture(2);
+
+	// 	$this->assertEquals($facture->getUserId(), 2);
+	// }
+
+	#Procedure pas ajoutée dans la BDD test
+	// public function test_getProductsByUserId(){
+	// 	$this->assertEquals($this->obj->getProductsByUserId(2), 2);
+	// }
 }

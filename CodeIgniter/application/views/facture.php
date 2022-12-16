@@ -67,16 +67,6 @@ foreach ($a as $prod){
     </tr>
     ';
 }
-if (is_a($f, "FactureReduction") && $f->getReduction() != 0){
-    $sub*=(100-$f->getReduction())/100;
-    $sub = round($sub, 2);
-    $html .= '
-    <tr> <td style="border:1px solid #cccccc;">Réduction sur code</td>
-        <td style = "text-align:right; border:1px solid #cccccc;">'.-$f->getReduction().'</td>
-        <td style = "text-align:right; border:1px solid #cccccc;">'.$sub.'</td>
-    </tr>
-    ';
-}
 $html .= '
 
 <tr style = "font-weight: bold;">

@@ -8,6 +8,7 @@
     margin: 0px;
     padding: 0px;
     scroll-behavior: smooth;
+    transition: background-color 0.4s;
 }
 
 
@@ -31,7 +32,8 @@ textarea {
 
 
 a,
-button {
+button,
+.btn {
     cursor: pointer;
 }
 button {
@@ -42,7 +44,7 @@ body {
     --black-200: #2F2F2F;
     --orange: #FFAE27; /*C'est du jaune bon bref*/
     --blue--link: #0000EE;
-    --red: hsl(0,78,49,0.94);
+    --red: #de1b1bf0;
     --blue-100:#3271AB;
     --blue-200: #79BCF7;
     --dark-blue: #334D6E;
@@ -54,6 +56,7 @@ body {
     --white-100: #FFFDFA;
     --green:hsl(130,94,41,0.85) ;
     --filter-orange-img: invert(67%) sepia(79%) saturate(566%) hue-rotate(338deg) brightness(104%) contrast(101%);
+    --filter-button-img: invert(0%) sepia(20%) saturate(8%) hue-rotate(339deg) brightness(91%) contrast(87%);
 
     font-family: 'Poppins', sans-serif;
 
@@ -139,4 +142,9 @@ input[type="checkbox"]:focus {
 
 .form-error {
     color: red;
+}
+
+
+section {
+    min-height: calc(100vh - 240px - 80px);
 }

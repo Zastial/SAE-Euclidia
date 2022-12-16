@@ -8,7 +8,8 @@ section {
 }
 
 .contact {
-    background-color: white;
+    background-color: var(--white-100); /*white*/
+    color: var(--black-100);
     border-radius: 5px;
     max-width: fit-content;
     margin: auto;

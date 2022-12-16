@@ -1,12 +1,14 @@
 <?php
-class UserEntity {
+require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."UserAdmin.php";
+require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."UserResponsable.php";
+require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."UserUtilisateur.php";
+abstract class UserEntity {
 
     private int $id_utilisateur;
     private string $nom;
     private string $prenom;
     private string $password;
     private string $email;
-    private string $status;
     private string $etat;
     private string $numrue;
     private string $adresse;
@@ -51,9 +53,7 @@ class UserEntity {
     /**
      * @return string
      */
-    public function getStatus(): string {
-        return $this->status;
-    }
+    abstract public function getStatus(): string;
 
     /**
      * @return string
@@ -127,6 +127,13 @@ class UserEntity {
     }
 
     /**
+     * @param string $password
+     */
+    public function setPassword(string $password): void {
+        $this->password = $password;
+    }
+
+    /**
      * @param string $email
      */
     public function setEmail(string $email): void {
@@ -139,14 +146,6 @@ class UserEntity {
     public function setEtat(string $etat): void {
         $this->etat = $etat;
     }
-
-    /**
-     * @param string $status
-     */
-    public function setStatus(string $status): void {
-        $this->status = $status;
-    }
-
 
     /**
      * @param string $numrue
@@ -192,5 +191,17 @@ class UserEntity {
         return password_verify($password, $this->password);
     }
 
+
+    public static function getUser(string $status) {
+        $u = null;
+        if ($status == "Administrateur") {
+            $u = new UserAdmin;
+        } else if ($status == "Responsable") {
+            $u = new UserResponsable;
+        } else if ($status == "Utilisateur") {
+            $u = new UserUtilisateur;
+        } 
+        return $u;
+    }
 }
 ?>

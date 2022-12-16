@@ -80,6 +80,10 @@ class ShoppingCart extends CI_Controller{
             redirect('shoppingCart');
         }
 
+        foreach ($this->session->cart as $id) {
+            $produits[] = $this->ProductModel->findByIdAvailable($id);
+        }
+
         $this->load->view("orderCommand", array('produits'=>$produits));
     }
 
@@ -96,13 +100,9 @@ class ShoppingCart extends CI_Controller{
         $f->setCodePostal($this->input->post("code_postal"));
         $f->setPaiement($this->input->post("choose"));
 
-        // if reduction then add decorator
-        // $f = new FactureReduction($f, $reduction);
-
         $f = $this->FactureModel->addFacture($f);
-
         if (is_null($f)){
-            $this->session->set_flashdata('error', 'L\'enregistrement de votre facture a échoué!');
+            $this->session->set_flashdata('error', 'L\\\'enregistrement de votre facture a échoué!');
             redirect('shoppingCart');
         }
 
@@ -153,7 +153,7 @@ class ShoppingCart extends CI_Controller{
         
         if (count($updatedCart) != count($this->session->cart)) {
             $this->session->set_userdata("cart",$updatedCart);
-            $this->session->set_flashdata('error', 'Un produit de votre panier n\'est plus disponible !');
+            $this->session->set_flashdata('error', 'Un produit de votre panier n\\\'est plus disponible !');
             redirect('shoppingCart');
         }
     }

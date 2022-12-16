@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="6" assertions="72" errors="0" warnings="0" failures="0" skipped="0" time="0.022722">
-    <testsuite name="CodeIgniter Application Test Suite" tests="6" assertions="72" errors="0" warnings="0" failures="0" skipped="0" time="0.022722">
-      <testsuite name="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" tests="6" assertions="72" errors="0" warnings="0" failures="0" skipped="0" time="0.022722">
-        <testcase name="test_findAll" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" line="21" assertions="16" time="0.003737"/>
-        <testcase name="test_findAllAvailable" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" line="57" assertions="16" time="0.003113"/>
-        <testcase name="test_findById" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" line="92" assertions="15" time="0.003253"/>
-        <testcase name="test_findIdAvailable" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" line="126" assertions="15" time="0.004154"/>
-        <testcase name="test_findQueryBuilder" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" line="158" assertions="5" time="0.003041"/>
-        <testcase name="test_addProduct" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" line="174" assertions="5" time="0.005424"/>
+  <testsuite name="" tests="19" assertions="174" errors="0" warnings="0" failures="0" skipped="0" time="0.125606">
+    <testsuite name="CodeIgniter Application Test Suite" tests="19" assertions="174" errors="0" warnings="0" failures="0" skipped="0" time="0.125606">
+      <testsuite name="AchatModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/AchatModel_test.php" tests="4" assertions="29" errors="0" warnings="0" failures="0" skipped="0" time="0.021960">
+        <testcase name="test_findAll" class="AchatModel_test" classname="AchatModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/AchatModel_test.php" line="26" assertions="13" time="0.009177"/>
+        <testcase name="test_findById" class="AchatModel_test" classname="AchatModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/AchatModel_test.php" line="58" assertions="12" time="0.004608"/>
+        <testcase name="test_boughtFromUser" class="AchatModel_test" classname="AchatModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/AchatModel_test.php" line="87" assertions="3" time="0.003778"/>
+        <testcase name="test_addAchat" class="AchatModel_test" classname="AchatModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/AchatModel_test.php" line="101" assertions="1" time="0.004397"/>
+      </testsuite>
+      <testsuite name="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" tests="8" assertions="78" errors="0" warnings="0" failures="0" skipped="0" time="0.042928">
+        <testcase name="test_findAll" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" line="26" assertions="16" time="0.004937"/>
+        <testcase name="test_findAllAvailable" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" line="62" assertions="16" time="0.002714"/>
+        <testcase name="test_findById" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" line="97" assertions="15" time="0.002977"/>
+        <testcase name="test_findIdAvailable" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" line="131" assertions="15" time="0.003022"/>
+        <testcase name="test_findQueryBuilder" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" line="163" assertions="5" time="0.005614"/>
+        <testcase name="test_addProduct" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" line="180" assertions="5" time="0.006467"/>
+        <testcase name="test_updateProduct" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" line="204" assertions="5" time="0.005688"/>
+        <testcase name="test_removeProduct" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/ProductModel_test.php" line="226" assertions="1" time="0.011509"/>
+      </testsuite>
+      <testsuite name="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/UserModel_test.php" tests="7" assertions="67" errors="0" warnings="0" failures="0" skipped="0" time="0.060719">
+        <testcase name="test_findAll" class="UserModel_test" classname="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/UserModel_test.php" line="25" assertions="16" time="0.005617"/>
+        <testcase name="test_findById" class="UserModel_test" classname="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/UserModel_test.php" line="64" assertions="18" time="0.003035"/>
+        <testcase name="test_findByEmail" class="UserModel_test" classname="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/UserModel_test.php" line="100" assertions="18" time="0.002999"/>
+        <testcase name="test_addUser" class="UserModel_test" classname="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/UserModel_test.php" line="136" assertions="6" time="0.008363"/>
+        <testcase name="test_updateUser" class="UserModel_test" classname="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/UserModel_test.php" line="160" assertions="6" time="0.007431"/>
+        <testcase name="test_activeUser" class="UserModel_test" classname="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/UserModel_test.php" line="182" assertions="1" time="0.030222"/>
+        <testcase name="test_isActive" class="UserModel_test" classname="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/models/UserModel_test.php" line="193" assertions="2" time="0.003052"/>
       </testsuite>
     </testsuite>
   </testsuite>

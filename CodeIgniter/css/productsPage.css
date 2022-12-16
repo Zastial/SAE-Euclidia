@@ -1,6 +1,10 @@
-
+section{
+    background-color: var(--white-100);
+    color: var(--black-100);
+}
 
 .main-content {
+    
     display:flex;
     justify-content: space-around;
     padding-top: 5em;
@@ -11,16 +15,24 @@
     display:flex;
     flex-direction: column;
     gap: 30px;
-    width: 20%;
+    max-width: 250px;
 
+}
+.form-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
 }
 
 
 .categories {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 50px;
 }
+
+
+
 .categories input[type=checkbox] {
     display: none;
 }

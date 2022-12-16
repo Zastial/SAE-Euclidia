@@ -5,22 +5,79 @@ class UserModel extends CI_Model {
     public function findAll() {
 		$this->db->select('*');
 		$q = $this->db->get_where('utilisateur');
-		$response = $q-> custom_result_object("UserEntity");
-		return $response;
+
+		$users = array();
+		foreach ($q->result() as $row) {
+			$status = $row->status;
+			$u = UserEntity::getUser($status);
+			if ($u == null) {
+				continue;
+			}
+			$u->setId($row->id_utilisateur);
+			$u->setNom($row->nom);
+			$u->setPrenom($row->prenom);
+			$u->setEmail($row->email);
+			$u->setEtat($row->etat);
+			$u->setNumRue($row->numrue);
+			$u->setAdresse($row->adresse);
+			$u->setVille($row->ville);
+			$u->setPostalCode($row->postalcode);
+			$u->setPays($row->pays);
+
+			$users[] = $u;
+
+		}
+		return $users;
     }
 
 	public function findById(string $id): ?UserEntity {
 		$this->db->select('*');
 		$q = $this->db->get_where('utilisateur',array('id_utilisateur'=>$id));
-		$response = $q->row(0,"UserEntity");
-		return $response;
+		if (empty($q->result())) {
+			return null;
+		}
+		$row = $q->result()[0];
+
+		$u = UserEntity::getUser($row->status);
+		if ($u != null) {
+			$u->setId($row->id_utilisateur);
+			$u->setNom($row->nom);
+			$u->setPrenom($row->prenom);
+			$u->setEmail($row->email);
+			$u->setEtat($row->etat);
+			$u->setNumRue($row->numrue);
+			$u->setAdresse($row->adresse);
+			$u->setVille($row->ville);
+			$u->setPostalCode($row->postalcode);
+			$u->setPays($row->pays);
+			$u->setPassword($row->password);
+		}
+		return $u;
 	}
 
     public function findByEmail(string $email): ?UserEntity {
 		$this->db->select('*');
 		$q = $this->db->get_where('utilisateur',array('email'=>$email));
-		$response = $q->row(0,"UserEntity");
-		return $response;
+		if (empty($q->result())) {
+			return null;
+		}
+		$row = $q->result()[0];
+
+		$u = UserEntity::getUser($row->status);
+		if ($u != null) {
+			$u->setId($row->id_utilisateur);
+			$u->setNom($row->nom);
+			$u->setPrenom($row->prenom);
+			$u->setEmail($row->email);
+			$u->setEtat($row->etat);
+			$u->setNumRue($row->numrue);
+			$u->setAdresse($row->adresse);
+			$u->setVille($row->ville);
+			$u->setPostalCode($row->postalcode);
+			$u->setPays($row->pays);
+			$u->setPassword($row->password);
+		}
+		return $u;
     }
 
 	public function addUser(UserEntity $user): ?UserEntity {
@@ -49,11 +106,7 @@ class UserModel extends CI_Model {
 			$this->db->db_debug = $db_debug;
 		} catch (Exception $e) {return null;}
 
-		// get last inserted row
-		$id = $this->db->insert_id();
-		$q = $this->db->get_where('utilisateur', array('id_utilisateur' => $id));
-		$response = $q->row(0,"UserEntity");
-		return $response;
+		return $this->findByEmail($email);
 	}
 	
 	public function updateUser(UserEntity $user): ?UserEntity{
@@ -74,5 +127,30 @@ class UserModel extends CI_Model {
 		} catch (Exception $e) {return null;} 
 		return $this->findById($user->getId());
 	}
+
+	public function activeUser(UserEntity $user) : ?UserEntity {
+		try {
+			$db_debug = $this->db->db_debug;
+			$this->db->db_debug = FALSE;
+			$this->db->set('etat', $user->getEtat());
+			$this->db->where('id_utilisateur', $user->getId());
+			$result = $this->db->update('utilisateur');
+			$this->db->db_debug = $db_debug;
+			if (!$result) {
+				return null;
+			}
+		} catch (Exception $e) {return null;} 
+		return $this->findById($user->getId());
+	}
+
+
+	public function isActive(UserEntity $user): bool {
+		$this->db->select('etat');
+		$q = $this->db->get_where('utilisateur',array('id_utilisateur'=>$user->getId()));
+		$row = $q->result();
+
+		return $row[0]->etat == "active";
+	}
+
 }
 ?>

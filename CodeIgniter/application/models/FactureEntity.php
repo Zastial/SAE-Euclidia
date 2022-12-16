@@ -1,6 +1,5 @@
 <?php
-require_once("FactureInterface.php");
-class FactureEntity implements FactureInterface {
+class FactureEntity {
 
     private int $id_facture;
     private string $date_facture;
@@ -42,26 +41,44 @@ class FactureEntity implements FactureInterface {
         return $this->id_utilisateur;
     }
 
+    /**
+	 * @return string
+	 */
     public function getAdresse(): string{
         return $this->adresse;
     }
 
+    /**
+	 * @return int
+	 */
     public function getNumeroRue(): int{
         return $this->numero_rue;
     }
 
+    /**
+	 * @return string
+	 */
     public function getPays():string{
         return $this->pays;
     }
 
+    /**
+	 * @return string
+	 */
     public function getVille():string{
         return $this->ville;
     }
 
+    /**
+	 * @return int
+	 */
     public function getCodePostal():int{
         return $this->code_postal;
     }
 
+    /**
+	 * @return string
+	 */
     public function getPaiement(): string{
         return $this->paiement;
     }
@@ -94,26 +111,44 @@ class FactureEntity implements FactureInterface {
         $this->id_utilisateur = $userid;
     }
 
+    /**
+	 * @param string $adresse
+	 */
     public function setAdresse(string $adresse){
         $this->adresse = $adresse;
     }
 
+    /**
+	 * @param int $numero_rue
+	 */
     public function setNumeroRue(int $numero_rue){
         $this->numero_rue = $numero_rue;
     }
 
+    /**
+	 * @param string $pays
+	 */
     public function setPays(string $pays){
         $this->pays = $pays;
     }
 
+    /**
+	 * @param string $ville
+	 */
     public function setVille(string $ville){
         $this->ville = $ville;
     }
 
+    /**
+	 * @param int $code_postal
+	 */
     public function setCodePostal(int $code_postal){
         $this->code_postal = $code_postal;
     }
 
+    /**
+	 * @param string $paiement
+	 */
     public function setPaiement(string $paiement){
         $this->paiement = $paiement;
     }

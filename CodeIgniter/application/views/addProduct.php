@@ -5,10 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
-    <link rel="stylesheet" href=<?= base_url("css/style.css") ?> >
-    <link rel="stylesheet" href=<?= base_url("css/tabs.css") ?> >
+    <link rel="stylesheet" href=<?= base_url("css/style.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
-
+    <link rel="stylesheet" href=<?= base_url("css/productImage.css") ?>>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>
+    <script>var base_url = '<?php echo base_url() ?>';</script>
     <title>Admin-AddProduct</title>
     <!--<link rel="icon" size="24x24"href="/assets/image/logoEuclidia.png" type="image/png">-->
 </head>
@@ -19,7 +22,7 @@
 
     <section>
 
-        <?php echo form_open('admin/addProduct'); ?>
+        <?php echo form_open_multipart('admin/addProduct'); ?>
         
 
         <div class="return">
@@ -63,7 +66,11 @@
             </div>
         
             <div class= "upload">
-                    <input type="file" name="usefile" accept="image/png, image/jpeg">
+                <ul id="sortable">
+                    
+                </ul>
+                <input id="file-upload" type="file" name="userfile[]" size="20" accept="image/png, image/jpeg" multiple required>
+                <input id="file-upload" type="file" name="models[]" size="20" accept="model/obj, model/mtl, application/x-3ds, model/gltf+json, model/gltf-binary, model/stl, model/mesh" multiple required>
             </div>
             
             <div class="validation">
@@ -75,8 +82,7 @@
 
 
     </section>
-
-   
+    <script type="text/javascript" src=<?=base_url("js/productImage.js")?>></script>
 </body>
 <footer>
 <?php require_once('footer.php'); ?>

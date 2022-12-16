@@ -8,8 +8,7 @@
 <head>
     <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/header.css") ?> >
-    <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
-
+    <script src="<?=base_url("js/theme.js")?>"></script>
 </head>
 
 <nav class="main-navbar">
@@ -71,10 +70,17 @@
                     <a href=<?= site_url("user/register")?>><button class="btn-nav">S'inscrire</button></a>
                 </div>
             <?php endif ;?>
-
+            
+            
+            <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="checkbox-switcher">
+                <input type="checkbox" id="checkbox-switcher" />
+                <span class="slider round"></span>
+            </label>
+            </div>
+            
             
 
-            
             
         </div>
     </div>

@@ -13,9 +13,10 @@
     <title>Document</title>
 </head>
 <body>
-    <?php require_once('error.php'); ?>
 
-    <?php require_once('header.php'); ?>
+    <?php  require_once(APPPATH.'views/error.php'); ?>
+
+    <?php require_once(APPPATH.'views/header.php'); ?> 
 
 
     <section>

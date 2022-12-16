@@ -30,18 +30,6 @@ class Resource extends CI_Controller {
         }
     }
 
-    public function listPictures($id){
-        $path = $this->config->item('model_assets') . $id;
-
-        if (!is_dir($path)) {
-            return array();
-        }
-
-        $files = scandir($path);
-        array_splice($files, 0, 2);
-        var_dump($files);
-    }
-
     public function default() {
         header('Content-type: image/png');
         readfile($this->config->item('model_assets') . "default/default-img.png");
@@ -82,10 +70,10 @@ class Resource extends CI_Controller {
             $this->session->set_flashdata('error', 'Vous n\\\'avez pas acheté ce produit!');
             redirect($_SERVER['HTTP_REFERER']); //Redirect back
         }
-        $path = $this->config->item('model_assets') . "products/" . $id . '.obj';
+        $path = $this->config->item('model_assets') . $id . '/models.zip';
         header('Content-Description: File Transfer');
         header('Content-type: application/octet-stream');
-        header('Content-Disposition: attachment; filename="'.$produit->getTitre().'.obj'.'"');
+        header('Content-Disposition: attachment; filename="'.$produit->getTitre().'.zip'.'"');
         readfile($path);
     }
 }

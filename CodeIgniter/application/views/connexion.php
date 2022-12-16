@@ -15,7 +15,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    
+    <script src="<?=base_url("js/theme.js")?>"></script>
+    <script>
+        if (!localStorage.theme){
+            localStorage.theme = "colors";
+        }
+        loadTheme('<?=base_url('css/')?>');
+    </script>
     <title>Connexion</title>
 </head>
 <body>

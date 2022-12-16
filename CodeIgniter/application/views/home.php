@@ -8,15 +8,13 @@
     <link rel="stylesheet" href= <?= base_url("css/typographie.css") ?>>
     <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/style.css") ?> >
-    <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>   
     <link rel="stylesheet" href=<?= base_url("css/home.css") ?>>
 
-    
     <title>Accueil</title>
 </head>
 
 
-<body>
+<body> 
     <section>
         <?php require_once ('header.php'); ?>
         
@@ -39,17 +37,7 @@
                 </div>
             </div>
         </div>
-        
-        <h2>encore du text</h2>
-        <h2>encore du text</h2>
-        <h2>encore du text</h2>
-        <h2>encore du text</h2>
-        <h2>encore du text</h2>
-        <h2>encore du text</h2>
-        <h2>encore du text</h2>
-        <h2>encore du text</h2>
-
-
+    
 
     </section>
         
