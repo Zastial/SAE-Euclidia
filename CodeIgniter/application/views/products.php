@@ -68,13 +68,13 @@ if ($max >= 1000) {
         
                     <div class="categories" id="categories">
                         <h1>Catégories :</h1>
-                        <?php foreach ($categories as $cat): ?>
-                            <div class="one-categ">
-                                <?php $categId = $cat->getId() ;?>
-                                <input class="input-with-icon" type="checkbox" id=<?=$categId?> name='categorie[]' value=<?=$categId?> <?php if (in_array($categId, $checked)) {echo 'checked';}?> />
-                                <label for=<?= $categId ?>> <?=$cat->getLibelle()?> </label>
-                            </div>
-                        <?php endforeach; ?>
+                            <?php foreach ($categories as $cat): ?>
+                                <div class="one-categ">
+                                    <?php $categId = $cat->getId() ;?>
+                                    <input class="input-with-icon" type="checkbox" id=<?=$categId?> name='categorie[]' value=<?=$categId?> <?php if (in_array($categId, $checked)) {echo 'checked';}?> />
+                                    <label for=<?= $categId ?>> <?=$cat->getLibelle()?> </label>
+                                </div>
+                            <?php endforeach; ?>
                     </div>
 
                     <div class="filters">

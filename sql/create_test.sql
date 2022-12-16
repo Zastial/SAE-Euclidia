@@ -21,7 +21,7 @@ CREATE TABLE utilisateur(
    ville VARCHAR(50) NOT NULL,
    postalcode VARCHAR(5) NOT NULL,
    pays VARCHAR(50) NOT NULL,
-      etat VARCHAR(20) NOT NULL default 'active',
+   etat VARCHAR(20) NOT NULL default 'active',
    PRIMARY KEY(id_utilisateur),
    UNIQUE(email)
 );
@@ -44,7 +44,6 @@ CREATE TABLE facture(
    ville VARCHAR(300),
    code_postal INT,
    paiement VARCHAR(200),
-   reduction INT,
    PRIMARY KEY(id_facture),
    FOREIGN KEY(id_utilisateur) REFERENCES utilisateur(id_utilisateur)
 );
@@ -62,11 +61,6 @@ CREATE TABLE achat(
    id_facture INT NOT NULL,
    prix DECIMAL(6,2),
    PRIMARY KEY(id_produit, id_facture),
-   FOREIGN KEY(id_produit) REFERENCES produit(id_produit) ON DELETE CASCADE,
-   FOREIGN KEY(id_facture) REFERENCES facture(id_facture) ON DELETE CASCADE
+   FOREIGN KEY(id_produit) REFERENCES produit(id_produit),
+   FOREIGN KEY(id_facture) REFERENCES facture(id_facture)
 );
-
-create TABLE reduction(
-   code VARCHAR(50) NOT NULL UNIQUE,
-   pourcent INT NOT NULL
-)

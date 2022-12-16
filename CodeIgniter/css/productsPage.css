@@ -4,32 +4,28 @@ section{
 }
 
 .main-content {
-    
     display:flex;
-    justify-content: space-around;
-    padding-top: 5em;
-    margin-bottom: 2rem;
+    flex-direction: row;
+    padding : 2em;
 }
 
 .search {
-    display:flex;
+    width: 25%;
+}
+
+.search form {
+    display: flex;
+    flex-direction:column;
+    gap: 2rem;
+}
+
+.search .categories {
+    display: flex;
     flex-direction: column;
     gap: 30px;
-    max-width: 250px;
-
-}
-.form-content {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
 }
 
 
-.categories {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 50px;
-}
 
 
 
@@ -60,6 +56,3 @@ section{
 
 
 
-.grid-product {
-    width: 80%;
-}
