@@ -148,9 +148,9 @@ class UserModel_test extends UnitTestCase {
 
 		$this->obj->addUser($newUser);
 
-		$list = $this->obj->findById(4); 
+		$list = $this->obj->findByEmail("siuleo@gmail.com"); 
 		$this->assertTrue(is_a($list, "UserEntity"));
-		$this->assertEquals($list->getNom(), $expected['nom']);
+		$this->assertEquals($expected['nom'], $list->getNom());
 		$this->assertEquals($list->getPrenom(), $expected['prenom']);
 		$this->assertEquals($list->getPassword(), $expected['password']);
 		$this->assertEquals($list->getEmail(), $expected['email']);

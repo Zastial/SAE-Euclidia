@@ -1,7 +1,7 @@
 <?php
 class UserAdmin extends UserEntity {
-    public function getStatus(): string {
-        return "Administrateur";
+    public function getStatus(): UserStatus {
+        return UserStatus::ADMINISTRATEUR;
     }
 }
 ?>

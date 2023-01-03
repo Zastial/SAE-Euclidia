@@ -5,10 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
-    <link rel="stylesheet" href=<?= base_url("css/style.css") ?> >
     <link rel="stylesheet" href=<?= base_url("css/tabs.css") ?> >
-    <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
 
     <title>Modifier l'adresse</title>
 </head>
@@ -17,6 +14,18 @@
 
     <?php require_once('header.php'); ?>
     <section>
+
+         <div class="return-previous-page">
+            <?php
+                $url = site_url("product/find");
+                if (isset($_SERVER['HTTP_REFERER'])) {
+                    $url = htmlspecialchars($_SERVER['HTTP_REFERER']); 
+                }
+            ?>
+            <a class="" href=<?= $url ?>> <img src="" alt=""> < Retour</a>
+            <!-- class="link-nav"-->
+        </div>   
+
         <?php echo form_open('user/modifyAddress/'); ?>
 
             <h1>Ajouter un Produit</h1>
@@ -25,7 +34,7 @@
                     
                     <div class="num-rue">
                         <label for="numerorue" class="labelTypo" size="30" required>Numéro de rue</label>
-                        <input class="" type="text" name="numerorue" required>
+                        <input class="" type="number" min="0"name="numerorue" required>
                     </div>
                     
                     <div class="adresse">
@@ -40,7 +49,7 @@
 
                     <div class="code-postal">
                         <label for="codepostal" class="labelTypo" size="30" required>Code Postal</label>
-                        <input class="" type="text" name="codepostal" required>
+                        <input class="" type="number" min="0" name="codepostal" required>
                     </div>
 
                     <div class="pays">

@@ -1,69 +1,59 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
-
-/* ===== RESET ==== */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0px;
-    padding: 0px;
-    scroll-behavior: smooth;
-    transition: background-color 0.4s;
-}
 
 
-ol,
-ul,
-a {
-    text-decoration: none;
-    list-style: none;
-    list-style-type: none;
-
-}
-
-a {
-    display: inline-block;
-}
-
-input,
-textarea {
-    -webkit-user-select: auto;
-}
-
-
-a,
-button,
-.btn {
-    cursor: pointer;
-}
-button {
-    border: none;
-}
-body {
+:root {
     --black-100: #111111;
     --black-200: #2F2F2F;
-    --orange: #FFAE27; /*C'est du jaune bon bref*/
+    --orange: #FFAE27;
     --blue--link: #0000EE;
     --red: #de1b1bf0;
-    --blue-100:#3271AB;
+    --blue-100: #3271AB;
     --blue-200: #79BCF7;
     --dark-blue: #334D6E;
+    --span-clr: #6F6F6F;
     --input-text-clr: #6F6F6F;
-    --input-border-clr:#949494;
+    --input-border-clr: #949494;
     --white-200: #F1F1F1;
     --grey: #E1E1E1;
+    --grey-300: #f1f1f1;
     --grey-200: #999999;
     --white-100: #FFFDFA;
-    --green:hsl(130,94,41,0.85) ;
+
+    --green: #06C925;
     --filter-orange-img: invert(67%) sepia(79%) saturate(566%) hue-rotate(338deg) brightness(104%) contrast(101%);
     --filter-button-img: invert(0%) sepia(20%) saturate(8%) hue-rotate(339deg) brightness(91%) contrast(87%);
-
+    --box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     font-family: 'Poppins', sans-serif;
 
 }
 
+.darkmode {
+    --black-100: #ffffff;
+    --black-200: #5e5e5e;
+    --orange: #FFAE27;
+    --blue--link: #0000EE;
+    --red: #de1b1bf0;
+    --blue-100: #0b0835;
+    --blue-200: #1d96ff;
+    --dark-blue: #afc9ec;
+    --span-clr: #6F6F6F;
+    --input-text-clr: #6F6F6F;
+    --input-border-clr: #949494;
+    --white-200: #707070;
+    --grey: #202020;
+    --grey-200: #999999;
+    --grey-300: #b8b8b856;
+    --white-100: #1b1b1b;
+    --green: #06C925;
+    --filter-orange-img: invert(67%) sepia(79%) saturate(566%) hue-rotate(338deg) brightness(104%) contrast(101%);
+    --filter-button-img: invert(91%) sepia(94%) saturate(2%) hue-rotate(229deg) brightness(105%) contrast(100%);
+    --box-shadow: 0px 8px 16px 0px rgba(253, 253, 253, 0.2);
+
+    font-family: 'Poppins', sans-serif;
+}
 
 
+
+/* end*/
 
 input {
     position: relative;
@@ -75,6 +65,11 @@ input {
     padding: 14px 20px;
     width: 100%;
 }
+
+input:not(:empty):not(:focus):invalid {
+    border: 2px solid red;
+}
+
 .invalid {
     border: 1px solid var(--red);
 }
@@ -85,11 +80,16 @@ input {
     padding-left: 30px;
 }
 
-input[type=text]:focus,input[type=text]:active,
-input[type=textarea]:focus,input[type=textarea]:active,
-input[type=email]:focus,input[type=email]:active,
-input[type=number]:focus,input[type=number]:active,
-input[type=password]:focus,input[type=password]:active  {
+input[type=text]:focus,
+input[type=text]:active,
+input[type=textarea]:focus,
+input[type=textarea]:active,
+input[type=email]:focus,
+input[type=email]:active,
+input[type=number]:focus,
+input[type=number]:active,
+input[type=password]:focus,
+input[type=password]:active {
 
     transition: 250ms ease-in-out;
     border: 1px solid var(--orange);
@@ -133,7 +133,7 @@ input[type="checkbox"]:focus {
 
 /*when label required : display red star*/
 .require:after {
-    content:" *";
+    content: " *";
     color: red;
 }
 

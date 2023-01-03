@@ -1,5 +1,6 @@
-.h1Typo {
+h1 {
     font-size: 32px;
+    color: var(--black-100);
 }
 
 .h2Typo {
@@ -29,4 +30,3 @@
     font-size: 20px;
     font-weight: 400;
 }
-

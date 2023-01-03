@@ -6,22 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href= <?= base_url("css/typographie.css") ?>>
-    <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
-    <link rel="stylesheet" href=<?= base_url("css/style.css") ?>>
-    <link rel="stylesheet" href=<?= base_url("css/inscription.css") ?>>
+
+    <link rel="stylesheet" href=<?= base_url("css/inscription-connexion.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
+    <link rel="stylesheet" href="<?= base_url("css/components.css") ?>">
+
+
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script src="<?=base_url("js/theme.js")?>"></script>
-    <script>
-        if (!localStorage.theme){
-            localStorage.theme = "colors";
-        }
-        loadTheme('<?=base_url('css/')?>');
-    </script>
     <title>Connexion</title>
 </head>
 <body>
@@ -47,7 +41,7 @@
                         <div class="input-container">
                             <label for="email" class="labelTypo require" size="30" required>Email</label>
                             <div class="input">
-                                <span class="material-symbols-outlined">alternate_email</span>                        
+                                <img class="input-icon" src="<?=base_url("assets/icon/icon-email.svg")?>" alt="">
                                 <input class="input-with-icon" type="email" name="email" id="email" value="<?= set_value('email'); ?>" required>
                             </div>
     
@@ -57,10 +51,10 @@
                 </div>
                 <div class="connexion-password">
                     <div class="form-input">
+                        <label for="password" class="labelTypo require">Mot de passe</label>
                         <div class="input-container">
-                            <label for="password" class="labelTypo require">Mot de passe</label>
                             <div class="input">
-                                <span class="material-symbols-outlined">lock</span>
+                                <img class="input-icon" src="<?=base_url("assets/icon/icon-lock.svg")?>" alt="">
                                 <input class="input-with-icon" type="password" name="password" id="password" value="<?= set_value('password'); ?>" required>
                             </div>
                             <?php echo form_error('password'); ?>
@@ -86,5 +80,10 @@
         <div class="bar-grey"></div>
         <div class="bar-orange"></div>
     </div>
+
+
+
+
+    <!--<script src="< ?=base_url("js/dark_mode.js")?>"></script>-->
 </body>
 </html>

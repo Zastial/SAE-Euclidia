@@ -18,7 +18,7 @@
     
     
             <div class="return">
-                <a class="link-nav" href=<?= site_url("Admin/index")?>> <img src="" alt=""> < Retour </a>
+                <a class="link-nav" href=<?= site_url("admin/categories")?>> <img src="" alt=""> < Retour </a>
             </div>
     
     

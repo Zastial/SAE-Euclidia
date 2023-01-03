@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
-    <link rel="stylesheet" href=<?= base_url("css/style.css") ?> >
     <link rel="stylesheet" href=<?= base_url("css/tabs.css") ?> >
-    <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
 
 
     <title>Document</title>
@@ -24,7 +21,7 @@
         <?php echo form_open('admin/addCategorie'); ?>
 
         <div class="return">
-            <a class="link-nav" href=<?= site_url("Admin/index")?>> <img src="" alt=""> < Retour </a>
+            <a class="btn btn-orange" href=<?= site_url("admin/categories")?>> <img src="" alt=""> < Retour  </a>
         </div>
         
             <h1>Ajouter une Catégorie</h1>

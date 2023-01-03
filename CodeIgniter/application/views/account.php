@@ -6,10 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
-    <link rel="stylesheet" href=<?= base_url("css/style.css") ?> >
     <link rel="stylesheet" href=<?= base_url("css/account.css") ?> >
-    <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/bill.css") ?>>
 
     <title>Account</title>
@@ -40,9 +37,9 @@
                         <h4 class="bigbold">Mot de passe</h4>
                         <p>******</p>
                     </div>
+                    <a class="btn btn-orange btn-large" href="<?= site_url("User/modifyProfil") ?>" target="_parent">Modifier mes informations</a>
                     
                     
-                    <a class="btn btn-orange btn-large" href="<?php site_url("user/modify") ?>" target="_parent">Modifier mes informations</a>
                 </div>
     
                 <!-- adresse -->
@@ -66,7 +63,7 @@
                         <p><?= $user->getPays();?></p>
     
                     </div>  
-                    <a class="btn btn-orange btn-large" href="<?php site_url("user/modifyAddress");?>"> Modifier mon adresse</a>               
+                    <a class="btn btn-orange btn-large" href="<?= site_url("user/modifyPersonnalAddress");?>"> Modifier mon adresse</a>               
                 </div>
     
                 

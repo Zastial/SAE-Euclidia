@@ -79,7 +79,7 @@ Euclidia S.A. - Modèles 3D<br/>
 A/C: 05346346543634563423<br/>
 BIC: 23141434<br/>
 </p>
-<p><i>Note: Pour plus d\'informations, veuillez envoyer un mail à : <a href="mailto://test@gmail.com">test@gmail.com</a></i></p>
+<p><i>Note: Pour plus d\'informations, veuillez envoyer un mail à : <a href="mailto://contact@euclidia.com">contact@euclidia.com</a></i></p>
 </body>
 ';
 $pdf->writeHTML($html);

@@ -24,32 +24,56 @@ class Admin extends CI_Controller {
     }
     
     public function index(){
-        $users = $this->UserModel->findAll();
-        $products = $this->ProductModel->findAll();
-        $categories = $this->CategorieModel->findAll();
-        $this->load->view("admin", array('products'=>$products, 'users'=>$users, 'categories'=>$categories));
+        $this->load->view('admin/dashboard.php');
     }
     
+    public function users() {
+        $status = $this->session->user["status"];
+        if ($status != "Administrateur") {
+            redirect('admin');
+        }
+        $users = $this->UserModel->findAll();
+        $this->load->view('admin/dashboardUsers.php', array('users'=>$users));
+    }
+
+    public function categories() {
+        $status = $this->session->user["status"];
+        if ($status != "Responsable" && $status != "Administrateur") {
+            redirect('admin');
+        }
+        $categories = $this->CategorieModel->findAll();
+        $this->load->view('admin/dashboardCategories.php', array('categories'=>$categories));
+    }
+
+    public function products() {
+        $status = $this->session->user["status"];
+        if ($status != "Responsable" && $status != "Administrateur") {
+            redirect('admin');
+        }
+        $products = $this->ProductModel->findAll();
+        $this->load->view('admin/dashboardProducts.php', array('products'=>$products));
+    }
+
     public function modifUser(int $idUser) {
-        $this->form_validation->set_rules('name', 'Name', 'required',
-        array('required' => 'Vous devez entrer le nom du produit'));
+        $this->form_validation->set_rules('nom', 'Nom', 'required',
+        array('required' => 'Vous devez entrer le nom de l utilisateur'));
 
         $this->form_validation->set_rules('prenom', 'Prenom', 'required',
-        array('required' => 'Vous devez entrer le prenom du produit'));
+        array('required' => 'Vous devez entrer le prenom de l utilisateur'));
 
         $this->form_validation->set_rules('email', 'Email', 'required',
-        array('required' => 'Vous devez entrer le mail du produit'));
+        array('required' => 'Vous devez entrer le mail de l utilisateur'));
 
         $user = $this->UserModel->findById($idUser);
         if ($user == null) {
             $this->session->set_flashdata('error', 'L\\\'utilisateur sélectionné n\\\'existe pas ou n\\\'est plus disponible.');
-            redirect('admin');
+            redirect('admin/users');
         }
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view("modifUser", array("user"=>$user));
         } else {
-            $name = $this -> input -> post("name");
+            $name = $this -> input -> post("nom");
             $prenom = $this -> input -> post("prenom");
             $email = $this->input->post("email");
             $password = $this->input->post("password");
@@ -61,12 +85,12 @@ class Admin extends CI_Controller {
             
             $this->UserModel->updateUser($user);
 
-            redirect('Admin/index');
+            redirect('Admin/users');
         }
     }
 
     public function removeUser() {
-
+        //DO NOT
     }
 
     public function addProduct(){
@@ -113,9 +137,9 @@ class Admin extends CI_Controller {
                 $_FILES['userfile']['tmp_name']= $files['userfile']['tmp_name'][$i];
                 $_FILES['userfile']['error']= $files['userfile']['error'][$i];
                 $_FILES['userfile']['size']= $files['userfile']['size'][$i];
-                $this->upload->initialize($this->set_upload_options($i, $filename, $id, "png|jpg"));
+                $this->upload->initialize($this->set_upload_options($i, $filename, $id, "png|jpg|jpeg"));
                 $this->upload->do_upload('userfile');
-                // print_r($this->upload->display_errors());
+                print_r($this->upload->display_errors());
                 
             }
             
@@ -128,7 +152,7 @@ class Admin extends CI_Controller {
             $zname .= "/models.zip";
             if ($za->open($zname, ZipArchive::CREATE) !== TRUE) {
                 $this->session->set_flashdata('error', 'La création du zip a échoué!');
-                redirect("admin");
+                redirect("admin/products");
             }
             for ($i=0;$i<$cpt;$i++){
                 $exp = explode('.', $files['models']['name'][$i]);
@@ -141,7 +165,7 @@ class Admin extends CI_Controller {
             $za->close();
 
             //COMBO BOX pour les catégories?
-            redirect('Admin/index');
+            redirect('Admin/products');
             
         }
     }
@@ -177,13 +201,13 @@ class Admin extends CI_Controller {
         $produit = $this->ProductModel->findById($id);
         if ($produit == null) {
             $this->session->set_flashdata('error', 'Le produit sélectionné n\\\'existe pas ou n\\\'est plus disponible.');
-            redirect('admin');
+            redirect('admin/products');
         }
         $categories = $this->CategorieModel->findAll();
         $affectations = $this->AffectationModel->findByIdProduct($id);
 
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view("modifProduct", array("produit"=>$produit, "categories"=>$categories, "affectations" => $affectations));
+            $this->load->view("admin/modifProduct", array("produit"=>$produit, "categories"=>$categories, "affectations" => $affectations));
         } else {
             $name = $this -> input -> post("name");
             $price = $this -> input -> post("price");
@@ -199,7 +223,7 @@ class Admin extends CI_Controller {
             
             $this->ProductModel->updateProduct($produit, $categories);
 
-            redirect('Admin/index');
+            redirect('Admin/products');
         }
     }
 
@@ -207,28 +231,27 @@ class Admin extends CI_Controller {
 
         $this->ProductModel->removeProduct($productid);
 
-        redirect('Admin/index');
+        redirect('Admin/products');
     }
 
     public function toggleVisibility(int $productid){
         $p = $this->ProductModel->findById($productid);
         if ($p == null) {
             $this->session->set_flashdata('error', 'Le produit sélectionné n\\\'existe pas ou n\\\'est plus disponible.');
-            redirect('admin');
+            redirect('admin/products');
         }
         $p->setDisponible(!$p->getDisponible());
         $this->ProductModel->updateProduct($p, array());
-        redirect('Admin/index');
+        redirect('Admin/products');
     }
     
     public function removeCategorie(int $categorieid) {
         $this->CategorieModel->removeCategorie($categorieid);
 
-        redirect('Admin/index');
+        redirect('Admin/categories');
     }
 
     public function addCategorie() {
-        // redirect to home if user is already connected
         
         $this->form_validation->set_rules('name', 'Name', 'required',
         array('required' => 'Vous devez entrer le nom du produit'));
@@ -249,7 +272,7 @@ class Admin extends CI_Controller {
             $this -> CategorieModel -> addCategorie($categorie);
 
             //COMBO BOX pour les catégories?
-            redirect('Admin/index');
+            redirect('Admin/categories');
         }
         
     }
@@ -262,7 +285,7 @@ class Admin extends CI_Controller {
         $categorie = $this->CategorieModel->findById($id);
         if ($categorie == null) {
             $this->session->set_flashdata('error', 'La Catégorie sélectionné n\\\'existe pas ou n\\\'est plus disponible.');
-            redirect('admin');
+            redirect('admin/categories');
         }
 
         if ($this->form_validation->run() == FALSE) {
@@ -274,7 +297,7 @@ class Admin extends CI_Controller {
             
             $this->CategorieModel->updateCategorie($categorie);
 
-            redirect('Admin/index');
+            redirect('Admin/categories');
         }
     }
 

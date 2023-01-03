@@ -11,7 +11,7 @@ section {
     background-color: var(--white-100); /*white*/
     color: var(--black-100);
     border-radius: 5px;
-    max-width: fit-content;
+    max-width: 500px;
     margin: auto;
     padding: 2rem;
     line-height: 2rem;

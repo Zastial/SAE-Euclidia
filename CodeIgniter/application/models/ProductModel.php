@@ -84,9 +84,9 @@ class ProductModel extends CI_Model {
 
 			if (isset($filtres['tri'])) {
 				switch ($filtres['tri']) {
-					case "1":
+					case Tri::PRIXCROISSANT:
 						$this->db->order_by('produit.prix', 'asc');
-					case "2":
+					case Tri::PRIXDECROISSANT:
 						$this->db->order_by('produit.prix', 'desc');
 				}
 			}
@@ -108,7 +108,13 @@ class ProductModel extends CI_Model {
 			$this->db->where('prix >=', $min);
 			$this->db->where('prix <=', $max);
 			$this->db->where('disponible =', $available);
-			
+			if (isset($filtres['page'])){
+				$page=$filtres['page'];
+				if ($page<=0)$page=1;
+				$this->db->limit(12, ($page-1)*12);
+			} else {
+				$this->db->limit(12);
+			}
 			$query = $this->db->get();
 			$response = $query->custom_result_object("ProductEntity");
 			return $response;
@@ -126,22 +132,16 @@ class ProductModel extends CI_Model {
 	 * @return ?ProductEntity
 	 */
     public function addProduct(ProductEntity $product, array $categories):?ProductEntity{
-        $data = array(
-			'titre'=>$product->getTitre(), 
-			'prix'=>$product->getPrix(), 
-			'description'=>$product->getDescription(), 
-			'disponible'=>$product->getDisponible());
-			
-        try {
-			$db_debug = $this->db->db_debug;
-			$this->db->db_debug = FALSE;
-			$this->db->insert('produit', $data);
-			$this->db->db_debug = $db_debug;
-			
-		} catch (Exception $e) {return null;}
-
-		// get last inserted row
-		$id = $this->db->insert_id();
+		try{
+			$this->db->trans_start();
+			$q = $this->db->query("CALL addProduct(?,?,?,?,@result)", array($product->getTitre(), $product->getPrix(), $product->getDescription(), $product->getDisponible()));
+			$qu = $this->db->query("SELECT @result as res");
+			$this->db->trans_complete();
+			$id=intval($qu->row_array(0)["res"]);
+		} catch (Exception $e){
+			return null;
+		}
+		
 		$q = $this->db->get_where('produit', array('id_produit' => $id));
 		$response = $q->row(0,"ProductEntity");
 
@@ -159,33 +159,21 @@ class ProductModel extends CI_Model {
 	 * 
 	 */
 	public function updateProduct(ProductEntity $product, array $categories){
-		try {
-			$db_debug = $this->db->db_debug;
-			$this->db->db_debug = FALSE;
-			$this->db->set('titre', $product->getTitre());	
-			$this->db->set('prix', $product->getPrix());		
-			$this->db->set('description', $product->getDescription());			
-			$this->db->set('disponible', $product->getDisponible());
-			$this->db->where('id_produit', $product->getId());
-			$result = $this->db->update('produit');
-			$this->db->db_debug = $db_debug;
-
-			if (!$result) {
-				return null;
-			}
-
-			$db_debug = $this->db->db_debug;
-			$this->db->db_debug = FALSE;
+		try{
+			$q = $this->db->query("CALL updateProduct(?,?,?,?,?)", array($product->getId(), $product->getTitre(), $product->getPrix(), $product->getDescription(), $product->getDisponible()));
 			$this->db->delete('affectation', array('id_produit' => $product->getID())); 
 
 			$this->load->model("AffectationModel"); 
 			$this->AffectationModel->addAffectations($product->getId(), $categories);
-
-		} catch (Exception $e) {return null;} 
+		} catch (Exception $e){
+			return null;
+		}
+		
 	}
 
 	/**
-	 * La fonction removeProduct permet de supprimer un produit
+	 * La fonction removeProduct permet de supprimer un produit.
+	 * ELLE NE DEVRAIT **JAMAIS** ÊTRE UTILISÉE!!!
 	 * 
 	 * @param int | $productID
 	 */
@@ -224,6 +212,15 @@ class ProductModel extends CI_Model {
 		$q = $this->db->query("CALL getBoughtProductsOfUser(".$id.")");
 		$response = $q->custom_result_object("ProductEntity");
 		return $response;
+	}
+
+	/**
+	 * getNumberOfAvailableProducts returns the number of available products in the database
+	 * 
+	 * @return int
+	 */
+	public function getNumberOfAvailableProducts() {
+		return $this->db->where(['disponible'=>1])->from("produit")->count_all_results();
 	}
 }
 ?>

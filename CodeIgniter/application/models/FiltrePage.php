@@ -1,9 +1,9 @@
 <?php
 require_once("FiltreDecorator.php");
 class FiltrePage extends FiltreDecorator {
-    private string $page;
+    private int $page;
 
-    public function __construct(FiltreInterface $filtre, $page) {
+    public function __construct(FiltreInterface $filtre, int $page) {
         parent::__construct($filtre);
         $this->page = $page;
     }

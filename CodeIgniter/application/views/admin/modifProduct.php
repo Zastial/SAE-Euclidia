@@ -8,11 +8,11 @@
     <link rel="stylesheet" href=<?= base_url("css/modifProduct.css")?>>
 </head>
 <body>
-    <?php require_once('error.php'); ?>
-    <?php require_once('header.php'); ?>
+    <?php require_once(APPPATH.'views/error.php'); ?>
+    <?php require_once(APPPATH.'views/header.php'); ?>
 
     <section>
-        <a class="link-nav" href=<?= site_url("Admin/index")?>> <img src="" alt=""> < Retour </a>
+        <a class="link-nav" href=<?= site_url("admin/products")?>> <img src="" alt=""> < Retour </a>
         
         
         <h1>Modification du produit </h1>
@@ -76,6 +76,6 @@
     
     </section>
     
-    <?php require_once('footer.php'); ?>
+    <?php require_once(APPPATH.'views/footer.php'); ?>
 </body>
 </html>

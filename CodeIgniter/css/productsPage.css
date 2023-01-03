@@ -10,7 +10,7 @@ section{
 }
 
 .search {
-    width: 25%;
+    width: 20%;
 }
 
 .search form {
@@ -23,6 +23,10 @@ section{
     display: flex;
     flex-direction: column;
     gap: 30px;
+}
+
+.main-content .grid-products {
+    margin: auto;
 }
 
 
@@ -56,3 +60,14 @@ section{
 
 
 
+.page-components{
+    display: flex;
+    padding: 0 0 32px 0;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.page-components p {
+    margin-top: 10px;
+    font-size: 1rem
+}

@@ -99,16 +99,11 @@ class AchatModel_test extends UnitTestCase {
     } 
 
 	public function test_addAchat() {
-		$expected = [   
-            'id_produit' => 4,
-            'id_facture' => 4,
-            'prix' => 426.8
-        ];
 
 		$newAchat = new AchatEntity;
-		$newAchat -> setIdProduit(4);
-		$newAchat -> setIdFacture(4);
-		$newAchat -> setprix(426.8);
+		$newAchat -> setIdProduit(1);
+		$newAchat -> setIdFacture(3);
+		$newAchat -> setprix(60.30);
 
 		$ans = $this->obj->addAchat($newAchat);
 		$this->assertTrue($ans);

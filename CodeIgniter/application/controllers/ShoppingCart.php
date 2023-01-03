@@ -87,7 +87,20 @@ class ShoppingCart extends CI_Controller{
         $this->load->view("orderCommand", array('produits'=>$produits));
     }
 
-    public function validatePayment(){
+    public function validatePayment() {
+
+        $user = $this->UserModel->findByEmail($this->session->user['email']);
+
+        if($user->getAdresse() == "NON DEFINI") {
+            $user->setNumRue($this->input->post("rue"));
+            $user->setAdresse($this->input->post("adresse"));
+            $user->setVille($this->input->post("ville"));
+            $user->setPostalCode($this->input->post("code_postal"));
+            $user->setPays($this->input->post("pays"));
+            $this->UserModel->updateUser($user);
+        }
+
+
         //TODO form validation (i am very lazy)
         $f = new FactureEntity();
         $f->setDate(date('Y-m-d H:i:s'));
@@ -101,7 +114,7 @@ class ShoppingCart extends CI_Controller{
         $f->setPaiement($this->input->post("choose"));
 
         $f = $this->FactureModel->addFacture($f);
-        if (is_null($f)){
+        if (is_null($f)){ 
             $this->session->set_flashdata('error', 'L\\\'enregistrement de votre facture a échoué!');
             redirect('shoppingCart');
         }
@@ -119,8 +132,9 @@ class ShoppingCart extends CI_Controller{
             $a = new AchatEntity();
             $prod = $this->ProductModel->findByIdAvailable($id);
 
-            if ($prod == null) {
-                continue;
+            if (is_null($prod)){
+                $this->session->set_flashdata('error', 'L\\\'enregistrement de votre achat a échoué!');
+                redirect('shoppingCart');
             }
 
             $a->setIdFacture($f->getId());

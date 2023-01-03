@@ -81,8 +81,6 @@ class User extends CI_Controller {
             redirect('Home');
             die();
         }
-        
-        
 
         $this->load->library('recaptcha');
         $recaptcha = $this->recaptcha->create_box();
@@ -93,9 +91,11 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('password', 'Mot de passe', 'required',
             array('required' => 'Vous devez entrer un mot de passe'));
 
-        $this->form_validation->set_rules('g-recaptcha', 'captcha', 'callback_verifyCaptcha',
-            array('verifyCaptcha'=>'Le captcha est invalide.'));
-
+        if ($this->config->item("captcha")) {
+            $this->form_validation->set_rules('g-recaptcha', 'captcha', 'callback_verifyCaptcha',
+                array('verifyCaptcha'=>'Le captcha est invalide.'));
+        }
+        
         if ($this->form_validation->run() == FALSE) {
             $this->load->view("connexion");
         } else {
@@ -132,6 +132,25 @@ class User extends CI_Controller {
         $this->session->unset_userdata("cart");
 		$this->session->sess_destroy();
         redirect('Home');
+    }
+
+    public function modifyProfil() {
+        
+        // redirect to home if user is not connected
+        if (!isset($this->session->user)) {
+            redirect('Home');
+            die();
+        }
+        $this->load->view('modifyAccount');
+    }
+    public function modifyPersonnalAddress() {
+        
+        // redirect to home if user is not connected
+        if (!isset($this->session->user)) {
+            redirect('Home');
+            die();
+        }
+        $this->load->view('modifyAddress');
     }
 
     public function modify() {

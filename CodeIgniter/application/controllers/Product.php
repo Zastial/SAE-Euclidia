@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."Filtre.php";
 require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."FiltrePrice.php";
+require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."FiltrePage.php";
 require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."FiltreName.php";
 require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."FiltreTri.php";
 require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."FiltreAvailable.php";
@@ -26,12 +27,6 @@ class Product extends CI_Controller {
         $minprice = $this->input->get('price-min');
         $maxprice = $this->input->get('price-max');
         
-        if ($page != null){
-            $page = intval($page);
-        }
-        if ($page<=0 || $page == null){
-            $page = 1;
-        }
         if ($minprice != null && !is_numeric($minprice)) {
             $minprice = 0;
         }
@@ -46,19 +41,43 @@ class Product extends CI_Controller {
             $filtre = new FiltreName($filtre, $name);
         }
         if ($tri != null && is_string($tri)) {
+            switch ($tri) {
+                case "1":
+                    $tri = Tri::PRIXCROISSANT;
+                    break;
+                case "2":
+                    $tri = Tri::PRIXDECROISSANT;
+                    break;
+                default:
+                    $tri = Tri::AUCUN;
+            }
             $filtre = new FiltreTri($filtre, $tri);
         }
         if ($categories != null && is_array($categories)) {
             $filtre = new FiltreCategories($filtre, $categories);
         }
 
+        $endPage = intval($this->ProductModel->getNumberOfAvailableProducts() / 12)+1;
+        if ($page != null){
+            $page = intval($page);
+            if ($page > $endPage) {
+                $page = $endPage;
+            }
+            if ($page < 1) {
+                $page = 1;
+            } 
+            $filtre = new FiltrePage($filtre, $page);
+        } else {
+            $page = 1;
+        }
         $filtre = new FiltreAvailable($filtre, true);
 
         $produits = $this->ProductModel->findQueryBuilder($filtre);
-        array_splice($produits, $page*12);
-        array_splice($produits, 0, ($page-1)*12);
+
         $categories = $this->CategorieModel->findAll();
-        $this->load->view("products", array("produits"=>$produits, "categories"=>$categories));
+
+
+        $this->load->view("products", array("produits"=>$produits, "categories"=>$categories, 'page'=>$page, 'endPage'=>$endPage));
     }
 
     public function display($productid){

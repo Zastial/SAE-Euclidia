@@ -30,16 +30,15 @@ section {
 .product .other-image {
     width: 200px;
     height: 160px;
+    object-fit: contain;
     cursor: pointer;
 }
 
 .product .main-image {
-    width: 500px;
-    height: 300px;
+    width: 80vh;
+    height: 70vh;
+    object-fit: contain;
 }
-
-
-
 
 
 
@@ -50,10 +49,10 @@ section {
 }
 
 .description .buy .a-desactived:hover {
-    color: var(--black-100);;
+    color: var(--black-100);
 }
 
 
-.return{
+.return-previous-page{
     margin-left: 3em;
 }

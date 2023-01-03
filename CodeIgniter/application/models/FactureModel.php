@@ -50,27 +50,16 @@ class FactureModel extends CI_Model {
      * @return ?FactureEntity
      */
     public function addFacture(FactureEntity $f): ?FactureEntity{
-        $data = array(
-            "date_facture" => $f->getDate(),
-            "total" => $f->getTotal(),
-            "id_utilisateur" => $f->getUserId(),
-            "adresse" => $f->getAdresse(),
-            "numero_rue" => $f->getNumeroRue(),
-            "pays" => $f->getPays(),
-            "ville" => $f->getVille(),
-            "code_postal" => $f->getCodePostal(),
-            "paiement" => $f->getPaiement()
-        );
+        try{
+            $this->db->trans_start();
+            $q = $this->db->query("CALL addFacture(?,?,?,?,?,?,?,?,?,@result)", array($f->getDate(),$f->getTotal(),$f->getUserId(),$f->getAdresse(),$f->getNumeroRue(),$f->getPays(),$f->getVille(),$f->getCodePostal(),$f->getPaiement()));
+            $qu = $this->db->query("SELECT @result as res");
+            $this->db->trans_complete();
+        } catch (Exception $e){
+            var_dump($e);
+        }
 
-        try {
-			$db_debug = $this->db->db_debug;
-			$this->db->db_debug = FALSE;
-			$this->db->insert('facture', $data);
-			$this->db->db_debug = $db_debug;
-		} catch (Exception $e) {return null;}
-
-        $id = $this->db->insert_id();
-        $q = $this->db->get_where('facture', array('id_facture' => $id));
+        $q = $this->db->get_where('facture', array('id_facture' => intval($qu->row_array(0)["res"])));
         $response = $q->row(0,"FactureEntity");
         return $response;
     }

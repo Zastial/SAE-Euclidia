@@ -32,6 +32,9 @@ button:disabled {
     background-color: var(--blue-200);
 }
 
+.btn-shadow-orange {
+    box-shadow: 0px 4px 10px rgba(255, 174, 39, 0.4);
+}
 
 button:hover{
     transition: 10ms ease;
@@ -85,13 +88,15 @@ button:hover{
     position: relative;
 }
 
-.input span {
+.input .input-icon {
+    width: 24px;
+    height: 24px;
     position: absolute;
     z-index: 1;
     padding: 0px;
     top: 25%;
     left: 10px;
-    color: var(--inpu-text-clr);
+    color: var(--span-clr);
 }
 
 .input-container {
@@ -101,6 +106,10 @@ button:hover{
 
 .input-with-icon {
     padding: 14px 20px 14px 40px;
+}
+
+select {
+    padding: 7px 10px;
 }
 
 

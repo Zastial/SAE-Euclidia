@@ -13,9 +13,6 @@ $email = empty(set_value('email')) ? $this->session->user["email"] : set_value('
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
-    <link rel="stylesheet" href=<?= base_url("css/style.css") ?> >
-    <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/modifyAccount.css")?>>
 
 
@@ -32,7 +29,7 @@ $email = empty(set_value('email')) ? $this->session->user["email"] : set_value('
     <section>
 
 
-        <?php echo form_open('user/modify'); ?>
+        <?php echo form_open('admin/modifUser/'.$user->getId()); ?>
             <div class="form-container">
     
                 <div class="form-head">
@@ -43,17 +40,17 @@ $email = empty(set_value('email')) ? $this->session->user["email"] : set_value('
                 <div class="form-input-modifyAccount">         
                         <div class="first-name">
                             <label for="first-name" class="labelTypo require" size="30">Prénom</label><br>
-                            <input class="input" type="text" name="prenom" value="<?= $prenom ?>" required>
+                            <input class="input" type="text" name="prenom" value="<?= $user->getPrenom() ?>" required>
                             <?php echo form_error('prenom'); ?>
                         </div>
                         <div class="name">
                             <label for="name" class="labelTypo require" size="30" >Nom</label><br>
-                            <input class="input" type="text" name="nom" value="<?= $nom ?>" required>
+                            <input class="input" type="text" name="nom" value="<?= $user->getNom() ?>" required>
                             <?php echo form_error('nom'); ?>
                         </div>
                     <div class="email">
                         <label for="email" class="labelTypo require" size="30" >Email</label><br>
-                        <input class="input" type="email" name="email" value="<?= $email ?>" required>
+                        <input class="input" type="email" name="email" value="<?= $user->getEmail() ?>" required>
                         <?php echo form_error('email'); ?>
                     </div>
     

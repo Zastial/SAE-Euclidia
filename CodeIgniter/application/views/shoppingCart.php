@@ -11,10 +11,8 @@ $connected = (isset($this->session->user)) ? true : false;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
+
     <link rel="stylesheet" href= <?= base_url("css/shoppingCart.css") ?>>
-    <link rel="stylesheet" href=<?= base_url("css/style.css") ?> >
-    <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
 
     <title>ShoppingCart</title>
 </head>
@@ -23,7 +21,6 @@ $connected = (isset($this->session->user)) ? true : false;
     <?php require_once('error.php'); ?>
     
     <section>
-
         <div class="cart-container">
             <div class="cart">
                 <div class="info">

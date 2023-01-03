@@ -5,7 +5,7 @@ Design Pattern
 
  -  decorateur   fait
  -  factory (utilisateur) fait
- - ???
+ -  delegation (class et array id dans la session) adapter le code
 
  + faire le mini rapport (voir mail Lanoix)
 
@@ -59,7 +59,7 @@ Passer une Commande :
         
 
 Footer :
-        -un peu trop grand
+        
 
 Recaptcha :
         - passer de V2 à V3
@@ -80,17 +80,18 @@ Modèles 3D:
 
 
 Admin : (action : inserer, modifier, supprimer)
-    - différentes vues pour les tabs (produits, utilisateurs, catégories...)
+    
+    
 
     - le script supprimer catégorie est il utile dans la vue admin ? 
     peut il etre deplacer dans tab js ?
 
-    users : 
+    Users : 
         - filter les utilisateurs (status, recherche nom prénom)
         - afficher les factures des utilisateurs
         
 
-    produits: 
+    Produits: 
         - afficher les produits achettés par utilisateurs
         - Trouver comment upload des images
         
@@ -100,33 +101,30 @@ Admin : (action : inserer, modifier, supprimer)
                 - liste des tables en sticky
 
 
+    Alertes pour admin/resp dans "gestion"
+
+        - quand on supprime/add/midif une categorie/produit/user ectt 
+        il faut une notification dans la vue gestion 
+
+    Eviter la duplication du code du dashbord (faire un require)
+
+     Lorsqu'on rajoute un produit (admin) le controller ne vérifie pas que le produit retourné par le modèle ne soit pas nul
+
+
+
+
 Account :
         - problème au niveau des liens de mofication de compte
-
- 
-
-    
+        - lien pour supprimer le compte sur la page de compte
 
 
 
 Error 404 :
 
 
-
-Account :
-    - refaire la vue
-
-
-
-
-Alertes pour admin/resp dans "gestion"
-
-        - quand on supprime/add/midif une categorie/produit/user ectt 
-        il faut une notification dans la vue gestion 
-
-
-
-Lorsqu'on rajoute un produit (admin) le controller ne vérifie pas que le produit retourné par le modèle ne soit pas nul
+Extras:
+        - documentation
+        - script d'installation
 
 #######################################################
 
@@ -140,3 +138,4 @@ Lorsqu'on rajoute un produit (admin) le controller ne vérifie pas que le produi
         (pouvoir faire en sorte de changer l'ordre)
 
 
+        - arborescence des fichiers

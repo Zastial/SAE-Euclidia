@@ -9,10 +9,7 @@ $disabled = empty($this->session->cart);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
     <link rel="stylesheet" href= <?= base_url("css/orderCommand.css") ?>>
-    <link rel="stylesheet" href=<?= base_url("css/style.css") ?>>
-    <link rel="stylesheet" href=<?= base_url("css/colors.css") ?> >
     <title>ShoppingCart</title>
 </head>
 <body>
@@ -20,12 +17,14 @@ $disabled = empty($this->session->cart);
     <?php require_once ('error.php'); ?>
 
     <section>
-
         
         <div class="main">
             <div class="summary">
                 <div class="summary-facturation tab">
                     <form action="<?= site_url("ShoppingCart/validatePayment") ?>" class="facturation" method="POST">
+
+                        <?php $user = $this->UserModel->findByEmail($this->session->user['email']); ?>
+
                         <div class="formulaire">
                             <h4>1 Adresse de facturation</h4>
                             <div class="entries">
@@ -36,19 +35,19 @@ $disabled = empty($this->session->cart);
                                 <input class="input" type="text" name="prenom" value = "<?= $this->session->user["prenom"] ?> " required> <br>         
                                 
                                 <label for="rue">Numéro de rue</label><br>
-                                <input class="input" type="number" min="0" oninput="this.value = Math.abs(this.value)" name="rue" required> <br>
+                                <input class="input" type="number" min="0" oninput="this.value = Math.abs(this.value)" name="rue" value="<?= ($user->getNumRue()=="NON DEFINI" ? "" : $user->getNumRue())?>" required> <br>
 
                                 <label for="adresse">Adresse</label><br>
-                                <input class="input" type="text" name="adresse" required> <br>
+                                <input class="input" type="text" name="adresse" value="<?= ($user->getAdresse()=="NON DEFINI" ? "" : $user->getAdresse())?>"  required> <br>
 
                                 <label for="ville">Ville</label><br>
-                                <input class="input" type="text" name="ville" required> <br>
+                                <input class="input" type="text" name="ville" value="<?= ($user->getVille()=="NON DEFINI" ? "" : $user->getVille())?>" required> <br>
 
                                 <label for="code_postal">Code postal</label><br>
-                                <input class="input" type="number" min="0" oninput="this.value = Math.abs(this.value)" name="code_postal" required> <br>
+                                <input class="input" type="number" min="0" oninput="this.value = Math.abs(this.value)" name="code_postal" value="<?= ($user->getPostalCode()=="NON DEFINI" ? "" : $user->getPostalCode())?>" required> <br>
                                 
                                 <label for="pays">Pays</label><br>
-                                <input class="input" type="text" name="pays" required> <br>
+                                <input class="input" type="text" name="pays" value="<?= ($user->getPays()=="NON DEFINI" ? "" : $user->getPays())?>" required> <br>
                             </div>
                         </div>
     

@@ -81,65 +81,32 @@ class UserModel extends CI_Model {
     }
 
 	public function addUser(UserEntity $user): ?UserEntity {
-		$nom = $user->getNom();
-		$prenom = $user->getPrenom();
-		$email = $user->getEmail();
-		$password = $user->getPassword();
-		$status = $user->getStatus();
-
-		$data = array(
-		'prenom' => $prenom, 
-		'nom' => $nom, 
-		'password' => $password, 
-		'email' => $email,
-		'status' => $status,
-		'numrue' => 'NON DEFINI',
-		'adresse' => 'NON DEFINI',
-		'ville' => 'NON DEFINI',
-		'postalcode' => 'NON DEFINI',
-		'pays' => 'NON DEFINI');
-		
-		try {
-			$db_debug = $this->db->db_debug;
-			$this->db->db_debug = FALSE;
-			$this->db->insert('utilisateur', $data);
-			$this->db->db_debug = $db_debug;
-		} catch (Exception $e) {return null;}
-
-		return $this->findByEmail($email);
+		try{
+			$q = $this->db->query("CALL addUser(?,?,?,?,?,'NON DEFINI','NON DEFINI','NON DEFINI','00000','NON DEFINI')", array($user->getNom(), $user->getPrenom(), $user->getPassword(), $user->getEmail(), $user->getStatus()));
+		} catch (Exception $e){
+			var_dump($e);
+			return null;
+		}
+		return $this->findByEmail($user->getEmail());
 	}
 	
 	public function updateUser(UserEntity $user): ?UserEntity{
-		try {
-			$db_debug = $this->db->db_debug;
-			$this->db->db_debug = FALSE;
-			$this->db->set('prenom', $user->getPrenom());		// This is:
-			$this->db->set('nom', $user->getNom());				// UPDATE utilisateur
-			$this->db->set('email', $user->getEmail());			// SET `prenom` = $user->getPrenom(), `nom` = $user->getNom(), `email` = $user->getEmail(), `password` = $user->getPassword
-			$this->db->set('password', $user->getPassword());	// WHERE `id_utilisateur` = $user->getID();
-			$this->db->where('id_utilisateur', $user->getId());	// To prevent data from being escaped, set $escape to FALSE in the set() functions.
-			$result = $this->db->update('utilisateur');			// See https://codeigniter.com/userguide3/database/query_builder.html#updating-data for more detail.
-			$this->db->db_debug = $db_debug;					// Note that while set() accepts an object, we can't do that here because our objects have IDs in them, and we don't want to change that :)
+		try{
+			$q = $this->db->query("CALL updateUser(?,?,?,?,?,?,?,?,?,?,?)", array($user->getId(), $user->getNom(), $user->getPrenom(), $user->getPassword(), $user->getEmail(), $user->getStatus(), $user->getNumRue(), $user->getAdresse(), $user->getVille(), $user->getPostalCode(), $user->getPays()));
+		} catch (Exception $e){
+			return null;
+		}
 
-			if (!$result) {
-				return null;
-			}
-		} catch (Exception $e) {return null;} 
 		return $this->findById($user->getId());
 	}
 
 	public function activeUser(UserEntity $user) : ?UserEntity {
-		try {
-			$db_debug = $this->db->db_debug;
-			$this->db->db_debug = FALSE;
-			$this->db->set('etat', $user->getEtat());
-			$this->db->where('id_utilisateur', $user->getId());
-			$result = $this->db->update('utilisateur');
-			$this->db->db_debug = $db_debug;
-			if (!$result) {
-				return null;
-			}
-		} catch (Exception $e) {return null;} 
+		try{
+			$q = $this->db->query("CALL activeUser(?,?)", array($user->getId(), $user->getEtat()));
+		} catch (Exception $e){
+			return null;
+		}
+
 		return $this->findById($user->getId());
 	}
 

@@ -11,10 +11,14 @@
 <body>
 
     <?php require_once('header.php'); ?>
+    
+    <section>
+        <h1>Une erreur est survenue</h1>
+        <p>Vous allez être redirigé a la page d'accueuil dans 5 secondes...</p>
+        <p><a href="<?=base_url()?>">Cliquez ici</a> pour y revenir instantanément.</p>
 
-	<h1>Une erreur est survenue</h1>
-    <p>Vous allez être redirigé a la page d'accueuil dans 5 secondes...</p>
-    <a href="<?=base_url()?>">Cliquez ici</a> pour y revenir instantanément.
+    </section>
+	
     
 </body>
 

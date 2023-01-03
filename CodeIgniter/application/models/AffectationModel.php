@@ -56,18 +56,12 @@ class AffectationModel extends CI_Model {
 		
 
 		foreach($affectations as $affect) {
+			try{
+				$q = $this->db->query("CALL addAffectation(?,?)", array($productID, intval($affect)));
+			} catch (Exception $e){
+				//normally i'd return here, but that'd stop all other affectations afterwards from being added.
+			}
 
-			$data = array(
-				'id_produit'=>$productID, 
-				'id_categorie'=>intval($affect)
-			);
-
-			try {
-				$db_debug = $this->db->db_debug;
-				$this->db->db_debug = FALSE;
-				$this->db->insert('affectation', $data);
-				$this->db->db_debug = $db_debug;
-			} catch (Exception $e) {return null;}
 		}
     }
 
@@ -83,18 +77,11 @@ class AffectationModel extends CI_Model {
 		
 
 		foreach($affectations as $affect) {
-
-			$data = array(
-				'id_produit'=>$productID, 
-				'id_categorie'=>intval($affect)
-			);
-
-			try {
-				$db_debug = $this->db->db_debug;
-				$this->db->db_debug = FALSE;
-				$this->db->delete('affectation', $data);
-				$this->db->db_debug = $db_debug;
-			} catch (Exception $e) {return null;}
+			try{
+				$q = $this->db->query("CALL removeAffectation(?,?)", array($productID, intval($affect)));
+			} catch (Exception $e){
+				//normally i'd return here, but that'd stop all other affectations afterwards from being removed.
+			}
 		}
     }
 }

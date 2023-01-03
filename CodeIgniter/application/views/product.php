@@ -6,11 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <link rel="stylesheet" href= <?= base_url("css/typographie.css") ?>>
-    <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
-    <link rel="stylesheet" href=<?= base_url("css/style.css") ?>>
+
     <link rel="stylesheet" href=<?= base_url("css/product.css") ?>>
-    <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/image-zoom.css") ?>>
 
     <script type="text/javascript" src=<?=base_url("js/slider.js")?>></script>
@@ -25,7 +22,7 @@
     <section>
 
 
-        <div class="return">
+        <div class="return-previous-page">
             <?php
                 $url = site_url("product/find");
                 if (isset($_SERVER['HTTP_REFERER'])) {
@@ -38,6 +35,7 @@
     
         <div class="product">
 
+            
             <div class="slider-image">
                 <?php for($i=0;$i<$c;$i++){?>
                     <img class="other-image" id="<?=$i?>" src="<?= base_url('resource/picture/'.$produit->getId()."/".$i) ?>" alt="" onclick="changeImage(id)">

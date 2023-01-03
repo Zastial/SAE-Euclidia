@@ -534,3 +534,5 @@ $config['proxy_ips'] = '';
 
 $config['model_assets'] = "/var/www/html/modelassets/";
 $config['model_assets_ext'] = array("jpg", "jpeg", "png");
+
+$config['captcha'] = TRUE;

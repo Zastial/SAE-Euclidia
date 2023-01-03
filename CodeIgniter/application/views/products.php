@@ -41,8 +41,7 @@ if ($max >= 1000) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
-    <link rel="stylesheet" href=<?= base_url("css/style.css") ?>>
+
     <link rel="stylesheet" href=<?= base_url("css/productsPage.css") ?>>
     <link rel="stylesheet" href="<?= base_url("css/grid-products.css") ?>">
 
@@ -57,11 +56,14 @@ if ($max >= 1000) {
     <section>
 
         <div class="main-content">
+
+
+            <!-- FILTER/SEARCH PRODUCT -->
             <div class="search">
                 <form class="form-content" method="get" action=<?= site_url("product/find")?>>
                     <div class="input-container">
                         <div class="input">
-                            <span class="material-symbols-outlined">search</span>
+                            <img class="input-icon" src="<?=base_url("assets/icon/icon-search.svg")?>" alt="">
                             <input class="input-with-icon" type="text" name="rechercher" value="<?=$name?>" id="rechercher" placeholder="Rechercher">
                         </div>
                     </div>
@@ -119,6 +121,8 @@ if ($max >= 1000) {
                 </form>
             </div>
             
+
+            <!-- GRID OF PRODUCT -->
             
             <div class="grid-products" id="produits">
             <?php foreach($produits as $prod) :?>
@@ -127,14 +131,20 @@ if ($max >= 1000) {
                     <div class="card-container">
                         <img src="<?= base_url('resource/picture/'.$prod->getId()) ?>" alt="modèle <?= $prod->getTitre() ?>">
                         <div class="card-description">
-                            <p class="price"><?= $prod->getPrix() ?>  €</p>
+                            <p class="price"><?= $prod->getPrix() ?> €</p>
                             <p class="title"><?= $prod->getTitre() ?></p>
                         </div>
                     </div>
                 </a>
             <?php endforeach; ?>
-
+            
             </div>
+            
+        </div>
+        <div class="page-components">
+            <a href="<?=base_url()."Product/find?page=".$page-1?>"><button class="btn-nav">Page Précédente</button></a>
+            <p><?="Page " . $page . " sur " . $endPage?></p>
+            <a href="<?=base_url()."Product/find?page=".$page+1?>"><button class="btn-nav">Page Suivante</button></a>
         </div>
 
     </section>
@@ -143,6 +153,7 @@ if ($max >= 1000) {
 
         
         $(function() {
+            // function to reset all filters
             $('#reset').click(function() {
                 
                 $('#categories').find('input[type=checkbox]:checked').prop('checked', false);
@@ -150,8 +161,7 @@ if ($max >= 1000) {
                 $('#price-max').val('1000');
                 $('#rechercher').val("");
                 $('#tri').prop('selectedIndex', 0);
-                modifyProducts();
-  
+                
             });
         });
         

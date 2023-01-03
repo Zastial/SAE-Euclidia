@@ -12,10 +12,7 @@ $email = empty(set_value('email')) ? $this->session->user["email"] : set_value('
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
-    <link rel="stylesheet" href=<?= base_url("css/style.css") ?> >
-    <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
+    
     <link rel="stylesheet" href=<?= base_url("css/modifyAccount.css")?>>
 
 
@@ -31,6 +28,16 @@ $email = empty(set_value('email')) ? $this->session->user["email"] : set_value('
     
     <section>
 
+        <div class="return-previous-page">
+            <?php
+                $url = site_url("product/find");
+                if (isset($_SERVER['HTTP_REFERER'])) {
+                    $url = htmlspecialchars($_SERVER['HTTP_REFERER']); 
+                }
+            ?>
+            <a class="" href=<?= $url ?>> <img src="" alt=""> < Retour</a>
+            <!-- class="link-nav"-->
+        </div>   
 
         <?php echo form_open('user/modify'); ?>
             <div class="form-container">
@@ -82,15 +89,8 @@ $email = empty(set_value('email')) ? $this->session->user["email"] : set_value('
                 </div>
             </div>
         </form>
-        <div class="back-btn">
-            <a href="<?= site_url("user/account") ?>" target="_parent">
-                <button class="btn btn-orange btn-main">Retourner sur mon compte</button>
-            </a>
-        </div>
 
-
-
-        
+             
     </section>
     
 </body>
