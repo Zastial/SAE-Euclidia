@@ -2,8 +2,6 @@
 require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."UserAdmin.php";
 require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."UserResponsable.php";
 require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."UserUtilisateur.php";
-require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."UserStatus.php";
-
 abstract class UserEntity {
 
     private int $id_utilisateur;
@@ -53,9 +51,9 @@ abstract class UserEntity {
     }
 
     /**
-     * @return UserStatus
+     * @return string
      */
-    abstract public function getStatus(): UserStatus;
+    abstract public function getStatus(): string;
 
     /**
      * @return string
@@ -194,21 +192,15 @@ abstract class UserEntity {
     }
 
 
-    public static function getUser(UserStatus $status) {
-        switch ($status) {
-            case UserStatus::UTILISATEUR:
-                $u = new UserUtilisateur;
-                break;
-            case UserStatus::ADMINISTRATEUR:
-                $u = new UserAdmin;
-                break;
-            case UserStatus::RESPONSABLE;
-                $u = new UserResponsable;
-                break;
-            default:
-                $u = null;
-                break;
-        }
+    public static function getUser(string $status) {
+        $u = null;
+        if ($status == "Administrateur") {
+            $u = new UserAdmin;
+        } else if ($status == "Responsable") {
+            $u = new UserResponsable;
+        } else if ($status == "Utilisateur") {
+            $u = new UserUtilisateur;
+        } 
         return $u;
     }
 }

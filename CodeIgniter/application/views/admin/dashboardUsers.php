@@ -4,6 +4,26 @@ if (isset($this->session->user["status"])) {
 } else {
     $status = "";
 }
+
+$tri = "";
+if (!empty($_GET['tri'])) {
+    $tri = htmlentities($_GET['tri']);
+}
+
+$rechercher = "";
+if (!empty($_GET['rechercher'])) {
+    $rechercher = htmlentities($_GET['rechercher']);
+}
+
+$triStatus = "";
+if (!empty($_GET['tri-status'])) {
+    $triStatus = htmlentities($_GET['tri-status']);
+}
+
+$triEtat = "";
+if (!empty($_GET['tri-etat'])) {
+    $triEtat = htmlentities($_GET['tri-etat']);
+}
 ?>
 
 
@@ -28,113 +48,142 @@ if (isset($this->session->user["status"])) {
         <div class="page">
 
             <!-- LEFT SIDE BAR -->
+            <?php require_once(APPPATH.'views/admin/dashboard _component.php'); ?> 
             
-            <div class="side-bar">
-                <h1>Tables</h1>
-                <div class="side-bar-container">
-                    <?php if ($status == "Responsable" || $status == "Administrateur"): ?>
-                        <a href=<?=site_url('admin/products')?> >
-                            <div class="table">
-                                <img class="icon-side-bar" src="<?= base_url("assets/icon/icon-rect.svg"); ?>" alt="">
-                                <p>Produits</p>
-                            </div>
-                        </a>
-                    <?php endif; ?>   
-        
-                    <?php if ($status == "Administrateur"): ?>
-                        <a href=<?=site_url('admin/users')?> >
-                            <div class="table active">
-                                <img class="icon-side-bar" src="<?= base_url("assets/icon/icon-rect.svg"); ?>" alt="">
-                                <p>Utilisateur</p>
-                            </div>
-                        </a>
-                    <?php endif; ?>
-        
-                    <?php if ($status == "Responsable" || $status == "Administrateur"): ?>
-                        <a href=<?=site_url('admin/categories')?> >
-                            <div class="table">
-                                <img class="icon-side-bar" src="<?= base_url("assets/icon/icon-rect.svg"); ?>" alt="">
-                                <p>Catégories</p>
-                            </div>
-                        </a>
-                    <?php endif; ?>
-                
-                
-                </div>
-                
-            </div>
-        
             <!-- MAIN CONTENT -->
             <div class="main">
                 
                 <?php if ($status == "Administrateur"): ?>
 
                     <div class="header">
-                        <h1>Utilisateurs</h1>
+                        <h1> Utilisateurs</h1>
                     </div>
-                        
-                    <div class="input-container">
-                        <div class="input">
-                            <img class="input-icon" src="<?=base_url("assets/icon/icon-search.svg")?>" alt="">
-                            <input class="input-with-icon" type="text" name="rechercher" id="rechercher" placeholder="Rechercher">
+                    
+                    
+                    <form class="form-content" method="get" id="form-filters-users" action=<?= site_url("admin/users")?>>
+                        <div class="input-container">
+                            <div class="input">
+                                <img class="input-icon" src="<?=base_url("assets/icon/icon-search.svg")?>" alt="">
+                                <input class="input-with-icon" type="text" value="<?=$rechercher?>" name="rechercher" id="rechercher" placeholder="Rechercher">
+                            </div>
                         </div>
-                    </div>
 
-                    <!--  finir le système de tri comme dans le shop-->
-                    <select name="tri" id="tri">
-                        <?php 
-                        
-                        $options = array('- Aucun filtre -', 'Tri status croissant', 'Tri par status décroissant');
+                        <div class="filters">
+                            <div class="filter">
+                                <label for="tri-nom">Trier :</label>
+                                <select name="tri" id="tri-nom">
+                                    <?php 
+                                    
+                                    $options = array('- Aucun filtre -', 'Tri par nom et prénom croissant', 'Tri par nom et prénom décroissant', 'Tri par email croissant', 'Tri par email décroissant');
+                                    $values = array('aucun', 'nom-asc', 'nom-desc', 'email-asc', 'email-desc',);
+                                
+                                    for ($i=0;$i<count($options);$i++) {
+                                    
+                                        $balise = "<option";
+                                        if ($tri == $values[$i]) {
+                                            $balise = $balise . " selected";
+                                        } 
+                                        $balise = $balise . " value=\"".$values[$i]."\">".$options[$i]."</option>";
+                                        echo $balise;
+                                    }
+                                    
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="filter">
+                                <label for="tri-status">Status :</label>
+                                <select name="tri-status" id="tri-status">
+                                    <?php 
+                                    
+                                    $options = array('Tous', 'Administrateur', 'Responsable', 'Utilisateur');
+                                    $values = array('status-tous', 'status-admin', 'status-resp','status-user');
+        
+                                    for ($i=0;$i<count($options);$i++) {
+                                        $balise = "<option";
+                                        if ($triStatus == $values[$i]) {
+                                            $balise = $balise . " selected";
+                                        } 
+                                        $balise = $balise . " value=\"".$values[$i]."\">".$options[$i]."</option>";
+                                        echo $balise;
+                                    }
+                                    
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="filter">
+                                <label for="tri-etat">Etat :</label>
+                                <select name="tri-etat" id="tri-etat">
+                                    <?php 
+                                    
+                                    $options = array('Tous', 'Actif', 'Inactif');
+                                    $values = array('etat-tous', 'etat-actif', 'etat-inactif');
+        
+                                    for ($i=0;$i<count($options);$i++) {
+                                        $balise = "<option";
+                                        if ($triEtat == $values[$i]) {
+                                            $balise = $balise . " selected";
+                                        } 
+                                        $balise = $balise . " value=\"".$values[$i]."\">".$options[$i]."</option>";
+                                        echo $balise;
+                                    }
+                                    
+                                    ?>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-large btn-orange btn-shadow-orange">Filtrer</button>
+                        </div>
 
-                        for ($i=0;$i<count($options);$i++) {
-                            $balise = "<option";
-                            if ($filter == $i) {
-                                $balise = $balise . " selected";
-                            } 
-                            $balise = $balise . " value=\"".$i."\">".$options[$i]."</option>";
-                            echo $balise;
-                        }
-                        
-                        ?>
-                    </select>
+                    </form>
 
                     <div id="Utilisateurs" class="content">
         
                         <div class="grid head">
-                            <p>Nom</p>
+                            <p>ID</p>
                             <p>Prénom</p>
+                            <p>Nom</p>
                             <p>Email</p>
                             <p>Status</p>
                             <p class="head-center">Etat</p>
                             <p class="head-center">Action</p>
                         </div>
         
-                        <?php foreach ($users as $user) :?>    
-                            <div class="grid item">
-                                <p><?= $user->getPrenom()?></p>
-                                <p><?= $user->getNom()?></p>
-                                <p class="user-email"><?= $user->getEmail()?></p>
-                                <p><?= $user->getStatus(); ?></p>
-                                <?php $etat = $user->getEtat(); 
-                                    if ($etat == "desactive") {
-                                        echo '<button class="invisible">Désactivé</button>';
-                                    }
-                                    if ($etat == "active") {
-                                        echo '<button class="visible">Activé</button>';
+                        <?php if (!empty($users)) :?>
+                            
+           
+                            <?php foreach ($users as $user) :?>    
+                                <div class="grid item">
+                                    <p><?= $user->getId(); ?></p>
+                                    <p><?= $user->getPrenom()?></p>
+                                    <p><?= $user->getNom()?></p>
+                                    <p class="user-email"><?= $user->getEmail()?></p>
+                                    <p><?= $user->getStatus(); ?></p>
+                                    <?php $etat = $user->getEtat(); 
+                                        if ($etat == "desactive") {
+                                            echo '<button class="invisible">Désactivé</button>';
+                                        }
+                                        if ($etat == "active") {
+                                            echo '<button class="visible">Activé</button>';
+                                        }
+                                    
+                                    ?>
 
-                                    }
-                                
-                                ?>
-
-                                
-                                <div class="icon-container item-center">
-                                    <a href="<?=site_url("Admin/modifUser/".$user->getID()) ?>">
-                                        <img class="icon" src="<?=base_url("assets/icon/icon-pen.svg")?>" alt="Modifier l'utilisateur">
-                                    </a>
+                                    
+                                    <div class="icon-container item-center">
+                                        <a href="<?=site_url("Admin/modifUser/".$user->getID()) ?>">
+                                            <img class="icon" src="<?=base_url("assets/icon/icon-pen.svg")?>" alt="Modifier l'utilisateur">
+                                        </a>
+                                        <a href="<?=site_url("Admin/factures/".$user->getID()) ?>">
+                                            <img class="icon" src="<?=base_url("assets/icon/icon-request-quote.svg")?>" alt="Factures de l'utilisateur">
+                                        </a>
+                                    </div>
                                 </div>
+                    
+                            <?php endforeach ; ?>
+                        <?php else : ?>
+                            <div class="grid item">
+                                <p>Aucun utilisateur trouvé</p>
                             </div>
-                
-                        <?php endforeach ; ?>
+                        <?php endif; ?>
                 
                     </div>
                 <?php endif; ?>

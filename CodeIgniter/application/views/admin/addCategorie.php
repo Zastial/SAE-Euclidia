@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href=<?= base_url("css/tabs.css") ?> >
+    <link rel="stylesheet" href=<?= base_url("css/admin/addCategorie.css") ?> >
 
 
     <title>Document</title>
@@ -17,27 +18,27 @@
 
 
     <section>
-
-        <?php echo form_open('admin/addCategorie'); ?>
-
+        
         <div class="return">
             <a class="btn btn-orange" href=<?= site_url("admin/categories")?>> <img src="" alt=""> < Retour  </a>
         </div>
         
-            <h1>Ajouter une Catégorie</h1>
+        
+        <?php echo form_open('admin/addCategorie'); ?>
 
-            <div >
+            <h1>Ajouter une catégorie</h1>
+
+        
                 
-                <div class="nom">
-                    <label for="name" class="labelTypo" size="30" required>Nom de la Catégorie</label>
-                    <input class="" type="text" name="name" required>
-                </div>
-
+            <div class="nom">
+                <label for="name" class="labelTypo" size="30" required>Nom de la catégorie</label>
+                <input class="" type="text" name="name" required>
             </div>
+
         
             
             <div class="validation">
-                <button class="btn btn-orange btn-main"type="submit">Créer une nouveau catégorie</button>
+                <button class="btn btn-orange btn-main"type="submit">Créer une nouvelle catégorie</button>
             </div>
         
 
@@ -45,9 +46,11 @@
 
 
 
-</section>
+    </section>
 
 
 
 </body>
+
+    <?php require_once(APPPATH.'views/footer.php'); ?> 
 </html>

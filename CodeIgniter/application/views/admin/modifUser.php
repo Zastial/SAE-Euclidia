@@ -16,7 +16,7 @@ $email = empty(set_value('email')) ? $this->session->user["email"] : set_value('
     <link rel="stylesheet" href=<?= base_url("css/modifyAccount.css")?>>
 
 
-    <title>Modifier mon compte</title>
+    <title>Modifier le compte</title>
 </head>
 
 <style>
@@ -24,13 +24,21 @@ $email = empty(set_value('email')) ? $this->session->user["email"] : set_value('
 </style>
 <body>
     
-    <?php require_once('header.php'); ?>
+    <?php require_once(APPPATH.'views/header.php'); ?>
     
     <section>
 
+        <?php
+            $url = site_url("admin/users");
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                $url = htmlspecialchars($_SERVER['HTTP_REFERER']); 
+            }
+        ?>
+        <a class="btn btn-orange" href="<?=$url?>"> <img src="" alt=""> < Retour </a>
 
         <?php echo form_open('admin/modifUser/'.$user->getId()); ?>
             <div class="form-container">
+                
     
                 <div class="form-head">
                     <h1>Modifier les informations de l'utilisateur</h1>
@@ -68,11 +76,7 @@ $email = empty(set_value('email')) ? $this->session->user["email"] : set_value('
                 </div>
             </div>
         </form>
-        <div class="back-btn">
-            <a href="<?= site_url("user/account") ?>" target="_parent">
-                <button class="btn btn-orange btn-main">Retourner sur mon compte</button>
-            </a>
-        </div>
+       
 
 
 
@@ -82,6 +86,6 @@ $email = empty(set_value('email')) ? $this->session->user["email"] : set_value('
 </body>
 
 
-    <?php require_once('footer.php'); ?>
+    <?php require_once(APPPATH.'views/footer.php'); ?>
 
 </html>

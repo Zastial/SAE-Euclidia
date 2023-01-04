@@ -3,7 +3,7 @@ $checked = array();
 if (isset($_GET['categorie'])) {
     $checked = $_GET['categorie'];
 }
-$filter = 0;
+$filter = "";
 if (!empty($_GET['tri'])) {
     $filter = htmlentities($_GET['tri']);
 }
@@ -60,7 +60,8 @@ if ($max >= 1000) {
 
             <!-- FILTER/SEARCH PRODUCT -->
             <div class="search">
-                <form class="form-content" method="get" action=<?= site_url("product/find")?>>
+                <form class="form-content" method="get" id="form-filters-products" action=<?= site_url("product/find")?>>
+                    <input type="hidden" id="page-hidden" name="page" value="1">
                     <div class="input-container">
                         <div class="input">
                             <img class="input-icon" src="<?=base_url("assets/icon/icon-search.svg")?>" alt="">
@@ -73,7 +74,7 @@ if ($max >= 1000) {
                             <?php foreach ($categories as $cat): ?>
                                 <div class="one-categ">
                                     <?php $categId = $cat->getId() ;?>
-                                    <input class="input-with-icon" type="checkbox" id=<?=$categId?> name='categorie[]' value=<?=$categId?> <?php if (in_array($categId, $checked)) {echo 'checked';}?> />
+                                    <input class="" type="checkbox" id=<?=$categId?> name='categorie[]' value=<?=$categId?> <?php if (in_array($categId, $checked)) {echo 'checked';}?> />
                                     <label for=<?= $categId ?>> <?=$cat->getLibelle()?> </label>
                                 </div>
                             <?php endforeach; ?>
@@ -85,13 +86,13 @@ if ($max >= 1000) {
                             <?php 
                             
                             $options = array('- Aucun filtre -', 'Tri par prix croissant', 'Tri par prix décroissant');
-
+                            $values = array('aucun', 'prix-asc', 'prix-desc');
                             for ($i=0;$i<count($options);$i++) {
                                 $balise = "<option";
-                                if ($filter == $i) {
+                                if ($filter == $values[$i]) {
                                     $balise = $balise . " selected";
                                 } 
-                                $balise = $balise . " value=\"".$i."\">".$options[$i]."</option>";
+                                $balise = $balise . " value=\"".$values[$i]."\">".$options[$i]."</option>";
                                 echo $balise;
                             }
                             
@@ -116,8 +117,8 @@ if ($max >= 1000) {
                     </div>
 
 
-                    <button class="btn btn-black-200 btn-large" id="filter">Filtrer</button>
-                    <button class="btn btn-black-200 btn-large" id="reset">Réinitialiser les filtres</button>
+                    <button type="submit" class="btn btn-black-200 btn-large" id="filter">Filtrer</button>
+                    <button type="button" class="btn btn-black-200 btn-large" id="reset">Réinitialiser les filtres</button>
                 </form>
             </div>
             
@@ -142,16 +143,28 @@ if ($max >= 1000) {
             
         </div>
         <div class="page-components">
-            <a href="<?=base_url()."Product/find?page=".$page-1?>"><button class="btn-nav">Page Précédente</button></a>
+            <button class="btn-nav" id="btn-page-prev">Page Précédente</button>
             <p><?="Page " . $page . " sur " . $endPage?></p>
-            <a href="<?=base_url()."Product/find?page=".$page+1?>"><button class="btn-nav">Page Suivante</button></a>
+            <button class="btn-nav" id="btn-page-next">Page Suivante</button>
         </div>
 
     </section>
     <script src="<?php echo base_url("js/notiflix-aio-3.2.5.min.js"); ?>"></script>
     <script type="text/javascript">
-
+        $(function(){
+            $('#btn-page-prev').click(function(){
+                $('#page-hidden').val('<?=$page-1?>');
+                $('#form-filters-products').submit();
+            });
+        });
         
+        $(function(){
+            $('#btn-page-next').click(function(){
+                $('#page-hidden').val('<?=$page+1?>');
+                $('#form-filters-products').submit();
+            });
+        });
+
         $(function() {
             // function to reset all filters
             $('#reset').click(function() {

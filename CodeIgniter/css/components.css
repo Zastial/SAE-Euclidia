@@ -7,6 +7,10 @@ button {
     border: none;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 button:disabled {
     background-color: grey;
     opacity: 0.6;
@@ -24,11 +28,11 @@ button:disabled {
 }
 
 .btn-orange {
-    color: var(--black-200);
+    color: var(--text-clr);
     background-color: var(--orange);
 }
 .btn-blue-200 {
-    color: var(--black-100);
+    color: var(--text-clr);
     background-color: var(--blue-200);
 }
 
@@ -78,13 +82,14 @@ button:hover{
 
 .btn-add {
     background-color: green;
-
 }
 
 /* =========== INPUT =========== */
 
 
 .input {
+    display: flex;
+    align-items: center;
     position: relative;
 }
 
@@ -94,7 +99,6 @@ button:hover{
     position: absolute;
     z-index: 1;
     padding: 0px;
-    top: 25%;
     left: 10px;
     color: var(--span-clr);
 }
@@ -105,11 +109,86 @@ button:hover{
 }
 
 .input-with-icon {
-    padding: 14px 20px 14px 40px;
+    padding: 14px 0px 14px 40px;
 }
+
+
+/* input checkbox style (categories)*/
+input[type=checkbox] {
+    display: none;
+}
+
+input[type=checkbox]:checked + label {
+    background-color: var(--orange);
+}
+
+.categories label {
+    background-color: var(--grey);
+    border-radius: 12px;
+    padding: 10px 20px;
+    transition: 150ms all ease-in-out; 
+}
+   
+.categories label:hover {
+    background:var(--grey-200);
+    cursor:pointer;
+}
+
+
+
+
+
 
 select {
     padding: 7px 10px;
 }
 
+textarea {
+    width :calc(100% - 20px);
+    height: 6rem;
+}
+
+
+
+/* SELECT */ 
+
+select {
+    position: relative;
+    max-width: 200px;
+    -webkit-appearance: none;
+    padding: 7px 40px 7px 12px;
+    width: 100%;
+    border: 1px solid var(--input-border-clr);
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 1px 3px -2px #9098A9;
+    cursor: pointer;
+    transition: all 150ms ease;
+    color: var(--input-text-clr);   
+    background-image: url(../assets/icon/icon-arrow-down-back.svg);
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 24px;   
+}
+
+
+input[type="date"] {
+    max-width: 200px;
+    padding: 7px 12px;
+    width: 100%;
+    border: 1px solid var(--input-border-clr);
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 1px 3px -2px #9098A9;
+    cursor: pointer;
+    transition: all 150ms ease;
+    color: var(--input-text-clr );
+} 
+
+
+select:focus {
+    outline: none;
+    border-color: var(--orange);
+    box-shadow: 0 0 0 2px rgba(var(--orange),.2);
+}
 

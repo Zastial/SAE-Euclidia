@@ -32,17 +32,6 @@ section {
     gap: 1rem;
 }
 
-.contact .names input{
-    width: 95%;
-}
-
-.contact .mail input{
-    width: 28.5rem;
-}
-
-.contact .object input{
-    width: 28.5rem;
-}
 
 .btn-send {
     margin-top: 2rem;

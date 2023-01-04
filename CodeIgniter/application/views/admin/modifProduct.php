@@ -6,16 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modification de produit</title>
     <link rel="stylesheet" href=<?= base_url("css/modifProduct.css")?>>
+    <link rel="stylesheet" href=<?= base_url("css/productImage.css") ?>>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>
+    <script>var base_url = '<?php echo base_url() ?>';</script>
 </head>
 <body>
     <?php require_once(APPPATH.'views/error.php'); ?>
     <?php require_once(APPPATH.'views/header.php'); ?>
 
     <section>
-        <a class="link-nav" href=<?= site_url("admin/products")?>> <img src="" alt=""> < Retour </a>
+        <?php
+            $url = site_url("admin/products");
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                $url = htmlspecialchars($_SERVER['HTTP_REFERER']); 
+            }
+        ?>
+        <a class="btn btn-orange" href="<?=$url?>"> <img src="" alt=""> < Retour </a>
         
-        
-        <h1>Modification du produit </h1>
+        <h1>Modification du produit</h1>
 
         <?php echo form_open("admin/modifProduct/".$produit->getId()) ?>
             <div>
@@ -32,50 +43,31 @@
             </div>   
     
 
-            <div class="categories-container">
-                <label for="categorie">Catégorie du produit : </label>
-                <div class="categorie-items">
+         
 
-                    <!--A REVOIR / SIMPLIIER --->
-
-
-
-
-                    <?php foreach ($categories as $categorie) : ?>
-                        <?php $val = false ?>
-                        <?php foreach ($affectations as $affectation) : ?>
-                            <?php if($produit->getID() == $affectation->getIdProduit() && $categorie->getID() == $affectation->getIdCategorie()) : ?>
-                                <input type="checkbox" id="categories" name="categories[]" value="<?php echo $categorie->getId(); ?>" checked>
-                                <label for="categorie"><?php echo $categorie->getLibelle(); ?></label>
-                                <?php $val = true ?>
-                            <?php endif ?>
-                        <?php endforeach ?>
-                        <?php if(!$val): ?>
-                            <input type="checkbox" id="categories" name="categories[]" value="<?php echo $categorie->getId(); ?>">
-                            <label for="categorie"><?php echo $categorie->getLibelle(); ?></label>
-                        <?php endif ?>
-                    <?php endforeach ?>
-
-
-
-                    
-                </div>
+            <div class="categories">
+                <?php foreach($categories as $categorie): ?>
+                    <input type="checkbox" id="categories" name="categories[]" value="<?php echo $categorie->getId(); ?>" <?php if (in_array($categorie, $affectations)) {echo 'checked';}?>>
+                    <label for="categories"><?php echo $categorie->getLibelle(); ?></label>
+                <?php endforeach ?>
             </div>
+            
+     
     
             <div class="available-container">
                 <label for="disponible">Disponibilité du produit : </label>
                 <select name="disponible" id="disponible">
-                    <option value="<?php echo ($produit->getDisponible()) ? "oui" : "non" ?>"><?php echo ($produit->getDisponible()) ? "oui" : "non" ?></option>
-                    <option value="<?php echo ($produit->getDisponible()) ? "oui" : "non" ?>"><?php echo ($produit->getDisponible()) ? "non" : "oui" ?></option>
+                    <option value="oui" <?php if ($produit->getDisponible()) {echo "selected";}?>>Disponible</option>
+                    <option value="non" <?php if (!$produit->getDisponible()) {echo "selected";}?>>Indisponible</option>
                 </select>
             </div>
-            
+
             <input class="btn btn-main btn-orange" type="submit" value="Modifier le produit">
     
         </form>
     
     </section>
-    
-    <?php require_once(APPPATH.'views/footer.php'); ?>
+    <script type="text/javascript" src=<?=base_url("js/productImage.js")?>></script>
 </body>
+<?php require_once(APPPATH.'views/footer.php'); ?>
 </html>

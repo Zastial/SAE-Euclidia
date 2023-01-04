@@ -45,7 +45,7 @@ if (isset($this->session->user["status"])) {
                     <a href=<?=site_url('admin/users')?> >
                         <div class="table">
                             <img class="icon-side-bar" src="<?= base_url("assets/icon/icon-rect.svg"); ?>" alt="">
-                            <p>Utilisateur</p>
+                            <p>Utilisateurs</p>
                         </div>
                     </a>
                 <?php endif; ?>
@@ -58,11 +58,16 @@ if (isset($this->session->user["status"])) {
                         </div>
                     </a>
                 <?php endif; ?>
-                
 
-                
+                <?php if ($status == "Administrateur"): ?>
+                        <a href=<?=site_url('admin/factures')?> >
+                            <div class="table">
+                                <img class="icon-side-bar" src="<?= base_url("assets/icon/icon-rect.svg"); ?>" alt="">
+                                <p>Factures</p>
+                            </div>
+                        </a>
+                <?php endif; ?>
 
-               
                
             </div>
             

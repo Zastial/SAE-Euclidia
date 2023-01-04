@@ -11,7 +11,7 @@ const enableDarkMode = () => {
     // 2. Update darkMode in localStorage
     localStorage.setItem('darkMode', 'enabled');
     // 3. Change the icon
-    logo.setAttribute("src", "/assets/image/logo_euclidia_white.svg")
+    if (logo != null)logo.setAttribute("src", "/assets/image/logo_euclidia_white.svg");
 }
 
 const disableDarkMode = () => {
@@ -20,29 +20,28 @@ const disableDarkMode = () => {
     // 2. Update darkMode in localStorage 
     localStorage.setItem('darkMode', null);
     // 3. Change the icon
-    logo.setAttribute("src", "/assets/image/logo_euclidia.svg")
+    if (logo != null)logo.setAttribute("src", "/assets/image/logo_euclidia.svg");
 }
 
 // If the user already visited and enabled darkMode
 // start things off with it on
 if (darkMode === 'enabled') {
     enableDarkMode();
-    document.getElementById("checkbox-switcher").checked = true;
+    if (document.getElementById("checkbox-switcher")!=null)document.getElementById("checkbox-switcher").checked = true;
 }
-
-// When someone clicks the button
-darkModeToggle.addEventListener('click', () => {
+if (darkModeToggle!=null){
+    // When someone clicks the button
+    darkModeToggle.addEventListener('click', () => {
+        
+        // get their darkMode setting
+        darkMode = localStorage.getItem('darkMode');
     
-    // get their darkMode setting
-    darkMode = localStorage.getItem('darkMode');
-
-    // if it not current enabled, enable it
-    if (darkMode !== 'enabled') {
-        enableDarkMode();
-        console.log("light");
-        // if it has been enabled, turn it off  
-    } else {
-        disableDarkMode();
-        console.log("dark");
-    }
-});
+        // if it not current enabled, enable it
+        if (darkMode !== 'enabled') {
+            enableDarkMode();
+            // if it has been enabled, turn it off  
+        } else {
+            disableDarkMode();
+        }
+    });
+}

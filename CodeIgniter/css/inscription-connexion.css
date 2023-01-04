@@ -1,4 +1,16 @@
 
+body{
+    background-color: var(--grey);
+    color: var(--black-100);
+}
+
+a {
+    color: var(--input-text-clr);
+}
+a:hover {
+    transition: all 0.250s ease-out;
+    color: var(--orange);
+}
 
 .form-container {
     display: flex;
@@ -35,36 +47,3 @@
 .connexion-email {grid-area: email;}
 .connexion-password { grid-area: password;}
 
-
-/* style de barres*/
-.bars {
-    position: absolute;
-    display: flex;
-    gap: 10rem;
-    margin-top: 2rem;
-}
-
-.bars .bar-black {
-    height: 450px;
-    border-left: 35px solid black;
-    border-radius: 25px;
-    transform: rotate(45deg);
-}
-
-.bars .bar-grey {
-    height: 600px;
-    border-left: 35px solid grey;
-    border-radius: 25px;
-    transform: rotate(45deg);
-    margin-left: -3rem;
-    margin-top: -6rem;
-}
-
-.bars .bar-orange {
-    height: 600px;
-    border-left: 35px solid orange;
-    border-radius: 25px;
-    transform: rotate(45deg);
-    margin-left: -10rem;
-    margin-top: 0rem;
-}

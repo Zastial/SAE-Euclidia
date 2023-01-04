@@ -1,0 +1,32 @@
+
+section {
+    padding: 4rem;
+}
+
+.main-content {
+    max-width: 1000px;
+    margin: auto;
+}
+
+h1 {
+    padding: 2rem;
+}
+
+.form-content,
+.upload {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+
+
+.file-container {
+    display: flex;
+    align-items: center;
+    gap : 30px;
+}
+
+.file-container label {
+    white-space: nowrap;
+}

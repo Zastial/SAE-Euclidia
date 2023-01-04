@@ -3,6 +3,8 @@
 :root {
     --black-100: #111111;
     --black-200: #2F2F2F;
+    --text-clr: #2F2F2F;
+    --text-white: #ffffff;
     --orange: #FFAE27;
     --blue--link: #0000EE;
     --red: #de1b1bf0;
@@ -17,11 +19,12 @@
     --grey-300: #f1f1f1;
     --grey-200: #999999;
     --white-100: #FFFDFA;
-
     --green: #06C925;
     --filter-orange-img: invert(67%) sepia(79%) saturate(566%) hue-rotate(338deg) brightness(104%) contrast(101%);
     --filter-button-img: invert(0%) sepia(20%) saturate(8%) hue-rotate(339deg) brightness(91%) contrast(87%);
+    --filter-account-icon: none;
     --box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    --theme-slider-background-image : url(../../assets/image/light-mode.png);
     font-family: 'Poppins', sans-serif;
 
 }
@@ -29,6 +32,7 @@
 .darkmode {
     --black-100: #ffffff;
     --black-200: #5e5e5e;
+    --btn-text-clr: #fffff;
     --orange: #FFAE27;
     --blue--link: #0000EE;
     --red: #de1b1bf0;
@@ -46,8 +50,9 @@
     --green: #06C925;
     --filter-orange-img: invert(67%) sepia(79%) saturate(566%) hue-rotate(338deg) brightness(104%) contrast(101%);
     --filter-button-img: invert(91%) sepia(94%) saturate(2%) hue-rotate(229deg) brightness(105%) contrast(100%);
-    --box-shadow: 0px 8px 16px 0px rgba(253, 253, 253, 0.2);
-
+    --filter-account-icon: invert(99%) sepia(43%) saturate(5%) hue-rotate(121deg) brightness(104%) contrast(87%);
+    --box-shadow: 0px 0px 0px 0px rgba(253, 253, 253, 0.2);
+    --theme-slider-background-image : url(../../assets/image/dark-mode.png);
     font-family: 'Poppins', sans-serif;
 }
 
@@ -63,7 +68,7 @@ input {
     border: 1px solid var(--input-border-clr);
     color: var(--input-text-clr);
     padding: 14px 20px;
-    width: 100%;
+    width :calc(100% - 20px);
 }
 
 input:not(:empty):not(:focus):invalid {
@@ -96,41 +101,6 @@ input[type=password]:active {
 }
 
 
-
-/* input checkbox */
-
-input[type="checkbox"] {
-    color: var(--orange);
-    width: 1.15em;
-    height: 1.15em;
-    border: 0.15em solid var(--orange);
-    border-radius: 0.15em;
-    transform: translateY(-0.075em);
-    place-content: center;
-    margin: 10px;
-}
-
-input[type="checkbox"]::before {
-    content: "";
-    width: 1em;
-    height: 1em;
-    background-color: var(--orange);
-    transform: scale(0);
-    transition: 120ms transform ease-in-out;
-    transform-origin: bottom left;
-    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-}
-
-input[type="checkbox"]:checked::before {
-    transform: scale(1);
-}
-
-input[type="checkbox"]:focus {
-    outline: max(2px, 0.15em) solid var(--orange);
-    outline-offset: max(2px, 0.15em);
-}
-
-
 /*when label required : display red star*/
 .require:after {
     content: " *";
@@ -146,5 +116,5 @@ input[type="checkbox"]:focus {
 
 
 section {
-    min-height: calc(100vh - 240px - 80px);
+    min-height: calc(100vh - 100px - 80px);
 }

@@ -1,6 +1,8 @@
 
- 
-
+ section {
+    background-color: var(--white-100);
+    color: var(--black-100);
+}
 
 
 /* ==== CSS HEADER ==== */
@@ -87,6 +89,13 @@ nav {
     padding: 0px 30px;
 }
 
+.account-icon{
+    filter: var(--filter-account-icon);
+}
+
+.user-name {
+    color:var(--black-100);
+}
 
 .btn-nav {
     border-radius: 6px;
@@ -137,6 +146,18 @@ nav {
     z-index: 6;
 }
 
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown .dropbtn {
+    color: var(--black-100);
+}
+
+.dropdown:hover .dropbtn {
+    background-color: var(--white-100); /*FFFFFF*/
+}
+
 .dropdown-content {
     display: none;
     position: absolute;
@@ -157,13 +178,6 @@ nav {
     background-color: var(--grey-300);
 }
 
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown:hover .dropbtn {
-    background-color: var(--white-100); /*FFFFFF*/
-}
 
 /* ==== SLIDER THEME ==== */
 
@@ -188,7 +202,8 @@ nav {
 }
 
 .slider {
-  background-color: #ccc;
+  
+  background-color: var(--orange);
   bottom: 0;
   cursor: pointer;
   left: 0;
@@ -199,7 +214,7 @@ nav {
 }
 
 .slider:before {
-  background-color: #fff;
+
   bottom: 4px;
   content: "";
   height: 26px;
@@ -210,7 +225,7 @@ nav {
 }
 
 input:checked + .slider {
-  background-color: var(--orange);
+    background-color: rgb(158, 158, 168);
 }
 
 input:checked + .slider:before {
@@ -223,6 +238,8 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+  background: var(--theme-slider-background-image);
+  background-size: cover;
 }
 
 

@@ -1,7 +1,13 @@
 $( function() {
     $( "#sortable" ).sortable({
         animation: 150,
-        handle: '.infos'
+        handle: '.img-container',
+
+        onSort: function (evt) {
+            $('li span').each(function(index, element) {
+                $(this).text(index+1);
+            });
+        }
     });
 });
 
@@ -25,10 +31,12 @@ $(function() {
         }
     });
 
-    // when submitting the form, we change the order of the images in the input of type file
-    $('form').on('submit', function (e) {
+    $("form").submit(function(e) {
+        e.preventDefault();    
+
+        // update images in file upload
         let list = new DataTransfer();
-        $('.infos').each(function() {
+        $('.img-container').each(function() {
             order = $(this).attr('data-id');
             for (let image of fileBuffer) {
                 if (image.id == order) {
@@ -39,8 +47,21 @@ $(function() {
             }
         });
         $('#file-upload').prop('files', list.files);
-        console.log(list);
-        return true;
+        var fd = new FormData($('form')[0]);
+        // ajax call
+        $.ajax({
+            type: "POST",
+            url: base_url + "/admin/addProductAjax", 
+            data: fd,
+            cache:false,
+            processData:false,
+            contentType:false,
+            success: 
+                function(data){
+                    alert(data);  //as a debugging message.
+                    console.log(data);
+                }
+        });
     });
 
 });
@@ -52,7 +73,11 @@ function appendImage(image, index) {
         var imageBalise = "image-"+index
         $('#sortable').append(
             $('<li/>', {class: imageBalise}).append(
-                $('<div/>', {class: "infos", "data-id": index})
+                $('<div/>', {class: "img-container", "data-id": index}).append(
+                    $('<span/>').append(
+                        index+1
+                    )
+                )
             ).append(
                 $('<div/>', {class: "link-delete", onclick: 'removeImage('+index+')'}).append(
                     $('<img/>', {src: base_url+"assets/icon/icon-delete.svg", alt: "supprimer"})
@@ -64,7 +89,7 @@ function appendImage(image, index) {
         // add image src when reader is ready
         reader.onload = function(event) {
             
-            $('.'+imageBalise+' .infos').append(
+            $('.'+imageBalise+' .img-container').append(
                 $('<img/>', {src: event.target.result})
             )
         }

@@ -12,6 +12,7 @@ class FactureEntity {
     private int $code_postal;
     private string $paiement;
 
+    private string $email_utilisateur;
 
     /**
 	 * @return int

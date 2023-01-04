@@ -24,6 +24,41 @@ class CategorieModel extends CI_Model {
 		return $response;
     }
 
+	public function findQueryBuilder(FiltreInterface $filtre) {
+		$filtres = $filtre->getFiltres();
+		try {
+			$this->db->select('*');
+			$this->db->from('categorie');
+
+			if (isset($filtres['name'])) {
+				$this->db->group_start();
+				$mots = explode(' ',$filtres['name']);
+				foreach($mots as $mot){
+					$this->db->or_like('categorie.libelle', $mot);
+				}
+				$this->db->group_end();
+			}
+
+			if (isset($filtres['tri'])) {
+				switch($filtres['tri']) {
+					case Tri::NOMCROISSANT:
+						$this->db->order_by('categorie.libelle', 'asc');
+						break;
+					case Tri::NOMDECROISSANT:
+						$this->db->order_by('categorie.libelle', 'desc');
+						break;
+				}
+			}
+
+			$query = $this->db->get();
+			$response = $query->custom_result_object("CategorieEntity");
+			return $response;
+
+		} catch (Exception $e) {
+			return null;
+		}
+
+	}
 
 	/**
 	 * La Fonction addCategorie ajoute une categorie dans la base de donnée
@@ -72,6 +107,16 @@ class CategorieModel extends CI_Model {
 		} catch (Exception $e){
 			return null;
 		}
+	}
+
+	public function findByModelId(int $id) {
+		$this->db->select('categorie.*');
+		$this->db->from('categorie');
+		$this->db->join('affectation', 'categorie.id_categorie = affectation.id_categorie');
+		$this->db->where('affectation.id_produit =', $id);
+		$q = $this->db->get();
+		$response = $q->custom_result_object("CategorieEntity");
+		return $response;
 	}
 
 

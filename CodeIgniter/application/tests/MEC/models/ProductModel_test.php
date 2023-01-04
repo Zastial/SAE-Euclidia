@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 class ProductModel_test extends UnitTestCase {
 
@@ -162,12 +162,13 @@ class ProductModel_test extends UnitTestCase {
 
 	public function test_findQueryBuilder() {
 		$expected = [
-				'titre' => 'Default Cube',
-				'prix' => 60.3,
-				'description' => 'Default Blender cube - can not get better!',
-				'disponible' => 1];
+			'titre' => 'Default Cube',
+            'prix' => 60.3,
+            'description' => 'Default Blender cube - can not get better!',
+            'disponible' => 1];
 
-		$filtre = new FiltreName(new Filtre,"Cube");
+		$filtre = new FiltreName(new Filtre(),"Cube");
+		$filtre = new FiltreAvailable($filtre, true);
 		$list = $this->obj->findQueryBuilder($filtre);
 
 		$this->assertTrue(is_a($list[0], "ProductEntity"));
@@ -203,18 +204,16 @@ class ProductModel_test extends UnitTestCase {
 
 	public function test_updateProduct() {
 		$expected = [
-			'titre' => 'Louis Painter',
-			'prix' => 10.1,
+			'titre' => 'Monke',
+			'prix' => 213.40,
 			'description' => 'Le major de Promo 3 fois de suite',
 			'disponible' => 1
 		];
 
-
-		$produitChange = $this->obj->findById(4);
+		$produitChange = $this->obj->findById(2);
 
 		$produitChange -> setDescription('Le major de Promo 3 fois de suite');
 		$this->obj->updateProduct($produitChange, array());
-
 
 		$this->assertTrue(is_a($produitChange, "ProductEntity"));
 		$this->assertEquals($produitChange->getTitre(), $expected['titre']);

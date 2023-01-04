@@ -5,6 +5,16 @@ if (isset($this->session->user["status"])) {
     $status = "";
 }
 
+$tri = "";
+if (!empty($_GET['tri-categ'])) {
+    $tri = htmlentities($_GET['tri-categ']);
+}
+
+$rechercher = "";
+if (!empty($_GET['rechercher'])) {
+    $rechercher = htmlentities($_GET['rechercher']);
+}
+
 
 ?>
 
@@ -32,81 +42,53 @@ if (isset($this->session->user["status"])) {
 
             <!-- LEFT SIDE BAR -->
             
-            <div class="side-bar">
-                <h1>Tables</h1>
-                <div class="side-bar-container">
-                    <?php if ($status == "Responsable" || $status == "Administrateur"): ?>
-                        <a href=<?=site_url('admin/products')?> >
-                            <div class="table">
-                                <img class="icon-side-bar" src="<?= base_url("assets/icon/icon-rect.svg"); ?>" alt="">
-                                <p>Produits</p>
-                            </div>
-                        </a>
-                    <?php endif; ?>   
-        
-                    <?php if ($status == "Administrateur"): ?>
-                        <a href=<?=site_url('admin/users')?> >
-                            <div class="table">
-                                <img class="icon-side-bar" src="<?= base_url("assets/icon/icon-rect.svg"); ?>" alt="">
-                                <p>Utilisateur</p>
-                            </div>
-                        </a>
-                    <?php endif; ?>
-        
-                    <?php if ($status == "Responsable" || $status == "Administrateur"): ?>
-                        <a href=<?=site_url('admin/categories')?> >
-                            <div class="table active">
-                                <img class="icon-side-bar" src="<?= base_url("assets/icon/icon-rect.svg"); ?>" alt="">
-                                <p>Catégories</p>
-                            </div>
-                        </a>
-                    <?php endif; ?>
-                    
-
-                
-                
-                </div>
-                
-            </div>
+            <?php require_once(APPPATH.'views/admin/dashboard _component.php'); ?> 
         
             <!-- MAIN CONTENT -->
             <div class="main">
                 
                 <?php if ($status == "Responsable" || $status == "Administrateur"): ?>
                     
-
                     <div class="header">
                         <h1>Catégories</h1>
-
-                        <div class="input-container">
-                            <div class="input">
-                                <img class="input-icon" src="<?=base_url("assets/icon/icon-search.svg")?>" alt="">
-                                <input class="input-with-icon" type="text" name="rechercher" id="rechercher" placeholder="Rechercher" >
-
-                            </div>
-                        </div>
-                        <p id="test"> le test</p>
-
-                        <!--  finir le système de tri comme dans le shop-->
-                        <select name="tri" id="tri">
-                                <?php 
-                                
-                                $options = array('- Aucun filtre -', 'Tri par nom', 'Tri par prix décroissant');
-
-                                for ($i=0;$i<count($options);$i++) {
-                                    $balise = "<option";
-                                    if ($filter == $i) {
-                                        $balise = $balise . " selected";
-                                    } 
-                                    $balise = $balise . " value=\"".$i."\">".$options[$i]."</option>";
-                                    echo $balise;
-                                }
-                                
-                                ?>
-                            </select>
                         <a class="btn btn-large btn-orange btn-shadow-orange" href= <?= site_url("Admin/addCategorie")?>>+ Ajouter une Catégorie</a>
                     </div>
 
+                    <form class="form-content" method="get" id="form-filters-categories" action=<?= site_url("admin/categories")?>>
+                        <div class="input-container">
+                            <div class="input">
+                                <img class="input-icon" src="<?=base_url("assets/icon/icon-search.svg")?>" alt="">
+                                <input class="input-with-icon" value="<?=$rechercher?>" type="text" name="rechercher" id="rechercher" placeholder="Rechercher" >
+
+                            </div>
+                        </div>
+                        
+                        <div class="filters">
+                            <div class="filter">
+                                <label for="tri-prix">Trier :</label>
+                                <select name="tri-categ" id="tri-categ">
+                                    <?php 
+                                    
+                                    $options = array('- Aucun filtre -', 'Tri par nom croissant', 'Tri par nom décroissant');
+                                    $values = array('aucun', 'nom-asc', 'nom-desc');
+            
+                                    for ($i=0;$i<count($options);$i++) {
+                                        $balise = "<option";
+                                        if ($tri == $values[$i]) {
+                                            $balise = $balise . " selected";
+                                        } 
+                                        $balise = $balise . " value=\"".$values[$i]."\">".$options[$i]."</option>";
+                                        echo $balise;
+                                    }
+                                    
+                                    ?>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-large btn-orange btn-shadow-orange">Filtrer</button>
+                        </div>
+                        
+                    
+                    </form>
                         
                     <div id="Categories" class="content">
                     
@@ -117,28 +99,33 @@ if (isset($this->session->user["status"])) {
                             <p class="head-center">Action</p>
                         </div>
 
+                        <?php if (!empty($categories)) :?>
+                            <?php foreach ($categories as $cat) :?>
 
-                        <?php foreach ($categories as $cat) :?>
+                                    <div class="grid item">
+                                        <p><?= $cat->getId()?></p>
+                                        <p id="libelle"><?= $cat->getLibelle()?></p>
 
-                                <div class="grid item">
-                                    <p><?= $cat->getId()?></p>
-                                    <p id="libelle"><?= $cat->getLibelle()?></p>
+                                        <div class="icon-container item-center">
+                                            <a href="<?=site_url("Admin/modifCategorie/".$cat->getId()) ?>">
+                                                <img class="icon" src="<?=base_url("assets/icon/icon-pen.svg")?>" alt="Modifier la catégorie">
+                                            </a>
 
-                                    <div class="icon-container item-center">
-                                        <a href="<?=site_url("Admin/modifCategorie/".$cat->getId()) ?>">
-                                            <img class="icon" src="<?=base_url("assets/icon/icon-pen.svg")?>" alt="Modifier la catégorie">
-                                        </a>
+                                        
 
-                                    
-
-                                        <a href="<?=site_url("Admin/removeCategorie/".$cat->getId()) ?>">
-                                            <img class="icon icon-delete" src="<?=base_url("assets/icon/icon-delete.svg")?>" alt="Supprimer la catégorie">
-                                        </a>
+                                            <a href="<?=site_url("Admin/removeCategorie/".$cat->getId()) ?>">
+                                                <img class="icon icon-delete" src="<?=base_url("assets/icon/icon-delete.svg")?>" alt="Supprimer la catégorie">
+                                            </a>
+                                        </div>
+                                        
                                     </div>
-                                    
-                                </div>
 
-                        <?php endforeach ; ?>
+                            <?php endforeach ; ?>
+                        <?php else : ?>
+                            <div class="grid item">
+                                <p>Aucune catégorie trouvée</p>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 <?php endif; ?>
             </div>
@@ -146,7 +133,7 @@ if (isset($this->session->user["status"])) {
             <button onclick="topFunction()" id="myBtn" ><img class="icon-up" src="<?=base_url("assets/icon/icon-arrow-down.svg")?>" alt=""></button>
         </div>
 
-        <script src="<?=base_url("js/tabAdmin.js")?>"></script>
+        <script src="<?= base_url("js/tabAdmin.js")?>"></script>
     </body>
 </html>
 

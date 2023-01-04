@@ -100,7 +100,6 @@ class ShoppingCart extends CI_Controller{
             $this->UserModel->updateUser($user);
         }
 
-
         //TODO form validation (i am very lazy)
         $f = new FactureEntity();
         $f->setDate(date('Y-m-d H:i:s'));

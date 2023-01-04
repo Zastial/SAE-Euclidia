@@ -1,11 +1,17 @@
 
-status facture  
+--------------------------------------------
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+CAHIER DE RECETTE AVEC LES FONCTIONS A FAIRE
+MARKDOWN
+ANGLAID
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+--------------------------------------------
 
 Design Pattern
 
  -  decorateur   fait
  -  factory (utilisateur) fait
- -  delegation (class et array id dans la session) adapter le code
+ -  
 
  + faire le mini rapport (voir mail Lanoix)
 
@@ -14,7 +20,6 @@ Design Pattern
                         TODO A FAIRE
 
 
--logo euclidia version white et black
 
 
 #

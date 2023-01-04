@@ -1,5 +1,4 @@
 <?php 
-
     $connected = (isset($this->session->user)) ? true : false;
     $status = ($connected) ? $this->session->user["status"] : "";
 ?>
@@ -42,19 +41,19 @@
                             
                                 <a class="dropbtn" href=<?=site_url("User/account")?>>
                                     <img class="nav-icon account-icon" src=<?= site_url("assets/icon/icon-account-circle.svg") ?> alt="account icon">
-                                    <p ><?= $this->session->user["nom"]." ".$this->session->user["prenom"] ?> </p>
+                                    <p><?= $this->session->user["nom"]." ".$this->session->user["prenom"] ?> </p>
                                 </a>
                             
                             
                             <div class="dropdown-content">
                                 <a href=<?=site_url("User/account")?>> Compte</a>
-                                <?php if ($status == UserStatus::ADMINISTRATEUR || UserStatus::RESPONSABLE) : ?>
+                                <?php if ($status == "Administrateur" || $status == "Responsable") : ?>
                                         <html>
                                             <a href=<?= site_url("admin") ?>>Gestion</a>
                                         </html>
                                 <?php endif; ?>
 
-                                <?php if ($status == UserStatus::ADMINISTRATEUR): ?>
+                                <?php if ($status == "Utilisateur"): ?>
                                     <a href=<?=site_url("User/commandes") ?>>Mes commandes</a>
                                 <?php endif; ?>  
                                 <a href=<?=site_url("User/logout")?>> Déconnexion</a>

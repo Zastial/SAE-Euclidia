@@ -38,9 +38,10 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('confirm-password', 'Confirmation du mot de passe', 'required|matches[password]',
             array('required' => 'Vous devez confirmer le mot de passe', 'matches' => 'Les mots de passe ne correspondent pas'));
 
+        if ($this->config->item("captcha")) {
             $this->form_validation->set_rules('g-recaptcha', 'captcha', 'callback_verifyCaptcha',
-            array('verifyCaptcha'=>'Le captcha est invalide.'));
-            
+                array('verifyCaptcha'=>'Le captcha est invalide.'));
+        }
         if ($this->form_validation->run() == FALSE) {
             $this->load->view("inscription");
         } else {
@@ -134,15 +135,16 @@ class User extends CI_Controller {
         redirect('Home');
     }
 
-    public function modifyProfil() {
+    // public function modifyProfil() {
         
-        // redirect to home if user is not connected
-        if (!isset($this->session->user)) {
-            redirect('Home');
-            die();
-        }
-        $this->load->view('modifyAccount');
-    }
+    //     // redirect to home if user is not connected
+    //     if (!isset($this->session->user)) {
+    //         redirect('Home');
+    //         die();
+    //     }
+    //     $this->load->view('modifyAccount');
+    // }
+    
     public function modifyPersonnalAddress() {
         
         // redirect to home if user is not connected
@@ -294,7 +296,18 @@ class User extends CI_Controller {
         $f = $this->FactureModel->findById($id);
         if (is_null($f)) redirect('User/account');
         $u = $this->UserModel->findById($f->getUserId());
-        if ($u->getId() != $this->UserModel->findByEmail($this->session->user["email"])->getId()) redirect('User/account');
+        
+        if (!isset($this->session->user)) {
+            redirect('User/account');
+        }
+
+        // if the bill does not belong to the user and if the user is not admin/resp, redirect to account page
+        if ($u->getId() != $this->UserModel->findByEmail($this->session->user["email"])->getId()) {
+            $status = $this->session->user["status"];
+            if ($status != "Administrateur" && $status != "Responsable") {
+                redirect('user/account');
+            }
+        }
         $a = $this->AchatModel->findById($id);
         $arr = array();
         foreach ($a as $ent){

@@ -25,7 +25,7 @@
 
 
     <a href=<?= site_url("Home") ?>>
-        <img src="/assets/image/logoEuclidia.png" alt="Euclidia" style="width: 12rem;">
+        <img src="/assets/image/logo_euclidia.svg" alt="Euclidia" id="euclidia-icon-header" style="width: 12rem;">
     </a>
 
         
@@ -75,15 +75,9 @@
         </div>
     </form>
 
-    <div class="bars">
-        <div class="bar-black"></div>
-        <div class="bar-grey"></div>
-        <div class="bar-orange"></div>
-    </div>
 
 
 
-
-    <!--<script src="< ?=base_url("js/dark_mode.js")?>"></script>-->
+    <script src="<?=base_url("js/dark_mode.js")?>"></script>
 </body>
 </html>

@@ -14,13 +14,16 @@
     
     <section>
 
+
+        <?php
+            $url = site_url("admin/categories");
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                $url = htmlspecialchars($_SERVER['HTTP_REFERER']); 
+            }
+        ?>
+        <a class="btn btn-orange" href="<?=$url?>"> <img src="" alt=""> < Retour </a>
         <?php echo form_open("admin/modifCategorie/".$categorie->getId()) ?>
-    
-    
-            <div class="return">
-                <a class="link-nav" href=<?= site_url("admin/categories")?>> <img src="" alt=""> < Retour </a>
-            </div>
-    
+        <h1>Ajouter une catégorie</h1>
     
             <label for="name">Nom de la categorie</label>
             <input type="text" name="name" id="name" value="<?php echo $categorie->getLibelle(); ?>">

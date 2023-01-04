@@ -21,6 +21,12 @@
     /*fff*/
     box-shadow: var(--box-shadow);
     /*rgba(0, 0, 0, 0.06)*/
+    border-radius: 3px;
+}
+
+.darkmode .side-bar {
+    border: 1px solid #ffffff63;
+    box-shadow: none;
 }
 
 .side-bar h1 {
@@ -69,29 +75,66 @@
     min-height: 100vh;
     width: 80%;
 }
+ /* FILTERS */
+.filters,
+.date-filter {
+    padding: 1rem 0rem;
+}
 
+.filters,
+.filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.filter label {
+    color:var(--black-100);
+    white-space: nowrap;
+}
+
+.date-filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 1rem;
+}
+
+
+
+/* GRID ELEMENT */ 
 .head p,
 .item p {
+    color: var(--black-100);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .header {
+    padding: 2rem;
     display: flex;
+    justify-content: space-between;
+    color: var(--black-100);
 }
+
 
 /*  */
 .visible {
+    padding: 6px 0px;
     color: var(--white-100);
     background-color: var(--green);
     border-radius: 4px;
 }
 .invisible {
+    padding: 6px 0px;
     color: var(--white-100);
     background-color: var(--red);
     border-radius: 4px;
 }
+
+
 
 
 /* grid */
@@ -115,9 +158,11 @@
 .item-center {
     display: flex;
     align-items: center;
-    justify-content: center ;
+    justify-content: center;
+    gap: 10px;
 }
 .item {
+    align-items: center;
     padding: 15px 100px;
     margin-bottom: 1px;
     color: var(--input-text-clr);
@@ -128,7 +173,15 @@
 .icon-container img {
     width: 24px;
     height: 24px;
-    
+}
+
+.icon-container a {
+    padding: 1px;
+}
+
+.icon-container a:hover {
+    transition: all 0.250s ease;
+    filter: var(--filter-orange-img);
 }
 
 .icon{

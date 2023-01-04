@@ -1,5 +1,6 @@
 <?php
 require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."ProductEntity.php";
+require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."CategorieModel.php";
 require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."AffectationModel.php";
 class ProductModel extends CI_Model {
 
@@ -86,8 +87,10 @@ class ProductModel extends CI_Model {
 				switch ($filtres['tri']) {
 					case Tri::PRIXCROISSANT:
 						$this->db->order_by('produit.prix', 'asc');
+						break;
 					case Tri::PRIXDECROISSANT:
 						$this->db->order_by('produit.prix', 'desc');
+						break;
 				}
 			}
 
@@ -100,7 +103,7 @@ class ProductModel extends CI_Model {
 			if (isset($filtres['maxPrice'])) {
 				$max = $filtres['maxPrice'];
 			}
-			$available = true;
+
 			if (isset($filtres['available'])) {
 				$available = $filtres['available'];
 			}
@@ -112,8 +115,6 @@ class ProductModel extends CI_Model {
 				$page=$filtres['page'];
 				if ($page<=0)$page=1;
 				$this->db->limit(12, ($page-1)*12);
-			} else {
-				$this->db->limit(12);
 			}
 			$query = $this->db->get();
 			$response = $query->custom_result_object("ProductEntity");
@@ -163,7 +164,12 @@ class ProductModel extends CI_Model {
 			$q = $this->db->query("CALL updateProduct(?,?,?,?,?)", array($product->getId(), $product->getTitre(), $product->getPrix(), $product->getDescription(), $product->getDisponible()));
 			$this->db->delete('affectation', array('id_produit' => $product->getID())); 
 
+			$this->load->model("CategorieModel");
 			$this->load->model("AffectationModel"); 
+
+			$selectedCategories = $this->CategorieModel->findByModelId($product->getId());
+			$this->AffectationModel->removeAffectations($product->getId(), array_diff($categories, $selectedCategories));
+
 			$this->AffectationModel->addAffectations($product->getId(), $categories);
 		} catch (Exception $e){
 			return null;
@@ -172,30 +178,22 @@ class ProductModel extends CI_Model {
 	}
 
 	/**
-	 * La fonction removeProduct permet de supprimer un produit.
-	 * ELLE NE DEVRAIT **JAMAIS** ÊTRE UTILISÉE!!!
+	 * Deletes a product based on its id (removes every record of it in achat, affectation and produit)
 	 * 
 	 * @param int | $productID
+	 * @return bool 
 	 */
 	public function removeProduct(int $productID) {
 		try {
 			$db_debug = $this->db->db_debug;
 			$this->db->db_debug = FALSE;
 			$this->db->delete('achat', array('id_produit' => $productID));
-
-			$db_debug = $this->db->db_debug;
-			$this->db->db_debug = FALSE;
 			$this->db->delete('affectation', array('id_produit' => $productID));
-
-			$db_debug = $this->db->db_debug;
-			$this->db->db_debug = FALSE;
-			$this->db->delete('favori', array('id_produit' => $productID));
-
-			$db_debug = $this->db->db_debug;
-			$this->db->db_debug = FALSE;
 			$this->db->delete('produit', array('id_produit' => $productID));
+			$this->db->db_debug = $db_debug;
+			return true;
 
-		} catch (Exception $e) {return null;} 
+		} catch (Exception $e) {return false;} 
 	}
 
 	public function findByFacture($id) {

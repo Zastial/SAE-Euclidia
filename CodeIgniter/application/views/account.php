@@ -37,7 +37,7 @@
                         <h4 class="bigbold">Mot de passe</h4>
                         <p>******</p>
                     </div>
-                    <a class="btn btn-orange btn-large" href="<?= site_url("User/modifyProfil") ?>" target="_parent">Modifier mes informations</a>
+                    <a class="btn btn-orange btn-large" href="<?= site_url("User/modify") ?>" target="_parent">Modifier mes informations</a>
                     
                     
                 </div>
@@ -66,8 +66,6 @@
                     <a class="btn btn-orange btn-large" href="<?= site_url("user/modifyPersonnalAddress");?>"> Modifier mon adresse</a>               
                 </div>
     
-                
-                <a href="" style="color : var(--red);">Supprimer le compte</a>
             </div>
     
           
@@ -89,15 +87,9 @@
                             
                         <?php endforeach; ?>
                     </div>
-                <?php endif ?>    
-    
+                <?php endif ?>   
             </div>
-                
-
         </div>    
-
-        
-        
 
 
     </section>    

@@ -2,6 +2,12 @@
 require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."FactureEntity.php";
 class FactureModel extends CI_Model {
    
+    public function findAll() {
+        $this->db->select('*');
+        $q = $this->db->get('facture');
+		$response = $q->custom_result_object("FactureEntity");
+		return $response;
+    }
     /**
      * La fonction findByUser permet de trouver les factures liées a un utilisateur via son ID
      * 
@@ -25,7 +31,6 @@ class FactureModel extends CI_Model {
         $this->db->select('*');
         $q = $this->db->get_where('facture', array('id_facture'=>$id));
         $res = $q->result();
-        $reduction = $res[0]->reduction;
         $row = $res[0];
         $f = new FactureEntity();
         $f->setId($row->id_facture);
@@ -40,6 +45,67 @@ class FactureModel extends CI_Model {
         $f->setPaiement($row->paiement);
 
 		return $f;
+    }
+
+    public function findQueryBuilder(FiltreInterface $filtre, int $userid=null) {
+        $filtres = $filtre->getFiltres();
+        try {
+            $this->db->select('*');
+            $this->db->from('facture');
+
+            if ($userid != null) {
+                $this->db->where('facture.id_utilisateur =', $userid);
+            }
+
+            if (isset($filtres["minDate"]) && !empty($filtres["minDate"])) {
+                $this->db->where('facture.date_facture >=', $filtres["minDate"]);
+            }
+
+            
+            if (isset($filtres["maxDate"]) && !empty($filtres["maxDate"])) {
+                $this->db->where('facture.date_facture <=', $filtres["maxDate"]. " 23:59:59.999");
+            }
+
+            if (isset($filtres["tri"])) {
+                switch($filtres["tri"]) {
+                    case Tri::NOMCROISSANT:
+                        $this->db->order_by('facture.id_utilisateur', 'asc');
+                        break;
+                    case Tri::NOMDECROISSANT:
+                        $this->db->order_by('facture.id_utilisateur', 'desc');
+                        break;
+                }
+            }
+            
+            if (isset($filtres["prix"])) {
+                switch ($filtres["prix"]) {
+                    case Tri::NOMCROISSANT:
+                        $this->db->order_by('facture.total', 'asc');
+                        break;
+                    case Tri::NOMDECROISSANT:
+                        $this->db->order_by('facture.total', 'desc');
+                        break;
+                }
+            }
+
+            if (isset($filtres["date"])) {
+                switch ($filtres["date"]) {
+                    case Tri::NOMCROISSANT:
+                        $this->db->order_by('facture.date_facture', 'asc');
+                        break;
+                    case Tri::NOMDECROISSANT:
+                        $this->db->order_by('facture.date_facture', 'desc');
+                        break;
+                }
+            }
+
+            $query = $this->db->get();
+			$response = $query->custom_result_object("FactureEntity");
+			return $response;
+            
+        } catch (Exception $e) {
+            return null;
+        }
     }
 
     /**

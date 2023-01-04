@@ -12,14 +12,13 @@
     <link rel="stylesheet" href="<?= base_url("css/components.css") ?>">
     
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 
     <title>Inscription</title>
 </head>
 <body>
 <?php require_once('error.php'); ?>
     <a href=<?= site_url("Home") ?>>
-        <img src="/assets/image/logoEuclidia.png" alt="Euclidia" style="width: 12rem;">
+        <img src="/assets/image/logo_euclidia.svg" alt="Euclidia" id="euclidia-icon-header"  style="width: 12rem;">
     </a>
 
     <?php echo form_open('user/register'); ?>
@@ -109,16 +108,8 @@
     </form>
 
 
-        
-    <div class="bars">
-        <div class="bar-black"></div>
-        <div class="bar-grey"></div>
-        <div class="bar-orange"></div>
-    </div>
 
 
-
-
-    <!--<script src="< ?=base_url("js/dark_mode.js")?>"></script>-->
+    <script src="<?=base_url("js/dark_mode.js")?>"></script>
 </body>
 </html>

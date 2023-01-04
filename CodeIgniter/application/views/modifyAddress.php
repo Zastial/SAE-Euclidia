@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href=<?= base_url("css/tabs.css") ?> >
+    <link rel="stylesheet" href=<?= base_url("css/modifyAddress.css") ?> >
 
     <title>Modifier l'adresse</title>
 </head>
@@ -22,15 +22,14 @@
                     $url = htmlspecialchars($_SERVER['HTTP_REFERER']); 
                 }
             ?>
-            <a class="" href=<?= $url ?>> <img src="" alt=""> < Retour</a>
+            <a class="btn btn-orange" href=<?= $url ?>> <img src="" alt=""> < Retour</a>
             <!-- class="link-nav"-->
         </div>   
 
         <?php echo form_open('user/modifyAddress/'); ?>
-
-            <h1>Ajouter un Produit</h1>
-
-                <div >
+            <div class="form-container">
+            <h1>Modifier son adresse</h1>
+                <div class="form-input-modifyAddress">
                     
                     <div class="num-rue">
                         <label for="numerorue" class="labelTypo" size="30" required>Numéro de rue</label>
@@ -61,9 +60,10 @@
                 <div class="validation">
                     <button class="btn btn-orange btn-main"type="submit">Changer l'adresse</button>
                 </div>
-
+            </div>
         </form>
     </section>
 
 </body>
+<?php require_once('footer.php'); ?>
 </html>
