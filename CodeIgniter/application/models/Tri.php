@@ -1,20 +1,28 @@
 <?php
 enum Tri
 {
+    // no sort
     case AUCUN;
 
+    // sort by price
     case PRIXCROISSANT;
     case PRIXDECROISSANT;
+
+    // sort by email
     case EMAILCROISSANT;
     case EMAILDECROISSANT;
+
+    // sort by name
     case NOMCROISSANT;
     case NOMDECROISSANT;
 
+    // sort by user status
     case ALLSTATUS;
     case ADMIN;
     case RESPONSABLE;
     case UTILISATEUR;
     
+    // sort by user state
     case ALLETAT;
     case ACTIF;
     case INACTIF;

@@ -67,4 +67,5 @@ section {
 
 .icon{
     width: 28px;
+    filter: var(--filter-button-img);
 }

@@ -135,26 +135,6 @@ class User extends CI_Controller {
         redirect('Home');
     }
 
-    // public function modifyProfil() {
-        
-    //     // redirect to home if user is not connected
-    //     if (!isset($this->session->user)) {
-    //         redirect('Home');
-    //         die();
-    //     }
-    //     $this->load->view('modifyAccount');
-    // }
-    
-    public function modifyPersonnalAddress() {
-        
-        // redirect to home if user is not connected
-        if (!isset($this->session->user)) {
-            redirect('Home');
-            die();
-        }
-        $this->load->view('modifyAddress');
-    }
-
     public function modify() {
         // redirect to home if user is not connected
         if (!isset($this->session->user)) {
@@ -172,7 +152,7 @@ class User extends CI_Controller {
             array('required' => 'Vous devez entrer un email', 'valid_email' => 'L\'email n\'est pas valide', 'isUniqueEmail' => 'L\'email est déjà utilisé'));
 
         $this->form_validation->set_rules('new-password', 'Mot de passe', 'max_length[50]|callback_isValidModifyPassword',
-            array('max_length' => 'Le mot de passe ne doit pas dépasser 50 caractères', 'isValidModifyPassword' => 'Votre mot de passe actuel est incorrect!'));
+            array('max_length' => 'Le mot de passe ne doit pas dépasser 50 caractères', 'isValidModifyPassword' => 'Votre mot de passe actuel n\'est pas assez sécurisé'));
 
         $this->form_validation->set_rules('confirm-new-password', 'Confirmation du mot de passe', 'matches[new-password]',
             array('matches' => 'Les mots de passe ne correspondent pas'));
@@ -323,7 +303,6 @@ class User extends CI_Controller {
     public function modifyAddress(){
         if (!isset($this->session->user)) {
             redirect('Home');
-            die();
         }
 
         $this->form_validation->set_rules('numerorue', 'Numéro de rue', 'required|max_length[6]',
@@ -420,7 +399,5 @@ class User extends CI_Controller {
  
         return $json['success'];
     }
-
-
 }
 ?>

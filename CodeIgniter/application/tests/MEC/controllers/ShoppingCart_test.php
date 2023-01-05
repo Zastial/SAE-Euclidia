@@ -81,8 +81,8 @@ class ShoppingCart_test extends CIPHPUnitTestCase
 
         $this->CI->session->user = array('prenom' => 'Louis',
         'nom' => 'Painter',
-        'password' => '09022003Aa!',
-        'email' => 'sasandre10@gmail.com',
+        'password' => '2y$10$JMuuaDMCavASPKf9KBcD1eaMHJ0zkeD8eYs7HjecoD8QeUVRhKQq6',
+        'email' => 'louis.nolan.painter@gmail.com',
         'status' => 'Utilisateur');
 
         $this->request('POST', 'ShoppingCart/addProduct/2');

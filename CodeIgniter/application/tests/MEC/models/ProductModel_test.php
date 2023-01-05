@@ -227,6 +227,7 @@ class ProductModel_test extends UnitTestCase {
 		$this->assertNull($this->obj->findByIdAvailable(3));
 	}
 
+
 	#Ici une erreur est renvoyée "Unknown table 'website_test.facture'" 
 	// public function test_findByFacture() {
 	// 	$facture = $this->obj->findByFacture(2);
@@ -235,7 +236,14 @@ class ProductModel_test extends UnitTestCase {
 	// }
 
 	#Procedure pas ajoutée dans la BDD test
-	// public function test_getProductsByUserId(){
-	// 	$this->assertEquals($this->obj->getProductsByUserId(2), 2);
-	// }
+	public function test_getProductsByUserId(){
+
+		$product = $this->obj->findById(2);
+
+		$this->assertEquals($this->obj->getProductsByUserId(2)[0], $product);
+	}
+
+	public function test_getNumberOfAvailableProducts(){
+		$this->assertEquals(3,$this->obj->getNumberOfAvailableProducts());
+	}
 }

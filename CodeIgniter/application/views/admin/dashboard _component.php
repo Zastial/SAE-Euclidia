@@ -9,6 +9,7 @@ if (isset($this->session->user["status"])) {
 }
 ?>
 
+<link rel="stylesheet" href="<?= base_url("css/admin/sidebar.css") ?>">
 <div class="side-bar">
     <h1>Tables</h1>
     <div class="side-bar-container">
@@ -21,10 +22,10 @@ if (isset($this->session->user["status"])) {
             </a>
         <?php endif; ?>   
 
-        <?php if ($status == "Administrateur"): ?>
+        <?php if ($status == "Responsable" || $status == "Administrateur"): ?>
             <a href=<?=site_url('admin/users')?> >
             <div class="table <?php if ($active == "users") {echo 'active';}?>">
-                    <img class="icon-side-bar" src="<?= base_url("assets/icon/icon-rect.svg"); ?>" alt="">
+                    <img class="icon-side-bar" src="<?= base_url("assets/icon/icon-account-circle-white.svg"); ?>" alt="">
                     <p>Utilisateurs</p>
                 </div>
             </a>
@@ -33,16 +34,16 @@ if (isset($this->session->user["status"])) {
         <?php if ($status == "Responsable" || $status == "Administrateur"): ?>
             <a href=<?=site_url('admin/categories')?> >
             <div class="table <?php if ($active == "categories") {echo 'active';}?>">
-                    <img class="icon-side-bar" src="<?= base_url("assets/icon/icon-rect.svg"); ?>" alt="">
+                    <img class="icon-side-bar" src="<?= base_url("assets/icon/icon-tag.svg"); ?>" alt="">
                     <p>Catégories</p>
                 </div>
             </a>
         <?php endif; ?>
 
-        <?php if ($status == "Administrateur"): ?>
+        <?php if ($status == "Responsable" || $status == "Administrateur"): ?>
                 <a href=<?=site_url('admin/factures')?> >
                 <div class="table <?php if ($active == "factures") {echo 'active';}?>">
-                        <img class="icon-side-bar" src="<?= base_url("assets/icon/icon-rect.svg"); ?>" alt="">
+                        <img class="icon-side-bar" src="<?= base_url("assets/icon/icon-request-quote-white.svg"); ?>" alt="">
                         <p>Factures</p>
                     </div>
                 </a>

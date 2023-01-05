@@ -53,7 +53,7 @@ if (!empty($_GET['tri-etat'])) {
             <!-- MAIN CONTENT -->
             <div class="main">
                 
-                <?php if ($status == "Administrateur"): ?>
+
 
                     <div class="header">
                         <h1> Utilisateurs</h1>
@@ -91,7 +91,7 @@ if (!empty($_GET['tri-etat'])) {
                                 </select>
                             </div>
                             <div class="filter">
-                                <label for="tri-status">Status :</label>
+                                <label for="tri-status">Statut :</label>
                                 <select name="tri-status" id="tri-status">
                                     <?php 
                                     
@@ -142,7 +142,7 @@ if (!empty($_GET['tri-etat'])) {
                             <p>Prénom</p>
                             <p>Nom</p>
                             <p>Email</p>
-                            <p>Status</p>
+                            <p>Statut</p>
                             <p class="head-center">Etat</p>
                             <p class="head-center">Action</p>
                         </div>
@@ -156,16 +156,14 @@ if (!empty($_GET['tri-etat'])) {
                                     <p><?= $user->getPrenom()?></p>
                                     <p><?= $user->getNom()?></p>
                                     <p class="user-email"><?= $user->getEmail()?></p>
-                                    <p><?= $user->getStatus(); ?></p>
-                                    <?php $etat = $user->getEtat(); 
-                                        if ($etat == "desactive") {
-                                            echo '<button class="invisible">Désactivé</button>';
-                                        }
-                                        if ($etat == "active") {
-                                            echo '<button class="visible">Activé</button>';
-                                        }
+
                                     
-                                    ?>
+                                    <p><?= $user->getStatus(); ?></p>
+
+                                    <a href="<?=site_url("Admin/toggleActivation/".$user->getId())?>" class="item-center <?= $user->getEtat()=="active" ? "visible" : "invisible" ?>">
+                                            <?= $user->getEtat()=="active" ? "Activé" : "Désactivé"?>
+                                    </a>
+
 
                                     
                                     <div class="icon-container item-center">
@@ -186,7 +184,7 @@ if (!empty($_GET['tri-etat'])) {
                         <?php endif; ?>
                 
                     </div>
-                <?php endif; ?>
+
 
             <button onclick="topFunction()" id="myBtn" ><img class="icon-up" src="<?=base_url("assets/icon/icon-arrow-down.svg")?>" alt=""></button>
         </div>

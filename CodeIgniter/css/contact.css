@@ -37,3 +37,7 @@ section {
     margin-top: 2rem;
     cursor: pointer;
 }
+
+textarea {
+    resize: vertical;
+}

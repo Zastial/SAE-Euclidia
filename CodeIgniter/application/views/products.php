@@ -18,20 +18,20 @@ if (!empty($_GET['price-min'])) {
     $min = intval($_GET['price-min']);
 }
 
-$max = 1000;
+$max = 10000;
 if (!empty($_GET['price-max'])) {
     $max = intval($_GET['price-max']);
 }
 
 if ($max < $min) {
     $min = 0;
-    $max = 1000;
+    $max = 10000;
 }
 if ($min < 0) {
     $min = 0;
 }
-if ($max >= 1000) {
-    $max = 1000;
+if ($max >= 10000) {
+    $max = 10000;
 }
 ?>
 
@@ -70,7 +70,7 @@ if ($max >= 1000) {
                     </div>
         
                     <div class="categories" id="categories">
-                        <h1>Catégories :</h1>
+                        <h1>Catégories</h1>
                             <?php foreach ($categories as $cat): ?>
                                 <div class="one-categ">
                                     <?php $categId = $cat->getId() ;?>
@@ -81,7 +81,7 @@ if ($max >= 1000) {
                     </div>
 
                     <div class="filters">
-                        <h1>Tri des produits :</h1>
+                        <h1>Tri des produits</h1>
                         <select name="tri" id="tri">
                             <?php 
                             
@@ -126,19 +126,22 @@ if ($max >= 1000) {
             <!-- GRID OF PRODUCT -->
             
             <div class="grid-products" id="produits">
-            <?php foreach($produits as $prod) :?>
-                <?php $id = $prod->getId(); ?>
-                <a class="card-link" href="<?=site_url("Product/display/").$id ?>">
-                    <div class="card-container">
-                        <img src="<?= base_url('resource/picture/'.$prod->getId()) ?>" alt="modèle <?= $prod->getTitre() ?>">
-                        <div class="card-description">
-                            <p class="price"><?= $prod->getPrix() ?> €</p>
-                            <p class="title"><?= $prod->getTitre() ?></p>
-                        </div>
-                    </div>
-                </a>
-            <?php endforeach; ?>
-            
+                <?php if (!empty($produits)) :?>
+                    <?php foreach($produits as $prod) :?>
+                        <?php $id = $prod->getId(); ?>
+                        <a class="card-link" href="<?=site_url("Product/display/").$id ?>">
+                            <div class="card-container">
+                                <img src="<?= base_url('resource/picture/'.$prod->getId()) ?>" alt="modèle <?= $prod->getTitre() ?>">
+                                <div class="card-description">
+                                    <p class="price"><?= $prod->getPrix() ?> €</p>
+                                    <p class="title"><?= $prod->getTitre() ?></p>
+                                </div>
+                            </div>
+                        </a>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <?="<h2>Aucun modèle trouvé</h2>"?>
+                <?php endif;?>
             </div>
             
         </div>

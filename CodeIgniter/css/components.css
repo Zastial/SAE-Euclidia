@@ -83,12 +83,20 @@ button:hover{
 .btn-add {
     background-color: green;
 }
+.btn-border-orange {
+    border: 2px  solid var(--orange);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 /* =========== INPUT =========== */
 
 
 .input {
     display: flex;
+    gap: 15px;
     align-items: center;
     position: relative;
 }
@@ -122,9 +130,12 @@ input[type=checkbox]:checked + label {
     background-color: var(--orange);
 }
 
+
+
 .categories label {
     background-color: var(--grey);
     border-radius: 12px;
+    
     padding: 10px 20px;
     transition: 150ms all ease-in-out; 
 }

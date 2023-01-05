@@ -29,7 +29,7 @@
             <div class="content">
                 <div class="info">
                     <h1>Découvrez nos nouveaux modèles</h1>
-                    <a href=<?= site_url("Product/find")?>><button class="btn btn-black-200">Explorer</button></a>
+                    <a href=<?= site_url("Product/find")?>><button class="btn btn-black-200 btn-border-orange">Explorer</button></a>
                 </div>
             </div>
         </div>

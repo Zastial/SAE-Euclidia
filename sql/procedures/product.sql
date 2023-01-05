@@ -12,4 +12,8 @@ create procedure toggleVisibility(IN idProduit INT)
 BEGIN
 UPDATE produit SET disponible = 1 - (select disponible from produit where id_produit = idProduit) where id_produit = idProduit;
 END&&
+create procedure deleteProduct(IN idProduit INT)
+BEGIN
+DELETE FROM produit WHERE id_produit = idProduit;
+END&&
 DELIMITER ;

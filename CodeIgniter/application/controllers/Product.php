@@ -32,7 +32,7 @@ class Product extends CI_Controller {
             $minprice = 0;
         }
         if ($maxprice != null && !is_numeric($maxprice)) {
-            $maxprice = 9999;
+            $maxprice = 9999.99;
         }
         $filtre = new Filtre();
         if ($minprice != null && $maxprice != null) {
@@ -52,8 +52,9 @@ class Product extends CI_Controller {
         $filtre = new FiltreAvailable($filtre, true);
 
         $produits = $this->ProductModel->findQueryBuilder($filtre);
-
+        
         $endPage = intval((count($produits)-1) / 12)+1;
+
         if ($page != null){
             $page = intval($page);
             if ($page > $endPage) {
@@ -62,12 +63,11 @@ class Product extends CI_Controller {
             if ($page < 1) {
                 $page = 1;
             } 
-            $filtre = new FiltrePage($filtre, $page);
         } else {
             $page=1;
-            $filtre = new FiltrePage($filtre, $page);
         }
         
+        $filtre = new FiltrePage($filtre, $page);
 
         $produits = $this->ProductModel->findQueryBuilder($filtre);
 

@@ -1,120 +1,393 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="80" assertions="256" errors="0" warnings="0" failures="0" skipped="0" time="0.669683">
-    <testsuite name="CodeIgniter Application Test Suite" tests="80" assertions="256" errors="0" warnings="0" failures="0" skipped="0" time="0.669683">
-      <testsuite name="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" tests="10" assertions="10" errors="0" warnings="0" failures="0" skipped="0" time="0.062131">
-        <testcase name="testIndex" class="Admin_test" classname="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" line="6" assertions="1" time="0.008624"/>
-        <testcase name="testUsers" class="Admin_test" classname="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" line="16" assertions="1" time="0.005626"/>
-        <testcase name="testCategories" class="Admin_test" classname="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" line="26" assertions="1" time="0.003988"/>
-        <testcase name="testProducts" class="Admin_test" classname="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" line="36" assertions="1" time="0.004795"/>
-        <testcase name="testModifUser" class="Admin_test" classname="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" line="46" assertions="1" time="0.004251"/>
-        <testcase name="testAddProduct" class="Admin_test" classname="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" line="56" assertions="1" time="0.003897"/>
-        <testcase name="testModifProduct" class="Admin_test" classname="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" line="66" assertions="1" time="0.004738"/>
-        <testcase name="testToggleVisibility" class="Admin_test" classname="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" line="76" assertions="1" time="0.018374"/>
-        <testcase name="testAddCategorie" class="Admin_test" classname="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" line="97" assertions="1" time="0.003884"/>
-        <testcase name="testModifCategorie" class="Admin_test" classname="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" line="107" assertions="1" time="0.003954"/>
+  <testsuite name="" tests="103" assertions="345" errors="0" warnings="0" failures="0" skipped="0" time="0.468637">
+    <testsuite name="CodeIgniter Application Test Suite" tests="103" assertions="345" errors="0" warnings="0" failures="0" skipped="0" time="0.468637">
+      <testsuite name="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" tests="11" assertions="11" errors="0" warnings="0" failures="0" skipped="0" time="0.050416">
+        <testcase name="testIndex" class="Admin_test" classname="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" line="6" assertions="1" time="0.007945"/>
+        <testcase name="testUsers" class="Admin_test" classname="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" line="16" assertions="1" time="0.004920"/>
+        <testcase name="testCategories" class="Admin_test" classname="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" line="26" assertions="1" time="0.002898"/>
+        <testcase name="testProducts" class="Admin_test" classname="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" line="36" assertions="1" time="0.003863"/>
+        <testcase name="testModifUser" class="Admin_test" classname="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" line="46" assertions="1" time="0.003087"/>
+        <testcase name="testAddProductView" class="Admin_test" classname="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" line="56" assertions="1" time="0.002693"/>
+        <testcase name="testAddProduct" class="Admin_test" classname="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" line="66" assertions="1" time="0.002526"/>
+        <testcase name="testModifProductView" class="Admin_test" classname="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" line="76" assertions="1" time="0.003350"/>
+        <testcase name="testToggleVisibility" class="Admin_test" classname="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" line="86" assertions="1" time="0.013694"/>
+        <testcase name="testAddCategorie" class="Admin_test" classname="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" line="107" assertions="1" time="0.002695"/>
+        <testcase name="testModifCategorie" class="Admin_test" classname="Admin_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Admin_test.php" line="117" assertions="1" time="0.002743"/>
       </testsuite>
-      <testsuite name="Contact_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Contact_test.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.003555">
-        <testcase name="testIndex" class="Contact_test" classname="Contact_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Contact_test.php" line="6" assertions="1" time="0.003555"/>
+      <testsuite name="Contact_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Contact_test.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.003909">
+        <testcase name="testIndex" class="Contact_test" classname="Contact_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Contact_test.php" line="26" assertions="1" time="0.003909"/>
       </testsuite>
-      <testsuite name="Error404_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Error404_test.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.003421">
-        <testcase name="testIndex" class="Error404_test" classname="Error404_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Error404_test.php" line="6" assertions="1" time="0.003421"/>
+      <testsuite name="Error404_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Error404_test.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.003447">
+        <testcase name="testIndex" class="Error404_test" classname="Error404_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Error404_test.php" line="6" assertions="1" time="0.003447"/>
       </testsuite>
-      <testsuite name="Home_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Home_test.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.002329">
-        <testcase name="testIndex" class="Home_test" classname="Home_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Home_test.php" line="6" assertions="1" time="0.002329"/>
+      <testsuite name="Home_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Home_test.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.002387">
+        <testcase name="testIndex" class="Home_test" classname="Home_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Home_test.php" line="6" assertions="1" time="0.002387"/>
       </testsuite>
-      <testsuite name="Product_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Product_test.php" tests="2" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.009036">
-        <testcase name="testFind" class="Product_test" classname="Product_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Product_test.php" line="6" assertions="1" time="0.004829"/>
-        <testcase name="testDisplay" class="Product_test" classname="Product_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Product_test.php" line="16" assertions="1" time="0.004207"/>
+      <testsuite name="Product_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Product_test.php" tests="9" assertions="9" errors="0" warnings="0" failures="0" skipped="0" time="0.028068">
+        <testcase name="testFindCategorie" class="Product_test" classname="Product_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Product_test.php" line="6" assertions="1" time="0.003724"/>
+        <testcase name="testFindRechercher" class="Product_test" classname="Product_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Product_test.php" line="12" assertions="1" time="0.003271"/>
+        <testcase name="testFindTri" class="Product_test" classname="Product_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Product_test.php" line="18" assertions="1" time="0.003438"/>
+        <testcase name="testFindPage" class="Product_test" classname="Product_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Product_test.php" line="24" assertions="1" time="0.003331"/>
+        <testcase name="testPriceMin" class="Product_test" classname="Product_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Product_test.php" line="30" assertions="1" time="0.003207"/>
+        <testcase name="testPriceMax" class="Product_test" classname="Product_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Product_test.php" line="36" assertions="1" time="0.003084"/>
+        <testcase name="testDisplay" class="Product_test" classname="Product_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Product_test.php" line="42" assertions="1" time="0.002703"/>
+        <testcase name="testDisplay2" class="Product_test" classname="Product_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Product_test.php" line="48" assertions="1" time="0.002640"/>
+        <testcase name="testDisplayError" class="Product_test" classname="Product_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/Product_test.php" line="54" assertions="1" time="0.002669"/>
       </testsuite>
-      <testsuite name="ShoppingCart_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/ShoppingCart_test.php" tests="7" assertions="10" errors="0" warnings="0" failures="0" skipped="0" time="0.111049">
-        <testcase name="testIndex" class="ShoppingCart_test" classname="ShoppingCart_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/ShoppingCart_test.php" line="6" assertions="1" time="0.005853"/>
-        <testcase name="testAddProduct" class="ShoppingCart_test" classname="ShoppingCart_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/ShoppingCart_test.php" line="16" assertions="1" time="0.006736"/>
-        <testcase name="testRemoveProduct" class="ShoppingCart_test" classname="ShoppingCart_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/ShoppingCart_test.php" line="28" assertions="2" time="0.009406"/>
-        <testcase name="testOrderCommand" class="ShoppingCart_test" classname="ShoppingCart_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/ShoppingCart_test.php" line="45" assertions="1" time="0.006251"/>
-        <testcase name="testValidatePayment" class="ShoppingCart_test" classname="ShoppingCart_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/ShoppingCart_test.php" line="62" assertions="1" time="0.066862"/>
-        <testcase name="testEmptyCart" class="ShoppingCart_test" classname="ShoppingCart_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/ShoppingCart_test.php" line="77" assertions="2" time="0.005982"/>
-        <testcase name="testGet_card_total" class="ShoppingCart_test" classname="ShoppingCart_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/ShoppingCart_test.php" line="96" assertions="2" time="0.009959"/>
+      <testsuite name="ShoppingCart_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/ShoppingCart_test.php" tests="7" assertions="10" errors="0" warnings="0" failures="0" skipped="0" time="0.110956">
+        <testcase name="testIndex" class="ShoppingCart_test" classname="ShoppingCart_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/ShoppingCart_test.php" line="6" assertions="1" time="0.005668"/>
+        <testcase name="testAddProduct" class="ShoppingCart_test" classname="ShoppingCart_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/ShoppingCart_test.php" line="16" assertions="1" time="0.006001"/>
+        <testcase name="testRemoveProduct" class="ShoppingCart_test" classname="ShoppingCart_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/ShoppingCart_test.php" line="28" assertions="2" time="0.009993"/>
+        <testcase name="testOrderCommand" class="ShoppingCart_test" classname="ShoppingCart_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/ShoppingCart_test.php" line="45" assertions="1" time="0.006050"/>
+        <testcase name="testValidatePayment" class="ShoppingCart_test" classname="ShoppingCart_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/ShoppingCart_test.php" line="62" assertions="1" time="0.067443"/>
+        <testcase name="testEmptyCart" class="ShoppingCart_test" classname="ShoppingCart_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/ShoppingCart_test.php" line="77" assertions="2" time="0.005841"/>
+        <testcase name="testGet_card_total" class="ShoppingCart_test" classname="ShoppingCart_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/ShoppingCart_test.php" line="96" assertions="2" time="0.009961"/>
       </testsuite>
-      <testsuite name="User_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/User_test.php" tests="7" assertions="9" errors="0" warnings="0" failures="0" skipped="0" time="0.326794">
-        <testcase name="testRegister" class="User_test" classname="User_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/User_test.php" line="6" assertions="1" time="0.004155"/>
-        <testcase name="testLogin" class="User_test" classname="User_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/User_test.php" line="16" assertions="2" time="0.064894"/>
-        <testcase name="testModifyPersonnalAddress" class="User_test" classname="User_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/User_test.php" line="28" assertions="1" time="0.062330"/>
-        <testcase name="testModify" class="User_test" classname="User_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/User_test.php" line="39" assertions="1" time="0.064159"/>
-        <testcase name="testAccountConnected" class="User_test" classname="User_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/User_test.php" line="50" assertions="1" time="0.062362"/>
-        <testcase name="testAccountNotConnected" class="User_test" classname="User_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/User_test.php" line="61" assertions="1" time="0.003599"/>
-        <testcase name="testModifyAdress" class="User_test" classname="User_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/User_test.php" line="70" assertions="2" time="0.065295"/>
+      <testsuite name="User_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/User_test.php" tests="6" assertions="7" errors="0" warnings="0" failures="0" skipped="0" time="0.080015">
+        <testcase name="testLogin" class="User_test" classname="User_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/User_test.php" line="10" assertions="1" time="0.060001"/>
+        <testcase name="testModifyAddress" class="User_test" classname="User_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/User_test.php" line="15" assertions="1" time="0.003798"/>
+        <testcase name="testModify" class="User_test" classname="User_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/User_test.php" line="25" assertions="1" time="0.004069"/>
+        <testcase name="testAccountConnected" class="User_test" classname="User_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/User_test.php" line="35" assertions="1" time="0.003814"/>
+        <testcase name="testAccountNotConnected" class="User_test" classname="User_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/User_test.php" line="45" assertions="1" time="0.002502"/>
+        <testcase name="testModifyAdress" class="User_test" classname="User_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/controllers/User_test.php" line="51" assertions="2" time="0.005832"/>
       </testsuite>
-      <testsuite name="AchatEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/AchatEntity_test.php" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.003136">
-        <testcase name="testSetIdProduit" class="AchatEntity_test" classname="AchatEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/AchatEntity_test.php" line="5" assertions="1" time="0.001105"/>
-        <testcase name="testSetIdFacture" class="AchatEntity_test" classname="AchatEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/AchatEntity_test.php" line="12" assertions="1" time="0.001016"/>
-        <testcase name="testSetPrix" class="AchatEntity_test" classname="AchatEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/AchatEntity_test.php" line="19" assertions="1" time="0.001015"/>
+      <testsuite name="AchatEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/AchatEntity_test.php" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.003097">
+        <testcase name="testSetIdProduit" class="AchatEntity_test" classname="AchatEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/AchatEntity_test.php" line="5" assertions="1" time="0.001061"/>
+        <testcase name="testSetIdFacture" class="AchatEntity_test" classname="AchatEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/AchatEntity_test.php" line="12" assertions="1" time="0.001011"/>
+        <testcase name="testSetPrix" class="AchatEntity_test" classname="AchatEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/AchatEntity_test.php" line="19" assertions="1" time="0.001026"/>
       </testsuite>
-      <testsuite name="AffectationEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/AffectationEntity_test.php" tests="2" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.002079">
-        <testcase name="testSetIdProduit" class="AffectationEntity_test" classname="AffectationEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/AffectationEntity_test.php" line="5" assertions="1" time="0.001045"/>
-        <testcase name="testSetIdCategorie" class="AffectationEntity_test" classname="AffectationEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/AffectationEntity_test.php" line="12" assertions="1" time="0.001034"/>
+      <testsuite name="AffectationEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/AffectationEntity_test.php" tests="2" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.002045">
+        <testcase name="testSetIdProduit" class="AffectationEntity_test" classname="AffectationEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/AffectationEntity_test.php" line="5" assertions="1" time="0.001015"/>
+        <testcase name="testSetIdCategorie" class="AffectationEntity_test" classname="AffectationEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/AffectationEntity_test.php" line="12" assertions="1" time="0.001030"/>
       </testsuite>
-      <testsuite name="CategorieEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/CategorieEntity_test.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.001025">
-        <testcase name="testSetLibelle" class="CategorieEntity_test" classname="CategorieEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/CategorieEntity_test.php" line="4" assertions="1" time="0.001025"/>
+      <testsuite name="CategorieEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/CategorieEntity_test.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.001020">
+        <testcase name="testSetLibelle" class="CategorieEntity_test" classname="CategorieEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/CategorieEntity_test.php" line="4" assertions="1" time="0.001020"/>
       </testsuite>
-      <testsuite name="FactureEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/FactureEntity_test.php" tests="9" assertions="9" errors="0" warnings="0" failures="0" skipped="0" time="0.009260">
-        <testcase name="testSetDate" class="FactureEntity_test" classname="FactureEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/FactureEntity_test.php" line="5" assertions="1" time="0.001051"/>
-        <testcase name="testSetTotal" class="FactureEntity_test" classname="FactureEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/FactureEntity_test.php" line="12" assertions="1" time="0.001031"/>
-        <testcase name="testSetUserId" class="FactureEntity_test" classname="FactureEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/FactureEntity_test.php" line="19" assertions="1" time="0.001017"/>
-        <testcase name="testSetAdresse" class="FactureEntity_test" classname="FactureEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/FactureEntity_test.php" line="26" assertions="1" time="0.001027"/>
-        <testcase name="testSetNumeroRue" class="FactureEntity_test" classname="FactureEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/FactureEntity_test.php" line="33" assertions="1" time="0.001017"/>
-        <testcase name="testSetPays" class="FactureEntity_test" classname="FactureEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/FactureEntity_test.php" line="40" assertions="1" time="0.001010"/>
-        <testcase name="testSetVille" class="FactureEntity_test" classname="FactureEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/FactureEntity_test.php" line="47" assertions="1" time="0.001043"/>
-        <testcase name="testSetCodePostal" class="FactureEntity_test" classname="FactureEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/FactureEntity_test.php" line="54" assertions="1" time="0.001052"/>
-        <testcase name="testSetPaiement" class="FactureEntity_test" classname="FactureEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/FactureEntity_test.php" line="61" assertions="1" time="0.001011"/>
+      <testsuite name="FactureEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/FactureEntity_test.php" tests="9" assertions="9" errors="0" warnings="0" failures="0" skipped="0" time="0.009160">
+        <testcase name="testSetDate" class="FactureEntity_test" classname="FactureEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/FactureEntity_test.php" line="5" assertions="1" time="0.001017"/>
+        <testcase name="testSetTotal" class="FactureEntity_test" classname="FactureEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/FactureEntity_test.php" line="12" assertions="1" time="0.001007"/>
+        <testcase name="testSetUserId" class="FactureEntity_test" classname="FactureEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/FactureEntity_test.php" line="19" assertions="1" time="0.001069"/>
+        <testcase name="testSetAdresse" class="FactureEntity_test" classname="FactureEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/FactureEntity_test.php" line="26" assertions="1" time="0.001020"/>
+        <testcase name="testSetNumeroRue" class="FactureEntity_test" classname="FactureEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/FactureEntity_test.php" line="33" assertions="1" time="0.001013"/>
+        <testcase name="testSetPays" class="FactureEntity_test" classname="FactureEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/FactureEntity_test.php" line="40" assertions="1" time="0.001017"/>
+        <testcase name="testSetVille" class="FactureEntity_test" classname="FactureEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/FactureEntity_test.php" line="47" assertions="1" time="0.001000"/>
+        <testcase name="testSetCodePostal" class="FactureEntity_test" classname="FactureEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/FactureEntity_test.php" line="54" assertions="1" time="0.001014"/>
+        <testcase name="testSetPaiement" class="FactureEntity_test" classname="FactureEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/FactureEntity_test.php" line="61" assertions="1" time="0.001002"/>
       </testsuite>
-      <testsuite name="ProductEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/ProductEntity_test.php" tests="4" assertions="4" errors="0" warnings="0" failures="0" skipped="0" time="0.004079">
-        <testcase name="testSetTitre" class="ProductEntity_test" classname="ProductEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/ProductEntity_test.php" line="5" assertions="1" time="0.001035"/>
-        <testcase name="testSetPrix" class="ProductEntity_test" classname="ProductEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/ProductEntity_test.php" line="12" assertions="1" time="0.001010"/>
-        <testcase name="testSetDescription" class="ProductEntity_test" classname="ProductEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/ProductEntity_test.php" line="19" assertions="1" time="0.001018"/>
-        <testcase name="testSetDisponible" class="ProductEntity_test" classname="ProductEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/ProductEntity_test.php" line="26" assertions="1" time="0.001017"/>
+      <testsuite name="ProductEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/ProductEntity_test.php" tests="4" assertions="4" errors="0" warnings="0" failures="0" skipped="0" time="0.004083">
+        <testcase name="testSetTitre" class="ProductEntity_test" classname="ProductEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/ProductEntity_test.php" line="5" assertions="1" time="0.001000"/>
+        <testcase name="testSetPrix" class="ProductEntity_test" classname="ProductEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/ProductEntity_test.php" line="12" assertions="1" time="0.001012"/>
+        <testcase name="testSetDescription" class="ProductEntity_test" classname="ProductEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/ProductEntity_test.php" line="19" assertions="1" time="0.001001"/>
+        <testcase name="testSetDisponible" class="ProductEntity_test" classname="ProductEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/ProductEntity_test.php" line="26" assertions="1" time="0.001070"/>
       </testsuite>
-      <testsuite name="UserEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/UserEntity_test.php" tests="10" assertions="10" errors="0" warnings="0" failures="0" skipped="0" time="0.010123">
-        <testcase name="testSetPrenom" class="UserEntity_test" classname="UserEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/UserEntity_test.php" line="4" assertions="1" time="0.001005"/>
-        <testcase name="testSetNom" class="UserEntity_test" classname="UserEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/UserEntity_test.php" line="11" assertions="1" time="0.001013"/>
-        <testcase name="testSetPassword" class="UserEntity_test" classname="UserEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/UserEntity_test.php" line="18" assertions="1" time="0.001012"/>
-        <testcase name="testSetEmail" class="UserEntity_test" classname="UserEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/UserEntity_test.php" line="25" assertions="1" time="0.001025"/>
-        <testcase name="testSetNumRue" class="UserEntity_test" classname="UserEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/UserEntity_test.php" line="32" assertions="1" time="0.001004"/>
-        <testcase name="testSetAdresse" class="UserEntity_test" classname="UserEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/UserEntity_test.php" line="39" assertions="1" time="0.001003"/>
-        <testcase name="testSetVille" class="UserEntity_test" classname="UserEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/UserEntity_test.php" line="46" assertions="1" time="0.001020"/>
-        <testcase name="testSetPostalCode" class="UserEntity_test" classname="UserEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/UserEntity_test.php" line="53" assertions="1" time="0.001027"/>
-        <testcase name="testSetPays" class="UserEntity_test" classname="UserEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/UserEntity_test.php" line="60" assertions="1" time="0.001005"/>
-        <testcase name="testSetEtat" class="UserEntity_test" classname="UserEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/UserEntity_test.php" line="67" assertions="1" time="0.001008"/>
+      <testsuite name="UserEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/UserEntity_test.php" tests="10" assertions="10" errors="0" warnings="0" failures="0" skipped="0" time="0.010152">
+        <testcase name="testSetPrenom" class="UserEntity_test" classname="UserEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/UserEntity_test.php" line="4" assertions="1" time="0.001062"/>
+        <testcase name="testSetNom" class="UserEntity_test" classname="UserEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/UserEntity_test.php" line="11" assertions="1" time="0.001003"/>
+        <testcase name="testSetPassword" class="UserEntity_test" classname="UserEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/UserEntity_test.php" line="18" assertions="1" time="0.001016"/>
+        <testcase name="testSetEmail" class="UserEntity_test" classname="UserEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/UserEntity_test.php" line="25" assertions="1" time="0.001014"/>
+        <testcase name="testSetNumRue" class="UserEntity_test" classname="UserEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/UserEntity_test.php" line="32" assertions="1" time="0.001000"/>
+        <testcase name="testSetAdresse" class="UserEntity_test" classname="UserEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/UserEntity_test.php" line="39" assertions="1" time="0.001019"/>
+        <testcase name="testSetVille" class="UserEntity_test" classname="UserEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/UserEntity_test.php" line="46" assertions="1" time="0.001002"/>
+        <testcase name="testSetPostalCode" class="UserEntity_test" classname="UserEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/UserEntity_test.php" line="53" assertions="1" time="0.001014"/>
+        <testcase name="testSetPays" class="UserEntity_test" classname="UserEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/UserEntity_test.php" line="60" assertions="1" time="0.001004"/>
+        <testcase name="testSetEtat" class="UserEntity_test" classname="UserEntity_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/entities/UserEntity_test.php" line="67" assertions="1" time="0.001019"/>
       </testsuite>
-      <testsuite name="AchatModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/AchatModel_test.php" tests="4" assertions="29" errors="0" warnings="0" failures="0" skipped="0" time="0.014700">
-        <testcase name="test_findAll" class="AchatModel_test" classname="AchatModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/AchatModel_test.php" line="26" assertions="13" time="0.002964"/>
-        <testcase name="test_findById" class="AchatModel_test" classname="AchatModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/AchatModel_test.php" line="58" assertions="12" time="0.003220"/>
-        <testcase name="test_boughtFromUser" class="AchatModel_test" classname="AchatModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/AchatModel_test.php" line="87" assertions="3" time="0.003343"/>
-        <testcase name="test_addAchat" class="AchatModel_test" classname="AchatModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/AchatModel_test.php" line="101" assertions="1" time="0.005172"/>
+      <testsuite name="AchatModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/AchatModel_test.php" tests="4" assertions="29" errors="0" warnings="0" failures="0" skipped="0" time="0.018802">
+        <testcase name="test_findAll" class="AchatModel_test" classname="AchatModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/AchatModel_test.php" line="26" assertions="13" time="0.002747"/>
+        <testcase name="test_findById" class="AchatModel_test" classname="AchatModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/AchatModel_test.php" line="58" assertions="12" time="0.002950"/>
+        <testcase name="test_boughtFromUser" class="AchatModel_test" classname="AchatModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/AchatModel_test.php" line="87" assertions="3" time="0.003310"/>
+        <testcase name="test_addAchat" class="AchatModel_test" classname="AchatModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/AchatModel_test.php" line="101" assertions="1" time="0.009794"/>
       </testsuite>
-      <testsuite name="FactureModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/FactureModel_test.php" tests="3" assertions="19" errors="0" warnings="0" failures="0" skipped="0" time="0.011017">
-        <testcase name="test_findByUser" class="FactureModel_test" classname="FactureModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/FactureModel_test.php" line="26" assertions="9" time="0.002847"/>
-        <testcase name="test_findById" class="FactureModel_test" classname="FactureModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/FactureModel_test.php" line="56" assertions="9" time="0.002672"/>
-        <testcase name="test_addFacture" class="FactureModel_test" classname="FactureModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/FactureModel_test.php" line="83" assertions="1" time="0.005499"/>
+      <testsuite name="AffectationModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/AffectationModel_test.php" tests="5" assertions="26" errors="0" warnings="0" failures="0" skipped="0" time="0.017603">
+        <testcase name="test_findAll" class="AffectationModel_test" classname="AffectationModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/AffectationModel_test.php" line="26" assertions="13" time="0.002680"/>
+        <testcase name="test_findByIdProduct" class="AffectationModel_test" classname="AffectationModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/AffectationModel_test.php" line="62" assertions="3" time="0.002576"/>
+        <testcase name="test_findByIdCategorie" class="AffectationModel_test" classname="AffectationModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/AffectationModel_test.php" line="72" assertions="6" time="0.002566"/>
+        <testcase name="test_addAffectations" class="AffectationModel_test" classname="AffectationModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/AffectationModel_test.php" line="85" assertions="3" time="0.004626"/>
+        <testcase name="test_removeAffectations" class="AffectationModel_test" classname="AffectationModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/AffectationModel_test.php" line="97" assertions="1" time="0.005155">
+          <system-out>
+A PHP Error was encountered
+
+Severity:    Warning
+Message:     Undefined array key 0
+Filename:    /var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/AffectationModel_test.php
+Line Number: 103
+
+Backtrace:
+	File: /var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/AffectationModel_test.php
+	Line: 103
+	Function: _error_handler
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestCase.php
+	Line: 1267
+	Function: test_removeAffectations
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestCase.php
+	Line: 933
+	Function: runTest
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestResult.php
+	Line: 588
+	Function: runBare
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestCase.php
+	Line: 724
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestSuite.php
+	Line: 505
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestSuite.php
+	Line: 505
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestSuite.php
+	Line: 505
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/TextUI/TestRunner.php
+	Line: 484
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/TextUI/Command.php
+	Line: 125
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/TextUI/Command.php
+	Line: 94
+	Function: run
+
+	File: /usr/local/bin/phpunit
+	Line: 2303
+	Function: main
+
+
+</system-out>
+        </testcase>
       </testsuite>
-      <testsuite name="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/ProductModel_test.php" tests="8" assertions="78" errors="0" warnings="0" failures="0" skipped="0" time="0.036941">
-        <testcase name="test_findAll" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/ProductModel_test.php" line="26" assertions="16" time="0.002717"/>
-        <testcase name="test_findAllAvailable" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/ProductModel_test.php" line="62" assertions="16" time="0.002621"/>
-        <testcase name="test_findById" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/ProductModel_test.php" line="97" assertions="15" time="0.002845"/>
-        <testcase name="test_findIdAvailable" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/ProductModel_test.php" line="131" assertions="15" time="0.002942"/>
-        <testcase name="test_findQueryBuilder" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/ProductModel_test.php" line="163" assertions="5" time="0.002747"/>
-        <testcase name="test_addProduct" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/ProductModel_test.php" line="181" assertions="5" time="0.005534"/>
-        <testcase name="test_updateProduct" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/ProductModel_test.php" line="205" assertions="5" time="0.007328"/>
-        <testcase name="test_removeProduct" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/ProductModel_test.php" line="225" assertions="1" time="0.010207"/>
+      <testsuite name="CategorieModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/CategorieModel_test.php" tests="7" assertions="18" errors="0" warnings="0" failures="0" skipped="0" time="0.027834">
+        <testcase name="test_findAll" class="CategorieModel_test" classname="CategorieModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/CategorieModel_test.php" line="26" assertions="7" time="0.002669"/>
+        <testcase name="test_findById" class="CategorieModel_test" classname="CategorieModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/CategorieModel_test.php" line="50" assertions="2" time="0.002556"/>
+        <testcase name="test_findQueryBuilder" class="CategorieModel_test" classname="CategorieModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/CategorieModel_test.php" line="59" assertions="2" time="0.002620"/>
+        <testcase name="test_addCategorie" class="CategorieModel_test" classname="CategorieModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/CategorieModel_test.php" line="69" assertions="2" time="0.005130"/>
+        <testcase name="test_updateCategorie" class="CategorieModel_test" classname="CategorieModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/CategorieModel_test.php" line="84" assertions="2" time="0.004976"/>
+        <testcase name="test_removeCategorie" class="CategorieModel_test" classname="CategorieModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/CategorieModel_test.php" line="100" assertions="2" time="0.007250">
+          <system-out>
+A PHP Error was encountered
+
+Severity:    Warning
+Message:     Undefined array key 0
+Filename:    /var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/CategorieModel_test.php
+Line Number: 114
+
+Backtrace:
+	File: /var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/CategorieModel_test.php
+	Line: 114
+	Function: _error_handler
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestCase.php
+	Line: 1267
+	Function: test_removeCategorie
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestCase.php
+	Line: 933
+	Function: runTest
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestResult.php
+	Line: 588
+	Function: runBare
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestCase.php
+	Line: 724
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestSuite.php
+	Line: 505
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestSuite.php
+	Line: 505
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestSuite.php
+	Line: 505
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/TextUI/TestRunner.php
+	Line: 484
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/TextUI/Command.php
+	Line: 125
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/TextUI/Command.php
+	Line: 94
+	Function: run
+
+	File: /usr/local/bin/phpunit
+	Line: 2303
+	Function: main
+
+
+</system-out>
+        </testcase>
+        <testcase name="test_findByModelId" class="CategorieModel_test" classname="CategorieModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/CategorieModel_test.php" line="118" assertions="1" time="0.002633"/>
       </testsuite>
-      <testsuite name="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/UserModel_test.php" tests="7" assertions="67" errors="0" warnings="0" failures="0" skipped="0" time="0.059008">
-        <testcase name="test_findAll" class="UserModel_test" classname="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/UserModel_test.php" line="25" assertions="16" time="0.002986"/>
-        <testcase name="test_findById" class="UserModel_test" classname="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/UserModel_test.php" line="64" assertions="18" time="0.003504"/>
-        <testcase name="test_findByEmail" class="UserModel_test" classname="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/UserModel_test.php" line="100" assertions="18" time="0.002937"/>
-        <testcase name="test_addUser" class="UserModel_test" classname="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/UserModel_test.php" line="136" assertions="6" time="0.015116"/>
-        <testcase name="test_updateUser" class="UserModel_test" classname="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/UserModel_test.php" line="160" assertions="6" time="0.011253"/>
-        <testcase name="test_activeUser" class="UserModel_test" classname="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/UserModel_test.php" line="182" assertions="1" time="0.020093"/>
-        <testcase name="test_isActive" class="UserModel_test" classname="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/UserModel_test.php" line="193" assertions="2" time="0.003118"/>
+      <testsuite name="FactureModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/FactureModel_test.php" tests="5" assertions="56" errors="0" warnings="0" failures="0" skipped="0" time="0.022455">
+        <testcase name="test_findAll" class="FactureModel_test" classname="FactureModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/FactureModel_test.php" line="26" assertions="27" time="0.002958"/>
+        <testcase name="test_findByUser" class="FactureModel_test" classname="FactureModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/FactureModel_test.php" line="78" assertions="9" time="0.002910"/>
+        <testcase name="test_findById" class="FactureModel_test" classname="FactureModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/FactureModel_test.php" line="108" assertions="9" time="0.003133"/>
+        <testcase name="test_findQueryBuilder" class="FactureModel_test" classname="FactureModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/FactureModel_test.php" line="135" assertions="10" time="0.002824">
+          <system-out>
+A PHP Error was encountered
+
+Severity:    8192
+Message:     Implicit conversion from float 60.3 to int loses precision
+Filename:    /var/www/html/equipe3-0/CodeIgniter/application/models/FiltrePrice.php
+Line Number: 9
+
+Backtrace:
+	File: /var/www/html/equipe3-0/CodeIgniter/application/models/FiltrePrice.php
+	Line: 9
+	Function: _error_handler
+
+	File: /var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/FactureModel_test.php
+	Line: 149
+	Function: __construct
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestCase.php
+	Line: 1267
+	Function: test_findQueryBuilder
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestCase.php
+	Line: 933
+	Function: runTest
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestResult.php
+	Line: 588
+	Function: runBare
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestCase.php
+	Line: 724
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestSuite.php
+	Line: 505
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestSuite.php
+	Line: 505
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestSuite.php
+	Line: 505
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/TextUI/TestRunner.php
+	Line: 484
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/TextUI/Command.php
+	Line: 125
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/TextUI/Command.php
+	Line: 94
+	Function: run
+
+	File: /usr/local/bin/phpunit
+	Line: 2303
+	Function: main
+
+
+
+A PHP Error was encountered
+
+Severity:    8192
+Message:     Implicit conversion from float 60.3 to int loses precision
+Filename:    /var/www/html/equipe3-0/CodeIgniter/application/models/FiltrePrice.php
+Line Number: 10
+
+Backtrace:
+	File: /var/www/html/equipe3-0/CodeIgniter/application/models/FiltrePrice.php
+	Line: 10
+	Function: _error_handler
+
+	File: /var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/FactureModel_test.php
+	Line: 149
+	Function: __construct
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestCase.php
+	Line: 1267
+	Function: test_findQueryBuilder
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestCase.php
+	Line: 933
+	Function: runTest
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestResult.php
+	Line: 588
+	Function: runBare
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestCase.php
+	Line: 724
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestSuite.php
+	Line: 505
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestSuite.php
+	Line: 505
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/Framework/TestSuite.php
+	Line: 505
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/TextUI/TestRunner.php
+	Line: 484
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/TextUI/Command.php
+	Line: 125
+	Function: run
+
+	File: phar:///usr/local/bin/phpunit/phpunit/TextUI/Command.php
+	Line: 94
+	Function: run
+
+	File: /usr/local/bin/phpunit
+	Line: 2303
+	Function: main
+
+
+</system-out>
+        </testcase>
+        <testcase name="test_addFacture" class="FactureModel_test" classname="FactureModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/FactureModel_test.php" line="165" assertions="1" time="0.010630"/>
+      </testsuite>
+      <testsuite name="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/ProductModel_test.php" tests="10" assertions="80" errors="0" warnings="0" failures="0" skipped="0" time="0.038822">
+        <testcase name="test_findAll" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/ProductModel_test.php" line="26" assertions="16" time="0.002885"/>
+        <testcase name="test_findAllAvailable" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/ProductModel_test.php" line="62" assertions="16" time="0.002632"/>
+        <testcase name="test_findById" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/ProductModel_test.php" line="97" assertions="15" time="0.002901"/>
+        <testcase name="test_findIdAvailable" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/ProductModel_test.php" line="131" assertions="15" time="0.003149"/>
+        <testcase name="test_findQueryBuilder" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/ProductModel_test.php" line="163" assertions="5" time="0.002767"/>
+        <testcase name="test_addProduct" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/ProductModel_test.php" line="181" assertions="5" time="0.005190"/>
+        <testcase name="test_updateProduct" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/ProductModel_test.php" line="205" assertions="5" time="0.005760"/>
+        <testcase name="test_removeProduct" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/ProductModel_test.php" line="225" assertions="1" time="0.008047"/>
+        <testcase name="test_getProductsByUserId" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/ProductModel_test.php" line="239" assertions="1" time="0.002924"/>
+        <testcase name="test_getNumberOfAvailableProducts" class="ProductModel_test" classname="ProductModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/ProductModel_test.php" line="246" assertions="1" time="0.002566"/>
+      </testsuite>
+      <testsuite name="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/UserModel_test.php" tests="7" assertions="67" errors="0" warnings="0" failures="0" skipped="0" time="0.034367">
+        <testcase name="test_findAll" class="UserModel_test" classname="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/UserModel_test.php" line="25" assertions="16" time="0.002956"/>
+        <testcase name="test_findById" class="UserModel_test" classname="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/UserModel_test.php" line="64" assertions="18" time="0.002975"/>
+        <testcase name="test_findByEmail" class="UserModel_test" classname="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/UserModel_test.php" line="100" assertions="18" time="0.002927"/>
+        <testcase name="test_addUser" class="UserModel_test" classname="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/UserModel_test.php" line="136" assertions="6" time="0.007089"/>
+        <testcase name="test_updateUser" class="UserModel_test" classname="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/UserModel_test.php" line="160" assertions="6" time="0.010665"/>
+        <testcase name="test_activeUser" class="UserModel_test" classname="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/UserModel_test.php" line="182" assertions="1" time="0.004833"/>
+        <testcase name="test_isActive" class="UserModel_test" classname="UserModel_test" file="/var/www/html/equipe3-0/CodeIgniter/application/tests/MEC/models/UserModel_test.php" line="193" assertions="2" time="0.002921"/>
       </testsuite>
     </testsuite>
   </testsuite>

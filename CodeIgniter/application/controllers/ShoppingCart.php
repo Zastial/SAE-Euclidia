@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."Payment.php";
 class ShoppingCart extends CI_Controller{
 
     public function __construct(){
@@ -89,6 +89,10 @@ class ShoppingCart extends CI_Controller{
 
     public function validatePayment() {
 
+        if (!isset($this->session->user) || !isset($this->session->cart) || empty($this->session->cart) ) {
+            redirect('shoppingCart');
+        }
+
         $user = $this->UserModel->findByEmail($this->session->user['email']);
 
         if($user->getAdresse() == "NON DEFINI") {
@@ -100,7 +104,21 @@ class ShoppingCart extends CI_Controller{
             $this->UserModel->updateUser($user);
         }
 
-        //TODO form validation (i am very lazy)
+        // name of payment
+        $name = $this->input->post("choose");
+        // object handling payment
+        $payment = Payment::getPaymentMethod($name);
+        
+        if ($payment == null) {
+            $this->session->set_flashdata('error', 'La méthode de paiement est indéfnie. Veuillez réessayer.');
+            redirect('shoppingCart/orderCommand');
+        }
+
+        if (!$payment->verifyPayment()) {
+            $this->session->set_flashdata('error', 'Le paiement a été refusé.');
+            redirect('shoppingCart/orderCommand');
+        }
+
         $f = new FactureEntity();
         $f->setDate(date('Y-m-d H:i:s'));
         $f->setTotal($this->input->post("total"));

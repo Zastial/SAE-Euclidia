@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="<?= base_url("css/inscription-connexion.css") ?>">
     <link rel="stylesheet" href="<?= base_url("css/colors.css") ?>">
     <link rel="stylesheet" href="<?= base_url("css/components.css") ?>">
-    
+    <link rel="shortcut icon" type="image/x-icon" href=<?=base_url("assets/icon/favicon.ico");?>>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <title>Inscription</title>

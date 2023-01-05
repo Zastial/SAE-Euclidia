@@ -67,8 +67,14 @@ $email = empty(set_value('email')) ? $this->session->user["email"] : set_value('
                         <input class="input" type="password" name="password" value="<?= set_value('password'); ?>">
                         <?php echo form_error('password'); ?>
                     </div>
-
-    
+                    <div class="status">
+                        <label for="status" class="labelTypo require" size="30">Statut</label><br>
+                        <select name="status" > 
+                            <option value="Administrateur" <?php if ($user->getStatus() == "Administrateu"){ echo'selected';} ?>>Administrateur</option>
+                            <option value="Responsable" <?php if ($user->getStatus() == "Responsable"){ echo'selected';} ?>>Responsable</option>
+                            <option value="Utilisateur"<?php if ($user->getStatus() == "Utilisateur"){ echo'selected';} ?>>Utilisateur</option>
+                        </select>
+                    </div>
                 </div>
     
                 <div class="form-btn">
@@ -77,8 +83,6 @@ $email = empty(set_value('email')) ? $this->session->user["email"] : set_value('
             </div>
         </form>
        
-
-
 
         
     </section>

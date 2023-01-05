@@ -72,7 +72,6 @@ if (!empty($_GET['maxDate'])) {
             <!-- MAIN CONTENT -->
             <div class="main">
                 
-                <?php if ($status == "Administrateur"): ?>
 
                     <h1 class="header">Factures</h1>
                     
@@ -144,7 +143,7 @@ if (!empty($_GET['maxDate'])) {
                             </div>
                             <button type="submit" class="btn btn-large btn-orange btn-shadow-orange">Filtrer</button>
                         </div>
-                        <div class="date_filter">
+                        <div class="date-filter">
                             <div class="filter">
                                 <div class="input-container">
                                     <div class="input">
@@ -205,7 +204,6 @@ if (!empty($_GET['maxDate'])) {
                         <?php endif; ?>
                 
                     </div>
-                <?php endif; ?>
 
             <button onclick="topFunction()" id="myBtn" ><img class="icon-up" src="<?=base_url("assets/icon/icon-arrow-down.svg")?>" alt=""></button>
         </div>

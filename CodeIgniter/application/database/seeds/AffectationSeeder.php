@@ -27,7 +27,6 @@ class AffectationSeeder extends Seeder {
 		$data = [
             'id_produit' => '1',
 			'id_categorie' => '1',
-
 		];
 		$this->db->insert($this->table, $data);
 

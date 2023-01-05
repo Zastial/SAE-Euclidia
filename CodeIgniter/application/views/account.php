@@ -63,7 +63,7 @@
                         <p><?= $user->getPays();?></p>
     
                     </div>  
-                    <a class="btn btn-orange btn-large" href="<?= site_url("user/modifyPersonnalAddress");?>"> Modifier mon adresse</a>               
+                    <a class="btn btn-orange btn-large" href="<?= site_url("user/modifyAddress");?>"> Modifier mon adresse</a>               
                 </div>
     
             </div>
@@ -74,18 +74,24 @@
                 <?php if (!is_null($factures)): ?>
                     <div class="bill-container">
                         <h1 class="bill-title">Factures</h1>
-                    
-                        <?php foreach ($factures as $bill): ?>
+
+                        <?php if (!empty($factures)) :?>
+                            <?php foreach ($factures as $bill): ?>
+                                
+                                <a href="<?=base_url("User/getFacture/".$bill->getId())?>" target="_blank"><!-- renvoie vers la page pour afficher la facture selon son ID -->
+                                <div class="bill">
+                                    <p> <?= $bill->getId() ?></p>
+                                    <p> Facture du <?= $bill->getDate() ?></p>
+                                    <img src="<?= base_url("assets/icon/icon-search.svg") ?>" alt="">
+                                </div>
                             
-                            <a href="<?=base_url("User/getFacture/".$bill->getId())?>" target="_blank"><!-- renvoie vers la page pour afficher la facture selon son ID -->
+                                
+                            <?php endforeach; ?>
+                        <?php else : ?>
                             <div class="bill">
-                                <p> <?= $bill->getId() ?></p>
-                                <p> Facture du <?= $bill->getDate() ?></p>
-                                <img src="<?= base_url("assets/icon/icon-search.svg") ?>" alt="">
+                                Aucune facture disponible
                             </div>
-                        
-                            
-                        <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
                 <?php endif ?>   
             </div>

@@ -74,6 +74,8 @@ class ProductModel extends CI_Model {
 				$mots = explode(' ',$filtres['name']);
 				foreach($mots as $mot){
 					$this->db->or_like('produit.titre', $mot);
+					// if we want to search product by id 
+					// $this->db->or_like('produit.id_produit', $mot);
 				}
 				$this->db->group_end();
 			}	
@@ -94,6 +96,17 @@ class ProductModel extends CI_Model {
 				}
 			}
 
+			if (isset($filtres['tri-nom'])) {
+				switch($filtres['tri-nom']) {
+					case Tri::NOMCROISSANT:
+						$this->db->order_by('produit.titre', 'asc');
+						break;
+					case Tri::NOMDECROISSANT:
+						$this->db->order_by('produit.titre', 'desc');
+						break;
+				}
+			}
+
 			$min = 0;
 			$max = 9999;
 
@@ -105,12 +118,11 @@ class ProductModel extends CI_Model {
 			}
 
 			if (isset($filtres['available'])) {
-				$available = $filtres['available'];
+				$this->db->where('disponible =', $filtres['available']);
 			}
 		
 			$this->db->where('prix >=', $min);
 			$this->db->where('prix <=', $max);
-			$this->db->where('disponible =', $available);
 			if (isset($filtres['page'])){
 				$page=$filtres['page'];
 				if ($page<=0)$page=1;
@@ -146,7 +158,9 @@ class ProductModel extends CI_Model {
 		$q = $this->db->get_where('produit', array('id_produit' => $id));
 		$response = $q->row(0,"ProductEntity");
 
-		$this->load->model("AffectationModel"); 
+		$this->load->model("AffectationModel");
+
+		//try catch
 		$this -> AffectationModel -> addAffectations($id,$categories);
 
 		return $response;

@@ -27,6 +27,18 @@ h1 {
     gap : 30px;
 }
 
+input[type="file"]{
+    display: none;
+}
+
 .file-container label {
     white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 12px 5px 6px;
+    border-radius: 10px;
+    color: var(--text-clr);
+    background-color: var(--orange);
 }
+

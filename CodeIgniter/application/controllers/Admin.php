@@ -27,7 +27,6 @@ class Admin extends CI_Controller {
         if ($status != "Responsable" && $status != "Administrateur") {
             redirect('home');
         }
-
         $this->load->model(array("UserModel", "ProductModel", "CategorieModel", "AffectationModel", "FactureModel"));
     }
     
@@ -37,9 +36,6 @@ class Admin extends CI_Controller {
     
     public function users() {
         $status = $this->session->user["status"];
-        if ($status != "Administrateur") {
-            redirect('admin');
-        }
         $rechercher = $this->input->get('rechercher');
         $tri = $this->input->get('tri');
         $triStatus = $this->input->get('tri-status');
@@ -69,10 +65,6 @@ class Admin extends CI_Controller {
     }
 
     public function categories() {
-        $status = $this->session->user["status"];
-        if ($status != "Responsable" && $status != "Administrateur") {
-            redirect('admin');
-        }
         $tri = $this->input->get('tri-categ');
         $rechercher = $this->input->get('rechercher');
 
@@ -91,19 +83,38 @@ class Admin extends CI_Controller {
     }
 
     public function products() {
-        $status = $this->session->user["status"];
-        if ($status != "Responsable" && $status != "Administrateur") {
-            redirect('admin');
+        
+        $rechercher = $this->input->get('rechercher');
+        $tri = $this->input->get('tri');
+        $prix = $this->input->get('tri-prix');
+        $visible = $this->input->get('tri-visible');
+
+        $filtre = new Filtre();
+        if ($rechercher != null && is_string($rechercher)) {
+            $filtre = new FiltreName($filtre, $rechercher);
         }
-        $products = $this->ProductModel->findAll();
+
+        if ($tri != null && is_string($tri)) {
+            $t = Tri::getTriFromString($tri);
+            $filtre = new FiltreTri($filtre, $t, 'tri-nom');
+        }
+
+        if ($prix != null && is_string($prix)) {
+            $t = Tri::getTriFromString($prix);
+            $filtre = new FiltreTri($filtre, $t, 'tri');
+        }
+
+        if ($visible != null && is_string($visible)) {
+            $visible = $visible == "false" ? false : true;
+            $filtre = new FiltreAvailable($filtre, $visible);
+        }
+
+        $products = $this->ProductModel->findQueryBuilder($filtre);
         $this->load->view('admin/dashboardProducts.php', array('products'=>$products, 'active'=>'products'));
     }
 
     public function factures($userid=null) {
         $status = $this->session->user["status"];
-        if ($status != "Responsable" && $status != "Administrateur") {
-            redirect('admin');
-        }
         
         $triId = $this->input->get('tri-id');
         $triPrix = $this->input->get('tri-prix');
@@ -140,6 +151,17 @@ class Admin extends CI_Controller {
     }
 
     public function modifUser(int $idUser) {
+
+        $status = $this->session->user["status"];
+        if ($status != "Administrateur") {
+            $this->session->set_flashdata('error', 'Vous n\\\'avez pas les droits nécessaires pour modifier un utilisateur.');
+            $url = site_url("admin/users");
+            if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
+                $url = $_SERVER['HTTP_REFERER'];
+            }
+            redirect($url);
+        }
+
         $this->form_validation->set_rules('nom', 'Nom', 'required',
         array('required' => 'Vous devez entrer le nom de l utilisateur'));
 
@@ -149,10 +171,25 @@ class Admin extends CI_Controller {
         $this->form_validation->set_rules('email', 'Email', 'required',
         array('required' => 'Vous devez entrer le mail de l utilisateur'));
 
+        $this->form_validation->set_rules('status', 'Statut', 'required',
+        array('required' => 'Vous devez entrer le statut de l utilisateur'));
+
+        $this->form_validation->set_rules('password', 'Mot de passe', 'max_length[50]|callback_isValidModifyPassword',
+            array('max_length' => 'Le mot de passe ne doit pas dépasser 50 caractères', 'isValidModifyPassword' => 'Le mot de passe actuel n\'est pas assez sécurisé'));
+
         $user = $this->UserModel->findById($idUser);
         if ($user == null) {
             $this->session->set_flashdata('error', 'L\\\'utilisateur sélectionné n\\\'existe pas ou n\\\'est plus disponible.');
             redirect('admin/users');
+        }
+
+        if ($this->session->user['email']==$user->getEmail()){
+            $this->session->set_flashdata('error', 'Vous ne pouvez pas modifier votre compte ici !');
+            $url = site_url("admin/users");
+            if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
+                $url = $_SERVER['HTTP_REFERER'];
+            }
+            redirect($url);
         }
 
         if ($this->form_validation->run() == FALSE) {
@@ -162,21 +199,70 @@ class Admin extends CI_Controller {
             $prenom = $this -> input -> post("prenom");
             $email = $this->input->post("email");
             $password = $this->input->post("password");
+            $status = $this->input->post("status");
 
-            $user -> setNom($name);
-            $user -> setPrenom($prenom);
-            $user -> setEmail($email);
-            $user -> setEncryptedPassword($password);
+            $user->setNom($name);
+            $user->setPrenom($prenom);
+            $user->setEmail($email);
+
+            if (!empty($password)) {
+                $user->setEncryptedPassword($password);
+            }
             
-            $this->UserModel->updateUser($user);
+            $u = UserEntity::getUser($status);
+            if ($u==null){
+                $this->session->set_flashdata('error', 'Statut invalide!');
+                redirect('Admin/users');
+            }
 
+           
+
+            $u->setNom($user->getNom());
+            $u->setId($user->getId());
+            $u->setPrenom($user->getPrenom());
+            $u->setEmail($user->getEmail());
+            $u->setEtat($user->getEtat());
+            $u->setPassword($user->getPassword());
+            $u->setNom($user->getNom());
+            $u->setNumRue($user->getNumRue());
+            $u->setAdresse($user->getAdresse());
+            $u->setVille($user->getVille());
+            $u->setPostalCode($user->getPostalCode());
+            $u->setPays($user->getPays());
+
+            if ($this->UserModel->updateUser($u) == null) {
+                $this->session->set_flashdata('error', 'L\\\'utilisateur n\\\'a pas pu être modifié.');
+            } else {
+                $this->session->set_flashdata('success', 'L\\\'utilisateur a bien été modifié.');
+            }
+            
             redirect('Admin/users');
         }
     }
-
-    public function removeUser() {
-        //DO NOT
+    public function isValidModifyPassword(string $pass=null) {
+        if ($pass == null || $pass == "") {
+            return true;
+        }
+        return $this->isValidPassword($pass);
     }
+
+     /**
+     * @param string $name
+     * @return bool
+     * checks is password is valid (at least 1 uppercase, 1 lowercase, 1 number, 1 special char, 5 chars min, 20 chars max)
+     */
+    public function isValidPassword(string $pass=null): bool {
+        if ($pass==null) {
+            return false;
+        }
+        $uppercase=preg_match('@[A-Z]@',$pass);
+        $lowercase=preg_match('@[a-z]@',$pass);
+        $number=preg_match('@[0-9]@',$pass);
+        $specialChars=preg_match('@[^\w]@',$pass);
+        return $uppercase && $lowercase && $number && $specialChars;
+    }
+
+
 
     public function addProductAjax() {
 
@@ -185,7 +271,6 @@ class Admin extends CI_Controller {
         $isAllowed = $status == "Responsable" || $status == "Administrateur";
         $errors = array();
         $status = "";
-
         if ($isAjax && $isAllowed) {
 
             $name = $this->input->post("name");
@@ -194,13 +279,18 @@ class Admin extends CI_Controller {
             $disponible = $this->input->post("disponible");
             $categories = $this->input->post("categories");
 
-            // text input errors
+            // if we have errors with text inputs, add them to the array
            
             if (!isset($name)) {
                 $errors['name'] = "Le nom du produit n'est pas défini !";
             }
             if (!isset($price)) {
                 $errors['price'] = "Le prix du produit n'est pas défini !";
+            }else {
+                $price = intval($price);
+                if ($price < 0 || $price >= 10000) {
+                    $errors['price'] = 'Le prix doit être compris entre 0 et 9 999.99€ compris';
+                }
             }
             if (!isset($description)) {
                 $errors['description'] = "La description du produit n'est pas définie !";
@@ -212,6 +302,7 @@ class Admin extends CI_Controller {
                 $categories = array();
             }
             
+            // if we have no error, we proceed to create the product
             if (empty($errors)) {
                 // create product
                 $product= new ProductEntity;
@@ -220,7 +311,7 @@ class Admin extends CI_Controller {
                 $product->setDescription($description);
                 $product->setDisponible($disponible);
                 $prod = $this->ProductModel->addProduct($product, $categories);
-
+                
                 if ($prod == null) {
                     $errors['product'] = "Le produit n'a pas pu être créé. Veuillez réessayer ou contacter l'administrateur du système.";
                 } else {
@@ -288,9 +379,10 @@ class Admin extends CI_Controller {
             }
         }
 
-        // if we have no errors
-        if (count($errors) == 1 && empty($errors[0])) {
+        // if we have no errors, redirect to product with success message
+        if (count($errors) == 1 && empty($errors['image'])) {
             $status = "success";
+            $this->session->set_flashdata('success', 'Le produit a été correctement ajouté !');
         }
         $data = array(
             $errors,
@@ -300,94 +392,8 @@ class Admin extends CI_Controller {
     }
 
     public function addProduct(){
-        
-        $this->form_validation->set_rules('name', 'Name', 'required',
-            array('required' => 'Vous devez entrer le nom du produit'));
-
-        $this->form_validation->set_rules('price', 'Price', 'required',
-        array('required' => 'Vous devez entrer le prix du produit'));
-
-        $this->form_validation->set_rules('description', 'Description', 'required',
-        array('required' => 'Vous devez entrer la description du produit'));
-
-
-        if ($this->form_validation->run() == FALSE) {
-            $categories = $this->CategorieModel->findAll();
-            $this->load->view("admin/addProduct", array("categories"=>$categories));
-        } else {
-            // form is valid
-            $name = $this -> input -> post("name");
-            $price = $this -> input -> post("price");
-            $description = $this->input->post("description");
-            $disponible = $this->input->post("disponible");
-            $categories = $this->input->post("categories");
-            if ($categories == null) {
-                $categories = array();
-            }
-            $product= new ProductEntity;
-            $product -> setTitre($name);
-            $product -> setPrix($price);
-            $product -> setDescription($description);
-            $product -> setDisponible($disponible);
-            $prod = $this -> ProductModel -> addProduct($product, $categories);
-            $id = $prod->getId();
-            $this->load->library('upload');
-            $errors=array();
-            $files=$_FILES;
-            $cpt=count($_FILES['userfile']['name']);
-            for ($i=0;$i<$cpt;$i++){
-                $ext = pathinfo($files['userfile']['name'][$i], PATHINFO_EXTENSION);
-                $filename = $i.'.'.$ext;
-                $_FILES['userfile']['name']= $filename;
-                $_FILES['userfile']['type']= $files['userfile']['type'][$i];
-                $_FILES['userfile']['tmp_name']= $files['userfile']['tmp_name'][$i];
-                $_FILES['userfile']['error']= $files['userfile']['error'][$i];
-                $_FILES['userfile']['size']= $files['userfile']['size'][$i];
-                $this->upload->initialize($this->set_upload_options($i, $filename, $id, "png|jpg|jpeg"));
-                $success=$this->upload->do_upload('userfile');
-                if (!$success){
-                    $errors[] = $filename;
-                    $e = $this->upload->display_errors();
-                    log_message('debug', $e);
-                    $this->load->view("admin/addProduct", array("categories"=>$categories));
-                    return;
-                }
-                
-            }
-            
-            $cpt=count($_FILES['models']['name']);
-            $za = new ZipArchive();
-            $zname = $this->config->item('model_assets') . $id;
-            if (!is_dir($zname)){
-                mkdir($zname, 0755, TRUE);
-            }
-            $zname .= "/models.zip";
-            if ($za->open($zname, ZipArchive::CREATE) !== TRUE) {
-                $this->session->set_flashdata('error', 'La création du zip a échoué!');
-                redirect("admin/products");
-            }
-            for ($i=0;$i<$cpt;$i++){
-                $exp = explode('.', $files['models']['name'][$i]);
-                $ext = end($exp);
-                $supported_file_types = array("glb", "gltf", "3ds", "stl", "mtl", "obj");
-                if (in_array($ext, $supported_file_types))$za->addFromString($files['models']['name'][$i], file_get_contents($_FILES['models']['tmp_name'][$i]));
-                //move_uploaded_file($_FILES['img']['tmp_name'][$i], './uploads/' . $files['models']['name'][$i]);
-
-            }
-            $za->close();
-
-            //COMBO BOX pour les catégories?
-            if (count($errors)>0){
-                $imgerrs="";
-                foreach($errors as $fail){
-                    $imgerrs.=$fail;
-                }
-                
-                $this->session->set_flashdata('error', 'Les images suivantes ne passent pas:'.$imgerrs);
-            }
-            redirect('Admin/products');
-            
-        }
+        $categories = $this->CategorieModel->findAll();
+        $this->load->view("admin/addProduct", array("categories"=>$categories));
     }
 
     private function set_upload_options($i=0, $str="none.jpg", $id=0, $types="png|jpg|jpeg"){
@@ -447,13 +453,15 @@ class Admin extends CI_Controller {
             redirect('Admin/products');
         }
     }
-
+    
+     
+    /*
     public function removeProduct(int $productid) { //NEVER DO THAT
 
         $this->ProductModel->removeProduct($productid);
 
         redirect('Admin/products');
-    }
+    }*/
 
     public function toggleVisibility(int $productid){
         $p = $this->ProductModel->findById($productid);
@@ -465,33 +473,64 @@ class Admin extends CI_Controller {
         $this->ProductModel->updateProduct($p, array());
         redirect('Admin/products');
     }
+
+    public function toggleActivation(int $userid){
+        $status = $this->session->user["status"];
+        if ($status != "Administrateur") {
+            $this->session->set_flashdata('error', 'Vous n\\\'avez pas les droits nécessaires pour modifier l\\\'état d\\\'un utilisateur.');
+            $url = site_url("admin/users");
+            if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
+                $url = $_SERVER['HTTP_REFERER'];
+            }
+            redirect($url);
+        }
+        $u = $this->UserModel->findById($userid);
+        if ($u == null) {
+            $this->session->set_flashdata('error', 'L\\\'utilisateur n\\\'existe plus!');
+            redirect('admin/users');
+        }
+        if ($this->session->user['email']==$u->getEmail()){
+            $this->session->set_flashdata('error', 'Vous ne pouvez pas désactiver votre compte!');
+            redirect('admin/users');
+        }
+        $u->setEtat($u->getEtat()=="active"?"desactive":"active");
+        $this->UserModel->activeUser($u);
+        redirect('Admin/users');
+    }
     
     public function removeCategorie(int $categorieid) {
-        $this->CategorieModel->removeCategorie($categorieid);
-
+        $success = $this->CategorieModel->removeCategorie($categorieid);
+        if (!$success) {
+            $this->session->set_flashdata('error', 'La catégorie n\\\'a pas pu être supprimée.');
+        } else {
+            $this->session->set_flashdata('success', 'La catégorie a bien été supprimée.');
+        }
         redirect('Admin/categories');
     }
 
     public function addCategorie() {
         
-        $this->form_validation->set_rules('name', 'Name', 'required',
-        array('required' => 'Vous devez entrer le nom du produit'));
+        $this->form_validation->set_rules('name', 'Name', 'required|is_unique[categorie.libelle]',
+        array('required' => 'Vous devez entrer le nom du produit', 'is_unique'=>'Ce nom de catégorie existe déjà.'));
 
 
         if ($this->form_validation->run() == FALSE) {
-            $categories = $this->CategorieModel->findAll();
-            $this->load->view("/admin/addCategorie.php", array("categories"=>$categories));
+            $this->load->view("/admin/addCategorie.php");
         } else {
             
             // form is valid
-            $name = $this -> input -> post("name");
+            $name =$this->input->post("name");
 
 
             $categorie= new CategorieEntity ;
             $categorie -> setLibelle($name);
 
-            $this -> CategorieModel -> addCategorie($categorie);
-
+            if ($this->CategorieModel->addCategorie($categorie)) {
+                $this->session->set_flashdata('success', 'La catégorie a bien été ajoutée !');
+            }else {
+                $this->session->set_flashdata('error', 'La catégorie n\\\'a pas pu être ajoutée.');
+            }
+            
             redirect('Admin/categories');
         }
         
@@ -504,7 +543,7 @@ class Admin extends CI_Controller {
         $id = intval($categorieid);
         $categorie = $this->CategorieModel->findById($id);
         if ($categorie == null) {
-            $this->session->set_flashdata('error', 'La Catégorie sélectionné n\\\'existe pas ou n\\\'est plus disponible.');
+            $this->session->set_flashdata('error', 'La catégorie sélectionné n\\\'existe pas ou n\\\'est plus disponible.');
             redirect('admin/categories');
         }
 

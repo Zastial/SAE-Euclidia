@@ -44,7 +44,7 @@ class FactureSeeder extends Seeder {
 		$this->db->insert($this->table, $data);
 
         $data = [
-            'date_facture' => '13/12/21',
+            'date_facture' => '12/12/21',
             'total' => '213.40',
             'id_utilisateur' => '3',
             'adresse' => 'rue du test',

@@ -19,7 +19,7 @@ var imageCounter = 0;
 $(function() {
 
     // when uploading new images
-    $('#file-upload').on('change', function() {
+    $('#image-upload').on('change', function() {
         if (this.files) {
             // add new images while updating imageCounter
             for (i = 0; i < this.files.length; i++) {
@@ -28,8 +28,28 @@ $(function() {
                 fileBuffer.add(this.files[i]);
                 imageCounter++;
             }
+            $('li span').each(function(index, element) {
+                $(this).text(index+1);
+            });
         }
     });
+
+    $('#submit-new-product-button').click(function(){
+        if ($('#image-upload')[0].files.length == 0) Notiflix.Notify.failure("Vous n'avez pas sélectionné d'images !", {timeout:5000, distance:'90px', width:"400px", fontSize:"16px"});
+        if ($('#model-upload')[0].files.length == 0) Notiflix.Notify.failure("Vous n'avez pas sélectionné de modèle !", {timeout:5000, distance:'90px', width:"400px", fontSize:"16px"});
+    })
+
+    //when uploading models
+    $('#model-upload').on('change', function(){
+        $('#list-of-models').empty();
+        if (this.files){
+            for (i = 0; i < this.files.length; i++) {
+                if (i!=0)$('#list-of-models').append(" / ");else $('#list-of-models').append("<strong>Fichiers sélectionnés: </strong>");
+                $('#list-of-models').append(this.files[i]['name']);
+
+            }
+        }
+    })
 
     $("form").submit(function(e) {
         e.preventDefault();    
@@ -41,25 +61,55 @@ $(function() {
             for (let image of fileBuffer) {
                 if (image.id == order) {
                     list.items.add(image);
-                    fileBuffer.delete(image);
                     break;
                 }
             }
         });
-        $('#file-upload').prop('files', list.files);
+        $('#image-upload').prop('files', list.files);
         var fd = new FormData($('form')[0]);
         // ajax call
         $.ajax({
             type: "POST",
-            url: base_url + "/admin/addProductAjax", 
+            url: base_url + "admin/addProductAjax", 
             data: fd,
             cache:false,
             processData:false,
             contentType:false,
             success: 
                 function(data){
-                    alert(data);  //as a debugging message.
-                    console.log(data);
+                    var parsedData = JSON.parse(data);
+                    console.log(parsedData);
+                    if (parsedData.length != 2) {
+                        Notiflix.Notify.failure('Une erreur est survenue, veuillez réessayer.', {timeout:5000, distance:'90px', width:"400px", fontSize:"16px"});
+                        return;
+                    }
+
+                    if (parsedData[1] == "success") {
+                        window.location.href = base_url+"admin/products";
+                    }
+
+                    var errors = parsedData[0];
+
+                    if ('image' in errors && errors['image'].length>0) {
+                        errors['image'].forEach(element => {
+                            $("li:nth-of-type("+(element+1)+")").addClass("invalid-image");
+                            $("li:nth-of-type("+(element+1)+") .img-container").prepend('<img class="error-icon" src="'+base_url+'assets/icon/icon-error.svg" />');
+                        });
+                        Notiflix.Notify.failure('Certaines images sont invalides !', {timeout:5000, distance:'90px', width:"400px", fontSize:"16px"});
+                    }
+
+                    if ('zip' in errors) {
+                        Notiflix.Notify.failure('Certains Modèles 3D sont invalides !', {timeout:5000, distance:'90px', width:"400px", fontSize:"16px"});
+                        var text = $('#list-of-models').html();
+                        console.log(text);
+                        errors['zip'].forEach(element => {
+                            text = text.replace(element, '<span style="color:red">'+element+'</span>');
+                            console.log(element, '<span style="color:red">'+element+'</span>', text.includes(element));
+                        });
+                        console.log(text);
+                        $('#list-of-models').empty();
+                        $('#list-of-models').append(text);
+                    }
                 }
         });
     });
@@ -106,4 +156,8 @@ function removeImage(index) {
         $('.image-'+index).remove();
        }
     }
+
+    $('li span').each(function(index, element) {
+        $(this).text(index+1);
+    });
 }

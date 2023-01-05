@@ -5,32 +5,56 @@ class Product_test extends CIPHPUnitTestCase
 
     public function testFindCategorie() {
 
-        $this->resetInstance();
-        $this->CI->load->library('session');
-        $this->CI->session->user = array('nom' => 'Carol','prenom' => 'Alex', 'status' => 'Administrateur');
+        $output = $this->request('GET', 'product/find?categorie[]=10');
+        $this->assertResponseCode(200);
+    }
+
+    public function testFindRechercher() {            
 
         $output = $this->request('GET', 'product/find?rechercher=Alexandre');
         $this->assertResponseCode(200);
     }
 
-    public function testFindRechercher() {
+    public function testFindTri() {            
 
-        $this->resetInstance();
-        $this->CI->load->library('session');
-        $this->CI->session->user = array('nom' => 'Carol','prenom' => 'Alex', 'status' => 'Administrateur');
+        $output = $this->request('GET', 'product/find?tri=prix-asc');
+        $this->assertResponseCode(200);
+    }
 
-        $output = $this->request('GET', 'product/find?rechercher=Alexandre');
+    public function testFindPage() {            
+
+        $output = $this->request('GET', 'product/find?page=2');
+        $this->assertResponseCode(200);
+    }
+
+    public function testPriceMin() {            
+
+        $output = $this->request('GET', 'product/find?price-min=500');
+        $this->assertResponseCode(200);
+    }
+
+    public function testPriceMax() {            
+
+        $output = $this->request('GET', 'product/find?price-max=50');
         $this->assertResponseCode(200);
     }
 
     public function testDisplay() {
 
-        $this->resetInstance();
-        $this->CI->load->library('session');
-        $this->CI->session->user = array('nom' => 'Carol','prenom' => 'Alex', 'email' => 'alex@email.com', 'status' => 'Administrateur');
-
         $output = $this->request('POST', 'product/display/2');
         $this->assertResponseCode(200);
+    }
+
+    public function testDisplay2() {
+
+        $output = $this->request('POST', 'product/display/3');
+        $this->assertResponseCode(200);
+    }
+
+    public function testDisplayError() {
+
+        $output = $this->request('POST', 'product/display/542');
+        $this->assertResponseCode(302); //redirigé vers 'product/find' car le produit n'a pas été trouvé
     }
   
 }

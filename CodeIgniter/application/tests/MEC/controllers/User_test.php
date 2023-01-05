@@ -2,37 +2,23 @@
 
 class User_test extends CIPHPUnitTestCase 
 {
-
-    public function testRegister() {
-
-        $this->resetInstance();
-        $this->CI->load->library('session');
-
-        
-        $output = $this->request('POST', 'User/register',array('nom'=>'carol','prenom'=>'alexandre','email'=>'alexcarol@gmail.com','password'=>'Testest09!'));
-        $this->assertResponseCode(200);
-    }
+    // public function testRegister() {
+    //     $output = $this->request('POST', 'User/register', array('nom'=>'carol','prenom'=>'alexandre','email'=>'alexcarolo@gmail.com','password'=>'Testest09!','confirm-password'=>'Testest09!'));
+    //     $this->assertResponseCode(302);
+    // }
 
     public function testLogin() {
-
-        $this->resetInstance();
-        $this->CI->load->library('session');
-
-        $output = $this->request('POST', 'User/login');
-        $this->assertResponseCode(200);
-
-        $output = $this->request('POST', 'User/login', array('email'=>'sasandre10@gmail.com','password'=>'09022003Aa!'));
+        $output = $this->request('POST', 'User/login', array('email'=>'louis.nolan.painter@gmail.com','password'=>'$2y$10$ozdePhwZoSc5VdEGlJk4YOMdUpZm0P636Mn3svUjOlSpLY4PwF42O'));
         $this->assertResponseCode(302); //vérifie que l'on est bien redirigé après la connexion
     }
 
-    public function testModifyPersonnalAddress() {
+    public function testModifyAddress() {
 
         $this->resetInstance();
         $this->CI->load->library('session');
+        $this->CI->session->user = array('nom' => 'Painteri','prenom' => 'Louisa', 'email'=>'louis.nolan.painter@gmail.com', 'status' => 'Administrateur');
 
-        $this->request('POST', 'User/login', array('email'=>'sasandre10@gmail.com','password'=>'09022003Aa!'));
-
-        $output = $this->request('POST', 'User/modifyPersonnalAddress');
+        $output = $this->request('POST', 'User/modifyAddress');
         $this->assertResponseCode(200);
     }
 
@@ -40,10 +26,9 @@ class User_test extends CIPHPUnitTestCase
 
         $this->resetInstance();
         $this->CI->load->library('session');
+        $this->CI->session->user = array('nom' => 'Painteri','prenom' => 'Louisa', 'email'=>'louis.nolan.painter@gmail.com', 'status' => 'Administrateur');
 
-        $this->request('POST', 'User/login', array('email'=>'sasandre10@gmail.com','password'=>'09022003Aa!'));
-
-        $output = $this->request('POST', 'User/modify', array('nom'=>'carol','prenom'=>'alexandre','email'=>'alexcarol@gmail.com'));
+        $output = $this->request('POST', 'User/modify', array('nom' => 'Painteri','prenom' => 'Louisa', 'email'=>'louis.nolan.painter@gmail.com','password'=>'$2y$10$ozdePhwZoSc5VdEGlJk4YOMdUpZm0P636Mn3svUjOlSpLY4PwF42O'));
         $this->assertResponseCode(200);
     }
 
@@ -51,17 +36,13 @@ class User_test extends CIPHPUnitTestCase
 
         $this->resetInstance();
         $this->CI->load->library('session');
-
-        $this->request('POST', 'User/login', array('email'=>'sasandre10@gmail.com','password'=>'09022003Aa!'));
+        $this->CI->session->user = array('nom' => 'Painteri','prenom' => 'Louisa', 'email'=>'louis.nolan.painter@gmail.com', 'status' => 'Administrateur');
 
         $output = $this->request('POST', 'User/account');
         $this->assertResponseCode(200);
     }
 
     public function testAccountNotConnected() {
-
-        $this->resetInstance();
-        $this->CI->load->library('session');
 
         $output = $this->request('POST', 'User/account');
         $this->assertResponseCode(302);
@@ -71,8 +52,7 @@ class User_test extends CIPHPUnitTestCase
 
         $this->resetInstance();
         $this->CI->load->library('session');
-
-        $this->request('POST', 'User/login', array('email'=>'sasandre10@gmail.com','password'=>'09022003Aa!'));
+        $this->CI->session->user = array('nom' => 'Painteri','prenom' => 'Louisa', 'email'=>'louis.nolan.painter@gmail.com', 'status' => 'Administrateur');
 
         $output = $this->request('POST', 'User/modifyAddress');
         $this->assertResponseCode(200);

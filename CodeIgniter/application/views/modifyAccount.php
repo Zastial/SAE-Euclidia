@@ -33,7 +33,15 @@ $email = empty(set_value('email')) ? $this->session->user["email"] : set_value('
                 <?php
                     $url = site_url("product/find");
                     if (isset($_SERVER['HTTP_REFERER'])) {
+                        if ($this->session->flashdata('original-url')==NULL){
+                            $url = htmlspecialchars($_SERVER['HTTP_REFERER']);
+                            $this->session->set_flashdata('original-url', $url);
+                        } else {
+                            $this->session->keep_flashdata('original-url');
+                        }
                         $url = htmlspecialchars($_SERVER['HTTP_REFERER']); 
+                    } else {
+                        $this->session->set_flashdata('original-url', site_url("admin/users"));
                     }
                 ?>
                 <a class="btn btn-orange" href=<?= $url ?>> <img src="" alt=""> < Retour</a>

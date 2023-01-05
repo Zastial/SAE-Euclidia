@@ -10,7 +10,6 @@
     <link rel="stylesheet" href=<?= base_url("css/product.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/image-zoom.css") ?>>
 
-    <script type="text/javascript" src=<?=base_url("js/slider.js")?>></script>
     <title>Modèle 3D</title>
 
 </head>
@@ -29,52 +28,58 @@
                     $url = htmlspecialchars($_SERVER['HTTP_REFERER']); 
                 }
             ?>
-            <a class="link-nav" href=<?= $url ?>> <img src="" alt=""> < Retour à la liste des produits</a>
+            <a class="btn btn-orange" href=<?= $url ?>> <img src="" alt=""> < Retour à la liste des produits</a>
         </div>
     
     
         <div class="product">
+            <!-- IMAGE PRINCIPALE-->
+            <img class="main-image" id="main-image"src="<?= base_url('resource/picture/'.$produit->getId()) ?>" alt="" data-zoom-image>
+            
+            <!-- SLIDER IMAGE -->
+            <div class="slider-container">
+                <button class="btn-scroll btn-scroll-to-left" onclick="scrollSliderLeft()" type="button"></button>
+                <div id="slider-image" class="slider-image">
+                    <?php for($i=0;$i<$c;$i++){?>
+                        <img class="other-image" id="<?=$i?>" src="<?= base_url('resource/picture/'.$produit->getId()."/".$i) ?>" alt="" onclick="changeImage(id)">
+                    <?php } ?>
+                </div>
+                <button class="btn-scroll btn-scroll-to-right" onclick="scrollSliderRight()" type="button"></button>
+            </div>
 
             
-            <div class="slider-image">
-                <?php for($i=0;$i<$c;$i++){?>
-                    <img class="other-image" id="<?=$i?>" src="<?= base_url('resource/picture/'.$produit->getId()."/".$i) ?>" alt="" onclick="changeImage(id)">
-                <?php } ?>
-            </div>
-                
-            <img class="main-image" id="main-image"src="<?= base_url('resource/picture/'.$produit->getId()) ?>" alt="" data-zoom-image>
-        
-            
-    
+            <!-- CONTENT -->
             <div class="product-content">
                 
                 <h1 class ="product-title"> <?= $produit->getTitre() ?> </h1>
                 <p class="product-description"> <?= $produit->getDescription() ?> </p>
                 
-    
-                <h3 class="product-price"> <?= $produit->getPrix() ?> €</h3>
                 
-                <div class="-button" class="buy">
+                <div class="product-price">
+                    <h3> <?= $produit->getPrix() ?> €</h3>
+                    
                     <?php if ($isbought): ?>
                         <a class="link-nav a-desactived" role="link" aria-disabled="true" href="<?= site_url("Resource/model/".$produit->getId()) ?>">Télécharger</a>
                     <?php endif; ?>
                     <?php if (!$incart && !$isbought) : ?>
-                        <a class="link-nav" href=<?= site_url("ShoppingCart/addProduct/".$produit->getId())?>>Ajouter au panier</a>
+                        <a class="btn btn-black-200 btn-border-orange" href=<?= site_url("ShoppingCart/addProduct/".$produit->getId())?>>Ajouter au panier</a>
                     <?php elseif (!$isbought): ?>
                         <a class="link-nav" href=<?= site_url("shoppingCart") ?>>Voir mon panier</a>
                     <?php endif; ?>
+
+                    
                 </div>
             </div>
+            
+
         </div>
-
-
 
     </section>
 
     
 
 
-
+    <script src="<?= base_url("js/slider.js") ?>"></script>
 </body>
 
 

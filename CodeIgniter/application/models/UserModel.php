@@ -90,6 +90,9 @@ class UserModel extends CI_Model {
 				$this->db->group_start();
 				$mots = explode(' ',$filtres['name']);
 				foreach($mots as $mot){
+					
+					$this->db->or_like('utilisateur.id_utilisateur', $mot);
+					
 					$this->db->or_like('utilisateur.nom', $mot);
 					$this->db->or_like('utilisateur.prenom', $mot);
 					$this->db->or_like('utilisateur.email', $mot);

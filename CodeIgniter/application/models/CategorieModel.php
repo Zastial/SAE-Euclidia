@@ -91,8 +91,9 @@ class CategorieModel extends CI_Model {
 	public function updateCategorie(CategorieEntity $categorie){
 		try{
 			$q = $this->db->query("CALL updateCategorie(?,?)", array($categorie->getId(), $categorie->getLibelle()));
+			return true;
 		} catch (Exception $e){
-			return null;
+			return false;
 		}
 	}
 
@@ -104,8 +105,9 @@ class CategorieModel extends CI_Model {
 	public function removeCategorie(int $categorieID) {
 		try{
 			$q = $this->db->query("CALL removeCategorie(?)", array($categorieID));
+			return true;
 		} catch (Exception $e){
-			return null;
+			return false;
 		}
 	}
 

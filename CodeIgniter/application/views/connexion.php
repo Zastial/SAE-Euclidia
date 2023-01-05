@@ -10,7 +10,7 @@
     <link rel="stylesheet" href=<?= base_url("css/inscription-connexion.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/colors.css") ?>>
     <link rel="stylesheet" href="<?= base_url("css/components.css") ?>">
-
+    <link rel="shortcut icon" type="image/x-icon" href=<?=base_url("assets/icon/favicon.ico");?>>
 
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />

@@ -26,52 +26,8 @@ if (isset($this->session->user["status"])) {
     <?php require_once(APPPATH.'views/header.php'); ?> 
 
     <div class="page">
-
-        <!-- LEFT SIDE BAR -->
         
-        <div class="side-bar">
-            <h1>Tables</h1>
-            <div class="side-bar-container">
-                <?php if ($status == "Responsable" || $status == "Administrateur"): ?>
-                    <a href=<?=site_url('admin/products')?> >
-                        <div class="table">
-                            <img class="icon-side-bar" src="<?= base_url("assets/icon/icon-rect.svg"); ?>" alt="">
-                            <p>Produits</p>
-                        </div>
-                    </a>
-                <?php endif; ?>   
-    
-                <?php if ($status == "Administrateur"): ?>
-                    <a href=<?=site_url('admin/users')?> >
-                        <div class="table">
-                            <img class="icon-side-bar" src="<?= base_url("assets/icon/icon-rect.svg"); ?>" alt="">
-                            <p>Utilisateurs</p>
-                        </div>
-                    </a>
-                <?php endif; ?>
-    
-                <?php if ($status == "Responsable" || $status == "Administrateur"): ?>
-                    <a href=<?=site_url('admin/categories')?> >
-                        <div class="table">
-                            <img class="icon-side-bar" src="<?= base_url("assets/icon/icon-rect.svg"); ?>" alt="">
-                            <p>Catégories</p>
-                        </div>
-                    </a>
-                <?php endif; ?>
-
-                <?php if ($status == "Administrateur"): ?>
-                        <a href=<?=site_url('admin/factures')?> >
-                            <div class="table">
-                                <img class="icon-side-bar" src="<?= base_url("assets/icon/icon-rect.svg"); ?>" alt="">
-                                <p>Factures</p>
-                            </div>
-                        </a>
-                <?php endif; ?>
-
-               
-            </div>
-            
-        </div>
+        <?php require_once(APPPATH.'views/admin/dashboard _component.php'); ?> 
       
         <!-- MAIN CONTENT -->
         <div class="main">

@@ -9,9 +9,6 @@ ANGLAID
 
 Design Pattern
 
- -  decorateur   fait
- -  factory (utilisateur) fait
- -  
 
  + faire le mini rapport (voir mail Lanoix)
 
@@ -20,107 +17,10 @@ Design Pattern
                         TODO A FAIRE
 
 
-
-
-#
-####
-BDD --->    
-            - procédures
-
-####
-#
-
-
-Inscription :
-        -
-
-
-
-Connexion :
-        -
-
-ShoppingCart :
-        - icone ShoppingCart un peu trop haute par rapport à l'icone de profil
-
-Mes commandes :
-        - faire la liste des produits comme celle du ShoppingCart en remplaçant le bouton retirer du panier par télécharger
-
-Factures :
-        - retirer le numéro de facture dans la vue account
-
-
-Contacter :
-        - aligner les textbox et agrandir textarea
-        - centrer bouton envoyer
-        - cooldown ??
-
-
-Passer une Commande :
-        - le bouton pour passer la commande ne doit pas être le bouton
-        "vérifier le code"
-        - Icones
-        - Titre
-        - numéro de rue, int ?? et si on veut rajouter par exemple "3 bis" ? champ supplémentaire ou numéro de rue devient un string ?
-        
-
-Footer :
-        
-
-Recaptcha :
-        - passer de V2 à V3
-
-Modèles 3D:
-
-        - si nom d'un produit est trop long afficher trois petit points
-
-
-        - images (ajout par l'admin/resp produit, modif par l'admin, affichage dans la page display)
-                (pour l'admin/resp produit, il peut ajouter des images, changer leur ordre, supprimer une image)
-
-        ((((on peut get les images dans url ex :http://172.26.82.48/resource/picture/1))))
-
-        - débordement des liens quand certaines catégories sont cochées
-        - si aucun modèle est trouvé on affiche un msg 
-        - implémentation des pages pour éviter d'avoir 50 000 produits sur la page modèle 3d
-
-
 Admin : (action : inserer, modifier, supprimer)
-    
-    
-
-    - le script supprimer catégorie est il utile dans la vue admin ? 
-    peut il etre deplacer dans tab js ?
-
-    Users : 
-        - filter les utilisateurs (status, recherche nom prénom)
-        - afficher les factures des utilisateurs
-        
 
     Produits: 
         - afficher les produits achettés par utilisateurs
-        - Trouver comment upload des images
-        
-
-        vue : 
-                - bouton "revenir tout en haut" devrait s'arrêter au dessus du footer quand on scroll tout en bas
-                - liste des tables en sticky
-
-
-    Alertes pour admin/resp dans "gestion"
-
-        - quand on supprime/add/midif une categorie/produit/user ectt 
-        il faut une notification dans la vue gestion 
-
-    Eviter la duplication du code du dashbord (faire un require)
-
-     Lorsqu'on rajoute un produit (admin) le controller ne vérifie pas que le produit retourné par le modèle ne soit pas nul
-
-
-
-
-Account :
-        - problème au niveau des liens de mofication de compte
-        - lien pour supprimer le compte sur la page de compte
 
 
 

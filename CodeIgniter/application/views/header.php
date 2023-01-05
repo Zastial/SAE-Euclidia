@@ -5,6 +5,7 @@
 
 
 <head>
+    <link rel="shortcut icon" type="image/x-icon" href=<?=base_url("assets/icon/favicon.ico");?>>
     <link rel="stylesheet" href= <?= base_url("css/components.css") ?>>
     <link rel="stylesheet" href=<?= base_url("css/components/header.css") ?> >
     <link rel="stylesheet" href=<?= base_url("css/main-css/reset.css") ?>>

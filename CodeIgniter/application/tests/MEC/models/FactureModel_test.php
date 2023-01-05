@@ -23,6 +23,58 @@ class FactureModel_test extends UnitTestCase {
 		$this->obj->db = $CI->load->database('tests', TRUE);
 	}
 
+    public function test_findAll() {
+        $expected = array(
+            [
+                'date_facture' => '2012-12-21 00:00:00',
+                'total' => '60.30',
+                'id_utilisateur' => '1',
+                'adresse' => 'rue du test',
+                'numero_rue' => '1',
+                'pays' => 'FranceTest',
+                'ville' => 'NantesTest',
+                'code_postal' => '44300',
+                'paiement' => 'paypal',
+            ],
+			[
+                'date_facture' => '2012-12-21 00:00:00',
+                'total' => '213.40',
+                'id_utilisateur' => '2',
+                'adresse' => 'rue du test',
+                'numero_rue' => '1',
+                'pays' => 'FranceTest',
+                'ville' => 'NantesTest',
+                'code_postal' => '44300',
+                'paiement' => 'paypal'
+            ],
+            [
+                'date_facture' => '2012-12-21 00:00:00',
+                'total' => '213.40',
+                'id_utilisateur' => '3',
+                'adresse' => 'rue du test',
+                'numero_rue' => '1',
+                'pays' => 'FranceTest',
+                'ville' => 'NantesTest',
+                'code_postal' => '44300',
+                'paiement' => 'paypal',
+            ]
+
+		);
+
+        $list = $this->obj->findAll();
+        for ($i=0;$i<count($list);$i++) {
+            $this->assertEquals($list[$i]->getDate(), $expected[$i]['date_facture']);
+            $this->assertEquals($list[$i]->getTotal(), $expected[$i]['total']);
+            $this->assertEquals($list[$i]->getUserId(), $expected[$i]['id_utilisateur']);
+            $this->assertEquals($list[$i]->getAdresse(), $expected[$i]['adresse']);
+            $this->assertEquals($list[$i]->getNumeroRue(), $expected[$i]['numero_rue']);
+            $this->assertEquals($list[$i]->getPays(), $expected[$i]['pays']);
+            $this->assertEquals($list[$i]->getVille(), $expected[$i]['ville']);
+            $this->assertEquals($list[$i]->getCodePostal(), $expected[$i]['code_postal']);
+            $this->assertEquals($list[$i]->getPaiement(), $expected[$i]['paiement']);
+        }
+    }
+
     public function test_findByUser() {
 
 		$expected = array(
@@ -78,6 +130,36 @@ class FactureModel_test extends UnitTestCase {
         $this->assertEquals($list->getVille(), $expected['ville']);
         $this->assertEquals($list->getCodePostal(), $expected['code_postal']);
         $this->assertEquals($list->getPaiement(), $expected['paiement']);
+	}
+
+    public function test_findQueryBuilder() {
+		$expected =
+			[
+                'date_facture' => '2012-12-21 00:00:00',
+                'total' => '60.30',
+                'id_utilisateur' => '1',
+                'adresse' => 'rue du test',
+                'numero_rue' => '1',
+                'pays' => 'FranceTest',
+                'ville' => 'NantesTest',
+                'code_postal' => '44300',
+                'paiement' => 'paypal'
+            ];
+
+		$filtre = new FiltrePrice(new Filtre(),60.30,60.30);
+		$filtre = new FiltreAvailable($filtre, true);
+		$list = $this->obj->findQueryBuilder($filtre,1);
+
+		$this->assertTrue(is_a($list[0], "FactureEntity"));
+        $this->assertEquals($list[0]->getDate(), $expected['date_facture']);
+        $this->assertEquals($list[0]->getTotal(), $expected['total']);
+        $this->assertEquals($list[0]->getUserId(), $expected['id_utilisateur']);   
+        $this->assertEquals($list[0]->getAdresse(), $expected['adresse']);
+        $this->assertEquals($list[0]->getNumeroRue(), $expected['numero_rue']);
+        $this->assertEquals($list[0]->getPays(), $expected['pays']);
+        $this->assertEquals($list[0]->getVille(), $expected['ville']);
+        $this->assertEquals($list[0]->getCodePostal(), $expected['code_postal']);
+        $this->assertEquals($list[0]->getPaiement(), $expected['paiement']);
 	}
 
 	public function test_addFacture() {

@@ -258,3 +258,10 @@ input:checked + .slider:before {
         transform: scale(3);
     }
 }
+
+
+@media screen and (max-width: 720px) {
+    .euclidia-icon {
+        display: none;
+    }
+}

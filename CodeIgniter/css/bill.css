@@ -1,13 +1,9 @@
 /* ====== BILLS ====== */
 
 
-.bill-component {
-    max-width: 700px;
-    width: 100%;
-}
 
 .bill-container {
-    width: 100%;
+    width: 700px;
     background-color: var(--black-200);
     padding: 44px 23px;
     max-width: 500px;
@@ -37,8 +33,10 @@
     align-items: center;
     gap: 15px;
     margin-bottom: 10px;
+    color: var(--black-100);
 }
 
 .bill img {
     margin-left: 20px;
+    
 }

@@ -32,27 +32,26 @@
             <div>
                 <label for="name">Nom du produit</label>
                 <input type="text" name="name" id="name" value="<?php echo $produit->getTitre(); ?>">
+                <?php echo form_error('name'); ?>
             </div>
             <div>
                 <label for="price">Prix du produit</label>
                 <input type="number" step="0.1" name="price" id="price" value="<?php echo $produit->getPrix(); ?>">
+                <?php echo form_error('price'); ?>
             </div>
             <div>
                 <label for="description">Description du produit</label>
                 <input type="text" name="description" id="description" value="<?php echo $produit->getDescription(); ?>">
+                <?php echo form_error('description'); ?>
             </div>   
-    
-
-         
 
             <div class="categories">
                 <?php foreach($categories as $categorie): ?>
-                    <input type="checkbox" id="categories" name="categories[]" value="<?php echo $categorie->getId(); ?>" <?php if (in_array($categorie, $affectations)) {echo 'checked';}?>>
-                    <label for="categories"><?php echo $categorie->getLibelle(); ?></label>
+                    <?php $labelcategorie = $categorie->getLibelle(); ?>
+                    <input type="checkbox" id="<?= $labelcategorie?>" name="categories[]" value="<?php echo $categorie->getId(); ?>" <?php if (in_array($categorie, $affectations)) {echo 'checked';}?>>
+                    <label for="<?= $labelcategorie?>"><?= $labelcategorie?></label>
                 <?php endforeach ?>
             </div>
-            
-     
     
             <div class="available-container">
                 <label for="disponible">Disponibilité du produit : </label>
@@ -67,7 +66,6 @@
         </form>
     
     </section>
-    <script type="text/javascript" src=<?=base_url("js/productImage.js")?>></script>
 </body>
 <?php require_once(APPPATH.'views/footer.php'); ?>
 </html>

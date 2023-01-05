@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href=<?= base_url("css/tabs.css") ?> >
     <link rel="stylesheet" href=<?= base_url("css/admin/addCategorie.css") ?> >
 
 
@@ -33,6 +32,7 @@
             <div class="nom">
                 <label for="name" class="labelTypo" size="30" required>Nom de la catégorie</label>
                 <input class="" type="text" name="name" required>
+                <?php echo form_error('name'); ?>
             </div>
 
         
