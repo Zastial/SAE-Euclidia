@@ -3,14 +3,14 @@
 
 .welcome-section {
     position: relative;
-    /*background-image:  url("/assets/image/default-img.png");*/
-    background-color: var(--blue-100) ;
+    background-image: var(--home-bg);
+
+    /*background-color: var(--blue-100);*/
     width: 100%;
     height: 100vh;
     background-repeat: no-repeat;
     background-size: cover;
 }
-
 
 .welcome-section .content {
     position: absolute;

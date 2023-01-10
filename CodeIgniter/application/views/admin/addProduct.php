@@ -37,7 +37,7 @@
                     
                     <div class="prix">
                         <label for="price" class="labelTypo" size="30" required>Prix du Produit</label>
-                        <input class="" type="number" min="0" max="9999,99" step="0.01" name="price" required>
+                        <input class="" type="number" min="0" max="9999.99" step="0.01" name="price" required>
                     </div>
                     
                     <div class="desc">

@@ -29,16 +29,16 @@
 
                     <div class="link-show" <?= $prod->getDisponible()?"onclick='location.href=\"" . site_url("Product/display/".$prod->getId())."\"'":""?>>
                         <?php if($prod->getDisponible()){ ?>
-                            <a><img class="icon icon-show" src="<?=base_url("assets/icon/icon-available.svg") ?>" alt="show product"></a>
+                            <a><img class="icon icon-show" src="<?=base_url("assets/icon/icon-available.svg") ?>" alt="show product" title="Afficher le produit"></a>
                         <?php } else { ?>
-                            <a><img class="icon icon-unavailable" src="<?=base_url("assets/icon/icon-unavailable.svg") ?>" alt="product unavailable"></a> 
+                            <a><img class="icon icon-unavailable" src="<?=base_url("assets/icon/icon-unavailable.svg") ?>" alt="product unavailable" title="Produit non disponible"></a> 
                         <?php } ?>
                     </div>
 
                     <div class="link-download" onclick='location.href="<?= site_url("resource/model/".$prod->getId())?>"'>
-                        <a><img class="icon icon-download" src="<?=base_url("assets/icon/icon-download.svg") ?>" alt="download bouton"></a>   
+                        <a><img class="icon icon-download" src="<?=base_url("assets/icon/icon-download.svg") ?>" alt="download bouton" title="Télécharger le produit"></a>   
                     </div>
-                    
+                </div>  
             <?php endforeach; ?>
     
         </div>

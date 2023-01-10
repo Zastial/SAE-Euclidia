@@ -22,7 +22,6 @@ class Admin extends CI_Controller {
         if (!isset($this->session->user)) {
             redirect('home');
         }
-
         $status = $this->session->user["status"];
         if ($status != "Responsable" && $status != "Administrateur") {
             redirect('home');
@@ -34,8 +33,12 @@ class Admin extends CI_Controller {
         $this->load->view('admin/dashboard.php');
     }
     
+    /**
+     * get list of users on admin page
+     */
     public function users() {
         $status = $this->session->user["status"];
+        //Process filters from inputs
         $rechercher = $this->input->get('rechercher');
         $tri = $this->input->get('tri');
         $triStatus = $this->input->get('tri-status');
@@ -60,11 +63,15 @@ class Admin extends CI_Controller {
             $t = Tri::getTriFromString($triEtat);
             $filtre = new FiltreTri($filtre, $t, 'etat');
         }
+        // here we have our final filter, now we can load the view
         $users = $this->UserModel->findQueryBuilder($filtre);
         $this->load->view('admin/dashboardUsers.php', array('users'=>$users, 'active'=>'users'));
     }
-
+    /**
+     * get list of categories on admin page
+     */
     public function categories() {
+        //process input filters
         $tri = $this->input->get('tri-categ');
         $rechercher = $this->input->get('rechercher');
 
@@ -77,13 +84,16 @@ class Admin extends CI_Controller {
             $t = Tri::getTriFromString($tri);
             $filtre = new FiltreTri($filtre, $t);
         }
-        
+        // filters processed, now we can load the view
         $categories = $this->CategorieModel->findQueryBuilder($filtre);
         $this->load->view('admin/dashboardCategories.php', array('categories'=>$categories, 'active'=>'categories'));
     }
 
+    /**
+     * get list of products on admin page
+     */
     public function products() {
-        
+        //process input filters
         $rechercher = $this->input->get('rechercher');
         $tri = $this->input->get('tri');
         $prix = $this->input->get('tri-prix');
@@ -108,14 +118,17 @@ class Admin extends CI_Controller {
             $visible = $visible == "false" ? false : true;
             $filtre = new FiltreAvailable($filtre, $visible);
         }
-
+        // filters processed, now we can load the view
         $products = $this->ProductModel->findQueryBuilder($filtre);
         $this->load->view('admin/dashboardProducts.php', array('products'=>$products, 'active'=>'products'));
     }
 
+    /**
+     * get list of bills on admin page
+     */
     public function factures($userid=null) {
         $status = $this->session->user["status"];
-        
+        //process input filters
         $triId = $this->input->get('tri-id');
         $triPrix = $this->input->get('tri-prix');
         $triDate = $this->input->get('tri-date');
@@ -145,13 +158,16 @@ class Admin extends CI_Controller {
         if (isset($minDate) && isset($maxDate)) {
             $filtre = new FiltreDate($filtre, $minDate, $maxDate);
         }
-
+        // filters processed, now we can load the view
         $factures = $this->FactureModel->findQueryBuilder($filtre, $userid);
         $this->load->view('admin/dashboardBills.php', array('factures'=>$factures, 'active'=>'factures', 'id'=>$userid));
     }
 
+    /**
+     * This function is called (at least, should be called) when one sends the form to edit an user.
+     */
     public function modifUser(int $idUser) {
-
+        // check if user has the correct rights. While we do this in the class constructor, this is needed here because a "responsable" can't edit users while admins can.
         $status = $this->session->user["status"];
         if ($status != "Administrateur") {
             $this->session->set_flashdata('error', 'Vous n\\\'avez pas les droits nécessaires pour modifier un utilisateur.');
@@ -161,7 +177,7 @@ class Admin extends CI_Controller {
             }
             redirect($url);
         }
-
+        //form validation rules.
         $this->form_validation->set_rules('nom', 'Nom', 'required',
         array('required' => 'Vous devez entrer le nom de l utilisateur'));
 
@@ -182,7 +198,7 @@ class Admin extends CI_Controller {
             $this->session->set_flashdata('error', 'L\\\'utilisateur sélectionné n\\\'existe pas ou n\\\'est plus disponible.');
             redirect('admin/users');
         }
-
+        //Even if an admin, one should not be able to edit his own account!
         if ($this->session->user['email']==$user->getEmail()){
             $this->session->set_flashdata('error', 'Vous ne pouvez pas modifier votre compte ici !');
             $url = site_url("admin/users");
@@ -195,6 +211,7 @@ class Admin extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             $this->load->view("admin/modifUser.php", array("user"=>$user));
         } else {
+            // get form inputs
             $name = $this -> input -> post("nom");
             $prenom = $this -> input -> post("prenom");
             $email = $this->input->post("email");
@@ -208,14 +225,12 @@ class Admin extends CI_Controller {
             if (!empty($password)) {
                 $user->setEncryptedPassword($password);
             }
-            
+            //factory
             $u = UserEntity::getUser($status);
             if ($u==null){
                 $this->session->set_flashdata('error', 'Statut invalide!');
                 redirect('Admin/users');
             }
-
-           
 
             $u->setNom($user->getNom());
             $u->setId($user->getId());
@@ -239,6 +254,10 @@ class Admin extends CI_Controller {
             redirect('Admin/users');
         }
     }
+
+    /**
+     * Check if password is valid (???)
+     */
     public function isValidModifyPassword(string $pass=null) {
         if ($pass == null || $pass == "") {
             return true;
@@ -263,7 +282,9 @@ class Admin extends CI_Controller {
     }
 
 
-
+    /**
+     * This function is called when adding a product using an AJAX form. This won't work if the form isn't AJAX.
+     */
     public function addProductAjax() {
 
         $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
@@ -271,6 +292,7 @@ class Admin extends CI_Controller {
         $isAllowed = $status == "Responsable" || $status == "Administrateur";
         $errors = array();
         $status = "";
+        
         if ($isAjax && $isAllowed) {
 
             $name = $this->input->post("name");
@@ -287,7 +309,7 @@ class Admin extends CI_Controller {
             if (!isset($price)) {
                 $errors['price'] = "Le prix du produit n'est pas défini !";
             }else {
-                $price = intval($price);
+                $price = floatval($price);
                 if ($price < 0 || $price >= 10000) {
                     $errors['price'] = 'Le prix doit être compris entre 0 et 9 999.99€ compris';
                 }
@@ -326,8 +348,9 @@ class Admin extends CI_Controller {
                     if (!isset($files)) {
                         $files = array();
                     }
+                    //Codeigniter n'a pas de fonction pour upload l'array $_FILES['userfiles'].
                     $cpt=count($files['userfile']['name']);
-                    for ($i=0;$i<$cpt;$i++){
+                    for ($i=0;$i<$cpt;$i++){ //On doit donc faire en sorte que pour chaque fichier,
                         $ext = pathinfo($files['userfile']['name'][$i], PATHINFO_EXTENSION);
                         $filename = $i.'.'.$ext;
                         $_FILES['userfile']['name']= $filename;
@@ -380,13 +403,15 @@ class Admin extends CI_Controller {
         }
 
         // if we have no errors, redirect to product with success message
+        // $errors should only contain one element: image
+        // image should be an empty array
         if (count($errors) == 1 && empty($errors['image'])) {
             $status = "success";
             $this->session->set_flashdata('success', 'Le produit a été correctement ajouté !');
         }
         $data = array(
             $errors,
-            $status
+            $status,
         );
         echo json_encode($data);
     }
@@ -420,6 +445,9 @@ class Admin extends CI_Controller {
         $this->form_validation->set_rules('description', 'Description', 'required',
         array('required' => 'Vous devez entrer la description du produit'));
 
+        $this->form_validation->set_rules('disponible', 'Disponible', 'required',
+        array('required' => 'Vous devez entrer la disponibilité du produit'));
+
         $id = intval($productid);
         $produit = $this->ProductModel->findById($id);
         if ($produit == null) {
@@ -432,8 +460,8 @@ class Admin extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             $this->load->view("admin/modifProduct", array("produit"=>$produit, "categories"=>$categories, "affectations" => $affectations));
         } else {
-            $name = $this -> input -> post("name");
-            $price = $this -> input -> post("price");
+            $name = $this->input->post("name");
+            $price = floatval($this->input->post("price"));
             $description = $this->input->post("description");
             $disponible = $this->input->post("disponible");
 
@@ -442,13 +470,20 @@ class Admin extends CI_Controller {
             $produit->setTitre($name);
             $produit->setPrix($price);
             $produit->setDescription($description);
-            $produit->setDisponible($disponible);
+            $produit->setDisponible($disponible=="oui");
             
             if (!isset($categories)) {
                 $categories = array();
             }
-            $this->ProductModel->updateProduct($produit, $categories);
-        
+            if($this->ProductModel->updateProduct($produit, $categories)) {
+                if ($price>9999.99){
+                    $this->session->set_flashdata('warning', 'Le produit a été modifié, mais le prix a été tronqué a 9999.99€ car il était trop haut!');
+                } else {
+                    $this->session->set_flashdata('success', 'Le produit a bien été modifié !');
+                }
+            } else {
+                $this->session->set_flashdata('error', 'Le produit n\\\'a pas pu être modifié.');
+            }
 
             redirect('Admin/products');
         }
@@ -540,6 +575,9 @@ class Admin extends CI_Controller {
         $this->form_validation->set_rules('name', 'Name', 'required',
         array('required' => 'Vous devez entrer le nom de la catégorie'));
 
+        $this->form_validation->set_rules('name', 'Name', 'required|is_unique[categorie.libelle]',
+        array('required' => 'Vous devez entrer le nom du produit', 'is_unique'=>'Ce nom de catégorie existe déjà.'));
+
         $id = intval($categorieid);
         $categorie = $this->CategorieModel->findById($id);
         if ($categorie == null) {
@@ -548,7 +586,7 @@ class Admin extends CI_Controller {
         }
 
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view("modifCategorie", array("categorie"=>$categorie));
+            $this->load->view("admin/modifCategorie", array("categorie"=>$categorie));
         } else {
             $name = $this -> input -> post("name");
             

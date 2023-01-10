@@ -4,7 +4,7 @@
     width: 250px;
     height: 250px;
     border-radius: 8px;
-    box-shadow: 1px 18px 40px -8px rgba(0, 0, 0, 0.25);
+    box-shadow: var(--product-shadow);
     background-color: var(--white-200);
 }
 

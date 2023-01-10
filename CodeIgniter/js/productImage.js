@@ -67,16 +67,19 @@ $(function() {
         });
         $('#image-upload').prop('files', list.files);
         var fd = new FormData($('form')[0]);
+        console.log(fd);
         // ajax call
         $.ajax({
+            url: base_url + "admin/addProductAjax/", 
             type: "POST",
-            url: base_url + "admin/addProductAjax", 
             data: fd,
             cache:false,
+            async: false,
             processData:false,
             contentType:false,
             success: 
                 function(data){
+                    console.log(data);
                     var parsedData = JSON.parse(data);
                     console.log(parsedData);
                     if (parsedData.length != 2) {

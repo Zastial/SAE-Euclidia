@@ -11,14 +11,8 @@
     gap: 3em;
 }
 
-
-.form-content-modifyAccount {
-    max-width: 40em;
-    display: grid;
-    grid-template-areas: 
-                "firstname  lastname" 
-                "email      email"
-                "password   passwordconfirmation";
-    grid-gap: 2rem;
+.form-input-modifyAccount {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
-

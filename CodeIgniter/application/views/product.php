@@ -23,9 +23,18 @@
 
         <div class="return-previous-page">
             <?php
+                
                 $url = site_url("product/find");
-                if (isset($_SERVER['HTTP_REFERER'])) {
-                    $url = htmlspecialchars($_SERVER['HTTP_REFERER']); 
+                //Méthode pour empecher de rester bloqué sur la même page lors du retour en arrière.
+                if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER']) && $this->session->original_url == null) { //Si il y a un referer
+                    if ($this->session->original_url==NULL){   //Si on a pas d'URL sauvegardée
+                        $this->session->original_url = $_SERVER['HTTP_REFERER'];  //
+                        $url = $this->session->original_url; //On sauvegarde l'URL dans une session
+                    } else {                                                //Si il y a une url dans la session
+                        $url = $this->session->original_url;    //On la garde pour la prochaine requete
+                    }
+                } else {
+                    $url = $this->session->original_url;
                 }
             ?>
             <a class="btn btn-orange" href=<?= $url ?>> <img src="" alt=""> < Retour à la liste des produits</a>
@@ -59,12 +68,12 @@
                     <h3> <?= $produit->getPrix() ?> €</h3>
                     
                     <?php if ($isbought): ?>
-                        <a class="link-nav a-desactived" role="link" aria-disabled="true" href="<?= site_url("Resource/model/".$produit->getId()) ?>">Télécharger</a>
+                        <a class="btn btn-black-200 btn-border-orange" role="link" aria-disabled="true" href="<?= site_url("Resource/model/".$produit->getId()) ?>">Télécharger</a>
                     <?php endif; ?>
                     <?php if (!$incart && !$isbought) : ?>
-                        <a class="btn btn-black-200 btn-border-orange" href=<?= site_url("ShoppingCart/addProduct/".$produit->getId())?>>Ajouter au panier</a>
+                        <a class="btn btn-black-200 btn-border-orange" href=<?= site_url("ShoppingCart/addProduct/".$produit->getId())?>> <img class="icon-shopping-cart" src="<?= site_url("assets/icon/icon-shopping-cart.svg");?>" alt=""> Ajouter au panier</a>
                     <?php elseif (!$isbought): ?>
-                        <a class="link-nav" href=<?= site_url("shoppingCart") ?>>Voir mon panier</a>
+                        <a class="btn btn-black-200 btn-border-orange" href=<?= site_url("shoppingCart") ?>>Voir mon panier</a>
                     <?php endif; ?>
 
                     

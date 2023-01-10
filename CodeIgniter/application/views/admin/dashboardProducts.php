@@ -121,11 +121,11 @@ if (!empty($_GET['tri-visible'])) {
                             </select>
                         </div>
                         <div class="filter">
-                                <label for="tri-visible">Visibilité :</label>
+                                <label for="tri-visible">Disponibilité :</label>
                                 <select name="tri-visible" id="tri-etat">
                                     <?php 
                                     
-                                    $options = array('- Aucun filtre -', 'Visible pour tous', 'Inivisible');
+                                    $options = array('- Aucun filtre -', 'Disponible à l\'achat', 'Indisponible à l\'achat');
                                     $values = array('aucun', 'true', 'false');
         
                                     for ($i=0;$i<count($options);$i++) {
@@ -151,7 +151,7 @@ if (!empty($_GET['tri-visible'])) {
                                 <p>ID</p>
                                 <p>Titre</p>
                                 <p>Prix</p>
-                                <p class="head-center">Visible</p>
+                                <p class="head-center">Disponibilité</p>
                                 <p class="head-center">Action</p>
                             </div>
                             
@@ -162,16 +162,16 @@ if (!empty($_GET['tri-visible'])) {
                                     <div class="grid item">
         
                                         <p><?= $product->getID()?></p>
-                                        <p><?= $product->getTitre()?></p>
+                                        <p title="<?= $product->getTitre()?>"><?= $product->getTitre()?></p>
                                         <p><?= $product->getPrix()?> €</p>
                                         <a href="<?=site_url("Admin/toggleVisibility/".$product->getId())?>" class="item-center <?= $product->getDisponible() ? "visible" : "invisible" ?>">
-                                            <?= $product->getDisponible() ? "Visible pour tous" : "Invisible"?>
+                                            <?= $product->getDisponible() ? "Disponible à l'achat" : "Indisponible à l'achat"?>
                                         </a>
         
                                         <div class="icon-container item-center">
                                             
                                                 <a class="" href="<?=site_url("Admin/modifProduct/".$product->getID()) ?>">
-                                                    <img class="icon" src="<?=base_url("assets/icon/icon-pen.svg")?>" alt="Modifier le produit">
+                                                    <img class="icon" src="<?=base_url("assets/icon/icon-pen.svg")?>" alt="Modifier le produit" title="Modifier le produit">
                                                 </a>
                 
                                         </div>

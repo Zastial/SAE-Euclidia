@@ -108,13 +108,13 @@ if (!empty($_GET['rechercher'])) {
 
                                         <div class="icon-container item-center">
                                             <a href="<?=site_url("Admin/modifCategorie/".$cat->getId()) ?>">
-                                                <img class="icon" src="<?=base_url("assets/icon/icon-pen.svg")?>" alt="Modifier la catégorie">
+                                                <img class="icon" src="<?=base_url("assets/icon/icon-pen.svg")?>" alt="Modifier la catégorie" title="Modifier la catégorie">
                                             </a>
 
                                         
 
                                             <a href="<?=site_url("Admin/removeCategorie/".$cat->getId()) ?>">
-                                                <img class="icon icon-delete" src="<?=base_url("assets/icon/icon-delete.svg")?>" alt="Supprimer la catégorie">
+                                                <img class="icon icon-delete" src="<?=base_url("assets/icon/icon-delete.svg")?>" alt="Supprimer la catégorie" title="Supprimer la catégorie">
                                             </a>
                                         </div>
                                         

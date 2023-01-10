@@ -24,7 +24,9 @@
     --filter-button-img: invert(0%) sepia(20%) saturate(8%) hue-rotate(339deg) brightness(91%) contrast(87%);
     --filter-account-icon: none;
     --box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    --product-shadow: 1px 18px 40px -8px rgba(0, 0, 0, 0.25);
     --theme-slider-background-image : url(../../assets/image/light-mode.png);
+    --home-bg: url("/assets/image/bg-smoke.jpg");;
     font-family: 'Poppins', sans-serif;
 
 }
@@ -51,8 +53,10 @@
     --filter-orange-img: invert(67%) sepia(79%) saturate(566%) hue-rotate(338deg) brightness(104%) contrast(101%);
     --filter-button-img: invert(91%) sepia(94%) saturate(2%) hue-rotate(229deg) brightness(105%) contrast(100%);
     --filter-account-icon: invert(99%) sepia(43%) saturate(5%) hue-rotate(121deg) brightness(104%) contrast(87%);
-    --box-shadow: 0px 0px 0px 0px rgba(253, 253, 253, 0.2);
+    --box-shadow: 0px 0px 0px 0px rgba(150, 150, 150, 0.699);
+    --product-shadow: 1px 18px 40px -8px rgba(92, 92, 92, 0.651);
     --theme-slider-background-image : url(../../assets/image/dark-mode.png);
+    --home-bg: url("/assets/image/bg-smoke-dark.jpg");
     font-family: 'Poppins', sans-serif;
 }
 

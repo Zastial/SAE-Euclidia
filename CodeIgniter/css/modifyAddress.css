@@ -1,3 +1,11 @@
+.main-content {
+    padding: 2rem;
+    max-width: 1450px;
+    margin: auto;
+}
+
+
+
 .form-container {
     display: flex;
     flex-direction: column;
@@ -6,13 +14,8 @@
 }
 
 
-.form-content-modifyAddess {
-    max-width: 40em;
-    display: grid;
-    grid-template-areas: 
-                "firstname  lastname" 
-                "email      email"
-                "password   passwordconfirmation";
-    grid-gap: 2rem;
+.form-input-modifyAddress {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
-

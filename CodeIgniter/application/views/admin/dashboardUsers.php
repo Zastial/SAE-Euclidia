@@ -153,9 +153,9 @@ if (!empty($_GET['tri-etat'])) {
                             <?php foreach ($users as $user) :?>    
                                 <div class="grid item">
                                     <p><?= $user->getId(); ?></p>
-                                    <p><?= $user->getPrenom()?></p>
-                                    <p><?= $user->getNom()?></p>
-                                    <p class="user-email"><?= $user->getEmail()?></p>
+                                    <p title="<?=$user->getPrenom()?>"><?= $user->getPrenom()?></p>
+                                    <p title="<?=$user->getNom()?>"><?= $user->getNom()?></p>
+                                    <p class="user-email" title="<?=$user->getEmail()?>"><?= $user->getEmail()?></p>
 
                                     
                                     <p><?= $user->getStatus(); ?></p>
@@ -168,10 +168,10 @@ if (!empty($_GET['tri-etat'])) {
                                     
                                     <div class="icon-container item-center">
                                         <a href="<?=site_url("Admin/modifUser/".$user->getID()) ?>">
-                                            <img class="icon" src="<?=base_url("assets/icon/icon-pen.svg")?>" alt="Modifier l'utilisateur">
+                                            <img class="icon" src="<?=base_url("assets/icon/icon-pen.svg")?>" alt="Modifier l'utilisateur" title="Modifier l'utilisateur">
                                         </a>
                                         <a href="<?=site_url("Admin/factures/".$user->getID()) ?>">
-                                            <img class="icon" src="<?=base_url("assets/icon/icon-request-quote.svg")?>" alt="Factures de l'utilisateur">
+                                            <img class="icon" src="<?=base_url("assets/icon/icon-request-quote.svg")?>" alt="Factures de l'utilisateur" title="Factures de l'utilisateur">
                                         </a>
                                     </div>
                                 </div>

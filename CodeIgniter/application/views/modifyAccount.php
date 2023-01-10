@@ -31,17 +31,18 @@ $email = empty(set_value('email')) ? $this->session->user["email"] : set_value('
         <div class="main-content">
             <div class="return-previous-page">
                 <?php
-                    $url = site_url("product/find");
-                    if (isset($_SERVER['HTTP_REFERER'])) {
-                        if ($this->session->flashdata('original-url')==NULL){
-                            $url = htmlspecialchars($_SERVER['HTTP_REFERER']);
-                            $this->session->set_flashdata('original-url', $url);
-                        } else {
-                            $this->session->keep_flashdata('original-url');
+                    $url = site_url("user/account");
+                    //Méthode pour empecher de rester bloqué sur la même page lors du retour en arrière.
+                    if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) { //Si il y a un referer
+                        if ($this->session->flashdata('original-url')==NULL){   //Si on a pas d'URL sauvegardée
+                            $url = htmlspecialchars($_SERVER['HTTP_REFERER']);  //
+                            $this->session->set_flashdata('original-url', $url);//On sauvegarde l'URL dans une flashdata
+                        } else {                                                //Si il y a une url dans la flashdata
+                            $url = $this->session->flashdata('original-url');   //
+                            $this->session->keep_flashdata('original-url');     //On la garde pour la prochaine requete
                         }
-                        $url = htmlspecialchars($_SERVER['HTTP_REFERER']); 
-                    } else {
-                        $this->session->set_flashdata('original-url', site_url("admin/users"));
+                    } else {                                                    //Si il n'y a pas de referer (accès direct)
+                        $this->session->set_flashdata('original-url', site_url("user/account")); //On redirige vers user/account si l'utilisateur revient en arrière
                     }
                 ?>
                 <a class="btn btn-orange" href=<?= $url ?>> <img src="" alt=""> < Retour</a>

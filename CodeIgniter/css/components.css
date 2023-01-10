@@ -24,7 +24,9 @@ button:disabled {
     padding: 8px;
 }
 .btn:hover {
+    transition: all 0.250s ease-in-out;
     filter: brightness(90%);
+    transform: scale(1.02);
 }
 
 .btn-orange {

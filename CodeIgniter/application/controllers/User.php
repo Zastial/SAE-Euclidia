@@ -124,6 +124,10 @@ class User extends CI_Controller {
                 "email"=>$user->getEmail(), 
                 "status"=>$user->getStatus()));
             
+            // privileged users cannot add products to their shopping cart and order so we delete the existing cart data
+            if ($user->getStatus() != "Utilisateur") {
+                $this->session->unset_userdata("cart");
+            }
             redirect('Home');
         }
     }

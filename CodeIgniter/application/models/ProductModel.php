@@ -108,7 +108,7 @@ class ProductModel extends CI_Model {
 			}
 
 			$min = 0;
-			$max = 9999;
+			$max = 9999.99;
 
 			if (isset($filtres['minPrice'])) {
 				$min = $filtres['minPrice'];
@@ -185,8 +185,9 @@ class ProductModel extends CI_Model {
 			$this->AffectationModel->removeAffectations($product->getId(), array_diff($categories, $selectedCategories));
 
 			$this->AffectationModel->addAffectations($product->getId(), $categories);
+			return true;
 		} catch (Exception $e){
-			return null;
+			return false;
 		}
 		
 	}

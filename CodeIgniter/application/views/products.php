@@ -54,7 +54,11 @@ if ($max >= 10000) {
     <?php require_once('error.php'); ?>
     <?php require_once ('header.php'); ?>
     <section>
-
+        <?php 
+            if ($this->session->original_url!=null){
+                $this->session->original_url = null;
+            }
+        ?>
         <div class="main-content">
 
 
@@ -106,11 +110,11 @@ if ($max >= 10000) {
                         <h2>Prix</h2>
                         <div class="price-container" id="price">
                             <div class="price-left">
-                                <label for="min">Prix minimum</label>
+                                <label for="min">Prix minimum (€)</label>
                                 <input id="price-min" type="number" name="price-min" min="0"  value=<?=$min?> oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" >
                             </div>
                             <div class="price-right">
-                                <label for="max">Prix maximum</label>
+                                <label for="max">Prix maximum (€)</label>
                                 <input id="price-max" name="price-max" type="number" min="0"  value=<?=$max?> oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" >
                             </div>
                         </div>

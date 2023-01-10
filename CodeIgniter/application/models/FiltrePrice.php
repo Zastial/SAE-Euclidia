@@ -1,8 +1,8 @@
 <?php
 require_once("FiltreDecorator.php");
 class FiltrePrice extends FiltreDecorator {
-    private int $minPrice;
-    private int $maxPrice;
+    private float $minPrice;
+    private float $maxPrice;
 
     public function __construct(FiltreInterface $filtre, $minPrice, $maxPrice) {
         parent::__construct($filtre);

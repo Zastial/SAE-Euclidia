@@ -6,23 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="refresh" content="5;url=<?=base_url()?>">
+    
+    <link rel="stylesheet" href=<?=base_url("css/error.css")?>>
     <title>404 Erreur</title>
 </head>
 <body>
 
-    <?php require_once('header.php'); ?>
+    <?php require_once(APPPATH.'views/header.php'); ?>
     
     <section>
-        <h1>Une erreur est survenue</h1>
-        <p>Vous allez être redirigé a la page d'accueuil dans 5 secondes...</p>
-        <p><a href="<?=base_url()?>">Cliquez ici</a> pour y revenir instantanément.</p>
+        <div class="error">
+            <h1>Une erreur est survenue</h1>
+            <p>Vous allez être redirigé vers la page d'accueuil dans 5 secondes...</p>
+            <p><a href="<?=base_url()?>">Cliquez ici</a> pour revenir à la page d'accueuil.</p>
+        </div>
 
     </section>
 	
     
 </body>
 
-<?php require_once('footer.php'); ?>
+<?php require_once(APPPATH.'views/footer.php'); ?>
 
 </html>
 

@@ -42,6 +42,8 @@ if (!empty($_GET['maxDate'])) {
     $maxDate = htmlentities($_GET['maxDate']);
 }
 
+var_dump($minDate);
+var_dump($maxDate);
 ?>
 
 
@@ -124,9 +126,8 @@ if (!empty($_GET['maxDate'])) {
                             <div class="filter">
                                 <label for="tri-date">Date :</label>
                                 <select name="tri-date" id="tri-date">
-                                    <?php 
-                                    
-                                    $options = array('- Aucun filtre -', 'Tri par date croissante', 'Tri par date décroissante');
+                                    <?php
+                                    $options = array('- Aucun filtre -', 'Du plus ancien au plus récent', 'Du plus récent au plus ancien');
                                     $values = array('aucun', 'nom-asc', 'nom-desc');
             
                                     for ($i=0;$i<count($options);$i++) {
@@ -184,7 +185,7 @@ if (!empty($_GET['maxDate'])) {
                                     
                                     <div class="icon-container item-center">
                                         <a href="<?=site_url("user/getfacture/".$fact->getId()) ?>" target="_blank">
-                                            <img class="icon" src="<?=base_url("assets/icon/icon-eye.svg")?>" alt="Voir la facture">
+                                            <img class="icon" src="<?=base_url("assets/icon/icon-eye.svg")?>" alt="Voir la facture" title="Voir la facture">
                                         </a>
                                     </div>
                                 </div>
@@ -195,8 +196,9 @@ if (!empty($_GET['maxDate'])) {
                                 <p>
                                     Aucune facture trouvée.
                                     <?php 
+                                    var_dump($minDate > $maxDate);
                                     if (!empty($minDate) && !empty($maxDate) && $minDate > $maxDate) {
-                                        echo "Attention, la date de début est après la date de fin.";
+                                        echo "Attention, les dates de début et de fin ne correspondent pas à l'ordre chronologique.";
                                     }
                                     ?>
                                 </p>

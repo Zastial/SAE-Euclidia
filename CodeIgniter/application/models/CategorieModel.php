@@ -68,18 +68,13 @@ class CategorieModel extends CI_Model {
 	 * @return ?CategorieEntity
 	 * 
 	 */
-	public function addCategorie(CategorieEntity $categorie):?CategorieEntity{
+	public function addCategorie(CategorieEntity $categorie): bool {
 		try{
 			$q = $this->db->query("CALL addCategorie(?)", array($categorie->getLibelle()));
+			return true;
 		} catch (Exception $e){
-			return null;
+			return false;
 		}
-		// get last inserted row
-		$id = $this->db->insert_id();
-		$q = $this->db->get_where('categorie', array('id_categorie' => $id));
-		$response = $q->row(0,"CategorieEntity");
-
-		return $response;
     }
 
 	/**

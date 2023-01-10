@@ -8,7 +8,9 @@
     margin: 0px;
     padding: 0px;
     scroll-behavior: smooth;
-    transition: background-color 0.2s, filter 0s;
+    transition: background-color 0.2s , filter 0s ;
+    -webkit-transition: background-image 0.2s;
+    transition: background-image 0.2s ;
 }
 
 

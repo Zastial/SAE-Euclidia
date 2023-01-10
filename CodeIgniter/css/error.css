@@ -1,0 +1,22 @@
+
+
+section {
+    display: flex;
+    align-items: center;
+}
+
+
+
+.error {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin:auto;
+
+}
+
+.error a {
+    text-decoration: underline;
+    color: var(--red);
+}

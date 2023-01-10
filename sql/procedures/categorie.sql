@@ -11,8 +11,9 @@ UPDATE categorie SET libelle=leLibelle WHERE id_categorie=categorieId;
 END&&
 DELIMITER;
 DELIMITER &&
-CREATE PROCEDURE removeCategorie(IN categorieId INT)
+CREATE or replace PROCEDURE removeCategorie(IN categorieId INT)
 BEGIN
+DELETE FROM affectation where id_categorie = categorieId;
 DELETE FROM categorie where id_categorie = categorieId;
 END&&
 DELIMITER ;
