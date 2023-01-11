@@ -13,15 +13,15 @@ $( function() {
 
 var fileBuffer = new Set();
 
-// number of images uploaded, used to link images in the page to the images in fileBuffer
+// nombre d'images a téléverser, utilisé pour lier les images dans la page aux images dans fileBuffer
 var imageCounter = 0;
 
 $(function() {
 
-    // when uploading new images
+    // quand on ajoute une image
     $('#image-upload').on('change', function() {
         if (this.files) {
-            // add new images while updating imageCounter
+            // on l'ajoute a fileBuffer en augmentant le compteur
             for (i = 0; i < this.files.length; i++) {
                 appendImage(this.files[i], imageCounter);
                 this.files[i].id = imageCounter;
@@ -39,7 +39,7 @@ $(function() {
         if ($('#model-upload')[0].files.length == 0) Notiflix.Notify.failure("Vous n'avez pas sélectionné de modèle !", {timeout:5000, distance:'90px', width:"400px", fontSize:"16px"});
     })
 
-    //when uploading models
+    //quand on ajoute des modèles 3d
     $('#model-upload').on('change', function(){
         $('#list-of-models').empty();
         if (this.files){
@@ -52,9 +52,12 @@ $(function() {
     })
 
     $("form").submit(function(e) {
-        e.preventDefault();    
+        e.preventDefault();
 
-        // update images in file upload
+        console.log($('#submit-new-product-button'));
+        $('#submit-new-product-button').prop('disabled', true);
+        $('#upload-progress').css('visibility', 'visible');
+        // mise a jours des images dans l'upload
         let list = new DataTransfer();
         $('.img-container').each(function() {
             order = $(this).attr('data-id');
@@ -65,16 +68,33 @@ $(function() {
                 }
             }
         });
+        // on met le buffer dans l'input pour que les bonnes images soient envoyées dans le bon ordre
         $('#image-upload').prop('files', list.files);
+
+        // récupérer les données du formulaire
         var fd = new FormData($('form')[0]);
-        console.log(fd);
-        // ajax call
+
+        
+        console.log('envoi');
+
+        // appel ajax pour submit les données au serveur
         $.ajax({
+
+            xhr: function() {
+                var xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener("progress", function(evt) {
+                    if (evt.lengthComputable) {
+                        var percentComplete = (evt.loaded / evt.total) * 100;
+                        $('progress').val(percentComplete);
+                    }
+                }, false);
+                return xhr;
+            },
+
             url: base_url + "admin/addProductAjax/", 
             type: "POST",
             data: fd,
             cache:false,
-            async: false,
             processData:false,
             contentType:false,
             success: 
@@ -113,13 +133,20 @@ $(function() {
                         $('#list-of-models').empty();
                         $('#list-of-models').append(text);
                     }
-                }
+                },
+            complete: function () {
+                $('#submit-new-product-button').prop('disabled', false);
+                $('#upload-progress').$('#element').css('visibility', 'hidden');
+                $('#upload-progress').val(0);
+                $('#traitement').prop('visibility', 'visible');
+            }
+
         });
     });
 
 });
 
-// add a new image 
+// ajout d'une nouvelle image
 function appendImage(image, index) {
     if (image) {
 
@@ -139,7 +166,7 @@ function appendImage(image, index) {
         )
         
         var reader = new FileReader();
-        // add image src when reader is ready
+        // ajout de l'image quand reader est prêt
         reader.onload = function(event) {
             
             $('.'+imageBalise+' .img-container').append(
@@ -150,7 +177,7 @@ function appendImage(image, index) {
     }
 }
 
-// remove image from the array and page of id index
+// suppression de l'image du tableau et de l'id de l'index
 function removeImage(index) {
     console.log(fileBuffer);
     for (let image of fileBuffer.values()) {

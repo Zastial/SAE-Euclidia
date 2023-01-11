@@ -2,6 +2,10 @@
 require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."UserEntity.php";
 class UserModel extends CI_Model {
 
+	/**
+	 * findAll retourne tous les utilisateurs de la base de données.
+	 * @return UserEntity[]
+	 */
     public function findAll() {
 		$this->db->select('*');
 		$q = $this->db->get_where('utilisateur');
@@ -30,6 +34,11 @@ class UserModel extends CI_Model {
 		return $users;
     }
 
+	/**
+	 * findById retourne l'utilisateur correspondant a l'id.
+	 * @param string $id
+	 * @return ?UserEntity
+	 */
 	public function findById(string $id): ?UserEntity {
 		$this->db->select('*');
 		$q = $this->db->get_where('utilisateur',array('id_utilisateur'=>$id));
@@ -55,6 +64,11 @@ class UserModel extends CI_Model {
 		return $u;
 	}
 
+	/**
+	 * findByEmail retourne l'utilisateur correspondant a l'email.
+	 * @param string $email
+	 * @return ?UserEntity
+	 */
     public function findByEmail(string $email): ?UserEntity {
 		$this->db->select('*');
 		$q = $this->db->get_where('utilisateur',array('email'=>$email));
@@ -79,7 +93,12 @@ class UserModel extends CI_Model {
 		}
 		return $u;
     }
-
+	/**
+     * findQueryBuilder est une fonction complexe qui permet de construire une requete SQL a partir des filtres présents ou non.
+     * Cette fonction est notamment appelée lors de la recherche et affichage des utilisateurs sur la page admin.
+     * @param FiltreInterface $filtre -> les filtres de la recherche.
+     * @return UserEntity[]
+     */
 	public function findQueryBuilder(FiltreInterface $filtre) {
 		$filtres = $filtre->getFiltres();
 		try {
@@ -172,7 +191,11 @@ class UserModel extends CI_Model {
 
 	}
 
-
+	/**
+	 * addUser ajoute un utilisateur a la base de données et le retourne, ou retourne null si ça n'a pas marché.
+	 * @param UserEntity $user
+	 * @return ?UserEntity
+	 */
 	public function addUser(UserEntity $user): ?UserEntity {
 		try{
 			$q = $this->db->query("CALL addUser(?,?,?,?,?,'NON DEFINI','NON DEFINI','NON DEFINI','00000','NON DEFINI')", array($user->getNom(), $user->getPrenom(), $user->getPassword(), $user->getEmail(), $user->getStatus()));
@@ -183,6 +206,11 @@ class UserModel extends CI_Model {
 		return $this->findByEmail($user->getEmail());
 	}
 	
+	/**
+	 * updateUser modifie un utilisateur dans la base de données et le retourne, ou retourne null si ça n'a pas marché.
+	 * @param UserEntity $user
+	 * @return ?UserEntity
+	 */
 	public function updateUser(UserEntity $user): ?UserEntity{
 		try{
 			$q = $this->db->query("CALL updateUser(?,?,?,?,?,?,?,?,?,?,?)", array($user->getId(), $user->getNom(), $user->getPrenom(), $user->getPassword(), $user->getEmail(), $user->getStatus(), $user->getNumRue(), $user->getAdresse(), $user->getVille(), $user->getPostalCode(), $user->getPays()));
@@ -193,6 +221,11 @@ class UserModel extends CI_Model {
 		return $this->findById($user->getId());
 	}
 
+	/**
+	 * activeUser change l'état d'un utilisateur et le retourne, ou retourne null si ça n'a pas marché.
+	 * @param UserEntity $user
+	 * @return ?UserEntity
+	 */
 	public function activeUser(UserEntity $user) : ?UserEntity {
 		try{
 			$q = $this->db->query("CALL activeUser(?,?)", array($user->getId(), $user->getEtat()));
@@ -203,7 +236,11 @@ class UserModel extends CI_Model {
 		return $this->findById($user->getId());
 	}
 
-
+	/**
+	 * isActive retourne true si l'utilisateur est actif, false sinon.
+	 * @param UserEntity $user
+	 * @return bool
+	 */
 	public function isActive(UserEntity $user): bool {
 		$this->db->select('etat');
 		$q = $this->db->get_where('utilisateur',array('id_utilisateur'=>$user->getId()));

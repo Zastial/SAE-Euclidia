@@ -59,7 +59,7 @@ class AffectationModel extends CI_Model {
 			try{
 				$q = $this->db->query("CALL addAffectation(?,?)", array($productID, intval($affect)));
 			} catch (Exception $e){
-				//normally i'd return here, but that'd stop all other affectations afterwards from being added.
+				//si on return ici, on ne pourrait pas ajouter les autres affectations.
 			}
 
 		}
@@ -80,7 +80,7 @@ class AffectationModel extends CI_Model {
 			try{
 				$q = $this->db->query("CALL removeAffectation(?,?)", array($productID, intval($affect)));
 			} catch (Exception $e){
-				//normally i'd return here, but that'd stop all other affectations afterwards from being removed.
+				//si on return ici, on ne pourrait pas supprimer les autres affectations.
 			}
 		}
     }

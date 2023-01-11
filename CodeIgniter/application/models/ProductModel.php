@@ -63,7 +63,6 @@ class ProductModel extends CI_Model {
 	 */
 	
 	public function findQueryBuilder(FiltreInterface $filtre) {
-		// ?string $name, ?array $categories, ?string $tri, ?float $minprice, ?float $maxprice, ?bool $available
 		$filtres = $filtre->getFiltres();
 		try {
 			$this->db->select('*');
@@ -74,7 +73,7 @@ class ProductModel extends CI_Model {
 				$mots = explode(' ',$filtres['name']);
 				foreach($mots as $mot){
 					$this->db->or_like('produit.titre', $mot);
-					// if we want to search product by id 
+					// si on veut chercher par id :  
 					// $this->db->or_like('produit.id_produit', $mot);
 				}
 				$this->db->group_end();
@@ -160,7 +159,6 @@ class ProductModel extends CI_Model {
 
 		$this->load->model("AffectationModel");
 
-		//try catch
 		$this -> AffectationModel -> addAffectations($id,$categories);
 
 		return $response;
@@ -211,6 +209,11 @@ class ProductModel extends CI_Model {
 		} catch (Exception $e) {return false;} 
 	}
 
+	/**
+	 * findByFacture trouve les produits qui sont dans une facture.
+	 * @param int $id
+	 * @return ProductEntity
+	 */
 	public function findByFacture($id) {
 		$this->db->select('facture.*');
 		$this->db->from('produit');
@@ -221,6 +224,11 @@ class ProductModel extends CI_Model {
 		return $response;
 	}
 
+	/**
+	 * getProductByUserId permet de trouver une liste de produits qu'un utilisateur a acheté.
+	 * @param int $id
+	 * @return ProductEntity[]
+	 */
 	public function getProductsByUserId($id){
 		$q = $this->db->query("CALL getBoughtProductsOfUser(".$id.")");
 		$response = $q->custom_result_object("ProductEntity");
@@ -228,7 +236,7 @@ class ProductModel extends CI_Model {
 	}
 
 	/**
-	 * getNumberOfAvailableProducts returns the number of available products in the database
+	 * getNumberOfAvailableProducts retourne le nombre de produits disponibles dans la base de onnées
 	 * 
 	 * @return int
 	 */

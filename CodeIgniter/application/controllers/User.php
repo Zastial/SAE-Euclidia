@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+/**
+ * Classe utilisateur - utilisée pour afficher toutes les pages utilisateur et vérifier les formulaires.
+ */
 class User extends CI_Controller {
 
     public function __construct(){
@@ -10,14 +12,13 @@ class User extends CI_Controller {
         $this->load->model("AchatModel");
         $this->load->model("ProductModel");
         $this->load->library('form_validation');
-        $this->load->helper('form');
-        //$this->output->enable_profiler(TRUE);
-
-    
+        $this->load->helper('form');  
     }
-
+    /**
+     * fonction utilisée pour créer un compte.
+     */
     public function register() {
-        // redirect to home if user is already connected
+        // redirection vers home si l'utilisateur est déjà connecté
         if (isset($this->session->user)) {
             redirect('Home');
             die();
@@ -46,7 +47,7 @@ class User extends CI_Controller {
             $this->load->view("inscription");
         } else {
             
-            // form is valid
+            // le formulaire est valide
 
             $nom = $this->input->post("nom");
             $prenom = $this->input->post("prenom");
@@ -61,11 +62,11 @@ class User extends CI_Controller {
             $user->setEmail(htmlspecialchars($email));
             $user->setEncryptedPassword(htmlspecialchars($password));
 
-            // add user to database, returns null if it didn't work
+            // ajout de l'utilisateur a la base de donnée, retourne null si ça n'a pas marché.
             $user = $this->UserModel->addUser($user);
             
             if ($user == null) {
-                $this->session->set_flashdata('error', 'Erreur dans l\'inscription ! Veuillez réessayer.');
+                $this->session->set_flashdata('error', 'Erreur dans l\\\'inscription ! Veuillez réessayer.');
                 redirect('User/register');
             }
             
@@ -75,9 +76,11 @@ class User extends CI_Controller {
     }
 
 
-
+    /**
+     * fonction utilisée pour se connecter.
+     */
     public function login() {
-        // redirect to home if user is already connected
+        // redirection vers home si l'utilisateur est déjà connecté
         if (isset($this->session->user)) {
             redirect('Home');
             die();
@@ -101,7 +104,7 @@ class User extends CI_Controller {
             $this->load->view("connexion");
         } else {
             
-            // form is valid
+            // le formulaire est valide
 
             $email = $this->input->post("email");
             $password = $this->input->post("password");
@@ -124,28 +127,33 @@ class User extends CI_Controller {
                 "email"=>$user->getEmail(), 
                 "status"=>$user->getStatus()));
             
-            // privileged users cannot add products to their shopping cart and order so we delete the existing cart data
+            // les utilisateurs privilégiés ne peuvent pas accéder a leur panier, donc on supprime les données.
             if ($user->getStatus() != "Utilisateur") {
                 $this->session->unset_userdata("cart");
             }
             redirect('Home');
         }
     }
-
+    /**
+     * fonction utilisée pour se déconnecter.
+     */
     public function logout() {
         $this->session->unset_userdata("user");
         $this->session->unset_userdata("cart");
 		$this->session->sess_destroy();
         redirect('Home');
     }
-
+    /**
+     * fonction utilisée pour modifier son nom, prenom, email, et mot de passe.
+     * aucun n'est obligatoire.
+     */
     public function modify() {
-        // redirect to home if user is not connected
+        // redirection vers home si l'utilisateur n'est pas connecté
         if (!isset($this->session->user)) {
             redirect('Home');
             die();
         }
-
+        //Validation du formulaire
         $this->form_validation->set_rules('prenom', 'Prénom', 'required|callback_isValidName|max_length[50]',
             array('required' => 'Vous devez entrer un prénom', 'isValidName' => 'Le prénom doit démarrer par une lettre et ne doit contenir que des lettres ou les caractères -\'', 'max_length' => 'Le prénom ne doit pas dépasser 50 caractères'));
 
@@ -164,8 +172,6 @@ class User extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             $this->load->view("modifyAccount");
         } else {
-
-            // form is valid
             $email = $this->input->post("email");
             $nom = $this->input->post("nom");
             $prenom = $this->input->post("prenom");
@@ -198,7 +204,7 @@ class User extends CI_Controller {
                 $this->logout();
             }
 
-            // update user in session
+            // mise a jour de l'utilisateur dans la session
             $this->session->set_userdata("user",array(
                 "nom"=>$newuser->getNom(),
                 "prenom"=>$newuser->getPrenom(),
@@ -209,7 +215,9 @@ class User extends CI_Controller {
             redirect('User/account');
         }
     }
-
+    /**
+     * Vérifie que le mot de passe est correct
+     */
     public function isValidModifyPassword(string $pass=null) {
         if ($pass == null || $pass == "") {
             return true;
@@ -220,8 +228,8 @@ class User extends CI_Controller {
     /**
      * @param string $email
      * @return bool
-     * returns true if email is unique
-     * if email is the same as the current user's email, returns true
+     * retourne true si l'email est unique.
+     * retourne aussi true si l'email est le même que celui de l'utilisateur actuel.
      */
     public function isUniqueEmail(string $email=null) {
         if ($email==null) {
@@ -239,7 +247,7 @@ class User extends CI_Controller {
     /**
      * @param string $name
      * @return bool
-     * checks is password is valid (at least 1 uppercase, 1 lowercase, 1 number, 1 special char, 5 chars min, 20 chars max)
+     * vérifie la validité du mot de passe (au moins 1 majuscule, 1 minuscule, 1 nombre, 1 caractère spécial, 5 caractères minimum, 20 caractères max)
      */
     public function isValidPassword(string $pass=null): bool {
         if ($pass==null) {
@@ -255,7 +263,7 @@ class User extends CI_Controller {
     /**
      * @param string $name
      * @return bool
-     * checks if name is valid (no numbers, 50 chars max)
+     * vérifie si le nom est valide (pas de nombre, 50 caractères max)
      */
     public function isValidName(string $name): bool {
         preg_match("@(?i)[a-zÀ-ÿ'-]+@", $name, $matches);
@@ -264,9 +272,11 @@ class User extends CI_Controller {
         if (count($matches2) == 0) return false;
         return strlen($matches[0]) == strlen($name);
     }
-
+    /**
+     * Charge la vue principale du compte utilisateur.
+     */
     public function account() {
-        // redirect to home if user is not connected
+        // redirection vers home si l'utilisateur n'est pas connecté
         if (!isset($this->session->user)) {
             redirect('Home');
         }
@@ -275,7 +285,9 @@ class User extends CI_Controller {
         $factures = $this->FactureModel->findByUser($user->getId());
         $this->load->view("account", array("factures" => $factures, "user"=>$user));
     }
-
+    /**
+     * fonction utilisée pour charger une facture.
+     */
     public function getFacture($id){
         $f = $this->FactureModel->findById($id);
         if (is_null($f)) redirect('User/account');
@@ -285,7 +297,7 @@ class User extends CI_Controller {
             redirect('User/account');
         }
 
-        // if the bill does not belong to the user and if the user is not admin/resp, redirect to account page
+        // si l'utilisateur n'a pas les droits pour accéder a la facture (pas la sienne ou pas un admin), on redirige vers son compte.
         if ($u->getId() != $this->UserModel->findByEmail($this->session->user["email"])->getId()) {
             $status = $this->session->user["status"];
             if ($status != "Administrateur" && $status != "Responsable") {
@@ -303,7 +315,9 @@ class User extends CI_Controller {
         $this->load->view("facture", array("f" => $f, "u" =>$u, "a"=>$arr));
         
     }
-
+    /**
+     * fonction similaire a modify() mais cette-fois ci pour modifier son adresse.
+     */
     public function modifyAddress(){
         if (!isset($this->session->user)) {
             redirect('Home');
@@ -327,8 +341,6 @@ class User extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             $this->load->view("modifyAddress");
         } else {
-
-            // form is valid
             $numerorue = $this->input->post("numerorue");
             $adresse = $this->input->post("adresse");
             $ville = $this->input->post("ville");
@@ -361,6 +373,9 @@ class User extends CI_Controller {
         }
     }
     
+    /**
+     * fonction qui affiche les commandes d'un utilisateur.
+     */
     public function commandes(){
         if (!isset($this->session->user)) {
             redirect('Home');
@@ -371,6 +386,10 @@ class User extends CI_Controller {
         $this->load->view("commandes", array("p" => $p));
     }
 
+    /**
+     * fonction qui vérifie le captcha lors de l'inscription ou de la connexion.
+     * @return true si le captch est réussi, false sinon.
+     */
     public function verifyCaptcha(): bool {
         if ($this->input->post('g-recaptcha-response') == null) {
             return false;

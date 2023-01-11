@@ -9,8 +9,14 @@ require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."FiltreCat
 require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."FiltreName.php";
 require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."FiltreDate.php";
 require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."Tri.php";
+/**
+ * Admin controller class.
+ * Utilisée pour les vues et pour les actions administrateur (add/edit/remove products/user/categories)
+ */
 class Admin extends CI_Controller {
-
+    /**
+     * Constructeur admin - c'est ici qu'on vérifie le statut de l'utilisateur.
+     */
     public function __construct(){
         parent::__construct();
         $this->load->library('form_validation');
@@ -18,7 +24,7 @@ class Admin extends CI_Controller {
         $this->load->library('upload');
         
 
-        // redirect to home if user is not connected or isn't an admin / responsable
+        // redirection vers home si l'utilisateur n'est pas connecté ou un responsable/admin
         if (!isset($this->session->user)) {
             redirect('home');
         }
@@ -34,11 +40,11 @@ class Admin extends CI_Controller {
     }
     
     /**
-     * get list of users on admin page
+     * Liste des utilisateurs sur la page admin
      */
     public function users() {
         $status = $this->session->user["status"];
-        //Process filters from inputs
+        //On gère les filtres entrés
         $rechercher = $this->input->get('rechercher');
         $tri = $this->input->get('tri');
         $triStatus = $this->input->get('tri-status');
@@ -63,15 +69,15 @@ class Admin extends CI_Controller {
             $t = Tri::getTriFromString($triEtat);
             $filtre = new FiltreTri($filtre, $t, 'etat');
         }
-        // here we have our final filter, now we can load the view
+        // nous avons ici notre filtre final donc on peut charger la vue
         $users = $this->UserModel->findQueryBuilder($filtre);
         $this->load->view('admin/dashboardUsers.php', array('users'=>$users, 'active'=>'users'));
     }
     /**
-     * get list of categories on admin page
+     * Liste des catégories
      */
     public function categories() {
-        //process input filters
+        //On gère les filtres entrés
         $tri = $this->input->get('tri-categ');
         $rechercher = $this->input->get('rechercher');
 
@@ -84,16 +90,16 @@ class Admin extends CI_Controller {
             $t = Tri::getTriFromString($tri);
             $filtre = new FiltreTri($filtre, $t);
         }
-        // filters processed, now we can load the view
+        // nous avons ici notre filtre final donc on peut charger la vue
         $categories = $this->CategorieModel->findQueryBuilder($filtre);
         $this->load->view('admin/dashboardCategories.php', array('categories'=>$categories, 'active'=>'categories'));
     }
 
     /**
-     * get list of products on admin page
+     * Liste des produits
      */
     public function products() {
-        //process input filters
+        //On gère les filtres entrés
         $rechercher = $this->input->get('rechercher');
         $tri = $this->input->get('tri');
         $prix = $this->input->get('tri-prix');
@@ -118,17 +124,17 @@ class Admin extends CI_Controller {
             $visible = $visible == "false" ? false : true;
             $filtre = new FiltreAvailable($filtre, $visible);
         }
-        // filters processed, now we can load the view
+        // nous avons ici notre filtre final donc on peut charger la vue
         $products = $this->ProductModel->findQueryBuilder($filtre);
         $this->load->view('admin/dashboardProducts.php', array('products'=>$products, 'active'=>'products'));
     }
 
     /**
-     * get list of bills on admin page
+     * Liste des factures
      */
     public function factures($userid=null) {
         $status = $this->session->user["status"];
-        //process input filters
+        //On gère les filtres entrés
         $triId = $this->input->get('tri-id');
         $triPrix = $this->input->get('tri-prix');
         $triDate = $this->input->get('tri-date');
@@ -158,16 +164,16 @@ class Admin extends CI_Controller {
         if (isset($minDate) && isset($maxDate)) {
             $filtre = new FiltreDate($filtre, $minDate, $maxDate);
         }
-        // filters processed, now we can load the view
+        // nous avons ici notre filtre final donc on peut charger la vue
         $factures = $this->FactureModel->findQueryBuilder($filtre, $userid);
         $this->load->view('admin/dashboardBills.php', array('factures'=>$factures, 'active'=>'factures', 'id'=>$userid));
     }
 
     /**
-     * This function is called (at least, should be called) when one sends the form to edit an user.
+     * modifUser est appelée lorsqu'un admin modifie un utilisateur en utilisant le formulaire.
      */
     public function modifUser(int $idUser) {
-        // check if user has the correct rights. While we do this in the class constructor, this is needed here because a "responsable" can't edit users while admins can.
+        // On vérifie si l'utilisateur est un admin. On fait déjà ça dans le constructeur, mais on a besoin de le faire ici car un responsable ne peut pas modifier les utilisateurs.
         $status = $this->session->user["status"];
         if ($status != "Administrateur") {
             $this->session->set_flashdata('error', 'Vous n\\\'avez pas les droits nécessaires pour modifier un utilisateur.');
@@ -177,7 +183,6 @@ class Admin extends CI_Controller {
             }
             redirect($url);
         }
-        //form validation rules.
         $this->form_validation->set_rules('nom', 'Nom', 'required',
         array('required' => 'Vous devez entrer le nom de l utilisateur'));
 
@@ -198,7 +203,7 @@ class Admin extends CI_Controller {
             $this->session->set_flashdata('error', 'L\\\'utilisateur sélectionné n\\\'existe pas ou n\\\'est plus disponible.');
             redirect('admin/users');
         }
-        //Even if an admin, one should not be able to edit his own account!
+        // Meme si un utilisateur est admin, il ne devrait pas pouvoir modifier son propre compte.
         if ($this->session->user['email']==$user->getEmail()){
             $this->session->set_flashdata('error', 'Vous ne pouvez pas modifier votre compte ici !');
             $url = site_url("admin/users");
@@ -211,7 +216,6 @@ class Admin extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             $this->load->view("admin/modifUser.php", array("user"=>$user));
         } else {
-            // get form inputs
             $name = $this -> input -> post("nom");
             $prenom = $this -> input -> post("prenom");
             $email = $this->input->post("email");
@@ -256,7 +260,7 @@ class Admin extends CI_Controller {
     }
 
     /**
-     * Check if password is valid (???)
+     * Vérification du mot de passe
      */
     public function isValidModifyPassword(string $pass=null) {
         if ($pass == null || $pass == "") {
@@ -268,7 +272,7 @@ class Admin extends CI_Controller {
      /**
      * @param string $name
      * @return bool
-     * checks is password is valid (at least 1 uppercase, 1 lowercase, 1 number, 1 special char, 5 chars min, 20 chars max)
+     * isValidPassword vérifie la validité du mot de passe (au moins 1 majuscule, 1 minuscule, 1 nombre, 1 caractère spécial, 5 caractères minimum, 20 caractères max)
      */
     public function isValidPassword(string $pass=null): bool {
         if ($pass==null) {
@@ -283,7 +287,7 @@ class Admin extends CI_Controller {
 
 
     /**
-     * This function is called when adding a product using an AJAX form. This won't work if the form isn't AJAX.
+     * Cette fonction est appelée lors de l'ajout d'un produit avec un formulaire AJAX.
      */
     public function addProductAjax() {
 
@@ -292,7 +296,7 @@ class Admin extends CI_Controller {
         $isAllowed = $status == "Responsable" || $status == "Administrateur";
         $errors = array();
         $status = "";
-        
+
         if ($isAjax && $isAllowed) {
 
             $name = $this->input->post("name");
@@ -301,7 +305,7 @@ class Admin extends CI_Controller {
             $disponible = $this->input->post("disponible");
             $categories = $this->input->post("categories");
 
-            // if we have errors with text inputs, add them to the array
+            // si il y a des erreurs avec les entrées, on les ajoute a un tableau.
            
             if (!isset($name)) {
                 $errors['name'] = "Le nom du produit n'est pas défini !";
@@ -324,9 +328,8 @@ class Admin extends CI_Controller {
                 $categories = array();
             }
             
-            // if we have no error, we proceed to create the product
+            // si il n'y a pas d'erreur, on créée le produit.
             if (empty($errors)) {
-                // create product
                 $product= new ProductEntity;
                 $product->setTitre($name);
                 $product->setPrix($price);
@@ -340,7 +343,7 @@ class Admin extends CI_Controller {
                     
                     $id = $prod->getId();
                     $this->load->library('upload');
-                    // upload images
+                    // téléversement des images
                     $errors['image'] = array();
 
                     $files=$_FILES;
@@ -353,11 +356,12 @@ class Admin extends CI_Controller {
                     for ($i=0;$i<$cpt;$i++){ //On doit donc faire en sorte que pour chaque fichier,
                         $ext = pathinfo($files['userfile']['name'][$i], PATHINFO_EXTENSION);
                         $filename = $i.'.'.$ext;
-                        $_FILES['userfile']['name']= $filename;
-                        $_FILES['userfile']['type']= $files['userfile']['type'][$i];
-                        $_FILES['userfile']['tmp_name']= $files['userfile']['tmp_name'][$i];
-                        $_FILES['userfile']['error']= $files['userfile']['error'][$i];
-                        $_FILES['userfile']['size']= $files['userfile']['size'][$i];
+                        $_FILES['userfile']['name']= $filename; //on modifie le nom,
+                        $_FILES['userfile']['type']= $files['userfile']['type'][$i]; //et on ré-attribue le type,
+                        $_FILES['userfile']['tmp_name']= $files['userfile']['tmp_name'][$i]; //le nom du fichier temporaire,
+                        $_FILES['userfile']['error']= $files['userfile']['error'][$i]; //l'erreur,
+                        $_FILES['userfile']['size']= $files['userfile']['size'][$i];//et la taille.
+                        //Ensuite, on initialise et on upload le fichier.
                         $this->upload->initialize($this->set_upload_options($i, $filename, $id, "png|jpg|jpeg"));
 
                         if(!$this->upload->do_upload('userfile')) {
@@ -365,7 +369,7 @@ class Admin extends CI_Controller {
                         }
                     }
 
-                    // upload zip
+                    //Pour les modèles 3d, on fait un zip de plusieurs fichiers.
                     $cpt=count($_FILES['models']['name']);
                     $za = new ZipArchive();
                     $zname = $this->config->item('model_assets') . $id;
@@ -377,6 +381,7 @@ class Admin extends CI_Controller {
                         $this->session->set_flashdata('error', 'La création du zip a échoué!');
                         redirect("admin/products");
                     }
+                    //ajout de chaque fichier au zip
                     for ($i=0;$i<$cpt;$i++){
                         $exp = explode('.', $files['models']['name'][$i]);
                         $ext = end($exp);
@@ -389,7 +394,7 @@ class Admin extends CI_Controller {
                     }
                     $za->close();
 
-                    // if we had errors uploading images or zip file, delete the directory and the product
+                    // si il y a eu des erreurs, on supprime les fichiers créés et le produit dans la base de données
                     if (!empty($errors['image']) || !empty($errors['zip'])) {
                         $path = $this->config->item('model_assets') . $id;
                         $this->load->helper("file"); 
@@ -402,9 +407,9 @@ class Admin extends CI_Controller {
             }
         }
 
-        // if we have no errors, redirect to product with success message
-        // $errors should only contain one element: image
-        // image should be an empty array
+        // si il n'y a pas d'erreurs, on redirige avec un message de succès.
+        // $errors ne devrait contenir qu'un seul élément : 'image'.
+        // $errors['image'] devrait être vide.
         if (count($errors) == 1 && empty($errors['image'])) {
             $status = "success";
             $this->session->set_flashdata('success', 'Le produit a été correctement ajouté !');
@@ -416,11 +421,17 @@ class Admin extends CI_Controller {
         echo json_encode($data);
     }
 
+    /**
+     * Fonction qui charge la vue pour ajouter un produit
+     */
     public function addProduct(){
         $categories = $this->CategorieModel->findAll();
         $this->load->view("admin/addProduct", array("categories"=>$categories));
     }
 
+    /**
+     * Fonction appellée lors de l'initialisation de l'upload. Elle n'est pas publique et ne doit pas l'être.
+     */
     private function set_upload_options($i=0, $str="none.jpg", $id=0, $types="png|jpg|jpeg"){
         $path = $this->config->item('model_assets') . $id;
         if (!is_dir($path)){
@@ -434,8 +445,11 @@ class Admin extends CI_Controller {
         return $config;
     }
 
-    public function modifProduct(int $productid) {
 
+    /**
+     * fonction appelée lorsqu'on envoie le formulaire de modification d'un produit.
+     */
+    public function modifProduct(int $productid) {
         $this->form_validation->set_rules('name', 'Name', 'required',
         array('required' => 'Vous devez entrer le nom du produit'));
 
@@ -489,15 +503,10 @@ class Admin extends CI_Controller {
         }
     }
     
-     
-    /*
-    public function removeProduct(int $productid) { //NEVER DO THAT
-
-        $this->ProductModel->removeProduct($productid);
-
-        redirect('Admin/products');
-    }*/
-
+    /**
+     * Fonction utilisée pour inverser la visibilité d'un produit.
+     * Note : Il y avait auparavant une fonction pour supprimer un produit, mais cela le rendait impossible a télecharger par un utilisateur qui l'a acheté, donc nous l'avons supprimé.
+     */     
     public function toggleVisibility(int $productid){
         $p = $this->ProductModel->findById($productid);
         if ($p == null) {
@@ -509,6 +518,9 @@ class Admin extends CI_Controller {
         redirect('Admin/products');
     }
 
+    /**
+     * Fonction utilisée pour inverser l'activation d'un compte utilisateur, Responsable ou admin.
+     */
     public function toggleActivation(int $userid){
         $status = $this->session->user["status"];
         if ($status != "Administrateur") {
@@ -524,6 +536,7 @@ class Admin extends CI_Controller {
             $this->session->set_flashdata('error', 'L\\\'utilisateur n\\\'existe plus!');
             redirect('admin/users');
         }
+        //Note : on ne peut pas modifier son compte car cela pourrait bloquer l'administrateur si il se met en utilisateur.
         if ($this->session->user['email']==$u->getEmail()){
             $this->session->set_flashdata('error', 'Vous ne pouvez pas désactiver votre compte!');
             redirect('admin/users');
@@ -533,6 +546,9 @@ class Admin extends CI_Controller {
         redirect('Admin/users');
     }
     
+    /**
+     * Fonction utilisée pour supprimer une catégorie
+     */
     public function removeCategorie(int $categorieid) {
         $success = $this->CategorieModel->removeCategorie($categorieid);
         if (!$success) {
@@ -543,6 +559,9 @@ class Admin extends CI_Controller {
         redirect('Admin/categories');
     }
 
+    /**
+     * Fonction appelée lors de la validation du formulaire d'ajout de catégorie.
+     */
     public function addCategorie() {
         
         $this->form_validation->set_rules('name', 'Name', 'required|is_unique[categorie.libelle]',
@@ -570,7 +589,9 @@ class Admin extends CI_Controller {
         }
         
     }
-
+    /**
+     * Fonction appelée lors de la validation du formulaire de modification de catégorie.
+     */
     public function modifCategorie(int $categorieid) {
         $this->form_validation->set_rules('name', 'Name', 'required',
         array('required' => 'Vous devez entrer le nom de la catégorie'));

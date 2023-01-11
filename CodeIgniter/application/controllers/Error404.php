@@ -1,4 +1,7 @@
 <?php 
+/**
+ * Cette classe, comme son nom l'indique, ne sert qu'a afficher l'erreur 404.
+ */
 class Error404 extends CI_Controller {
 
     public function __construct() {

@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."Payment.php";
+/**
+ * Classe utilisée pour le panier d'un utilisateur.
+ * Le panier marche aussi lorsqu'on est pas connecté, et sera conservé a la prochaine connexion.
+ */
 class ShoppingCart extends CI_Controller{
 
     public function __construct(){
@@ -21,6 +25,9 @@ class ShoppingCart extends CI_Controller{
         $this->verifyCart();
     }
 
+    /**
+     * page principale.
+     */
     public function index(){
 
         $produits = array();
@@ -34,6 +41,11 @@ class ShoppingCart extends CI_Controller{
         $this->load->view("shoppingCart", array('produits'=>$produits));
     }
 
+    /**
+     * Fonction appelée lors de l'ajout d'un produit au panier.
+     * Le produit sera ajouté au panier si il n'y est pas déjà et si l'utilisateur ne possède pas le produit.
+     * @param int $productid -> l'id du produit a jouter au panier.
+     */
     public function addProduct($productid=null){
         $id = intval($productid);
         $produit = $this->ProductModel->findByIdAvailable($id);
@@ -56,7 +68,10 @@ class ShoppingCart extends CI_Controller{
         redirect("product/display/".$id);
         
     }
-
+    /**
+     * Supprime un produit si il n'est pas dans le panier.
+     * @param int $productid -> l'id du produit a supprimer du panier.
+     */
     public function removeProduct($productid=null){
         $id = intval($productid);
         $cart = $this->session->cart;
@@ -73,6 +88,9 @@ class ShoppingCart extends CI_Controller{
         redirect($this->agent->referrer());
     }
 
+    /**
+     * Fonction utilisée pour passer commande et afficher la vue qui résume les produits a acheter.
+     */
     public function orderCommand() {
         $produits = array();
 
@@ -87,6 +105,9 @@ class ShoppingCart extends CI_Controller{
         $this->load->view("orderCommand", array('produits'=>$produits));
     }
 
+    /**
+     * fontion utilisée pour valider le paiement.
+     */
     public function validatePayment() {
 
         if (!isset($this->session->user) || !isset($this->session->cart) || empty($this->session->cart) ) {
@@ -104,13 +125,13 @@ class ShoppingCart extends CI_Controller{
             $this->UserModel->updateUser($user);
         }
 
-        // name of payment
+        // nom du moyen de paiement
         $name = $this->input->post("choose");
-        // object handling payment
+        // l'objet qui va gérer le paiement
         $payment = Payment::getPaymentMethod($name);
         
         if ($payment == null) {
-            $this->session->set_flashdata('error', 'La méthode de paiement est indéfnie. Veuillez réessayer.');
+            $this->session->set_flashdata('error', 'La méthode de paiement est indéfinie. Veuillez réessayer.');
             redirect('shoppingCart/orderCommand');
         }
 
@@ -144,6 +165,11 @@ class ShoppingCart extends CI_Controller{
         redirect('User/account');
     }
 
+    /**
+     * fonction utilisée pour définir que l'utilisateur a acheté un produit.
+     * @param FactureEntity $f Facture auquel l'achat va correspondre
+     * @param array $panier -> liste d'id de produits qui vont être achetés.
+     */
     private function addAchat(FactureEntity $f, array $panier) {
         foreach ($panier as $id) {
             $a = new AchatEntity();
@@ -162,9 +188,9 @@ class ShoppingCart extends CI_Controller{
     }
     
     /**
-     * Verify the cart
-     * remove unavailable or already bought items from the cart
-     * if the cart is modified, redirect the user to the shopping cart page
+     * Vérifier le panier
+     * suppression des produits non disponibles ou déjà achetés.
+     * Si il y a un changement, on redirige l'utilisateur vers la page du panier.
      */
     private function verifyCart() {
         $this->load->model("AchatModel");
@@ -173,7 +199,7 @@ class ShoppingCart extends CI_Controller{
         foreach ($this->session->cart as $index=>$id) {
             $prod = $this->ProductModel->findByIdAvailable($id);
 
-            // if the user is connected and bought the model, do not add it in the updated cart
+            // si l'utilisateur est connecté et a acheté le produit, on ne l'ajoute pas au panier.
             if ($mail != "" && $this->AchatModel->boughtFromUser($id, $mail)) {
                 continue;
             }
@@ -189,11 +215,17 @@ class ShoppingCart extends CI_Controller{
         }
     }
 
-    // returns true if cart contains product of id = $id
+    /** 
+     * cartContains retourne true si le panier contient un produit de l'id $id.
+     * @param int $id
+     * @return bool
+    */
     private function cartContains(int $id): bool {
         return in_array($id, $this->session->cart);
     }
-
+    /**
+     * vider le panier
+     */
     public function emptyCart(){
         if (!empty($this->session->cart)){
             $this->session->set_flashdata('info', 'Le panier vient d\\\'être vidé.');
@@ -202,6 +234,10 @@ class ShoppingCart extends CI_Controller{
         redirect('shoppingCart');
     }
 
+    /**
+     * @return int 
+     * retourne le nombre de produits dans le panier
+     */
     public function get_card_total(): int {
         $items_in_cart = count($_SESSION["cart"]);
         return $items_in_cart;

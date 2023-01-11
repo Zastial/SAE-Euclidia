@@ -106,6 +106,12 @@ class CategorieModel extends CI_Model {
 		}
 	}
 
+	/**
+	 * Cette fonction permet de trouver une catégorie par ID.
+	 * 
+	 * @param int $id
+	 * @return ?CategorieEntity
+	 */
 	public function findByModelId(int $id) {
 		$this->db->select('categorie.*');
 		$this->db->from('categorie');

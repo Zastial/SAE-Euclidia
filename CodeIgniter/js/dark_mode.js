@@ -1,4 +1,4 @@
-// check for saved 'darkMode' in localStorage
+// on vérifie si 'darkMode' est dans le localStorage
 let darkMode = localStorage.getItem('darkMode');
 
 
@@ -6,40 +6,40 @@ const darkModeToggle = document.querySelector('#dark-mode-toggle');
 const logo = document.querySelector("#euclidia-icon-header");
 
 const enableDarkMode = () => {
-    // 1. Add the class to the body
+    // 1. ajout de la classe au body
     document.body.classList.add('darkmode');
-    // 2. Update darkMode in localStorage
+    // 2. Mise a jour de darkMode dans le localstorage
     localStorage.setItem('darkMode', 'enabled');
-    // 3. Change the icon
+    // 3. Changement de l'icone
     if (logo != null)logo.setAttribute("src", "/assets/image/logo_euclidia_white.svg");
 }
 
 const disableDarkMode = () => {
-    // 1. Remove the class from the body
+    // 1. suppression de la classe du body
     document.body.classList.remove('darkmode');
-    // 2. Update darkMode in localStorage 
+    // 2. Mise a jour de darkMode dans le localstorage
     localStorage.setItem('darkMode', null);
-    // 3. Change the icon
+    // 3. Changement de l'icone
     if (logo != null)logo.setAttribute("src", "/assets/image/logo_euclidia.svg");
 }
 
-// If the user already visited and enabled darkMode
-// start things off with it on
+// Si l'utilisateur a déjà visité la page avec le dark mode
+// On peut l'activer directement
 if (darkMode === 'enabled') {
     enableDarkMode();
     if (document.getElementById("checkbox-switcher")!=null)document.getElementById("checkbox-switcher").checked = true;
 }
 if (darkModeToggle!=null){
-    // When someone clicks the button
+    // Quand on appuie sur le bouton
     darkModeToggle.addEventListener('click', () => {
         
-        // get their darkMode setting
+        // on prend darkMode de localstorage
         darkMode = localStorage.getItem('darkMode');
     
-        // if it not current enabled, enable it
+        // si il n'est pas activé, on l'active
         if (darkMode !== 'enabled') {
             enableDarkMode();
-            // if it has been enabled, turn it off  
+            // sinon, on le désactive  
         } else {
             disableDarkMode();
         }

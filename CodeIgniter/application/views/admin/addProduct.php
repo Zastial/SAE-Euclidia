@@ -82,7 +82,8 @@
                     
                     
                     <button class="btn btn-black-200 btn-border-orange" id="submit-new-product-button" type="submit">Créer un nouveau produit</button>
-                    
+                    <progress id='upload-progress' style='visibility: hidden' value="0" max="100"></progress>
+                    <p id="traitement" style="visibility: hidden">Les fichiers ont été uploadés, ils sont maintenant en cours de traitement...</p>
                 </div>    
             </form>
 

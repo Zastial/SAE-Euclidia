@@ -1,16 +1,24 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+/**
+ * Classe contact - utilisée pour la vue du contact et l'envoi de mail.
+ */
 class Contact extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
     }
     
+    /**
+     * Vue contact
+     */
     public function index(){
         $this->load->view("contact");
     }
 
+    /**
+     * Fonction utilisée pour envoyer un mail.
+     */
     public function sendMail() {
         $nom = $this->input->post("nom");
         $prenom = $this->input->post("prenom");
@@ -19,7 +27,7 @@ class Contact extends CI_Controller {
         $message = $this->input->post("message");
 
         $objet = $prenom . " " . $nom . " : " . $objet;
-
+        $message = "Message de ".$email." :\n\n " . $message;
         mail('euclidia3d@proton.me', $objet, $message);
     
         redirect("contact");

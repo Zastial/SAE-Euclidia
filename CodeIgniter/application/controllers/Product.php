@@ -8,6 +8,9 @@ require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."FiltrePag
 require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."FiltreCategories.php";
 require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."FiltreName.php";
 require_once APPPATH.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR."Tri.php";
+/**
+ * Controleur du produit. Utilisé pour les pages de produit du coté utilisateur.
+ */
 class Product extends CI_Controller {
 
     public function __construct(){
@@ -17,9 +20,18 @@ class Product extends CI_Controller {
         $this->load->model("UserModel");
         $this->load->model("AchatModel");
         $this->load->helper("url");
-        //$this->output->enable_profiler(TRUE);
     }
-    
+    /**
+     * Cette fonction charge la vue de la liste des produits en fonction des éventuels filtres.
+     * Ces filtres sont passéslors de la validation d'un formulaire mais ne sont pas obligatoires pour que la page s'affiche.
+     * Les filtres par défaut sont:
+     * - prix minimum = 0
+     * - prix maximum = 9999.99
+     * - nom = ""
+     * - tri = aucun
+     * - categories : N/A
+     * - Page : 1
+     */
     public function find(){
         $categories = $this->input->get('categorie');
         $name = $this->input->get('rechercher');
@@ -77,6 +89,10 @@ class Product extends CI_Controller {
         $this->load->view("products", array("produits"=>$produits, "categories"=>$categories, 'page'=>$page, 'endPage'=>$endPage));
     }
 
+    /**
+     * Fonction utilisée pour afficher un seul produit.
+     * @param int $productid -> id du produit voulu.
+     */
     public function display($productid){
         $id = intval($productid);
         $produit = $this->ProductModel->findByIdAvailable($id);

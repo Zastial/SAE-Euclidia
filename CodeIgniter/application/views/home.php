@@ -19,8 +19,9 @@
         <div class="welcome-section">
             <div class="modele">
 
-                <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-                <model-viewer auto-rotate rotation-per-second="300%" auto-rotate-delay="0" src="<?= site_url("Resource/getRandomHomeModel")?>" alt="A 3D model of an astronaut"></model-viewer>
+                <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script> 
+                <!-- auto-rotate -->
+                <model-viewer camera-controls rotation-per-second="300%" auto-rotate-delay="0" src="<?= site_url("Resource/getRandomHomeModel")?>" alt="A 3D model of an astronaut"></model-viewer>
                
 
             </div>

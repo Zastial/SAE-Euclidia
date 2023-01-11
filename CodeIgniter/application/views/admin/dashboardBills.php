@@ -42,8 +42,7 @@ if (!empty($_GET['maxDate'])) {
     $maxDate = htmlentities($_GET['maxDate']);
 }
 
-var_dump($minDate);
-var_dump($maxDate);
+
 ?>
 
 
@@ -196,7 +195,7 @@ var_dump($maxDate);
                                 <p>
                                     Aucune facture trouvée.
                                     <?php 
-                                    var_dump($minDate > $maxDate);
+                                    
                                     if (!empty($minDate) && !empty($maxDate) && $minDate > $maxDate) {
                                         echo "Attention, les dates de début et de fin ne correspondent pas à l'ordre chronologique.";
                                     }

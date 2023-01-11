@@ -47,6 +47,13 @@ class FactureModel extends CI_Model {
 		return $f;
     }
 
+    /**
+     * findQueryBuilder est une fonction complexe qui permet de construire une requete SQL a partir des filtres présents ou non.
+     * Cette fonction est notamment appelée lors de la recherche et affichage des factures sur la page admin.
+     * @param FiltreInterface $filtre -> les filtres de la recherche.
+     * @param ?int $userid = null -> l'id de l'utilisateur dont on recherche les factures.
+     * @return FactureEntity[]
+     */
     public function findQueryBuilder(FiltreInterface $filtre, int $userid=null) {
         $filtres = $filtre->getFiltres();
         try {
