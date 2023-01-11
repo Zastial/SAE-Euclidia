@@ -111,8 +111,8 @@ class CategorieModel_test extends UnitTestCase {
 
         $this->obj->removeCategorie($categorie->getID());
         $filtre = new FiltreName(new Filtre(),"cat");
-		$categorie = $this->obj->findQueryBuilder($filtre)[0];
-        $this->assertNull($categorie);
+		$categorie = $this->obj->findQueryBuilder($filtre);
+        $this->assertTrue(empty($categorie));
 	}
 
     public function test_findByModelId() {

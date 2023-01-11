@@ -27,7 +27,7 @@ class Contact_test extends CIPHPUnitTestCase
 
         $this->resetInstance();
         $this->CI->load->library('session');
-        $this->CI->session->user = array('nom' => 'Carol','prenom' => 'Alex', 'status' => 'Administrateur');
+        $this->CI->session->user = array('nom' => 'Carol','prenom' => 'Alex', 'email'=> 'alexcarol@gmail.com', 'status' => 'Administrateur');
 
         $output = $this->request('POST', 'contact/index');
         $this->assertResponseCode(200);

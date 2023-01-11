@@ -100,7 +100,7 @@ class AffectationModel_test extends UnitTestCase {
 
         $affectation = $this->obj->findByIdCategorie(3);
 
-        $this->assertNull($affectation[0]);
+        $this->assertTrue(empty($affectation));
     }
 
 }

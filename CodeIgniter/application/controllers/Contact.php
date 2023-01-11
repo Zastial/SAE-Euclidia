@@ -31,10 +31,10 @@ class Contact extends CI_Controller {
         try{
             mail('euclidia3d@proton.me', $objet, $message);
         } catch(Exception $e) {
-            $this->session->set_flashdata('error', 'Il y a eu un problème lors de l\\\'envoi du message!');
+            $this->session->set_flashdata('error', 'Il y a eu un problème lors de l\\\'envoi du message !');
             redirect("contact");
         }
-        $this->session->set_flashdata('success', 'Votre email a bien été envoyé!');
+        $this->session->set_flashdata('success', 'Votre email a bien été envoyé !');
         redirect("contact");
     }
 

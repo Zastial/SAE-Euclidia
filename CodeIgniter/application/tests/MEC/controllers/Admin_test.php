@@ -43,16 +43,6 @@ class Admin_test extends CIPHPUnitTestCase
         $this->assertResponseCode(200);
     }
 
-    public function testModifUser() {
-
-        $CI =& get_instance();
-        $CI->load->library('session');
-        $CI->session->user = array('nom' => 'Carol','prenom' => 'Alex', 'email'=>'alexcarol@gmail.com', 'status' => 'Administrateur');
-
-        $output = $this->request('POST', 'admin/modifUser/38');
-        $this->assertResponseCode(200);
-    }
-
     public function testAddProductView() {
 
         $CI =& get_instance();

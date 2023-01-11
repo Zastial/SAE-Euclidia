@@ -5,7 +5,7 @@ class Home_test extends CIPHPUnitTestCase
 
     public function testIndex() {
 
-        $output = $this->request('POST', 'welcome/index');
+        $output = $this->request('POST', 'home');
         $this->assertResponseCode(200);
     }
 }
