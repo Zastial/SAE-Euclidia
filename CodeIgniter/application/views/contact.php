@@ -37,16 +37,16 @@
                         <div class="names">
                             <div>
                                 <td><label class="require">Nom : </label></td><br>
-                                <td><input type="text" name="nom" required></td>
+                                <td><input type="text" name="nom" <?php if(isset($this->session->user)) echo 'value="'.$this->session->user['nom'].'"'?> required></td>
                             </div>
                             <div>               
                                 <td><label  class="require">Prénom :</label></td><br>
-                                <td><input type="text" name="prenom" required></td>
+                                <td><input type="text" name="prenom" <?php if(isset($this->session->user)) echo 'value="'.$this->session->user['prenom'].'"'?> required></td>
                             </div>
                         </div>
                         <div class="mail">
                             <td><label  class="require" for="email">Votre email :</label></td><br>
-                            <td><input type="email" name="email" required></td>
+                            <td><input type="email" name="email" <?php if(isset($this->session->user)) echo 'value="'.$this->session->user['email'].'"'?> required></td>
                         </div>
     
                         <div class="object">

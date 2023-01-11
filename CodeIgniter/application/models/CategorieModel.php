@@ -47,7 +47,12 @@ class CategorieModel extends CI_Model {
 					case Tri::NOMDECROISSANT:
 						$this->db->order_by('categorie.libelle', 'desc');
 						break;
+					case Tri::AUCUN:
+						$this->db->order_by('categorie.id_categorie', 'asc');
+						break;
 				}
+			} else {
+				$this->db->order_by('categorie.id_categorie', 'asc');
 			}
 
 			$query = $this->db->get();

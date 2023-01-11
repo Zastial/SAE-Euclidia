@@ -44,3 +44,23 @@
     margin-top: 10px;
     font-size: 1rem
 }
+
+.categories nav{
+    margin-left: 0;
+    border-radius: 5px;
+    box-shadow: none;
+    text-align: left;
+}
+
+.categories nav ul{
+    height: 30vh;
+}
+
+.categories nav ul div{
+    padding: 1rem;
+}
+
+.categories nav ul{
+    overflow:hidden; 
+    overflow-y:scroll;
+}

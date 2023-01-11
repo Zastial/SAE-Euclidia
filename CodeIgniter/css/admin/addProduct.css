@@ -42,3 +42,8 @@ input[type="file"]{
     background-color: var(--orange);
 }
 
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}

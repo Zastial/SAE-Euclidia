@@ -93,14 +93,12 @@ section {
 }
 
 
-
-
 .product-content {
     grid-area: desc;
     padding: clamp(100px, 25vw, 3rem);
     border: 1px solid var(--orange);
     box-shadow:  var(--box-shadow);
-    
+    height: fit-content;
 }
 
 

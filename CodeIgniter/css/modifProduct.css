@@ -16,27 +16,8 @@ form {
     max-width: 50rem;
 }
 
-
-.categorie-items {
-    padding: 10px;
-}
-
-.categorie-items input[type=checkbox] {
-    
-}
-
-.categorie-items  input[type=checkbox]:checked + label {
-    background-color: var(--orange);
-}
-
-.categorie-items  label {
-    background-color: var(--grey);
-    border-radius: 12px ;
-    padding: 10px 20px;
-    transition: 150ms all ease-in-out; 
-}
-   
-.categorie-items  label:hover {
-    background:var(--grey-200);
-    cursor:pointer;
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }

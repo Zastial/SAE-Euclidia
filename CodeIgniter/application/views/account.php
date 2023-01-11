@@ -84,7 +84,7 @@
                                     <p> Facture du <?= $bill->getDate() ?></p>
                                     <img src="<?= base_url("assets/icon/icon-search.svg") ?>" alt="">
                                 </div>
-                            
+                            </a>
                                 
                             <?php endforeach; ?>
                         <?php else : ?>

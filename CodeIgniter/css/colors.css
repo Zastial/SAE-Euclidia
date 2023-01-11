@@ -20,6 +20,7 @@
     --grey-200: #999999;
     --white-100: #FFFDFA;
     --green: #06C925;
+    --border-tags : #a5a5a5;
     --filter-orange-img: invert(67%) sepia(79%) saturate(566%) hue-rotate(338deg) brightness(104%) contrast(101%);
     --filter-button-img: invert(0%) sepia(20%) saturate(8%) hue-rotate(339deg) brightness(91%) contrast(87%);
     --filter-account-icon: none;
@@ -50,6 +51,7 @@
     --grey-300: #b8b8b856;
     --white-100: #1b1b1b;
     --green: #06C925;
+    --border-tags : #5E5E5E;
     --filter-orange-img: invert(67%) sepia(79%) saturate(566%) hue-rotate(338deg) brightness(104%) contrast(101%);
     --filter-button-img: invert(91%) sepia(94%) saturate(2%) hue-rotate(229deg) brightness(105%) contrast(100%);
     --filter-account-icon: invert(99%) sepia(43%) saturate(5%) hue-rotate(121deg) brightness(104%) contrast(87%);

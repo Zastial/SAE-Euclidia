@@ -75,13 +75,17 @@ if ($max >= 10000) {
         
                     <div class="categories" id="categories">
                         <h1>Catégories</h1>
-                            <?php foreach ($categories as $cat): ?>
-                                <div class="one-categ">
-                                    <?php $categId = $cat->getId() ;?>
-                                    <input class="" type="checkbox" id=<?=$categId?> name='categorie[]' value=<?=$categId?> <?php if (in_array($categId, $checked)) {echo 'checked';}?> />
-                                    <label for=<?= $categId ?>> <?=$cat->getLibelle()?> </label>
-                                </div>
-                            <?php endforeach; ?>
+                        <nav>
+                            <ul>
+                                <?php foreach ($categories as $cat): ?>
+                                    <div class="one-categ">
+                                        <?php $categId = $cat->getId() ;?>
+                                        <input class="" type="checkbox" id=<?=$categId?> name='categorie[]' value=<?=$categId?> <?php if (in_array($categId, $checked)) {echo 'checked';}?> />
+                                        <label for=<?= $categId ?>> <?=$cat->getLibelle()?> </label>
+                                    </div>
+                                <?php endforeach; ?>
+                            </ul>
+                        </nav>
                     </div>
 
                     <div class="filters">

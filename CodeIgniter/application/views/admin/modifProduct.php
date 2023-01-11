@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modification de produit</title>
     <link rel="stylesheet" href=<?= base_url("css/modifProduct.css")?>>
-    <link rel="stylesheet" href=<?= base_url("css/productImage.css") ?>>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
