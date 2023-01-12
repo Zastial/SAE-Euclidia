@@ -11,9 +11,9 @@
 </head>
 <body>
 
-    <?php  require_once(APPPATH.'views/error.php'); ?>
+    <?php  require_once(APPPATH.'views/main-component/error.php'); ?>
 
-    <?php require_once(APPPATH.'views/header.php'); ?> 
+    <?php require_once(APPPATH.'views/main-component/header.php'); ?> 
 
 
     <section>
@@ -52,5 +52,5 @@
 
 </body>
 
-    <?php require_once(APPPATH.'views/footer.php'); ?> 
+    <?php require_once(APPPATH.'views/main-component/footer.php'); ?> 
 </html>

@@ -19,7 +19,7 @@
     <title>Connexion</title>
 </head>
 <body>
-    <?php require_once('error.php'); ?>
+    <?php require_once(APPPATH.'views/error.php'); ?>
 
     
 

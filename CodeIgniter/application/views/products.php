@@ -51,8 +51,8 @@ if ($max >= 10000) {
 </head>
 <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <?php require_once('error.php'); ?>
-    <?php require_once ('header.php'); ?>
+    <?php require_once(APPPATH.'views/error.php'); ?>
+    <?php require_once(APPPATH.'views/main-component/header.php'); ?>
     <section>
         <?php 
             if ($this->session->original_url!=null){
@@ -193,7 +193,7 @@ if ($max >= 10000) {
 
 </body>
 <footer>
-    <?php require_once('footer.php'); ?>
+    <?php require_once(APPPATH.'views/main-component/footer.php'); ?>
 </footer>
 </html>
 

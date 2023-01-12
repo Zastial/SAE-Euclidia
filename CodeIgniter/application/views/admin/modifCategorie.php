@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href=<?= base_url("css/modifCategorie.css")?>>
+    <link rel="stylesheet" href=<?= base_url("css/admin/modifCategorie.css")?>>
     <title>modifCategorie</title>
 </head>
 <body>
     <?php require_once(APPPATH.'views/error.php'); ?>
-    <?php require_once(APPPATH.'views/header.php'); ?>
+    <?php require_once(APPPATH.'views/main-component/header.php'); ?>
     
     <section>
         <?php
@@ -42,7 +42,7 @@
     </section>
 
 
-    <?php require_once(APPPATH.'views/footer.php'); ?>
+    <?php require_once(APPPATH.'views/main-component/footer.php'); ?>
 
     
 </body>

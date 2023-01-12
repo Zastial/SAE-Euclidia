@@ -24,7 +24,7 @@ $email = empty(set_value('email')) ? $this->session->user["email"] : set_value('
 </style>
 <body>
     
-    <?php require_once(APPPATH.'views/header.php'); ?>
+    <?php require_once(APPPATH.'views/main-component/header.php'); ?>
     
     <section>
 
@@ -99,6 +99,6 @@ $email = empty(set_value('email')) ? $this->session->user["email"] : set_value('
 </body>
 
 
-    <?php require_once(APPPATH.'views/footer.php'); ?>
+    <?php require_once(APPPATH.'views/main-component/footer.php'); ?>
 
 </html>

@@ -14,7 +14,7 @@
 
 <body> 
     <section>
-        <?php require_once ('header.php'); ?>
+        <?php require_once(APPPATH.'views/main-component/header.php'); ?>
         
 
         
@@ -43,7 +43,7 @@
 </body>
 
 
-<?php require_once('footer.php'); ?>
+<?php require_once(APPPATH.'views/main-component/footer.php'); ?>
 
 </html>
 

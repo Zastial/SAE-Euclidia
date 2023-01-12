@@ -36,7 +36,7 @@ if (!empty($_GET['rechercher'])) {
         
         <?php  require_once(APPPATH.'views/error.php'); ?>
 
-        <?php require_once(APPPATH.'views/header.php'); ?> 
+        <?php require_once(APPPATH.'views/main-component/header.php'); ?> 
 
         <div class="page">
 

@@ -7,11 +7,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <title>404 Page Not Found</title>
 </head>
 <body>
-	<?php // require_once('views/header.php'); ?>
-
-	<h1>Oups quelque chodse c'est mal passé</h1>
 
 
-	<?php //require_once('footer.php'); ?>
+	<h1>Oups quelque chose c'est mal passé</h1>
+
+
+
 </body>
 </html>

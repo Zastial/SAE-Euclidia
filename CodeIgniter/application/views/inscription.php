@@ -16,7 +16,7 @@
     <title>Inscription</title>
 </head>
 <body>
-<?php require_once('error.php'); ?>
+    <?php require_once(APPPATH.'views/error.php'); ?>
     <a href=<?= site_url("Home") ?>>
         <img src="/assets/image/logo_euclidia.svg" alt="Euclidia" id="euclidia-icon-header"  style="width: 12rem;">
     </a>

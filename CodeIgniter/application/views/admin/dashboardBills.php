@@ -62,7 +62,7 @@ if (!empty($_GET['maxDate'])) {
         
         <?php  require_once(APPPATH.'views/error.php'); ?>
 
-        <?php require_once(APPPATH.'views/header.php'); ?> 
+        <?php require_once(APPPATH.'views/main-component/header.php'); ?> 
 
         <div class="page">
 

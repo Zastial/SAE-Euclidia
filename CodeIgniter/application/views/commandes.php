@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    <?php require_once('header.php'); ?>
+    <?php require_once(APPPATH.'views/main-component/header.php'); ?>
 
     <section>
         <h1>Vos commandes</h1>
@@ -45,6 +45,6 @@
     </section>
 
 </body>
-<?php require_once('footer.php'); ?>
+<?php require_once(APPPATH.'views/main-component/footer.php'); ?>
 
 </html>

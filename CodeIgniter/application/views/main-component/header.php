@@ -86,5 +86,5 @@
         <script src="<?=base_url("js/dark_mode.js")?>"></script>
     </body>
     
-    <?php require_once('error.php'); ?>
+    <?php require_once(APPPATH.'views/error.php'); ?>
 </html>

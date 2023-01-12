@@ -12,8 +12,7 @@
 </head>
 <body>
 
-    <?php require_once(APPPATH.'views/header.php'); ?>
-    
+    <?php require_once(APPPATH.'views/main-component/header.php'); ?>    
     <section>
         <div class="error">
             <h1>Une erreur est survenue</h1>
@@ -26,7 +25,7 @@
     
 </body>
 
-<?php require_once(APPPATH.'views/footer.php'); ?>
+<?php require_once(APPPATH.'views/main-component/footer.php'); ?>
 
 </html>
 

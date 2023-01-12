@@ -13,8 +13,8 @@ $disabled = empty($this->session->cart);
     <title>ShoppingCart</title>
 </head>
 <body>
-    <?php require_once ('header.php'); ?>
-    <?php require_once ('error.php'); ?>
+<?php require_once(APPPATH.'views/main-component/header.php'); ?>
+    <?php require_once (APPPATH.'views/error.php'); ?>
 
     <section>
         
@@ -98,7 +98,6 @@ $disabled = empty($this->session->cart);
                                 </div>
                             </div>
                         </div>
-    
                     </form>
                 </div>
             </div>
@@ -108,6 +107,6 @@ $disabled = empty($this->session->cart);
 </body>
 
 
-<?php require_once('footer.php'); ?>
+<?php require_once(APPPATH.'views/main-component/footer.php'); ?>
 
 </html>

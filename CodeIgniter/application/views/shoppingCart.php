@@ -17,9 +17,8 @@ $connected = (isset($this->session->user)) ? true : false;
     <title>ShoppingCart</title>
 </head>
 <body>
-    <?php require_once('error.php'); ?>
-    <?php require_once ('header.php'); ?>
-    
+    <?php require_once(APPPATH.'views/error.php'); ?>
+    <?php require_once(APPPATH.'views/main-component/header.php'); ?>    
     <section>
         <div class="cart-container">
             <div class="cart">
@@ -82,15 +81,12 @@ $connected = (isset($this->session->user)) ? true : false;
             </div>
         </div>
 
-
-
-
         
     </section>
 
 
 </body>
 
-<?php require_once('footer.php'); ?>
+<?php require_once(APPPATH.'views/main-component/footer.php'); ?>
 
 </html>
