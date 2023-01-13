@@ -23,7 +23,7 @@ class Product extends CI_Controller {
     }
     /**
      * Cette fonction charge la vue de la liste des produits en fonction des éventuels filtres.
-     * Ces filtres sont passéslors de la validation d'un formulaire mais ne sont pas obligatoires pour que la page s'affiche.
+     * Ces filtres sont passés lors de la validation d'un formulaire mais ne sont pas obligatoires pour que la page s'affiche.
      * Les filtres par défaut sont:
      * - prix minimum = 0
      * - prix maximum = 9999.99
@@ -93,7 +93,11 @@ class Product extends CI_Controller {
      * Fonction utilisée pour afficher un seul produit.
      * @param int $productid -> id du produit voulu.
      */
-    public function display($productid){
+    public function display($productid=null){
+        if ($productid == null) {
+            redirect('product/find');
+        }
+        
         $id = intval($productid);
         $produit = $this->ProductModel->findByIdAvailable($id);
         if ($produit == null) {

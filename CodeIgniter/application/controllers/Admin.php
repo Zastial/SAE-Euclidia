@@ -533,12 +533,12 @@ class Admin extends CI_Controller {
         }
         $u = $this->UserModel->findById($userid);
         if ($u == null) {
-            $this->session->set_flashdata('error', 'L\\\'utilisateur n\\\'existe plus!');
+            $this->session->set_flashdata('error', 'L\\\'utilisateur n\\\'existe plus !');
             redirect('admin/users');
         }
         //Note : on ne peut pas modifier son compte car cela pourrait bloquer l'administrateur si il se met en utilisateur.
         if ($this->session->user['email']==$u->getEmail()){
-            $this->session->set_flashdata('error', 'Vous ne pouvez pas désactiver votre compte!');
+            $this->session->set_flashdata('error', 'Vous ne pouvez pas désactiver votre compte !');
             redirect('admin/users');
         }
         $u->setEtat($u->getEtat()=="active"?"desactive":"active");
