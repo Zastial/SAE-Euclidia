@@ -12,6 +12,10 @@
     display: block;
     width: 250px;
 }
+.card-link:hover {
+    transition: all 0.2s ease-in-out;
+    transform: scale(1.1);
+}
 
 .card-container img {
     border-radius: 8px 8px 0px 0px;

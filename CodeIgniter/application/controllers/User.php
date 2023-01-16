@@ -388,7 +388,7 @@ class User extends CI_Controller {
 
     /**
      * fonction qui vérifie le captcha lors de l'inscription ou de la connexion.
-     * @return true si le captch est réussi, false sinon.
+     * @return true si le captcha est réussi, false sinon.
      */
     public function verifyCaptcha(): bool {
         if ($this->input->post('g-recaptcha-response') == null) {
